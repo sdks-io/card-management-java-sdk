@@ -10,22 +10,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.shell.apitest.ApiHelper;
 import com.shell.apitest.Server;
 import com.shell.apitest.exceptions.ApiException;
-import com.shell.apitest.exceptions.ErrorObjectException;
+import com.shell.apitest.exceptions.FleetmanagementV2RestrictionSearchcard401ErrorException;
+import com.shell.apitest.exceptions.FleetmanagementV2RestrictionSearchcard500ErrorException;
 import com.shell.apitest.http.request.HttpMethod;
 import com.shell.apitest.models.AccountRestrictionRequest;
 import com.shell.apitest.models.AccountRestrictionResponse;
+import com.shell.apitest.models.BudleDetailsRequest;
+import com.shell.apitest.models.BundleDetailsResponse;
+import com.shell.apitest.models.CardRestrictionReq;
+import com.shell.apitest.models.CardRestrictionResponse;
 import com.shell.apitest.models.CreateBundleRequest;
 import com.shell.apitest.models.CreateBundleResponse;
 import com.shell.apitest.models.DeleteBundleRequest;
 import com.shell.apitest.models.DeleteBundleResponse;
-import com.shell.apitest.models.RestrictionCardRequest;
-import com.shell.apitest.models.RestrictionCardResponse;
-import com.shell.apitest.models.RestrictionSearchCardRequest;
-import com.shell.apitest.models.RestrictionSearchCardResponse;
 import com.shell.apitest.models.SearchAccountLimitRequest;
 import com.shell.apitest.models.SearchAccountLimitResponse;
-import com.shell.apitest.models.SummaryOfBundleRequest;
-import com.shell.apitest.models.SummaryOfBundleResponse;
+import com.shell.apitest.models.SearchCardRestrictionReq;
+import com.shell.apitest.models.SearchCardRestrictionRes;
+import com.shell.apitest.models.SummaryofbundleResponse;
+import com.shell.apitest.models.SummaryofbundlerRequest;
 import com.shell.apitest.models.UpdateBundleRequest;
 import com.shell.apitest.models.UpdateBundleResponse;
 import io.apimatic.core.ApiCall;
@@ -49,107 +52,346 @@ public final class RestrictionController extends BaseController {
     }
 
     /**
-     * This API enables clients to create a new card bundle and apply restrictions. #### Supported
-     * operations * Create bundle and include mandatory - * Usage, day/time, product and location
-     * restrictions * List of cards to add to bundle * Create bundle and include optional identifier
-     * of bundle in external system #### Validation rules The following are the key validation rules
-     * with the associated error codes for failed validation- * `7012` - At least one card must be
-     * added to the bundle * `7011` - The total number of cards passed in the input must be 500 or
-     * less. * `7014` - All the cards passed in the input are part of the selected account. * `7013`
-     * - At least one restriction must be applied to the bundle i.e. either of usage, day/time,
-     * location or product restriction. * `7005` - Day time restriction cannot be set to restrict
-     * the use of a card on all days of the week. * `7000` - Usage restriction of the bundle is not
-     * open ended i.e. all the limits within the usage restriction must not be set to 0/null. *
-     * `7004` - In the usage restrictions, the limits per transaction should be less than or equal
-     * to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal
-     * to Monthly. Exception being 0/blank will be skipped, i.e. Daily value should be less than
-     * equal to Monthly value if Weekly value is 0/blank. * `0007` - Error returned if request
-     * parameters fail validation e.g. mandatory check.
+     * This API will allows querying card details including the day/time and product restrictions.
+     * #### Supported operations * Search by list of cards or bundle * Include card bundle details
+     * (optional).
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Create Bundle Request body
-     * @return    Returns the CreateBundleResponse response from the API call
+     * @param  body  Optional parameter: Restriction search card request body
+     * @return    Returns the SearchCardRestrictionRes response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CreateBundleResponse restrictionBundleCreate(
+    public SearchCardRestrictionRes searchCardRestriction(
+            final String apikey,
             final String requestId,
-            final CreateBundleRequest body) throws ApiException, IOException {
-        return prepareRestrictionBundleCreateRequest(requestId, body).execute();
+            final SearchCardRestrictionReq body) throws ApiException, IOException {
+        return prepareSearchCardRestrictionRequest(apikey, requestId, body).execute();
     }
 
     /**
-     * This API enables clients to create a new card bundle and apply restrictions. #### Supported
-     * operations * Create bundle and include mandatory - * Usage, day/time, product and location
-     * restrictions * List of cards to add to bundle * Create bundle and include optional identifier
-     * of bundle in external system #### Validation rules The following are the key validation rules
-     * with the associated error codes for failed validation- * `7012` - At least one card must be
-     * added to the bundle * `7011` - The total number of cards passed in the input must be 500 or
-     * less. * `7014` - All the cards passed in the input are part of the selected account. * `7013`
-     * - At least one restriction must be applied to the bundle i.e. either of usage, day/time,
-     * location or product restriction. * `7005` - Day time restriction cannot be set to restrict
-     * the use of a card on all days of the week. * `7000` - Usage restriction of the bundle is not
-     * open ended i.e. all the limits within the usage restriction must not be set to 0/null. *
-     * `7004` - In the usage restrictions, the limits per transaction should be less than or equal
-     * to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal
-     * to Monthly. Exception being 0/blank will be skipped, i.e. Daily value should be less than
-     * equal to Monthly value if Weekly value is 0/blank. * `0007` - Error returned if request
-     * parameters fail validation e.g. mandatory check.
+     * This API will allows querying card details including the day/time and product restrictions.
+     * #### Supported operations * Search by list of cards or bundle * Include card bundle details
+     * (optional).
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Create Bundle Request body
-     * @return    Returns the CreateBundleResponse response from the API call
+     * @param  body  Optional parameter: Restriction search card request body
+     * @return    Returns the SearchCardRestrictionRes response from the API call
      */
-    public CompletableFuture<CreateBundleResponse> restrictionBundleCreateAsync(
+    public CompletableFuture<SearchCardRestrictionRes> searchCardRestrictionAsync(
+            final String apikey,
             final String requestId,
-            final CreateBundleRequest body) {
+            final SearchCardRestrictionReq body) {
         try { 
-            return prepareRestrictionBundleCreateRequest(requestId, body).executeAsync(); 
+            return prepareSearchCardRestrictionRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for restrictionBundleCreate.
+     * Builds the ApiCall object for searchCardRestriction.
      */
-    private ApiCall<CreateBundleResponse, ApiException> prepareRestrictionBundleCreateRequest(
+    private ApiCall<SearchCardRestrictionRes, ApiException> prepareSearchCardRestrictionRequest(
+            final String apikey,
             final String requestId,
-            final CreateBundleRequest body) throws JsonProcessingException, IOException {
-        return new ApiCall.Builder<CreateBundleResponse, ApiException>()
+            final SearchCardRestrictionReq body) throws JsonProcessingException, IOException {
+        return new ApiCall.Builder<SearchCardRestrictionRes, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/bundles/create")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v2/restriction/searchcard")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
+                        .httpMethod(HttpMethod.POST))
+                .responseHandler(responseHandler -> responseHandler
+                        .deserializer(
+                                response -> ApiHelper.deserialize(response, SearchCardRestrictionRes.class))
+                        .nullify404(false)
+                        .localErrorCase("400",
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("401",
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new FleetmanagementV2RestrictionSearchcard401ErrorException(reason, context)))
+                        .localErrorCase("403",
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("404",
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("500",
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new FleetmanagementV2RestrictionSearchcard500ErrorException(reason, context)))
+                        .globalErrorCase(GLOBAL_ERROR_CASES))
+                .build();
+    }
+
+    /**
+     * The Card Limit and Restriction API is REST-based and employs Basic and ApiKey authentication.
+     * The API endpoints accept JSON-encoded request bodies, return JSON-encoded responses and use
+     * standard HTTP response codes. All resources are located in the Shell Card Platform. The Shell
+     * Card Platform is the overall platform that encompasses all the internal Shell systems used to
+     * manage resources. The internal workings of the platform are not important when interacting
+     * with the API. However, it is worth noting that the platform uses a microservice architecture
+     * to communicate with various backend systems and some API calls are processed asynchronously.
+     * All endpoints use the `POST` verb for retrieving, updating, creating and deleting resources
+     * in the Shell Card Platform. The endpoints that retrieve resources from the Shell Card
+     * Platform allow flexible search parameters in the API request body. **Important Note** - This
+     * operation allows setting or updating the restrictions on existing cards. (For up to 3 cards
+     * in a single call). All restrictions of the cards are submitted and executed after successful
+     * below condition. •	The card exists. •	Day time restriction cannot be set to restrict the use
+     * of a card on all days of the week i.e., the values for all the days in the restriction cannot
+     * be set to false. •	Either of the usage, daytime, location or product restriction ‘Reset’ is
+     * set to ‘True’ or applied on the card. •	All the limits in the usage restriction profile for a
+     * card is not set to ‘0’/null. •	If IsVelocityCeiling is ‘true’, API will validate below
+     * condition: Usage restrictions for a card are lower than Customer Card Type level limits, if
+     * there are no customer level overrides available then lower than OU card type limits. •	In
+     * usage restrictions, the limits per transaction should be less than or equal to Daily, Daily
+     * should be less than or equal to Weekly, Weekly should be less than or equal to Monthly,
+     * Monthly should be less than or equal to Yearly (Annually). Exception being null/blank will be
+     * skipped. i.e., Daily value should be less than equal to Monthly value if Weekly value is
+     * null/blank. Lifetime limit is not considered for usage restrictions limits validation.
+     * •	Apply the card type limit to Gateway when a value is NULL in the input. However, if the
+     * card type limit is NULL for the same field, then no limit will be applied in Gateway. •	If
+     * ‘SetDefaultOnVelocityUpdate’ is ‘true’ then the operation will apply customer cardtype or OU
+     * level velocity limits on existing cards when restrictions are modified without providing
+     * custom values for all fields.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
+     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
+     *         requests and responses. This will be played back in the response from the request.
+     * @param  body  Optional parameter: Card Restriction request body
+     * @return    Returns the CardRestrictionResponse response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public CardRestrictionResponse applyRestriction(
+            final String apikey,
+            final String requestId,
+            final CardRestrictionReq body) throws ApiException, IOException {
+        return prepareApplyRestrictionRequest(apikey, requestId, body).execute();
+    }
+
+    /**
+     * The Card Limit and Restriction API is REST-based and employs Basic and ApiKey authentication.
+     * The API endpoints accept JSON-encoded request bodies, return JSON-encoded responses and use
+     * standard HTTP response codes. All resources are located in the Shell Card Platform. The Shell
+     * Card Platform is the overall platform that encompasses all the internal Shell systems used to
+     * manage resources. The internal workings of the platform are not important when interacting
+     * with the API. However, it is worth noting that the platform uses a microservice architecture
+     * to communicate with various backend systems and some API calls are processed asynchronously.
+     * All endpoints use the `POST` verb for retrieving, updating, creating and deleting resources
+     * in the Shell Card Platform. The endpoints that retrieve resources from the Shell Card
+     * Platform allow flexible search parameters in the API request body. **Important Note** - This
+     * operation allows setting or updating the restrictions on existing cards. (For up to 3 cards
+     * in a single call). All restrictions of the cards are submitted and executed after successful
+     * below condition. •	The card exists. •	Day time restriction cannot be set to restrict the use
+     * of a card on all days of the week i.e., the values for all the days in the restriction cannot
+     * be set to false. •	Either of the usage, daytime, location or product restriction ‘Reset’ is
+     * set to ‘True’ or applied on the card. •	All the limits in the usage restriction profile for a
+     * card is not set to ‘0’/null. •	If IsVelocityCeiling is ‘true’, API will validate below
+     * condition: Usage restrictions for a card are lower than Customer Card Type level limits, if
+     * there are no customer level overrides available then lower than OU card type limits. •	In
+     * usage restrictions, the limits per transaction should be less than or equal to Daily, Daily
+     * should be less than or equal to Weekly, Weekly should be less than or equal to Monthly,
+     * Monthly should be less than or equal to Yearly (Annually). Exception being null/blank will be
+     * skipped. i.e., Daily value should be less than equal to Monthly value if Weekly value is
+     * null/blank. Lifetime limit is not considered for usage restrictions limits validation.
+     * •	Apply the card type limit to Gateway when a value is NULL in the input. However, if the
+     * card type limit is NULL for the same field, then no limit will be applied in Gateway. •	If
+     * ‘SetDefaultOnVelocityUpdate’ is ‘true’ then the operation will apply customer cardtype or OU
+     * level velocity limits on existing cards when restrictions are modified without providing
+     * custom values for all fields.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
+     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
+     *         requests and responses. This will be played back in the response from the request.
+     * @param  body  Optional parameter: Card Restriction request body
+     * @return    Returns the CardRestrictionResponse response from the API call
+     */
+    public CompletableFuture<CardRestrictionResponse> applyRestrictionAsync(
+            final String apikey,
+            final String requestId,
+            final CardRestrictionReq body) {
+        try { 
+            return prepareApplyRestrictionRequest(apikey, requestId, body).executeAsync(); 
+        } catch (Exception e) {  
+            throw new CompletionException(e); 
+        }
+    }
+
+    /**
+     * Builds the ApiCall object for applyRestriction.
+     */
+    private ApiCall<CardRestrictionResponse, ApiException> prepareApplyRestrictionRequest(
+            final String apikey,
+            final String requestId,
+            final CardRestrictionReq body) throws JsonProcessingException, IOException {
+        return new ApiCall.Builder<CardRestrictionResponse, ApiException>()
+                .globalConfig(getGlobalConfiguration())
+                .requestBuilder(requestBuilder -> requestBuilder
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v2/restriction/card")
+                        .bodyParam(param -> param.value(body).isRequired(false))
+                        .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
+                        .headerParam(param -> param.key("RequestId")
+                                .value(requestId).isRequired(false))
+                        .headerParam(param -> param.key("Content-Type")
+                                .value("application/json").isRequired(false))
+                        .headerParam(param -> param.key("accept").value("application/json"))
+                        .withAuth(auth -> auth
+                                .add("BasicAuth"))
+                        .httpMethod(HttpMethod.POST))
+                .responseHandler(responseHandler -> responseHandler
+                        .deserializer(
+                                response -> ApiHelper.deserialize(response, CardRestrictionResponse.class))
+                        .nullify404(false)
+                        .localErrorCase("400",
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("401",
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("403",
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("404",
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .localErrorCase("500",
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
+                        .globalErrorCase(GLOBAL_ERROR_CASES))
+                .build();
+    }
+
+    /**
+     * This API enables clients to create a new card bundle and apply restrictions. #### Supported
+     * operations * Create bundle and include mandatory - * Usage, day/time, product and location
+     * restrictions * List of cards to add to bundle * Create bundle and include optional identifier
+     * of bundle in external system #### Validation rules The following are the key validation rules
+     * with the associated error codes for failed validation- * `7012` - At least one card must be
+     * added to the bundle * `7011` - The total number of cards passed in the input must be 500 or
+     * less. * `7014` - All the cards passed in the input are part of the selected account. * `7013`
+     * - At least one restriction must be applied to the bundle i.e. either of usage, day/time,
+     * location or product restriction. * `7005` - Day time restriction cannot be set to restrict
+     * the use of a card on all days of the week. * `7000` - Usage restriction of the bundle is not
+     * open ended i.e. all the limits within the usage restriction must not be set to 0/null. *
+     * `7004` - In the usage restrictions, the limits per transaction should be less than or equal
+     * to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal
+     * to Monthly. Exception being 0/blank will be skipped, i.e. Daily value should be less than
+     * equal to Monthly value if Weekly value is 0/blank. * `0007` - Error returned if request
+     * parameters fail validation e.g. mandatory check.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
+     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
+     *         requests and responses. This will be played back in the response from the request.
+     * @param  body  Optional parameter: CreateBundle request body
+     * @return    Returns the CreateBundleResponse response from the API call
+     * @throws    ApiException    Represents error response from the server.
+     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
+     */
+    public CreateBundleResponse createBundle(
+            final String apikey,
+            final String requestId,
+            final CreateBundleRequest body) throws ApiException, IOException {
+        return prepareCreateBundleRequest(apikey, requestId, body).execute();
+    }
+
+    /**
+     * This API enables clients to create a new card bundle and apply restrictions. #### Supported
+     * operations * Create bundle and include mandatory - * Usage, day/time, product and location
+     * restrictions * List of cards to add to bundle * Create bundle and include optional identifier
+     * of bundle in external system #### Validation rules The following are the key validation rules
+     * with the associated error codes for failed validation- * `7012` - At least one card must be
+     * added to the bundle * `7011` - The total number of cards passed in the input must be 500 or
+     * less. * `7014` - All the cards passed in the input are part of the selected account. * `7013`
+     * - At least one restriction must be applied to the bundle i.e. either of usage, day/time,
+     * location or product restriction. * `7005` - Day time restriction cannot be set to restrict
+     * the use of a card on all days of the week. * `7000` - Usage restriction of the bundle is not
+     * open ended i.e. all the limits within the usage restriction must not be set to 0/null. *
+     * `7004` - In the usage restrictions, the limits per transaction should be less than or equal
+     * to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal
+     * to Monthly. Exception being 0/blank will be skipped, i.e. Daily value should be less than
+     * equal to Monthly value if Weekly value is 0/blank. * `0007` - Error returned if request
+     * parameters fail validation e.g. mandatory check.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
+     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
+     *         requests and responses. This will be played back in the response from the request.
+     * @param  body  Optional parameter: CreateBundle request body
+     * @return    Returns the CreateBundleResponse response from the API call
+     */
+    public CompletableFuture<CreateBundleResponse> createBundleAsync(
+            final String apikey,
+            final String requestId,
+            final CreateBundleRequest body) {
+        try { 
+            return prepareCreateBundleRequest(apikey, requestId, body).executeAsync(); 
+        } catch (Exception e) {  
+            throw new CompletionException(e); 
+        }
+    }
+
+    /**
+     * Builds the ApiCall object for createBundle.
+     */
+    private ApiCall<CreateBundleResponse, ApiException> prepareCreateBundleRequest(
+            final String apikey,
+            final String requestId,
+            final CreateBundleRequest body) throws JsonProcessingException, IOException {
+        return new ApiCall.Builder<CreateBundleResponse, ApiException>()
+                .globalConfig(getGlobalConfiguration())
+                .requestBuilder(requestBuilder -> requestBuilder
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/createbundle")
+                        .bodyParam(param -> param.value(body).isRequired(false))
+                        .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
+                        .headerParam(param -> param.key("RequestId")
+                                .value(requestId).isRequired(false))
+                        .headerParam(param -> param.key("Content-Type")
+                                .value("application/json").isRequired(false))
+                        .headerParam(param -> param.key("accept").value("application/json"))
+                        .withAuth(auth -> auth
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
                                 response -> ApiHelper.deserialize(response, CreateBundleResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -175,17 +417,20 @@ public final class RestrictionController extends BaseController {
      * value should be less than equal to Monthly value if Weekly value is 0/blank. This validation
      * is applicable for Update request action. * `0007` - Error returned if request parameters fail
      * validation e.g. at least one card must be provided in the input.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Update Bundle Request body
+     * @param  body  Optional parameter: Update Bundle request body
      * @return    Returns the UpdateBundleResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateBundleResponse restrictionBundleUpdate(
+    public UpdateBundleResponse updateBundle(
+            final String apikey,
             final String requestId,
             final UpdateBundleRequest body) throws ApiException, IOException {
-        return prepareRestrictionBundleUpdateRequest(requestId, body).execute();
+        return prepareUpdateBundleRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -209,61 +454,67 @@ public final class RestrictionController extends BaseController {
      * value should be less than equal to Monthly value if Weekly value is 0/blank. This validation
      * is applicable for Update request action. * `0007` - Error returned if request parameters fail
      * validation e.g. at least one card must be provided in the input.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Update Bundle Request body
+     * @param  body  Optional parameter: Update Bundle request body
      * @return    Returns the UpdateBundleResponse response from the API call
      */
-    public CompletableFuture<UpdateBundleResponse> restrictionBundleUpdateAsync(
+    public CompletableFuture<UpdateBundleResponse> updateBundleAsync(
+            final String apikey,
             final String requestId,
             final UpdateBundleRequest body) {
         try { 
-            return prepareRestrictionBundleUpdateRequest(requestId, body).executeAsync(); 
+            return prepareUpdateBundleRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for restrictionBundleUpdate.
+     * Builds the ApiCall object for updateBundle.
      */
-    private ApiCall<UpdateBundleResponse, ApiException> prepareRestrictionBundleUpdateRequest(
+    private ApiCall<UpdateBundleResponse, ApiException> prepareUpdateBundleRequest(
+            final String apikey,
             final String requestId,
             final UpdateBundleRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<UpdateBundleResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/bundles/update")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/updatebundle")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
                                 response -> ApiHelper.deserialize(response, UpdateBundleResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -276,17 +527,20 @@ public final class RestrictionController extends BaseController {
      * associated error codes for failed validation- * `7019` - The given card bundle is not
      * available in the Shell Card Platform. * `0007` - Error returned if request parameters fail
      * validation e.g. mandatory check.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Delete Bundle Request body
+     * @param  body  Optional parameter: Update Bundle request body
      * @return    Returns the DeleteBundleResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public DeleteBundleResponse restrictionBundleDelete(
+    public DeleteBundleResponse deleteBundle(
+            final String apikey,
             final String requestId,
             final DeleteBundleRequest body) throws ApiException, IOException {
-        return prepareRestrictionBundleDeleteRequest(requestId, body).execute();
+        return prepareDeleteBundleRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -297,61 +551,67 @@ public final class RestrictionController extends BaseController {
      * associated error codes for failed validation- * `7019` - The given card bundle is not
      * available in the Shell Card Platform. * `0007` - Error returned if request parameters fail
      * validation e.g. mandatory check.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Delete Bundle Request body
+     * @param  body  Optional parameter: Update Bundle request body
      * @return    Returns the DeleteBundleResponse response from the API call
      */
-    public CompletableFuture<DeleteBundleResponse> restrictionBundleDeleteAsync(
+    public CompletableFuture<DeleteBundleResponse> deleteBundleAsync(
+            final String apikey,
             final String requestId,
             final DeleteBundleRequest body) {
         try { 
-            return prepareRestrictionBundleDeleteRequest(requestId, body).executeAsync(); 
+            return prepareDeleteBundleRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for restrictionBundleDelete.
+     * Builds the ApiCall object for deleteBundle.
      */
-    private ApiCall<DeleteBundleResponse, ApiException> prepareRestrictionBundleDeleteRequest(
+    private ApiCall<DeleteBundleResponse, ApiException> prepareDeleteBundleRequest(
+            final String apikey,
             final String requestId,
             final DeleteBundleRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<DeleteBundleResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/bundles/delete")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/deletebundle")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
                                 response -> ApiHelper.deserialize(response, DeleteBundleResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -364,17 +624,20 @@ public final class RestrictionController extends BaseController {
      * associated with any bundles, in the input parameter SearchCardBundles either pass all the
      * bundles of the account in the list or pass only account with bundle id left blank/null. ####
      * Supported operations * Get summary of bundles by list of bundle Ids.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the SummaryOfBundleResponse response from the API call
+     * @param  body  Optional parameter: Summary of Bundle request body
+     * @return    Returns the SummaryofbundleResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public SummaryOfBundleResponse restrictionBundleSummary(
+    public SummaryofbundleResponse summaryofbundles(
+            final String apikey,
             final String requestId,
-            final SummaryOfBundleRequest body) throws ApiException, IOException {
-        return prepareRestrictionBundleSummaryRequest(requestId, body).execute();
+            final SummaryofbundlerRequest body) throws ApiException, IOException {
+        return prepareSummaryofbundlesRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -385,206 +648,139 @@ public final class RestrictionController extends BaseController {
      * associated with any bundles, in the input parameter SearchCardBundles either pass all the
      * bundles of the account in the list or pass only account with bundle id left blank/null. ####
      * Supported operations * Get summary of bundles by list of bundle Ids.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the SummaryOfBundleResponse response from the API call
+     * @param  body  Optional parameter: Summary of Bundle request body
+     * @return    Returns the SummaryofbundleResponse response from the API call
      */
-    public CompletableFuture<SummaryOfBundleResponse> restrictionBundleSummaryAsync(
+    public CompletableFuture<SummaryofbundleResponse> summaryofbundlesAsync(
+            final String apikey,
             final String requestId,
-            final SummaryOfBundleRequest body) {
+            final SummaryofbundlerRequest body) {
         try { 
-            return prepareRestrictionBundleSummaryRequest(requestId, body).executeAsync(); 
+            return prepareSummaryofbundlesRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for restrictionBundleSummary.
+     * Builds the ApiCall object for summaryofbundles.
      */
-    private ApiCall<SummaryOfBundleResponse, ApiException> prepareRestrictionBundleSummaryRequest(
+    private ApiCall<SummaryofbundleResponse, ApiException> prepareSummaryofbundlesRequest(
+            final String apikey,
             final String requestId,
-            final SummaryOfBundleRequest body) throws JsonProcessingException, IOException {
-        return new ApiCall.Builder<SummaryOfBundleResponse, ApiException>()
+            final SummaryofbundlerRequest body) throws JsonProcessingException, IOException {
+        return new ApiCall.Builder<SummaryofbundleResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/bundles/Summary")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/summaryofbundles")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
-                                response -> ApiHelper.deserialize(response, SummaryOfBundleResponse.class))
+                                response -> ApiHelper.deserialize(response, SummaryofbundleResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
 
     /**
-     * This API allows to set or update the restrictions for existing cards or newly ordered cards
-     * under the same payer. #### Supported operations * Set or reset usage restrictions for cards *
-     * Set or reset day/time restrictions for cards * Set or reset product restrictions for cards *
-     * Set or reset location restrictions for cards.
+     * This API allows setting or updating the usage restrictions of an existing account. Then
+     * validation rules applied for this API. •	The account exists. •	Day time restriction cannot be
+     * set to restrict the use of a card, under the account, on all days of the week. •	Either of
+     * the usage, daytime or location is either marked for reset or new restriction values provided
+     * for the account. •	In usage restrictions, the limits per transaction should be less than or
+     * equal to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or
+     * equal to Monthly. Exception being 0/blank will be skipped, i.e., Daily value should be less
+     * than equal to Monthly value if Weekly value is 0/blank.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the RestrictionCardResponse response from the API call
-     * @throws    ApiException    Represents error response from the server.
-     * @throws    IOException    Signals that an I/O exception of some sort has occurred.
-     */
-    public RestrictionCardResponse cardRestriction(
-            final String requestId,
-            final RestrictionCardRequest body) throws ApiException, IOException {
-        return prepareCardRestrictionRequest(requestId, body).execute();
-    }
-
-    /**
-     * This API allows to set or update the restrictions for existing cards or newly ordered cards
-     * under the same payer. #### Supported operations * Set or reset usage restrictions for cards *
-     * Set or reset day/time restrictions for cards * Set or reset product restrictions for cards *
-     * Set or reset location restrictions for cards.
-     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
-     *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the RestrictionCardResponse response from the API call
-     */
-    public CompletableFuture<RestrictionCardResponse> cardRestrictionAsync(
-            final String requestId,
-            final RestrictionCardRequest body) {
-        try { 
-            return prepareCardRestrictionRequest(requestId, body).executeAsync(); 
-        } catch (Exception e) {  
-            throw new CompletionException(e); 
-        }
-    }
-
-    /**
-     * Builds the ApiCall object for cardRestriction.
-     */
-    private ApiCall<RestrictionCardResponse, ApiException> prepareCardRestrictionRequest(
-            final String requestId,
-            final RestrictionCardRequest body) throws JsonProcessingException, IOException {
-        return new ApiCall.Builder<RestrictionCardResponse, ApiException>()
-                .globalConfig(getGlobalConfiguration())
-                .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v2/card")
-                        .bodyParam(param -> param.value(body).isRequired(false))
-                        .bodySerializer(() ->  ApiHelper.serialize(body))
-                        .headerParam(param -> param.key("RequestId")
-                                .value(requestId).isRequired(false))
-                        .headerParam(param -> param.key("Content-Type")
-                                .value("application/json").isRequired(false))
-                        .headerParam(param -> param.key("accept").value("application/json"))
-                        .withAuth(auth -> auth
-                                .add("BearerToken"))
-                        .httpMethod(HttpMethod.POST))
-                .responseHandler(responseHandler -> responseHandler
-                        .deserializer(
-                                response -> ApiHelper.deserialize(response, RestrictionCardResponse.class))
-                        .nullify404(false)
-                        .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
-                        .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
-                        .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
-                        .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
-                        .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
-                        .globalErrorCase(GLOBAL_ERROR_CASES))
-                .build();
-    }
-
-    /**
-     * This operation allows setting or updating the usage restrictions of an existing account. ####
-     * Validation rules *	The account exists. *	Day time restriction cannot be set to restrict the
-     * use of a card, under the account, on all days of the week. *	Either of the usage, daytime or
-     * location is either marked for reset or new restriction values provided for the account. *	In
-     * usage restrictions, the limits per transaction should be less than or equal to Daily, Daily
-     * should be less than or equal to Weekly, Weekly should be less than or equal to Monthly.
-     * Exception being 0/blank will be skipped, i.e., Daily value should be less than equal to
-     * Monthly value if Weekly value is 0/blank.
-     * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
-     *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
+     * @param  body  Optional parameter: Account Restriction request body
      * @return    Returns the AccountRestrictionResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public AccountRestrictionResponse accountRestriction(
+    public AccountRestrictionResponse restrictionAccount(
+            final String apikey,
             final String requestId,
             final AccountRestrictionRequest body) throws ApiException, IOException {
-        return prepareAccountRestrictionRequest(requestId, body).execute();
+        return prepareRestrictionAccountRequest(apikey, requestId, body).execute();
     }
 
     /**
-     * This operation allows setting or updating the usage restrictions of an existing account. ####
-     * Validation rules *	The account exists. *	Day time restriction cannot be set to restrict the
-     * use of a card, under the account, on all days of the week. *	Either of the usage, daytime or
-     * location is either marked for reset or new restriction values provided for the account. *	In
-     * usage restrictions, the limits per transaction should be less than or equal to Daily, Daily
-     * should be less than or equal to Weekly, Weekly should be less than or equal to Monthly.
-     * Exception being 0/blank will be skipped, i.e., Daily value should be less than equal to
-     * Monthly value if Weekly value is 0/blank.
+     * This API allows setting or updating the usage restrictions of an existing account. Then
+     * validation rules applied for this API. •	The account exists. •	Day time restriction cannot be
+     * set to restrict the use of a card, under the account, on all days of the week. •	Either of
+     * the usage, daytime or location is either marked for reset or new restriction values provided
+     * for the account. •	In usage restrictions, the limits per transaction should be less than or
+     * equal to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or
+     * equal to Monthly. Exception being 0/blank will be skipped, i.e., Daily value should be less
+     * than equal to Monthly value if Weekly value is 0/blank.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
+     * @param  body  Optional parameter: Account Restriction request body
      * @return    Returns the AccountRestrictionResponse response from the API call
      */
-    public CompletableFuture<AccountRestrictionResponse> accountRestrictionAsync(
+    public CompletableFuture<AccountRestrictionResponse> restrictionAccountAsync(
+            final String apikey,
             final String requestId,
             final AccountRestrictionRequest body) {
         try { 
-            return prepareAccountRestrictionRequest(requestId, body).executeAsync(); 
+            return prepareRestrictionAccountRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for accountRestriction.
+     * Builds the ApiCall object for restrictionAccount.
      */
-    private ApiCall<AccountRestrictionResponse, ApiException> prepareAccountRestrictionRequest(
+    private ApiCall<AccountRestrictionResponse, ApiException> prepareRestrictionAccountRequest(
+            final String apikey,
             final String requestId,
             final AccountRestrictionRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<AccountRestrictionResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/Account")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/account")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
@@ -598,53 +794,59 @@ public final class RestrictionController extends BaseController {
                                 response -> ApiHelper.deserialize(response, AccountRestrictionResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
 
     /**
-     * This operation will allow user to get account level limits for the given account. It returns
-     * the velocity limits if its overridden at the account else the values will be null/empty.
+     * This API will allow user to get account level limits for the given account. It returns the
+     * velocity limits if its overridden at the account else the values will be null/empty.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
+     * @param  body  Optional parameter: Search Account Limit RequestBody
      * @return    Returns the SearchAccountLimitResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
     public SearchAccountLimitResponse searchAccountLimit(
+            final String apikey,
             final String requestId,
             final SearchAccountLimitRequest body) throws ApiException, IOException {
-        return prepareSearchAccountLimitRequest(requestId, body).execute();
+        return prepareSearchAccountLimitRequest(apikey, requestId, body).execute();
     }
 
     /**
-     * This operation will allow user to get account level limits for the given account. It returns
-     * the velocity limits if its overridden at the account else the values will be null/empty.
+     * This API will allow user to get account level limits for the given account. It returns the
+     * velocity limits if its overridden at the account else the values will be null/empty.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
+     * @param  body  Optional parameter: Search Account Limit RequestBody
      * @return    Returns the SearchAccountLimitResponse response from the API call
      */
     public CompletableFuture<SearchAccountLimitResponse> searchAccountLimitAsync(
+            final String apikey,
             final String requestId,
             final SearchAccountLimitRequest body) {
         try { 
-            return prepareSearchAccountLimitRequest(requestId, body).executeAsync(); 
+            return prepareSearchAccountLimitRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
@@ -654,122 +856,132 @@ public final class RestrictionController extends BaseController {
      * Builds the ApiCall object for searchAccountLimit.
      */
     private ApiCall<SearchAccountLimitResponse, ApiException> prepareSearchAccountLimitRequest(
+            final String apikey,
             final String requestId,
             final SearchAccountLimitRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<SearchAccountLimitResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v1/searchaccountlimit")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/searchaccountlimit")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
                                 response -> ApiHelper.deserialize(response, SearchAccountLimitResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
 
     /**
-     * This API will allows querying card details including the day/time and product restrictions.
-     * #### Supported operations * Search by list of cards or bundle * Include card bundle details
-     * (optional).
+     * This API allows to get the details of a specific card bundle. It returns the bundle basic
+     * details along with the cards in the bundle and restrictions applied on them.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the RestrictionSearchCardResponse response from the API call
+     * @param  body  Optional parameter: Bundle Details Request body
+     * @return    Returns the BundleDetailsResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public RestrictionSearchCardResponse searchCardRestriction(
+    public BundleDetailsResponse bundledetails(
+            final String apikey,
             final String requestId,
-            final RestrictionSearchCardRequest body) throws ApiException, IOException {
-        return prepareSearchCardRestrictionRequest(requestId, body).execute();
+            final BudleDetailsRequest body) throws ApiException, IOException {
+        return prepareBundledetailsRequest(apikey, requestId, body).execute();
     }
 
     /**
-     * This API will allows querying card details including the day/time and product restrictions.
-     * #### Supported operations * Search by list of cards or bundle * Include card bundle details
-     * (optional).
+     * This API allows to get the details of a specific card bundle. It returns the bundle basic
+     * details along with the cards in the bundle and restrictions applied on them.
+     * @param  apikey  Required parameter: This is the API key of the specific environment which
+     *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
-     * @param  body  Optional parameter: Summary Bundle Request body
-     * @return    Returns the RestrictionSearchCardResponse response from the API call
+     * @param  body  Optional parameter: Bundle Details Request body
+     * @return    Returns the BundleDetailsResponse response from the API call
      */
-    public CompletableFuture<RestrictionSearchCardResponse> searchCardRestrictionAsync(
+    public CompletableFuture<BundleDetailsResponse> bundledetailsAsync(
+            final String apikey,
             final String requestId,
-            final RestrictionSearchCardRequest body) {
+            final BudleDetailsRequest body) {
         try { 
-            return prepareSearchCardRestrictionRequest(requestId, body).executeAsync(); 
+            return prepareBundledetailsRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for searchCardRestriction.
+     * Builds the ApiCall object for bundledetails.
      */
-    private ApiCall<RestrictionSearchCardResponse, ApiException> prepareSearchCardRestrictionRequest(
+    private ApiCall<BundleDetailsResponse, ApiException> prepareBundledetailsRequest(
+            final String apikey,
             final String requestId,
-            final RestrictionSearchCardRequest body) throws JsonProcessingException, IOException {
-        return new ApiCall.Builder<RestrictionSearchCardResponse, ApiException>()
+            final BudleDetailsRequest body) throws JsonProcessingException, IOException {
+        return new ApiCall.Builder<BundleDetailsResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
-                        .path("/card-restrictions/v2/search")
+                        .server(Server.SHELL.value())
+                        .path("/fleetmanagement/v1/restriction/bundledetails")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
+                        .headerParam(param -> param.key("apikey")
+                                .value(apikey).isRequired(false))
                         .headerParam(param -> param.key("RequestId")
                                 .value(requestId).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BearerToken"))
+                                .add("BasicAuth"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
-                                response -> ApiHelper.deserialize(response, RestrictionSearchCardResponse.class))
+                                response -> ApiHelper.deserialize(response, BundleDetailsResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }

@@ -12,52 +12,67 @@ CardController cardController = client.getCardController();
 
 ## Methods
 
-* [Search Card](../../doc/controllers/card.md#search-card)
-* [Card Summary](../../doc/controllers/card.md#card-summary)
-* [Order Card](../../doc/controllers/card.md#order-card)
-* [Order Card Enquiry](../../doc/controllers/card.md#order-card-enquiry)
-* [Card Cancel](../../doc/controllers/card.md#card-cancel)
-* [Card Update Status](../../doc/controllers/card.md#card-update-status)
+* [Searchcard](../../doc/controllers/card.md#searchcard)
+* [Cardsummary](../../doc/controllers/card.md#cardsummary)
+* [Cardordercard](../../doc/controllers/card.md#cardordercard)
+* [Cardordercardenquiry](../../doc/controllers/card.md#cardordercardenquiry)
+* [Cardcancel](../../doc/controllers/card.md#cardcancel)
+* [Cardupdatestatus](../../doc/controllers/card.md#cardupdatestatus)
 * [Purchase Category](../../doc/controllers/card.md#purchase-category)
-* [Card Details](../../doc/controllers/card.md#card-details)
+* [Carddetails](../../doc/controllers/card.md#carddetails)
 * [Card Move](../../doc/controllers/card.md#card-move)
-* [Card Pin Reminder](../../doc/controllers/card.md#card-pin-reminder)
+* [Cardpinreminder](../../doc/controllers/card.md#cardpinreminder)
 * [Schedule Card Block](../../doc/controllers/card.md#schedule-card-block)
-* [Auto Renew](../../doc/controllers/card.md#auto-renew)
-* [Update Mobile Payment Registration Status](../../doc/controllers/card.md#update-mobile-payment-registration-status)
-* [Get Key](../../doc/controllers/card.md#get-key)
-* [Delivery Address Update](../../doc/controllers/card.md#delivery-address-update)
+* [Autorenew](../../doc/controllers/card.md#autorenew)
+* [Updatemobilepaymentregistrationstatus](../../doc/controllers/card.md#updatemobilepaymentregistrationstatus)
+* [Getkey](../../doc/controllers/card.md#getkey)
+* [Deliveryaddressupdate](../../doc/controllers/card.md#deliveryaddressupdate)
 
 
-# Search Card
+# Searchcard
 
 This API allows to search for Shell Cards in the Shell Card Platform. It provides flexible search criteria and supports paging.
 
 #### New version updates
 
 * Oauth authentication to access the API
+
 * New parameters have been added in the response. Below are the list of parameters added
+  
   * IsEMVContact
+  
   * IsEMVContactless
+  
   * IsRFID
+  
   * RFIDUID
+  
   * EMAID
+  
   * EVPrintedNumber
+  
   * CardMediaCode
 
 #### Supported operations
 
 * Search cards by card id or PAN
+
 * Search cards by card status
+
 * Search cards by excluding card status
+
 * Search cards by date fields
+
 * Search cards by embossed fields
+
 * Search cards by card configuration fields
+
 * Search cards by included/excluded list of cards
+
 * Search cards by excluding card bundle Id
 
 ```java
-CompletableFuture<CardSearchResponse> searchCardAsync(
+CompletableFuture<CardSearchResponse> searchcardAsync(
     final String requestId,
     final SearchCardRequest body)
 ```
@@ -78,7 +93,7 @@ CompletableFuture<CardSearchResponse> searchCardAsync(
 ```java
 String requestId = "RequestId8";
 SearchCardRequest body = new SearchCardRequest.Builder()
-    .filters(new SearchRequest.Builder(
+    .filters(new Filters.Builder(
         Arrays.asList(
             "ACTIVE",
             "BLOCKED"
@@ -143,7 +158,7 @@ SearchCardRequest body = new SearchCardRequest.Builder()
     .page("1")
     .build();
 
-cardController.searchCardAsync(requestId, body).thenAccept(result -> {
+cardController.searchcardAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -238,7 +253,7 @@ cardController.searchCardAsync(requestId, body).thenAccept(result -> {
 | 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
 
 
-# Card Summary
+# Cardsummary
 
 This API allows to search for fuel cards in the Shell Card Platform and returns a high-level summary count. It provides flexible search criteria.
 
@@ -258,7 +273,7 @@ This API allows to search for fuel cards in the Shell Card Platform and returns 
 * Search cards by included/excluded list of cards
 
 ```java
-CompletableFuture<CardSummaryResponse> cardSummaryAsync(
+CompletableFuture<CardSummaryResponse> cardsummaryAsync(
     final String requestId,
     final CardSummaryRequest body)
 ```
@@ -279,7 +294,7 @@ CompletableFuture<CardSummaryResponse> cardSummaryAsync(
 ```java
 String requestId = "RequestId8";
 CardSummaryRequest body = new CardSummaryRequest.Builder()
-    .filters(new SummaryRequest.Builder(
+    .filters(new Filters1.Builder(
         Arrays.asList(
             "ACTIVE",
             "BLOCKED"
@@ -336,7 +351,7 @@ CardSummaryRequest body = new CardSummaryRequest.Builder()
     .build())
     .build();
 
-cardController.cardSummaryAsync(requestId, body).thenAccept(result -> {
+cardController.cardsummaryAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -354,18 +369,18 @@ cardController.cardSummaryAsync(requestId, body).thenAccept(result -> {
   "Status": "SUCCESS",
   "Data": [
     {
-      "ActiveCards": 0,
-      "BlockedCards": 0,
-      "CancelledCards": 0,
-      "ExpiredCards": 0,
-      "ExpiringCards": 0,
+      "ActiveCards": 10,
+      "BlockedCards": 5,
+      "CancelledCards": 2,
+      "ExpiredCards": 5,
+      "ExpiringCards": 2,
       "FraudCards": 0,
       "NewCards": 0,
       "RenewalPendingCards": 0,
       "ReplacedCards": 0,
       "TemporaryBlockByCustomer": 0,
       "TemporaryBlockByShell": 0,
-      "TotalCards": 0
+      "TotalCards": 24
     }
   ]
 }
@@ -376,13 +391,13 @@ cardController.cardSummaryAsync(requestId, body).thenAccept(result -> {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
 | 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
 
 
-# Order Card
+# Cardordercard
 
 This API allows ordering one or more fuel cards (up to 50). If the API call succeeds, the API will return a reference number and queue the request for asynchronous processing.
 
@@ -420,9 +435,9 @@ This API allows ordering one or more fuel cards (up to 50). If the API call succ
 * Individual reference numbers (**OrderCardReference**) for each new card
 
 ```java
-CompletableFuture<OrderCardResponse> orderCardAsync(
+CompletableFuture<OrderCardResponse> cardordercardAsync(
     final String requestId,
-    final OrderCardRequest body)
+    final CardManagementV1OrdercardRequest body)
 ```
 
 ## Parameters
@@ -430,7 +445,7 @@ CompletableFuture<OrderCardResponse> orderCardAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`OrderCardRequest`](../../doc/models/order-card-request.md) | Body, Optional | Order card request body |
+| `body` | [`CardManagementV1OrdercardRequest`](../../doc/models/card-management-v1-ordercard-request.md) | Body, Optional | Order card request body |
 
 ## Response Type
 
@@ -440,7 +455,7 @@ CompletableFuture<OrderCardResponse> orderCardAsync(
 
 ```java
 String requestId = "RequestId8";
-OrderCardRequest body = new OrderCardRequest.Builder()
+CardManagementV1OrdercardRequest body = new CardManagementV1OrdercardRequest.Builder()
     .cardDetails(Arrays.asList(
         new CardDetail.Builder(
             1,
@@ -467,7 +482,7 @@ OrderCardRequest body = new OrderCardRequest.Builder()
         .cardGroupName("Group1")
         .isNewCardGroup(false)
         .embossCardGroup(false)
-        .cardContact(new CardDeliveryContact.Builder(
+        .cardContact(new CardContact.Builder(
                 "Robert",
                 "WILTON AUFDERHAR",
                 "Herrn Dieter Whausen Lansstrab",
@@ -485,7 +500,7 @@ OrderCardRequest body = new OrderCardRequest.Builder()
             .saveForCardReissue(false)
             .build())
         .pINDeliveryAddressType(1)
-        .pINContact(new PINDeliveryContact.Builder()
+        .pINContact(new PINContact.Builder()
                 .deliveryContactTitle("Mr.")
                 .deliveryContactName("Robert")
                 .deliveryCompanyName("WILTON AUFDERHAR")
@@ -523,7 +538,7 @@ OrderCardRequest body = new OrderCardRequest.Builder()
     ))
     .build();
 
-cardController.orderCardAsync(requestId, body).thenAccept(result -> {
+cardController.cardordercardAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -537,15 +552,15 @@ cardController.orderCardAsync(requestId, body).thenAccept(result -> {
 
 ```json
 {
-  "RequestId": "string",
-  "Status": "string",
+  "RequestId": "b88525fd-6340-404e-9313-12e702c33cb7",
+  "Status": "SUCCESS",
   "Data": [
     {
-      "DriverAndVRN": "Robert:MV65YLH",
+      "DriverAndVRN": "ROBERT:MV65YLH",
       "OrderCardReference": 488351
     }
   ],
-  "MainReference": 0
+  "MainReference": 488453
 }
 ```
 
@@ -553,30 +568,33 @@ cardController.orderCardAsync(requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Order Card Enquiry
+# Cardordercardenquiry
 
 This API retrieves the card order status from the Shell Card Platform based on the given reference numbers.
 
 #### New version updates
 
     * Oauth authentication to access the API
+    
     * Minor change in response structure with addition of Status parameter
 
 #### Supported operations
 
     * Get order status by Bulk Card Order Reference
+    
     * Get order status by Order Reference (main reference for the order)
+    
     * Get order status by Card Reference (individual card reference belonging to an order reference)
 
 ```java
-CompletableFuture<OrderCardEnquiryResponse> orderCardEnquiryAsync(
+CompletableFuture<OrderCardEnquiryResponse> cardordercardenquiryAsync(
     final String requestId,
     final OrderCardEnquiryRequest body)
 ```
@@ -597,7 +615,7 @@ CompletableFuture<OrderCardEnquiryResponse> orderCardEnquiryAsync(
 ```java
 String requestId = "RequestId8";
 OrderCardEnquiryRequest body = new OrderCardEnquiryRequest.Builder()
-    .filters(new OrderCardEnquiryReq.Builder()
+    .filters(new Filters2.Builder()
         .accountId(70)
         .accountNumber("NL00000063")
         .colCoCode(18)
@@ -613,7 +631,7 @@ OrderCardEnquiryRequest body = new OrderCardEnquiryRequest.Builder()
         .build())
     .build();
 
-cardController.orderCardEnquiryAsync(requestId, body).thenAccept(result -> {
+cardController.cardordercardenquiryAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -627,45 +645,44 @@ cardController.orderCardEnquiryAsync(requestId, body).thenAccept(result -> {
 
 ```json
 {
-  "RequestId": "string",
-  "Status": "string",
+  "RequestId": "6fb81ffe-bf1b-44b0-94f8-d6711afde392",
+  "Status": "SUCCESS",
   "Data": [
     {
-      "AccountId": 0,
-      "AccountNumber": "string",
+      "AccountId": 70,
+      "AccountNumber": "NL00000063",
       "BCOReference": 0,
       "BCORowNumber": 0,
       "CardGroupId": 0,
-      "CardGroupName": "string",
-      "CardId": 0,
-      "CardPAN": "string",
-      "CardTypeCode": "string",
-      "CardTypeId": 0,
-      "CardTypeName": "string",
-      "DriverName": "string",
-      "ErrorCode": "string",
-      "ErrorDescription": "string",
-      "GatewaySyncErrorCode": "string",
-      "GatewaySyncErrorDescription": "string",
-      "GatewaySyncStatus": "string",
-      "MainReference": 0,
-      "OrderCardReference": 0,
-      "OrderStatus": "string",
-      "PayerId": 0,
-      "PayerNumber": "string",
-      "ProcessedDate": "string",
-      "PurchaseCategoryCode": "string",
-      "PurchaseCategoryId": 0,
-      "PurchaseCategoryName": "string",
-      "SubmittedDate": "string",
-      "SyncProcessedDate": "string",
-      "SyncRequestedDate": "string",
-      "VRN": "string",
-      "OrderRequestId": "string",
-      "ExpiryDate": "string",
-      "ClientReferenceId": "string",
-      "StatusDescription": "string",
-      "ColCoId": 0
+      "CardGroupName": "null",
+      "CardId": 41008,
+      "CardPAN": "7077187910757000712",
+      "CardTypeCode": "7077187",
+      "CardTypeId": 704,
+      "CardTypeName": "NL CRT Nat. Shell + partnernetwerk",
+      "DriverName": "DAVE ROUSE TEST",
+      "ErrorCode": "0000",
+      "ErrorDescription": "null",
+      "GatewaySyncErrorCode": "0000",
+      "GatewaySyncErrorDescription": "Success",
+      "GatewaySyncStatus": "S",
+      "MainReference": 512164,
+      "OrderCardReference": 714069,
+      "OrderStatus": "S",
+      "PayerId": 70,
+      "PayerNumber": "NL00000063",
+      "ProcessedDate": "20231219 10:12:21",
+      "PurchaseCategoryCode": "3",
+      "PurchaseCategoryId": 139,
+      "PurchaseCategoryName": "3 - No Restriction",
+      "SubmittedDate": "20231219 10:11:16",
+      "SyncProcessedDate": "20231219 10:15:44",
+      "SyncRequestedDate": "null",
+      "VRN": "null",
+      "OrderRequestId": "ee625150-8d84-496c-b824-a4c47b482ae3",
+      "ExpiryDate": "20271231 00:00:00",
+      "ClientReferenceId": "9073ab4e-c1f5-4f2d-947f-753ead176c3d",
+      "StatusDescription": "Success"
     }
   ]
 }
@@ -675,14 +692,14 @@ cardController.orderCardEnquiryAsync(requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Card Cancel
+# Cardcancel
 
 This API allows cancelling one or multiple cards (up to 500) within a single API call. This API allows updating of
 the card to the following status-
@@ -718,9 +735,9 @@ A permanent block (cancelled) request for the card will be queued in Shell Card 
 When a card is requested to be Blocked permanently (cancelled) for which a request has already been submitted to report as Damaged and the damaged card active period is not yet completed, the damaged card request will be marked as superseded and the new Block (cancelled) request will be processed.
 
 ```java
-CompletableFuture<CancelCardResponse> cardCancelAsync(
+CompletableFuture<CancelCardResponse> cardcancelAsync(
     final String requestId,
-    final CancelCardRequest body)
+    final CardManagementV1CancelRequest body)
 ```
 
 ## Parameters
@@ -728,7 +745,7 @@ CompletableFuture<CancelCardResponse> cardCancelAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`CancelCardRequest`](../../doc/models/cancel-card-request.md) | Body, Optional | Update status request body |
+| `body` | [`CardManagementV1CancelRequest`](../../doc/models/card-management-v1-cancel-request.md) | Body, Optional | Update status request body |
 
 ## Response Type
 
@@ -738,7 +755,7 @@ CompletableFuture<CancelCardResponse> cardCancelAsync(
 
 ```java
 String requestId = "RequestId8";
-CancelCardRequest body = new CancelCardRequest.Builder(
+CardManagementV1CancelRequest body = new CardManagementV1CancelRequest.Builder(
     Arrays.asList(
         new UpdateCard.Builder()
             .caller("NextGenUI")
@@ -746,7 +763,7 @@ CancelCardRequest body = new CancelCardRequest.Builder(
             .notifyCaller(false)
             .notifyCallerOnSync(false)
             .orderCardReplacement(true)
-            .cardSettings(new ReplaceCardSettings.Builder(
+            .cardSettings(new CardSettings.Builder(
                 1
             )
             .selfSelectedEncryptedPIN("0hCx7wfFp3z8QkW8dElhHiMwCwC1")
@@ -801,7 +818,7 @@ CancelCardRequest body = new CancelCardRequest.Builder(
 .reasonText("Lost")
 .build();
 
-cardController.cardCancelAsync(requestId, body).thenAccept(result -> {
+cardController.cardcancelAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -842,13 +859,13 @@ cardController.cardCancelAsync(requestId, body).thenAccept(result -> {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Card Update Status
+# Cardupdatestatus
 
 This API allows updating of the card status for one or more cards (up to 500) within a single API call.  If the API call succeeds, the API will return a reference number and queue the request for asynchronous processing.
 
@@ -897,9 +914,9 @@ This API allows updating of the card status for one or more cards (up to 500) wi
   * If during the damage card active period another request is made to set the card to Temporarily Blocked or Blocked permanently (cancelled), then the damaged card request will be marked as superseded and the new Temporary Block or Block (cancelled) will be processed.
 
 ```java
-CompletableFuture<UpdateCardStatusResponse> cardUpdateStatusAsync(
+CompletableFuture<UpdateCardStatusResponse> cardupdatestatusAsync(
     final String requestId,
-    final UpdateCardStatusRequest body)
+    final CardManagementV1UpdatestatusRequest body)
 ```
 
 ## Parameters
@@ -907,7 +924,7 @@ CompletableFuture<UpdateCardStatusResponse> cardUpdateStatusAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`UpdateCardStatusRequest`](../../doc/models/update-card-status-request.md) | Body, Optional | Update status request body |
+| `body` | [`CardManagementV1UpdatestatusRequest`](../../doc/models/card-management-v1-updatestatus-request.md) | Body, Optional | Update status request body |
 
 ## Response Type
 
@@ -917,7 +934,7 @@ CompletableFuture<UpdateCardStatusResponse> cardUpdateStatusAsync(
 
 ```java
 String requestId = "RequestId8";
-UpdateCardStatusRequest body = new UpdateCardStatusRequest.Builder(
+CardManagementV1UpdatestatusRequest body = new CardManagementV1UpdatestatusRequest.Builder(
     Arrays.asList(
         new UpdateCard.Builder()
             .caller("Motix")
@@ -925,7 +942,7 @@ UpdateCardStatusRequest body = new UpdateCardStatusRequest.Builder(
             .notifyCaller(true)
             .notifyCallerOnSync(false)
             .orderCardReplacement(true)
-            .cardSettings(new ReplaceCardSettings.Builder(
+            .cardSettings(new CardSettings.Builder(
                 1
             )
             .selfSelectedEncryptedPIN("0hCx7wfFp3z8QkW8dElhHiMwCwC1")
@@ -982,7 +999,7 @@ UpdateCardStatusRequest body = new UpdateCardStatusRequest.Builder(
 .reasonText("Unblock")
 .build();
 
-cardController.cardUpdateStatusAsync(requestId, body).thenAccept(result -> {
+cardController.cardupdatestatusAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1022,11 +1039,11 @@ cardController.cardUpdateStatusAsync(requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
 # Purchase Category
@@ -1126,14 +1143,14 @@ cardController.purchaseCategoryAsync(apikey, requestId, body).thenAccept(result 
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 403 | The server understood the request but refuses to authorize it. | [`ErrorUserAccessError1Exception`](../../doc/models/error-user-access-error-1-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Card Details
+# Carddetails
 
 This API allows to fetch details of a single fuel card from the Shell Card Platform. If a **CardId** request parameter is provided, this will return a single card.  If a **PAN** request parameter is provided, this may result in multiple fuel cards matching the search criteria. The card details of the most recently issued card will be returned.
 
@@ -1142,7 +1159,7 @@ This API allows to fetch details of a single fuel card from the Shell Card Platf
 * Get card by card id or PAN
 
 ```java
-CompletableFuture<CardDetailsResponse> cardDetailsAsync(
+CompletableFuture<CardDetailsResponse> carddetailsAsync(
     final String apikey,
     final String requestId,
     final CardDetailsRequest body)
@@ -1185,7 +1202,7 @@ CardDetailsRequest body = new CardDetailsRequest.Builder()
     .includeScheduledCardBlocks(false)
     .build();
 
-cardController.cardDetailsAsync(apikey, requestId, body).thenAccept(result -> {
+cardController.carddetailsAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1329,11 +1346,11 @@ cardController.cardDetailsAsync(apikey, requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 403 | The server understood the request but refuses to authorize it. | [`ErrorUserAccessError1Exception`](../../doc/models/error-user-access-error-1-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
 # Card Move
@@ -1454,14 +1471,14 @@ cardController.cardMoveAsync(apikey, requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 403 | The server understood the request but refuses to authorize it. | [`ErrorUserAccessError1Exception`](../../doc/models/error-user-access-error-1-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Card Pin Reminder
+# Cardpinreminder
 
 This API allows requesting a PIN reminder for a fuel card. If the API call succeeds, the API will return a reference number and queue the request for asynchronous processing.
 
@@ -1488,9 +1505,9 @@ This API allows requesting a PIN reminder for a fuel card. If the API call succe
 * A PIN reminder request has not been successfully processed in the last 48 hours for the card
 
 ```java
-CompletableFuture<PINReminderResponse> cardPinReminderAsync(
+CompletableFuture<PINReminderResponse> cardpinreminderAsync(
     final String requestId,
-    final PINReminderRequest body)
+    final CardManagementV1PinreminderRequest body)
 ```
 
 ## Parameters
@@ -1498,7 +1515,7 @@ CompletableFuture<PINReminderResponse> cardPinReminderAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`PINReminderRequest`](../../doc/models/pin-reminder-request.md) | Body, Optional | PIN reminder request body |
+| `body` | [`CardManagementV1PinreminderRequest`](../../doc/models/card-management-v1-pinreminder-request.md) | Body, Optional | PIN reminder request body |
 
 ## Response Type
 
@@ -1508,7 +1525,7 @@ CompletableFuture<PINReminderResponse> cardPinReminderAsync(
 
 ```java
 String requestId = "RequestId8";
-PINReminderRequest body = new PINReminderRequest.Builder()
+CardManagementV1PinreminderRequest body = new CardManagementV1PinreminderRequest.Builder()
     .accountNumber("CZ00000927")
     .colCoCode(32)
     .payerNumber("CZ00000927")
@@ -1520,7 +1537,7 @@ PINReminderRequest body = new PINReminderRequest.Builder()
         .pAN("7027329200000115820")
         .cardExpiryDate("20241031")
         .pINContactType(4)
-        .pINDeliverTo(new PINDeliveryDetails.Builder(
+        .pINDeliverTo(new PINDeliverTo.Builder(
                 "CGI",
                 "Address1",
                 "938373",
@@ -1538,7 +1555,7 @@ PINReminderRequest body = new PINReminderRequest.Builder()
     ))
     .build();
 
-cardController.cardPinReminderAsync(requestId, body).thenAccept(result -> {
+cardController.cardpinreminderAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1687,14 +1704,14 @@ cardController.scheduleCardBlockAsync(requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Auto Renew
+# Autorenew
 
 This API allows to update the reissue indicator of a single card. If the API call succeeds, the API will return a reference number for tracking purposes and queue the request for asynchronous processing.
 
@@ -1717,7 +1734,7 @@ This API allows to update the reissue indicator of a single card. If the API cal
 * Providing a **PAN** request paramter may result in multiple fuel cards being located in the Shell Card Platform. The card details of the most recently issued card will be considered.
 
 ```java
-CompletableFuture<AutoRenewCardResponse> autoRenewAsync(
+CompletableFuture<AutoRenewCardResponse> autorenewAsync(
     final String requestId,
     final AutoRenewCardRequest body)
 ```
@@ -1754,7 +1771,7 @@ AutoRenewCardRequest body = new AutoRenewCardRequest.Builder()
     ))
     .build();
 
-cardController.autoRenewAsync(requestId, body).thenAccept(result -> {
+cardController.autorenewAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1784,14 +1801,14 @@ cardController.autoRenewAsync(requestId, body).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Update Mobile Payment Registration Status
+# Updatemobilepaymentregistrationstatus
 
 This operation allows  update the approval status of Mobile Payment Registration requests requiring for Fleet Manager approval.
 If the approval status is:
@@ -1800,7 +1817,7 @@ If the approval status is:
 * “Rejected” then status will be updated to “CI” (Failed) with appropriate error message.
 
 ```java
-CompletableFuture<UpdateMPayRegStatusResponse> updateMobilePaymentRegistrationStatusAsync(
+CompletableFuture<UpdateMPayRegStatusResponse> updatemobilepaymentregistrationstatusAsync(
     final String requestId,
     final UpdateMPayRegStatusRequest body)
 ```
@@ -1836,7 +1853,7 @@ UpdateMPayRegStatusRequest body = new UpdateMPayRegStatusRequest.Builder()
     ))
     .build();
 
-cardController.updateMobilePaymentRegistrationStatusAsync(requestId, body).thenAccept(result -> {
+cardController.updatemobilepaymentregistrationstatusAsync(requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1860,18 +1877,18 @@ cardController.updateMobilePaymentRegistrationStatusAsync(requestId, body).thenA
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | Forbidden | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | `ApiException` |
 
 
-# Get Key
+# Getkey
 
 Get a new public key that will be used to encrypt data for selected PIN process when ordering new Shell Card. This encrypted data is used for further processing.
 
 ```java
-CompletableFuture<GeneratePINKeyResponse> getKeyAsync(
+CompletableFuture<GeneratePINKeyResponse> getkeyAsync(
     final String requestId,
     final Boolean fleet)
 ```
@@ -1892,7 +1909,7 @@ CompletableFuture<GeneratePINKeyResponse> getKeyAsync(
 ```java
 String requestId = "RequestId8";
 
-cardController.getKeyAsync(requestId, null).thenAccept(result -> {
+cardController.getkeyAsync(requestId, null).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1915,14 +1932,14 @@ cardController.getKeyAsync(requestId, null).thenAccept(result -> {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 403 | The server understood the request but refuses to authorize it. | [`ErrorUserAccessError1Exception`](../../doc/models/error-user-access-error-1-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Delivery Address Update
+# Deliveryaddressupdate
 
 This API allows users to update the card’s delivery addresses (card delivery address used for card re-issue and PIN delivery address used when PIN reminder is requested)
 
@@ -1931,7 +1948,7 @@ This API allows users to update the card’s delivery addresses (card delivery a
 * card delivery address update
 
 ```java
-CompletableFuture<DeliveryAddressUpdateResponse> deliveryAddressUpdateAsync(
+CompletableFuture<DeliveryAddressUpdateResponse> deliveryaddressupdateAsync(
     final String apikey,
     final DeliveryAddressUpdateRequest body)
 ```
@@ -1958,9 +1975,31 @@ DeliveryAddressUpdateRequest body = new DeliveryAddressUpdateRequest.Builder()
     .payerNumber("GB000000123")
     .accountId(12356)
     .accountNumber("GB000000124")
+    .deliveryAddressUpdates(Arrays.asList(
+        new DeliveryAddressUpdate.Builder(
+            true
+        )
+        .cardId(123)
+        .pAN("7002051006629889654")
+        .cardExpiryDate("20170930")
+        .updateCardRenewalAddress(new UpdateCardRenewalAddress2.Builder(
+                "Jack",
+                "Travel Transport",
+                "Elm Street 11",
+                "1023EA",
+                8
+            )
+            .contactTitle("Mr")
+            .city("London")
+            .regionID(2)
+            .emailAddress("testmail@gmail.com")
+            .phoneNumber("+99999999999")
+            .build())
+        .build()
+    ))
     .build();
 
-cardController.deliveryAddressUpdateAsync(apikey, body).thenAccept(result -> {
+cardController.deliveryaddressupdateAsync(apikey, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1970,13 +2009,34 @@ cardController.deliveryAddressUpdateAsync(apikey, body).thenAccept(result -> {
 });
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "RequestId": "eb621f45-a543-4d9a-a934-2f223b263c42",
+  "ServiceReference": 123456,
+  "DeliveryAddressUpdateReferences": {
+    "CardId": 12345,
+    "CardPAN": "7002051006629889654",
+    "AccountId": 12356,
+    "AccountNumber": "GB000000124",
+    "ReferenceId": 573567,
+    "ErrorInfo": "null"
+  },
+  "Error": {
+    "Code": "0000",
+    "Description": "Success"
+  }
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 403 | The server understood the request but refuses to authorize it. | [`ErrorUserAccessError1Exception`](../../doc/models/error-user-access-error-1-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
-| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`DefaultErrorException`](../../doc/models/default-error-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 

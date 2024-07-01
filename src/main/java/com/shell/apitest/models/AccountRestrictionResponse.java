@@ -9,13 +9,19 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for AccountRestrictionResponse type.
  */
 public class AccountRestrictionResponse {
-    private String requestId;
-    private String status;
+    private OptionalNullable<String> requestId;
+    private Integer accountId;
+    private String accountNumber;
+    private String usageRestrictionStatus;
+    private String usageRestrictionDescription;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
@@ -26,55 +32,192 @@ public class AccountRestrictionResponse {
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  usageRestrictionStatus  String value for usageRestrictionStatus.
+     * @param  usageRestrictionDescription  String value for usageRestrictionDescription.
+     * @param  error  ErrorStatus value for error.
      */
     public AccountRestrictionResponse(
             String requestId,
-            String status) {
+            Integer accountId,
+            String accountNumber,
+            String usageRestrictionStatus,
+            String usageRestrictionDescription,
+            ErrorStatus error) {
+        this.requestId = OptionalNullable.of(requestId);
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.usageRestrictionDescription = usageRestrictionDescription;
+        this.error = error;
+    }
+
+    /**
+     * Initialization constructor.
+     * @param  requestId  String value for requestId.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  usageRestrictionStatus  String value for usageRestrictionStatus.
+     * @param  usageRestrictionDescription  String value for usageRestrictionDescription.
+     * @param  error  ErrorStatus value for error.
+     */
+
+    protected AccountRestrictionResponse(OptionalNullable<String> requestId, Integer accountId,
+            String accountNumber, String usageRestrictionStatus, String usageRestrictionDescription,
+            ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.usageRestrictionDescription = usageRestrictionDescription;
+        this.error = error;
+    }
+
+    /**
+     * Internal Getter for RequestId.
+     * Request Id of the API call
+     * @return Returns the Internal String
+     */
+    @JsonGetter("RequestId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetRequestId() {
+        return this.requestId;
     }
 
     /**
      * Getter for RequestId.
-     * API Request Id
+     * Request Id of the API call
      * @return Returns the String
      */
-    @JsonGetter("RequestId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getRequestId() {
-        return requestId;
+        return OptionalNullable.getFrom(requestId);
     }
 
     /**
      * Setter for RequestId.
-     * API Request Id
+     * Request Id of the API call
      * @param requestId Value for String
      */
     @JsonSetter("RequestId")
     public void setRequestId(String requestId) {
-        this.requestId = requestId;
+        this.requestId = OptionalNullable.of(requestId);
     }
 
     /**
-     * Getter for Status.
-     * API Response Status
+     * UnSetter for RequestId.
+     * Request Id of the API call
+     */
+    public void unsetRequestId() {
+        requestId = null;
+    }
+
+    /**
+     * Getter for AccountId.
+     * Account Id on which restriction is applied. Example: 123456
+     * @return Returns the Integer
+     */
+    @JsonGetter("AccountId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    /**
+     * Setter for AccountId.
+     * Account Id on which restriction is applied. Example: 123456
+     * @param accountId Value for Integer
+     */
+    @JsonSetter("AccountId")
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    /**
+     * Getter for AccountNumber.
+     * Account Number on which restriction is applied. Example: GB000000123
      * @return Returns the String
      */
-    @JsonGetter("Status")
+    @JsonGetter("AccountNumber")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
     /**
-     * Setter for Status.
-     * API Response Status
-     * @param status Value for String
+     * Setter for AccountNumber.
+     * Account Number on which restriction is applied. Example: GB000000123
+     * @param accountNumber Value for String
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("AccountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    /**
+     * Getter for UsageRestrictionStatus.
+     * Status of the card usage restriction submitted to Gateway. Based on the response from Gateway
+     * value will be set as either “Success” or “Failed”.
+     * @return Returns the String
+     */
+    @JsonGetter("UsageRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getUsageRestrictionStatus() {
+        return usageRestrictionStatus;
+    }
+
+    /**
+     * Setter for UsageRestrictionStatus.
+     * Status of the card usage restriction submitted to Gateway. Based on the response from Gateway
+     * value will be set as either “Success” or “Failed”.
+     * @param usageRestrictionStatus Value for String
+     */
+    @JsonSetter("UsageRestrictionStatus")
+    public void setUsageRestrictionStatus(String usageRestrictionStatus) {
+        this.usageRestrictionStatus = usageRestrictionStatus;
+    }
+
+    /**
+     * Getter for UsageRestrictionDescription.
+     * Response for the usage restriction in case of an error. This field will have a value only
+     * when “UsageRestrictionStatus” is “Failed”.
+     * @return Returns the String
+     */
+    @JsonGetter("UsageRestrictionDescription")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getUsageRestrictionDescription() {
+        return usageRestrictionDescription;
+    }
+
+    /**
+     * Setter for UsageRestrictionDescription.
+     * Response for the usage restriction in case of an error. This field will have a value only
+     * when “UsageRestrictionStatus” is “Failed”.
+     * @param usageRestrictionDescription Value for String
+     */
+    @JsonSetter("UsageRestrictionDescription")
+    public void setUsageRestrictionDescription(String usageRestrictionDescription) {
+        this.usageRestrictionDescription = usageRestrictionDescription;
+    }
+
+    /**
+     * Getter for Error.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("Error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getError() {
+        return error;
+    }
+
+    /**
+     * Setter for Error.
+     * @param error Value for ErrorStatus
+     */
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
     }
 
     /**
@@ -83,8 +226,10 @@ public class AccountRestrictionResponse {
      */
     @Override
     public String toString() {
-        return "AccountRestrictionResponse [" + "requestId=" + requestId + ", status=" + status
-                + "]";
+        return "AccountRestrictionResponse [" + "requestId=" + requestId + ", accountId="
+                + accountId + ", accountNumber=" + accountNumber + ", usageRestrictionStatus="
+                + usageRestrictionStatus + ", usageRestrictionDescription="
+                + usageRestrictionDescription + ", error=" + error + "]";
     }
 
     /**
@@ -94,8 +239,12 @@ public class AccountRestrictionResponse {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .requestId(getRequestId())
-                .status(getStatus());
+                .accountId(getAccountId())
+                .accountNumber(getAccountNumber())
+                .usageRestrictionStatus(getUsageRestrictionStatus())
+                .usageRestrictionDescription(getUsageRestrictionDescription())
+                .error(getError());
+        builder.requestId = internalGetRequestId();
         return builder;
     }
 
@@ -103,8 +252,12 @@ public class AccountRestrictionResponse {
      * Class to build instances of {@link AccountRestrictionResponse}.
      */
     public static class Builder {
-        private String requestId;
-        private String status;
+        private OptionalNullable<String> requestId;
+        private Integer accountId;
+        private String accountNumber;
+        private String usageRestrictionStatus;
+        private String usageRestrictionDescription;
+        private ErrorStatus error;
 
 
 
@@ -114,17 +267,66 @@ public class AccountRestrictionResponse {
          * @return Builder
          */
         public Builder requestId(String requestId) {
-            this.requestId = requestId;
+            this.requestId = OptionalNullable.of(requestId);
             return this;
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * UnSetter for requestId.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder unsetRequestId() {
+            requestId = null;
+            return this;
+        }
+
+        /**
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
+         * @return Builder
+         */
+        public Builder accountId(Integer accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        /**
+         * Setter for accountNumber.
+         * @param  accountNumber  String value for accountNumber.
+         * @return Builder
+         */
+        public Builder accountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Setter for usageRestrictionStatus.
+         * @param  usageRestrictionStatus  String value for usageRestrictionStatus.
+         * @return Builder
+         */
+        public Builder usageRestrictionStatus(String usageRestrictionStatus) {
+            this.usageRestrictionStatus = usageRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for usageRestrictionDescription.
+         * @param  usageRestrictionDescription  String value for usageRestrictionDescription.
+         * @return Builder
+         */
+        public Builder usageRestrictionDescription(String usageRestrictionDescription) {
+            this.usageRestrictionDescription = usageRestrictionDescription;
+            return this;
+        }
+
+        /**
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
+         * @return Builder
+         */
+        public Builder error(ErrorStatus error) {
+            this.error = error;
             return this;
         }
 
@@ -133,7 +335,8 @@ public class AccountRestrictionResponse {
          * @return {@link AccountRestrictionResponse}
          */
         public AccountRestrictionResponse build() {
-            return new AccountRestrictionResponse(requestId, status);
+            return new AccountRestrictionResponse(requestId, accountId, accountNumber,
+                    usageRestrictionStatus, usageRestrictionDescription, error);
         }
     }
 }

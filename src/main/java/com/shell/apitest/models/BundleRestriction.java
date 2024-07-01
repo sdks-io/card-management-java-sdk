@@ -9,236 +9,277 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for BundleRestriction type.
  */
 public class BundleRestriction {
-    private Boolean resetDayTimeRestriction;
-    private Boolean resetLocationRestriction;
-    private Boolean resetProductRestriction;
-    private UsageRestrictions usageRestrictions;
-    private DayTimeRestrictions dayTimeRestrictions;
-    private ProductRestrictions productRestriction;
-    private String locationRestrictionProfileId;
-    private LocationRestrictions locationRestrictions;
+    private OptionalNullable<String> dayTimeRestrictionAction;
+    private OptionalNullable<String> locationRestrictionAction;
+    private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+    private DayTimeRestriction dayTimeRestrictions;
+    private OptionalNullable<ProductRestrictionCard> productRestrictions;
+    private LocationRestriction locationRestrictions;
 
     /**
      * Default constructor.
      */
     public BundleRestriction() {
-        resetDayTimeRestriction = false;
-        resetLocationRestriction = false;
-        resetProductRestriction = false;
     }
 
     /**
      * Initialization constructor.
-     * @param  resetDayTimeRestriction  Boolean value for resetDayTimeRestriction.
-     * @param  resetLocationRestriction  Boolean value for resetLocationRestriction.
-     * @param  resetProductRestriction  Boolean value for resetProductRestriction.
-     * @param  usageRestrictions  UsageRestrictions value for usageRestrictions.
-     * @param  dayTimeRestrictions  DayTimeRestrictions value for dayTimeRestrictions.
-     * @param  productRestriction  ProductRestrictions value for productRestriction.
-     * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
-     * @param  locationRestrictions  LocationRestrictions value for locationRestrictions.
+     * @param  dayTimeRestrictionAction  String value for dayTimeRestrictionAction.
+     * @param  locationRestrictionAction  String value for locationRestrictionAction.
+     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
+     * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
+     * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
      */
     public BundleRestriction(
-            Boolean resetDayTimeRestriction,
-            Boolean resetLocationRestriction,
-            Boolean resetProductRestriction,
-            UsageRestrictions usageRestrictions,
-            DayTimeRestrictions dayTimeRestrictions,
-            ProductRestrictions productRestriction,
-            String locationRestrictionProfileId,
-            LocationRestrictions locationRestrictions) {
-        this.resetDayTimeRestriction = resetDayTimeRestriction;
-        this.resetLocationRestriction = resetLocationRestriction;
-        this.resetProductRestriction = resetProductRestriction;
-        this.usageRestrictions = usageRestrictions;
+            String dayTimeRestrictionAction,
+            String locationRestrictionAction,
+            UsageRestrictionsCard usageRestrictions,
+            DayTimeRestriction dayTimeRestrictions,
+            ProductRestrictionCard productRestrictions,
+            LocationRestriction locationRestrictions) {
+        this.dayTimeRestrictionAction = OptionalNullable.of(dayTimeRestrictionAction);
+        this.locationRestrictionAction = OptionalNullable.of(locationRestrictionAction);
+        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
         this.dayTimeRestrictions = dayTimeRestrictions;
-        this.productRestriction = productRestriction;
-        this.locationRestrictionProfileId = locationRestrictionProfileId;
+        this.productRestrictions = OptionalNullable.of(productRestrictions);
         this.locationRestrictions = locationRestrictions;
     }
 
     /**
-     * Getter for ResetDayTimeRestriction.
-     * True/False A value indicates if the day/time restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @return Returns the Boolean
+     * Initialization constructor.
+     * @param  dayTimeRestrictionAction  String value for dayTimeRestrictionAction.
+     * @param  locationRestrictionAction  String value for locationRestrictionAction.
+     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
+     * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
+     * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
      */
-    @JsonGetter("ResetDayTimeRestriction")
+
+    protected BundleRestriction(OptionalNullable<String> dayTimeRestrictionAction,
+            OptionalNullable<String> locationRestrictionAction,
+            OptionalNullable<UsageRestrictionsCard> usageRestrictions,
+            DayTimeRestriction dayTimeRestrictions,
+            OptionalNullable<ProductRestrictionCard> productRestrictions,
+            LocationRestriction locationRestrictions) {
+        this.dayTimeRestrictionAction = dayTimeRestrictionAction;
+        this.locationRestrictionAction = locationRestrictionAction;
+        this.usageRestrictions = usageRestrictions;
+        this.dayTimeRestrictions = dayTimeRestrictions;
+        this.productRestrictions = productRestrictions;
+        this.locationRestrictions = locationRestrictions;
+    }
+
+    /**
+     * Internal Getter for DayTimeRestrictionAction.
+     * The value indicates what actions to be performed with respect to day time restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * Day/Time restriction will be applied on the bundle in Gateway.
+     * @return Returns the Internal String
+     */
+    @JsonGetter("DayTimeRestrictionAction")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean getResetDayTimeRestriction() {
-        return resetDayTimeRestriction;
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetDayTimeRestrictionAction() {
+        return this.dayTimeRestrictionAction;
     }
 
     /**
-     * Setter for ResetDayTimeRestriction.
-     * True/False A value indicates if the day/time restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @param resetDayTimeRestriction Value for Boolean
+     * Getter for DayTimeRestrictionAction.
+     * The value indicates what actions to be performed with respect to day time restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * Day/Time restriction will be applied on the bundle in Gateway.
+     * @return Returns the String
      */
-    @JsonSetter("ResetDayTimeRestriction")
-    public void setResetDayTimeRestriction(Boolean resetDayTimeRestriction) {
-        this.resetDayTimeRestriction = resetDayTimeRestriction;
+    public String getDayTimeRestrictionAction() {
+        return OptionalNullable.getFrom(dayTimeRestrictionAction);
     }
 
     /**
-     * Getter for ResetLocationRestriction.
-     * True/False A value indicates if the location restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @return Returns the Boolean
+     * Setter for DayTimeRestrictionAction.
+     * The value indicates what actions to be performed with respect to day time restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * Day/Time restriction will be applied on the bundle in Gateway.
+     * @param dayTimeRestrictionAction Value for String
      */
-    @JsonGetter("ResetLocationRestriction")
+    @JsonSetter("DayTimeRestrictionAction")
+    public void setDayTimeRestrictionAction(String dayTimeRestrictionAction) {
+        this.dayTimeRestrictionAction = OptionalNullable.of(dayTimeRestrictionAction);
+    }
+
+    /**
+     * UnSetter for DayTimeRestrictionAction.
+     * The value indicates what actions to be performed with respect to day time restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * Day/Time restriction will be applied on the bundle in Gateway.
+     */
+    public void unsetDayTimeRestrictionAction() {
+        dayTimeRestrictionAction = null;
+    }
+
+    /**
+     * Internal Getter for LocationRestrictionAction.
+     * The value indicates what actions to be performed with respect to location restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * location restriction will be applied on the bundle in Gateway.
+     * @return Returns the Internal String
+     */
+    @JsonGetter("LocationRestrictionAction")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean getResetLocationRestriction() {
-        return resetLocationRestriction;
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetLocationRestrictionAction() {
+        return this.locationRestrictionAction;
     }
 
     /**
-     * Setter for ResetLocationRestriction.
-     * True/False A value indicates if the location restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @param resetLocationRestriction Value for Boolean
+     * Getter for LocationRestrictionAction.
+     * The value indicates what actions to be performed with respect to location restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * location restriction will be applied on the bundle in Gateway.
+     * @return Returns the String
      */
-    @JsonSetter("ResetLocationRestriction")
-    public void setResetLocationRestriction(Boolean resetLocationRestriction) {
-        this.resetLocationRestriction = resetLocationRestriction;
+    public String getLocationRestrictionAction() {
+        return OptionalNullable.getFrom(locationRestrictionAction);
     }
 
     /**
-     * Getter for ResetProductRestriction.
-     * True/False A value indicates if the product restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @return Returns the Boolean
+     * Setter for LocationRestrictionAction.
+     * The value indicates what actions to be performed with respect to location restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * location restriction will be applied on the bundle in Gateway.
+     * @param locationRestrictionAction Value for String
      */
-    @JsonGetter("ResetProductRestriction")
+    @JsonSetter("LocationRestrictionAction")
+    public void setLocationRestrictionAction(String locationRestrictionAction) {
+        this.locationRestrictionAction = OptionalNullable.of(locationRestrictionAction);
+    }
+
+    /**
+     * UnSetter for LocationRestrictionAction.
+     * The value indicates what actions to be performed with respect to location restriction.
+     * Mandatory Allowed values – •	Add: Apply the given restriction on the bundle. •	Default: No
+     * location restriction will be applied on the bundle in Gateway.
+     */
+    public void unsetLocationRestrictionAction() {
+        locationRestrictionAction = null;
+    }
+
+    /**
+     * Internal Getter for UsageRestrictions.
+     * @return Returns the Internal UsageRestrictionsCard
+     */
+    @JsonGetter("UsageRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Boolean getResetProductRestriction() {
-        return resetProductRestriction;
-    }
-
-    /**
-     * Setter for ResetProductRestriction.
-     * True/False A value indicates if the product restriction is to be reset for card bundle.
-     * Optional Default value is False.
-     * @param resetProductRestriction Value for Boolean
-     */
-    @JsonSetter("ResetProductRestriction")
-    public void setResetProductRestriction(Boolean resetProductRestriction) {
-        this.resetProductRestriction = resetProductRestriction;
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<UsageRestrictionsCard> internalGetUsageRestrictions() {
+        return this.usageRestrictions;
     }
 
     /**
      * Getter for UsageRestrictions.
-     * @return Returns the UsageRestrictions
+     * @return Returns the UsageRestrictionsCard
      */
-    @JsonGetter("UsageRestrictions")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public UsageRestrictions getUsageRestrictions() {
-        return usageRestrictions;
+    public UsageRestrictionsCard getUsageRestrictions() {
+        return OptionalNullable.getFrom(usageRestrictions);
     }
 
     /**
      * Setter for UsageRestrictions.
-     * @param usageRestrictions Value for UsageRestrictions
+     * @param usageRestrictions Value for UsageRestrictionsCard
      */
     @JsonSetter("UsageRestrictions")
-    public void setUsageRestrictions(UsageRestrictions usageRestrictions) {
-        this.usageRestrictions = usageRestrictions;
+    public void setUsageRestrictions(UsageRestrictionsCard usageRestrictions) {
+        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+    }
+
+    /**
+     * UnSetter for UsageRestrictions.
+     */
+    public void unsetUsageRestrictions() {
+        usageRestrictions = null;
     }
 
     /**
      * Getter for DayTimeRestrictions.
-     * Day/time restrictions such as weekdays and time range to be applied on the bundle. Mandatory
-     * if respective action is set as “Add”. The details of DayTimeRestriction entity is given
-     * below.
-     * @return Returns the DayTimeRestrictions
+     * Details of the day/time restrictions such as weekdays and time range in which transactions
+     * should be allowed on the card.
+     * @return Returns the DayTimeRestriction
      */
     @JsonGetter("DayTimeRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public DayTimeRestrictions getDayTimeRestrictions() {
+    public DayTimeRestriction getDayTimeRestrictions() {
         return dayTimeRestrictions;
     }
 
     /**
      * Setter for DayTimeRestrictions.
-     * Day/time restrictions such as weekdays and time range to be applied on the bundle. Mandatory
-     * if respective action is set as “Add”. The details of DayTimeRestriction entity is given
-     * below.
-     * @param dayTimeRestrictions Value for DayTimeRestrictions
+     * Details of the day/time restrictions such as weekdays and time range in which transactions
+     * should be allowed on the card.
+     * @param dayTimeRestrictions Value for DayTimeRestriction
      */
     @JsonSetter("DayTimeRestrictions")
-    public void setDayTimeRestrictions(DayTimeRestrictions dayTimeRestrictions) {
+    public void setDayTimeRestrictions(DayTimeRestriction dayTimeRestrictions) {
         this.dayTimeRestrictions = dayTimeRestrictions;
     }
 
     /**
-     * Getter for ProductRestriction.
-     * @return Returns the ProductRestrictions
+     * Internal Getter for ProductRestrictions.
+     * @return Returns the Internal ProductRestrictionCard
      */
-    @JsonGetter("ProductRestriction")
+    @JsonGetter("ProductRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public ProductRestrictions getProductRestriction() {
-        return productRestriction;
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<ProductRestrictionCard> internalGetProductRestrictions() {
+        return this.productRestrictions;
     }
 
     /**
-     * Setter for ProductRestriction.
-     * @param productRestriction Value for ProductRestrictions
+     * Getter for ProductRestrictions.
+     * @return Returns the ProductRestrictionCard
      */
-    @JsonSetter("ProductRestriction")
-    public void setProductRestriction(ProductRestrictions productRestriction) {
-        this.productRestriction = productRestriction;
+    public ProductRestrictionCard getProductRestrictions() {
+        return OptionalNullable.getFrom(productRestrictions);
     }
 
     /**
-     * Getter for LocationRestrictionProfileId.
-     * Identifier of the location restriction profile to be updated for the bundle in Gateway.
-     * Optional
-     * @return Returns the String
+     * Setter for ProductRestrictions.
+     * @param productRestrictions Value for ProductRestrictionCard
      */
-    @JsonGetter("LocationRestrictionProfileId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getLocationRestrictionProfileId() {
-        return locationRestrictionProfileId;
+    @JsonSetter("ProductRestrictions")
+    public void setProductRestrictions(ProductRestrictionCard productRestrictions) {
+        this.productRestrictions = OptionalNullable.of(productRestrictions);
     }
 
     /**
-     * Setter for LocationRestrictionProfileId.
-     * Identifier of the location restriction profile to be updated for the bundle in Gateway.
-     * Optional
-     * @param locationRestrictionProfileId Value for String
+     * UnSetter for ProductRestrictions.
      */
-    @JsonSetter("LocationRestrictionProfileId")
-    public void setLocationRestrictionProfileId(String locationRestrictionProfileId) {
-        this.locationRestrictionProfileId = locationRestrictionProfileId;
+    public void unsetProductRestrictions() {
+        productRestrictions = null;
     }
 
     /**
      * Getter for LocationRestrictions.
-     * Location restrictions to be applied on the bundle which either allows or restricts using the
-     * cards, which are under the bundle, in the specified locations. Mandatory if respective action
-     * is set as “Add”. Details of location restrictions are given below.
-     * @return Returns the LocationRestrictions
+     * @return Returns the LocationRestriction
      */
     @JsonGetter("LocationRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public LocationRestrictions getLocationRestrictions() {
+    public LocationRestriction getLocationRestrictions() {
         return locationRestrictions;
     }
 
     /**
      * Setter for LocationRestrictions.
-     * Location restrictions to be applied on the bundle which either allows or restricts using the
-     * cards, which are under the bundle, in the specified locations. Mandatory if respective action
-     * is set as “Add”. Details of location restrictions are given below.
-     * @param locationRestrictions Value for LocationRestrictions
+     * @param locationRestrictions Value for LocationRestriction
      */
     @JsonSetter("LocationRestrictions")
-    public void setLocationRestrictions(LocationRestrictions locationRestrictions) {
+    public void setLocationRestrictions(LocationRestriction locationRestrictions) {
         this.locationRestrictions = locationRestrictions;
     }
 
@@ -248,13 +289,11 @@ public class BundleRestriction {
      */
     @Override
     public String toString() {
-        return "BundleRestriction [" + "resetDayTimeRestriction=" + resetDayTimeRestriction
-                + ", resetLocationRestriction=" + resetLocationRestriction
-                + ", resetProductRestriction=" + resetProductRestriction + ", usageRestrictions="
-                + usageRestrictions + ", dayTimeRestrictions=" + dayTimeRestrictions
-                + ", productRestriction=" + productRestriction + ", locationRestrictionProfileId="
-                + locationRestrictionProfileId + ", locationRestrictions=" + locationRestrictions
-                + "]";
+        return "BundleRestriction [" + "dayTimeRestrictionAction=" + dayTimeRestrictionAction
+                + ", locationRestrictionAction=" + locationRestrictionAction
+                + ", usageRestrictions=" + usageRestrictions + ", dayTimeRestrictions="
+                + dayTimeRestrictions + ", productRestrictions=" + productRestrictions
+                + ", locationRestrictions=" + locationRestrictions + "]";
     }
 
     /**
@@ -264,14 +303,12 @@ public class BundleRestriction {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .resetDayTimeRestriction(getResetDayTimeRestriction())
-                .resetLocationRestriction(getResetLocationRestriction())
-                .resetProductRestriction(getResetProductRestriction())
-                .usageRestrictions(getUsageRestrictions())
                 .dayTimeRestrictions(getDayTimeRestrictions())
-                .productRestriction(getProductRestriction())
-                .locationRestrictionProfileId(getLocationRestrictionProfileId())
                 .locationRestrictions(getLocationRestrictions());
+        builder.dayTimeRestrictionAction = internalGetDayTimeRestrictionAction();
+        builder.locationRestrictionAction = internalGetLocationRestrictionAction();
+        builder.usageRestrictions = internalGetUsageRestrictions();
+        builder.productRestrictions = internalGetProductRestrictions();
         return builder;
     }
 
@@ -279,93 +316,107 @@ public class BundleRestriction {
      * Class to build instances of {@link BundleRestriction}.
      */
     public static class Builder {
-        private Boolean resetDayTimeRestriction = false;
-        private Boolean resetLocationRestriction = false;
-        private Boolean resetProductRestriction = false;
-        private UsageRestrictions usageRestrictions;
-        private DayTimeRestrictions dayTimeRestrictions;
-        private ProductRestrictions productRestriction;
-        private String locationRestrictionProfileId;
-        private LocationRestrictions locationRestrictions;
+        private OptionalNullable<String> dayTimeRestrictionAction;
+        private OptionalNullable<String> locationRestrictionAction;
+        private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+        private DayTimeRestriction dayTimeRestrictions;
+        private OptionalNullable<ProductRestrictionCard> productRestrictions;
+        private LocationRestriction locationRestrictions;
 
 
 
         /**
-         * Setter for resetDayTimeRestriction.
-         * @param  resetDayTimeRestriction  Boolean value for resetDayTimeRestriction.
+         * Setter for dayTimeRestrictionAction.
+         * @param  dayTimeRestrictionAction  String value for dayTimeRestrictionAction.
          * @return Builder
          */
-        public Builder resetDayTimeRestriction(Boolean resetDayTimeRestriction) {
-            this.resetDayTimeRestriction = resetDayTimeRestriction;
+        public Builder dayTimeRestrictionAction(String dayTimeRestrictionAction) {
+            this.dayTimeRestrictionAction = OptionalNullable.of(dayTimeRestrictionAction);
             return this;
         }
 
         /**
-         * Setter for resetLocationRestriction.
-         * @param  resetLocationRestriction  Boolean value for resetLocationRestriction.
+         * UnSetter for dayTimeRestrictionAction.
          * @return Builder
          */
-        public Builder resetLocationRestriction(Boolean resetLocationRestriction) {
-            this.resetLocationRestriction = resetLocationRestriction;
+        public Builder unsetDayTimeRestrictionAction() {
+            dayTimeRestrictionAction = null;
             return this;
         }
 
         /**
-         * Setter for resetProductRestriction.
-         * @param  resetProductRestriction  Boolean value for resetProductRestriction.
+         * Setter for locationRestrictionAction.
+         * @param  locationRestrictionAction  String value for locationRestrictionAction.
          * @return Builder
          */
-        public Builder resetProductRestriction(Boolean resetProductRestriction) {
-            this.resetProductRestriction = resetProductRestriction;
+        public Builder locationRestrictionAction(String locationRestrictionAction) {
+            this.locationRestrictionAction = OptionalNullable.of(locationRestrictionAction);
+            return this;
+        }
+
+        /**
+         * UnSetter for locationRestrictionAction.
+         * @return Builder
+         */
+        public Builder unsetLocationRestrictionAction() {
+            locationRestrictionAction = null;
             return this;
         }
 
         /**
          * Setter for usageRestrictions.
-         * @param  usageRestrictions  UsageRestrictions value for usageRestrictions.
+         * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
          * @return Builder
          */
-        public Builder usageRestrictions(UsageRestrictions usageRestrictions) {
-            this.usageRestrictions = usageRestrictions;
+        public Builder usageRestrictions(UsageRestrictionsCard usageRestrictions) {
+            this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+            return this;
+        }
+
+        /**
+         * UnSetter for usageRestrictions.
+         * @return Builder
+         */
+        public Builder unsetUsageRestrictions() {
+            usageRestrictions = null;
             return this;
         }
 
         /**
          * Setter for dayTimeRestrictions.
-         * @param  dayTimeRestrictions  DayTimeRestrictions value for dayTimeRestrictions.
+         * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
          * @return Builder
          */
-        public Builder dayTimeRestrictions(DayTimeRestrictions dayTimeRestrictions) {
+        public Builder dayTimeRestrictions(DayTimeRestriction dayTimeRestrictions) {
             this.dayTimeRestrictions = dayTimeRestrictions;
             return this;
         }
 
         /**
-         * Setter for productRestriction.
-         * @param  productRestriction  ProductRestrictions value for productRestriction.
+         * Setter for productRestrictions.
+         * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
          * @return Builder
          */
-        public Builder productRestriction(ProductRestrictions productRestriction) {
-            this.productRestriction = productRestriction;
+        public Builder productRestrictions(ProductRestrictionCard productRestrictions) {
+            this.productRestrictions = OptionalNullable.of(productRestrictions);
             return this;
         }
 
         /**
-         * Setter for locationRestrictionProfileId.
-         * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
+         * UnSetter for productRestrictions.
          * @return Builder
          */
-        public Builder locationRestrictionProfileId(String locationRestrictionProfileId) {
-            this.locationRestrictionProfileId = locationRestrictionProfileId;
+        public Builder unsetProductRestrictions() {
+            productRestrictions = null;
             return this;
         }
 
         /**
          * Setter for locationRestrictions.
-         * @param  locationRestrictions  LocationRestrictions value for locationRestrictions.
+         * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
          * @return Builder
          */
-        public Builder locationRestrictions(LocationRestrictions locationRestrictions) {
+        public Builder locationRestrictions(LocationRestriction locationRestrictions) {
             this.locationRestrictions = locationRestrictions;
             return this;
         }
@@ -375,9 +426,9 @@ public class BundleRestriction {
          * @return {@link BundleRestriction}
          */
         public BundleRestriction build() {
-            return new BundleRestriction(resetDayTimeRestriction, resetLocationRestriction,
-                    resetProductRestriction, usageRestrictions, dayTimeRestrictions,
-                    productRestriction, locationRestrictionProfileId, locationRestrictions);
+            return new BundleRestriction(dayTimeRestrictionAction, locationRestrictionAction,
+                    usageRestrictions, dayTimeRestrictions, productRestrictions,
+                    locationRestrictions);
         }
     }
 }

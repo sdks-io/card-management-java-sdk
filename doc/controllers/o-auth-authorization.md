@@ -32,7 +32,7 @@ CompletableFuture<OAuthToken> requestTokenBearerTokenAsync(
 
 ## Server
 
-`Server.ACCESS_TOKEN_SERVER`
+`Server.OAUTH_SERVER`
 
 ## Response Type
 

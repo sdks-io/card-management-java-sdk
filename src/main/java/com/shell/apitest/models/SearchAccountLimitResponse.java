@@ -9,14 +9,21 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
+import java.util.List;
 
 /**
  * This is a model class for SearchAccountLimitResponse type.
  */
 public class SearchAccountLimitResponse {
-    private String requestId;
-    private String status;
-    private SearchAccountLimitResponseData data;
+    private OptionalNullable<String> requestId;
+    private Integer accountId;
+    private String accountNumber;
+    private String referenceProduct;
+    private String restrictionCondition;
+    private List<AccountVelocityLimit> velocityLimits;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
@@ -27,73 +34,212 @@ public class SearchAccountLimitResponse {
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
-     * @param  data  SearchAccountLimitResponseData value for data.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  referenceProduct  String value for referenceProduct.
+     * @param  restrictionCondition  String value for restrictionCondition.
+     * @param  velocityLimits  List of AccountVelocityLimit value for velocityLimits.
+     * @param  error  ErrorStatus value for error.
      */
     public SearchAccountLimitResponse(
             String requestId,
-            String status,
-            SearchAccountLimitResponseData data) {
+            Integer accountId,
+            String accountNumber,
+            String referenceProduct,
+            String restrictionCondition,
+            List<AccountVelocityLimit> velocityLimits,
+            ErrorStatus error) {
+        this.requestId = OptionalNullable.of(requestId);
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.referenceProduct = referenceProduct;
+        this.restrictionCondition = restrictionCondition;
+        this.velocityLimits = velocityLimits;
+        this.error = error;
+    }
+
+    /**
+     * Initialization constructor.
+     * @param  requestId  String value for requestId.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  referenceProduct  String value for referenceProduct.
+     * @param  restrictionCondition  String value for restrictionCondition.
+     * @param  velocityLimits  List of AccountVelocityLimit value for velocityLimits.
+     * @param  error  ErrorStatus value for error.
+     */
+
+    protected SearchAccountLimitResponse(OptionalNullable<String> requestId, Integer accountId,
+            String accountNumber, String referenceProduct, String restrictionCondition,
+            List<AccountVelocityLimit> velocityLimits, ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
-        this.data = data;
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.referenceProduct = referenceProduct;
+        this.restrictionCondition = restrictionCondition;
+        this.velocityLimits = velocityLimits;
+        this.error = error;
+    }
+
+    /**
+     * Internal Getter for RequestId.
+     * Request Id of the API call
+     * @return Returns the Internal String
+     */
+    @JsonGetter("RequestId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetRequestId() {
+        return this.requestId;
     }
 
     /**
      * Getter for RequestId.
+     * Request Id of the API call
      * @return Returns the String
      */
-    @JsonGetter("RequestId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getRequestId() {
-        return requestId;
+        return OptionalNullable.getFrom(requestId);
     }
 
     /**
      * Setter for RequestId.
+     * Request Id of the API call
      * @param requestId Value for String
      */
     @JsonSetter("RequestId")
     public void setRequestId(String requestId) {
-        this.requestId = requestId;
+        this.requestId = OptionalNullable.of(requestId);
     }
 
     /**
-     * Getter for Status.
+     * UnSetter for RequestId.
+     * Request Id of the API call
+     */
+    public void unsetRequestId() {
+        requestId = null;
+    }
+
+    /**
+     * Getter for AccountId.
+     * Account ID of the customer.
+     * @return Returns the Integer
+     */
+    @JsonGetter("AccountId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    /**
+     * Setter for AccountId.
+     * Account ID of the customer.
+     * @param accountId Value for Integer
+     */
+    @JsonSetter("AccountId")
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    /**
+     * Getter for AccountNumber.
+     * Account Number Example: GB99215176
      * @return Returns the String
      */
-    @JsonGetter("Status")
+    @JsonGetter("AccountNumber")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
     /**
-     * Setter for Status.
-     * @param status Value for String
+     * Setter for AccountNumber.
+     * Account Number Example: GB99215176
+     * @param accountNumber Value for String
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("AccountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     /**
-     * Getter for Data.
-     * @return Returns the SearchAccountLimitResponseData
+     * Getter for ReferenceProduct.
+     * 3 digit Shell global fuel product code, if already set up. Example: 021
+     * @return Returns the String
      */
-    @JsonGetter("Data")
+    @JsonGetter("ReferenceProduct")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchAccountLimitResponseData getData() {
-        return data;
+    public String getReferenceProduct() {
+        return referenceProduct;
     }
 
     /**
-     * Setter for Data.
-     * @param data Value for SearchAccountLimitResponseData
+     * Setter for ReferenceProduct.
+     * 3 digit Shell global fuel product code, if already set up. Example: 021
+     * @param referenceProduct Value for String
      */
-    @JsonSetter("Data")
-    public void setData(SearchAccountLimitResponseData data) {
-        this.data = data;
+    @JsonSetter("ReferenceProduct")
+    public void setReferenceProduct(String referenceProduct) {
+        this.referenceProduct = referenceProduct;
+    }
+
+    /**
+     * Getter for RestrictionCondition.
+     * The restriction condition code. Example: DECLINE_ALERT
+     * @return Returns the String
+     */
+    @JsonGetter("RestrictionCondition")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getRestrictionCondition() {
+        return restrictionCondition;
+    }
+
+    /**
+     * Setter for RestrictionCondition.
+     * The restriction condition code. Example: DECLINE_ALERT
+     * @param restrictionCondition Value for String
+     */
+    @JsonSetter("RestrictionCondition")
+    public void setRestrictionCondition(String restrictionCondition) {
+        this.restrictionCondition = restrictionCondition;
+    }
+
+    /**
+     * Getter for VelocityLimits.
+     * @return Returns the List of AccountVelocityLimit
+     */
+    @JsonGetter("VelocityLimits")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<AccountVelocityLimit> getVelocityLimits() {
+        return velocityLimits;
+    }
+
+    /**
+     * Setter for VelocityLimits.
+     * @param velocityLimits Value for List of AccountVelocityLimit
+     */
+    @JsonSetter("VelocityLimits")
+    public void setVelocityLimits(List<AccountVelocityLimit> velocityLimits) {
+        this.velocityLimits = velocityLimits;
+    }
+
+    /**
+     * Getter for Error.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("Error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getError() {
+        return error;
+    }
+
+    /**
+     * Setter for Error.
+     * @param error Value for ErrorStatus
+     */
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
     }
 
     /**
@@ -102,8 +248,10 @@ public class SearchAccountLimitResponse {
      */
     @Override
     public String toString() {
-        return "SearchAccountLimitResponse [" + "requestId=" + requestId + ", status=" + status
-                + ", data=" + data + "]";
+        return "SearchAccountLimitResponse [" + "requestId=" + requestId + ", accountId="
+                + accountId + ", accountNumber=" + accountNumber + ", referenceProduct="
+                + referenceProduct + ", restrictionCondition=" + restrictionCondition
+                + ", velocityLimits=" + velocityLimits + ", error=" + error + "]";
     }
 
     /**
@@ -113,9 +261,13 @@ public class SearchAccountLimitResponse {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .requestId(getRequestId())
-                .status(getStatus())
-                .data(getData());
+                .accountId(getAccountId())
+                .accountNumber(getAccountNumber())
+                .referenceProduct(getReferenceProduct())
+                .restrictionCondition(getRestrictionCondition())
+                .velocityLimits(getVelocityLimits())
+                .error(getError());
+        builder.requestId = internalGetRequestId();
         return builder;
     }
 
@@ -123,9 +275,13 @@ public class SearchAccountLimitResponse {
      * Class to build instances of {@link SearchAccountLimitResponse}.
      */
     public static class Builder {
-        private String requestId;
-        private String status;
-        private SearchAccountLimitResponseData data;
+        private OptionalNullable<String> requestId;
+        private Integer accountId;
+        private String accountNumber;
+        private String referenceProduct;
+        private String restrictionCondition;
+        private List<AccountVelocityLimit> velocityLimits;
+        private ErrorStatus error;
 
 
 
@@ -135,27 +291,76 @@ public class SearchAccountLimitResponse {
          * @return Builder
          */
         public Builder requestId(String requestId) {
-            this.requestId = requestId;
+            this.requestId = OptionalNullable.of(requestId);
             return this;
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * UnSetter for requestId.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder unsetRequestId() {
+            requestId = null;
             return this;
         }
 
         /**
-         * Setter for data.
-         * @param  data  SearchAccountLimitResponseData value for data.
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
          * @return Builder
          */
-        public Builder data(SearchAccountLimitResponseData data) {
-            this.data = data;
+        public Builder accountId(Integer accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        /**
+         * Setter for accountNumber.
+         * @param  accountNumber  String value for accountNumber.
+         * @return Builder
+         */
+        public Builder accountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Setter for referenceProduct.
+         * @param  referenceProduct  String value for referenceProduct.
+         * @return Builder
+         */
+        public Builder referenceProduct(String referenceProduct) {
+            this.referenceProduct = referenceProduct;
+            return this;
+        }
+
+        /**
+         * Setter for restrictionCondition.
+         * @param  restrictionCondition  String value for restrictionCondition.
+         * @return Builder
+         */
+        public Builder restrictionCondition(String restrictionCondition) {
+            this.restrictionCondition = restrictionCondition;
+            return this;
+        }
+
+        /**
+         * Setter for velocityLimits.
+         * @param  velocityLimits  List of AccountVelocityLimit value for velocityLimits.
+         * @return Builder
+         */
+        public Builder velocityLimits(List<AccountVelocityLimit> velocityLimits) {
+            this.velocityLimits = velocityLimits;
+            return this;
+        }
+
+        /**
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
+         * @return Builder
+         */
+        public Builder error(ErrorStatus error) {
+            this.error = error;
             return this;
         }
 
@@ -164,7 +369,8 @@ public class SearchAccountLimitResponse {
          * @return {@link SearchAccountLimitResponse}
          */
         public SearchAccountLimitResponse build() {
-            return new SearchAccountLimitResponse(requestId, status, data);
+            return new SearchAccountLimitResponse(requestId, accountId, accountNumber,
+                    referenceProduct, restrictionCondition, velocityLimits, error);
         }
     }
 }

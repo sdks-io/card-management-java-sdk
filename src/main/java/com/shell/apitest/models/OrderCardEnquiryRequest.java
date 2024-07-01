@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for OrderCardEnquiryRequest type.
  */
 public class OrderCardEnquiryRequest {
-    private OrderCardEnquiryReq filters;
+    private Filters2 filters;
 
     /**
      * Default constructor.
@@ -24,33 +24,29 @@ public class OrderCardEnquiryRequest {
 
     /**
      * Initialization constructor.
-     * @param  filters  OrderCardEnquiryReq value for filters.
+     * @param  filters  Filters2 value for filters.
      */
     public OrderCardEnquiryRequest(
-            OrderCardEnquiryReq filters) {
+            Filters2 filters) {
         this.filters = filters;
     }
 
     /**
      * Getter for Filters.
-     * This class holds Order Card Enquiry list based on which the Order Card Enquiry need to be
-     * filtered.
-     * @return Returns the OrderCardEnquiryReq
+     * @return Returns the Filters2
      */
     @JsonGetter("Filters")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public OrderCardEnquiryReq getFilters() {
+    public Filters2 getFilters() {
         return filters;
     }
 
     /**
      * Setter for Filters.
-     * This class holds Order Card Enquiry list based on which the Order Card Enquiry need to be
-     * filtered.
-     * @param filters Value for OrderCardEnquiryReq
+     * @param filters Value for Filters2
      */
     @JsonSetter("Filters")
-    public void setFilters(OrderCardEnquiryReq filters) {
+    public void setFilters(Filters2 filters) {
         this.filters = filters;
     }
 
@@ -78,16 +74,16 @@ public class OrderCardEnquiryRequest {
      * Class to build instances of {@link OrderCardEnquiryRequest}.
      */
     public static class Builder {
-        private OrderCardEnquiryReq filters;
+        private Filters2 filters;
 
 
 
         /**
          * Setter for filters.
-         * @param  filters  OrderCardEnquiryReq value for filters.
+         * @param  filters  Filters2 value for filters.
          * @return Builder
          */
-        public Builder filters(OrderCardEnquiryReq filters) {
+        public Builder filters(Filters2 filters) {
             this.filters = filters;
             return this;
         }

@@ -21,7 +21,7 @@ public class UpdateCard {
     private Boolean notifyCaller;
     private Boolean notifyCallerOnSync;
     private Boolean orderCardReplacement;
-    private ReplaceCardSettings cardSettings;
+    private CardSettings cardSettings;
     private Integer reasonId;
     private OptionalNullable<String> reasonText;
     private OptionalNullable<Integer> targetStatus;
@@ -48,7 +48,7 @@ public class UpdateCard {
      * @param  notifyCaller  Boolean value for notifyCaller.
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
      * @param  orderCardReplacement  Boolean value for orderCardReplacement.
-     * @param  cardSettings  ReplaceCardSettings value for cardSettings.
+     * @param  cardSettings  CardSettings value for cardSettings.
      * @param  reasonId  Integer value for reasonId.
      * @param  reasonText  String value for reasonText.
      * @param  targetStatus  Integer value for targetStatus.
@@ -68,7 +68,7 @@ public class UpdateCard {
             Boolean notifyCaller,
             Boolean notifyCallerOnSync,
             Boolean orderCardReplacement,
-            ReplaceCardSettings cardSettings,
+            CardSettings cardSettings,
             Integer reasonId,
             String reasonText,
             Integer targetStatus,
@@ -108,7 +108,7 @@ public class UpdateCard {
      * @param  notifyCaller  Boolean value for notifyCaller.
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
      * @param  orderCardReplacement  Boolean value for orderCardReplacement.
-     * @param  cardSettings  ReplaceCardSettings value for cardSettings.
+     * @param  cardSettings  CardSettings value for cardSettings.
      * @param  reasonId  Integer value for reasonId.
      * @param  reasonText  String value for reasonText.
      * @param  targetStatus  Integer value for targetStatus.
@@ -125,7 +125,7 @@ public class UpdateCard {
 
     protected UpdateCard(OptionalNullable<String> caller, Boolean isReplacementChargeable,
             Boolean notifyCaller, Boolean notifyCallerOnSync, Boolean orderCardReplacement,
-            ReplaceCardSettings cardSettings, Integer reasonId, OptionalNullable<String> reasonText,
+            CardSettings cardSettings, Integer reasonId, OptionalNullable<String> reasonText,
             OptionalNullable<Integer> targetStatus, OptionalNullable<Integer> accountId,
             OptionalNullable<String> accountNumber, OptionalNullable<String> cardExpiryDate,
             OptionalNullable<Integer> cardId, OptionalNullable<Integer> colCoCode,
@@ -326,22 +326,20 @@ public class UpdateCard {
 
     /**
      * Getter for CardSettings.
-     * Request entity object for ReplaceCardSettings
-     * @return Returns the ReplaceCardSettings
+     * @return Returns the CardSettings
      */
     @JsonGetter("CardSettings")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public ReplaceCardSettings getCardSettings() {
+    public CardSettings getCardSettings() {
         return cardSettings;
     }
 
     /**
      * Setter for CardSettings.
-     * Request entity object for ReplaceCardSettings
-     * @param cardSettings Value for ReplaceCardSettings
+     * @param cardSettings Value for CardSettings
      */
     @JsonSetter("CardSettings")
-    public void setCardSettings(ReplaceCardSettings cardSettings) {
+    public void setCardSettings(CardSettings cardSettings) {
         this.cardSettings = cardSettings;
     }
 
@@ -901,7 +899,7 @@ public class UpdateCard {
         private Boolean notifyCaller;
         private Boolean notifyCallerOnSync;
         private Boolean orderCardReplacement;
-        private ReplaceCardSettings cardSettings;
+        private CardSettings cardSettings;
         private Integer reasonId;
         private OptionalNullable<String> reasonText;
         private OptionalNullable<Integer> targetStatus;
@@ -978,10 +976,10 @@ public class UpdateCard {
 
         /**
          * Setter for cardSettings.
-         * @param  cardSettings  ReplaceCardSettings value for cardSettings.
+         * @param  cardSettings  CardSettings value for cardSettings.
          * @return Builder
          */
-        public Builder cardSettings(ReplaceCardSettings cardSettings) {
+        public Builder cardSettings(CardSettings cardSettings) {
             this.cardSettings = cardSettings;
             return this;
         }

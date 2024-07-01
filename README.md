@@ -19,26 +19,25 @@ Install the SDK by adding the following dependency in your project's pom.xml fil
 <dependency>
   <groupId>io.sdks</groupId>
   <artifactId>card-management-sdk</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
 You can also view the package at:
-https://central.sonatype.com/artifact/io.sdks/card-management-sdk/1.0.0
+https://central.sonatype.com/artifact/io.sdks/card-management-sdk/1.1.0
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `url` | `UrlEnum` | This variable specifies the type of environment. Environments:<br><br>* `api.shell.com` - Production<br>* `api-test.shell.com` - SIT<br>*Default*: `UrlEnum.ENUM_APITESTSHELLCOMTEST` |
-| `environment` | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
-| `httpClientConfig` | [`Consumer<HttpClientConfiguration.Builder>`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-client-configuration-builder.md) | Set up Http Client Configuration instance. |
-| `basicAuthCredentials` | [`BasicAuthCredentials`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/basic-authentication.md) | The Credentials Setter for Basic Authentication |
-| `bearerTokenCredentials` | [`BearerTokenCredentials`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
+| `environment` | `Environment` | The API environment. <br> **Default: `Environment.SIT`** |
+| `httpClientConfig` | [`Consumer<HttpClientConfiguration.Builder>`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-client-configuration-builder.md) | Set up Http Client Configuration instance. |
+| `basicAuthCredentials` | [`BasicAuthCredentials`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/basic-authentication.md) | The Credentials Setter for Basic Authentication |
+| `bearerTokenCredentials` | [`BearerTokenCredentials`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -56,36 +55,46 @@ ShellCardManagementAPIsClient client = new ShellCardManagementAPIsClient.Builder
             "OAuthClientSecret"
         )
         .build())
-    .environment(Environment.PRODUCTION)
-    .url(UrlEnum.ENUM_APITESTSHELLCOMTEST)
+    .environment(Environment.SIT)
     .build();
 ```
+
+## Environments
+
+The SDK can be configured to use a different environment for making API calls. Available environments are:
+
+### Fields
+
+| Name | Description |
+|  --- | --- |
+| SIT | **Default** |
+| Production | - |
 
 ## Authorization
 
 This API uses the following authentication schemes.
 
-* [`BasicAuth (Basic Authentication)`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/basic-authentication.md)
-* [`BearerToken (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/oauth-2-client-credentials-grant.md)
+* [`BasicAuth (Basic Authentication)`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/basic-authentication.md)
+* [`BearerToken (OAuth 2 Client Credentials Grant)`](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/$a/https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [O Auth Authorization](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/controllers/o-auth-authorization.md)
-* [Customer](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/controllers/customer.md)
-* [Restriction](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/controllers/restriction.md)
-* [Card](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/controllers/card.md)
+* [O Auth Authorization](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/controllers/o-auth-authorization.md)
+* [Customer](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/controllers/customer.md)
+* [Restriction](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/controllers/restriction.md)
+* [Card](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/controllers/card.md)
 
 ## Classes Documentation
 
-* [Utility Classes](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/utility-classes.md)
-* [HttpRequest](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-request.md)
-* [HttpResponse](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-response.md)
-* [HttpStringResponse](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-string-response.md)
-* [HttpContext](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-context.md)
-* [HttpBodyRequest](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-body-request.md)
-* [Headers](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/headers.md)
-* [ApiException](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/api-exception.md)
-* [Configuration Interface](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/configuration-interface.md)
-* [HttpClientConfiguration](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-client-configuration.md)
-* [HttpClientConfiguration.Builder](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.0.0/doc/http-client-configuration-builder.md)
+* [Utility Classes](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/utility-classes.md)
+* [HttpRequest](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-request.md)
+* [HttpResponse](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-response.md)
+* [HttpStringResponse](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-string-response.md)
+* [HttpContext](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-context.md)
+* [HttpBodyRequest](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-body-request.md)
+* [Headers](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/headers.md)
+* [ApiException](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/api-exception.md)
+* [Configuration Interface](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/configuration-interface.md)
+* [HttpClientConfiguration](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-client-configuration.md)
+* [HttpClientConfiguration.Builder](https://www.github.com/sdks-io/card-management-java-sdk/tree/1.1.0/doc/http-client-configuration-builder.md)
 

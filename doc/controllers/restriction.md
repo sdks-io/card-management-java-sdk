@@ -12,17 +12,527 @@ RestrictionController restrictionController = client.getRestrictionController();
 
 ## Methods
 
-* [Restriction Bundle Create](../../doc/controllers/restriction.md#restriction-bundle-create)
-* [Restriction Bundle Update](../../doc/controllers/restriction.md#restriction-bundle-update)
-* [Restriction Bundle Delete](../../doc/controllers/restriction.md#restriction-bundle-delete)
-* [Restriction Bundle Summary](../../doc/controllers/restriction.md#restriction-bundle-summary)
-* [Card Restriction](../../doc/controllers/restriction.md#card-restriction)
-* [Account Restriction](../../doc/controllers/restriction.md#account-restriction)
-* [Search Account Limit](../../doc/controllers/restriction.md#search-account-limit)
 * [Search Card Restriction](../../doc/controllers/restriction.md#search-card-restriction)
+* [Apply Restriction](../../doc/controllers/restriction.md#apply-restriction)
+* [Create Bundle](../../doc/controllers/restriction.md#create-bundle)
+* [Update Bundle](../../doc/controllers/restriction.md#update-bundle)
+* [Delete Bundle](../../doc/controllers/restriction.md#delete-bundle)
+* [Summaryofbundles](../../doc/controllers/restriction.md#summaryofbundles)
+* [Restriction Account](../../doc/controllers/restriction.md#restriction-account)
+* [Search Account Limit](../../doc/controllers/restriction.md#search-account-limit)
+* [Bundledetails](../../doc/controllers/restriction.md#bundledetails)
 
 
-# Restriction Bundle Create
+# Search Card Restriction
+
+This API will allows querying card details including the day/time and product restrictions.
+
+#### Supported operations
+
+* Search by list of cards or bundle
+* Include card bundle details (optional)
+
+```java
+CompletableFuture<SearchCardRestrictionRes> searchCardRestrictionAsync(
+    final String apikey,
+    final String requestId,
+    final SearchCardRestrictionReq body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
+| `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
+| `body` | [`SearchCardRestrictionReq`](../../doc/models/search-card-restriction-req.md) | Body, Optional | Restriction search card request body |
+
+## Response Type
+
+[`SearchCardRestrictionRes`](../../doc/models/search-card-restriction-res.md)
+
+## Example Usage
+
+```java
+String apikey = "apikey6";
+String requestId = "RequestId8";
+restrictionController.searchCardRestrictionAsync(apikey, requestId, null).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "Cards": [
+    {
+      "BundleId": null,
+      "Restrictions": {
+        "DayTimeRestrictions": {
+          "Friday": false,
+          "Monday": false,
+          "Saturday": true,
+          "Sunday": true,
+          "Thursday": true,
+          "TimeFrom": "02:00:00",
+          "TimeTo": "19:00:00",
+          "Tuesday": false,
+          "Wednesday": false
+        },
+        "LocationRestrictions": null,
+        "ProductRestrictions": {
+          "FuelSetId": 0,
+          "FuelSetName": null,
+          "NonFuelSets": null,
+          "ProductGroups": [
+            {
+              "IsDefault": true,
+              "IsFuelType": true,
+              "Name": "Electric",
+              "ProductGroupId": "P100",
+              "Products": [
+                {
+                  "Description": "Electric Charge",
+                  "GlobalProductCode": "018"
+                },
+                {
+                  "Description": "Electric Charge - Time",
+                  "GlobalProductCode": "087"
+                },
+                {
+                  "Description": "Electric Charge - Home",
+                  "GlobalProductCode": "088"
+                },
+                {
+                  "Description": "DC Rapid eCharge",
+                  "GlobalProductCode": "486"
+                },
+                {
+                  "Description": "eCharge Connection Fee",
+                  "GlobalProductCode": "489"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": true,
+              "Name": "Standard Diesel",
+              "ProductGroupId": "P105",
+              "Products": [
+                {
+                  "Description": "Diesel AGO",
+                  "GlobalProductCode": "030"
+                },
+                {
+                  "Description": "GTL",
+                  "GlobalProductCode": "031"
+                },
+                {
+                  "Description": "Fuel Economy Diesel (AGO Low Sulphur)",
+                  "GlobalProductCode": "032"
+                },
+                {
+                  "Description": "Two Stroke",
+                  "GlobalProductCode": "035"
+                },
+                {
+                  "Description": "HVO-100",
+                  "GlobalProductCode": "036"
+                },
+                {
+                  "Description": "Industrial GasOil",
+                  "GlobalProductCode": "037"
+                },
+                {
+                  "Description": "AdBlue Bulk",
+                  "GlobalProductCode": "038"
+                },
+                {
+                  "Description": "AdBlue Packed",
+                  "GlobalProductCode": "039"
+                },
+                {
+                  "Description": "HVO Blended",
+                  "GlobalProductCode": "505"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": true,
+              "Name": "Standard Petrol",
+              "ProductGroupId": "P106",
+              "Products": [
+                {
+                  "Description": "Unspecified Unleaded",
+                  "GlobalProductCode": "020"
+                },
+                {
+                  "Description": "Unleaded - High octane",
+                  "GlobalProductCode": "021"
+                },
+                {
+                  "Description": "Unleaded - Medium octane",
+                  "GlobalProductCode": "022"
+                },
+                {
+                  "Description": "Unleaded - Low octane",
+                  "GlobalProductCode": "023"
+                },
+                {
+                  "Description": "Unleaded Environmental",
+                  "GlobalProductCode": "024"
+                },
+                {
+                  "Description": "Leaded and Lead Replacement",
+                  "GlobalProductCode": "025"
+                },
+                {
+                  "Description": "Super Ethanol – E85",
+                  "GlobalProductCode": "502"
+                },
+                {
+                  "Description": "Super Ethanol – E85",
+                  "GlobalProductCode": "502"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": false,
+              "Name": "Alcholic Drink",
+              "ProductGroupId": "P107",
+              "Products": [
+                {
+                  "Description": "Alcoholic drinks",
+                  "GlobalProductCode": "073"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": false,
+              "Name": "Car Cleaning",
+              "ProductGroupId": "P109",
+              "Products": [
+                {
+                  "Description": "Automatic Carwash",
+                  "GlobalProductCode": "065"
+                },
+                {
+                  "Description": "Carwash Subscription",
+                  "GlobalProductCode": "465"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": false,
+              "Name": "Controlled Road Services",
+              "ProductGroupId": "P110",
+              "Products": [
+                {
+                  "Description": "Public transport and taxi",
+                  "GlobalProductCode": "063"
+                },
+                {
+                  "Description": "Others",
+                  "GlobalProductCode": "080"
+                },
+                {
+                  "Description": "Car hire",
+                  "GlobalProductCode": "081"
+                },
+                {
+                  "Description": "Hotels",
+                  "GlobalProductCode": "082"
+                },
+                {
+                  "Description": "Restaurant",
+                  "GlobalProductCode": "083"
+                },
+                {
+                  "Description": "Telephone",
+                  "GlobalProductCode": "089"
+                }
+              ],
+              "ReferenceId": 0
+            },
+            {
+              "IsDefault": true,
+              "IsFuelType": false,
+              "Name": "Food and Drink",
+              "ProductGroupId": "P111",
+              "Products": [
+                {
+                  "Description": "Food (low VAT)",
+                  "GlobalProductCode": "071"
+                },
+                {
+                  "Description": "Non-alcoholic drinks",
+                  "GlobalProductCode": "072"
+                },
+                {
+                  "Description": "Food (high VAT)",
+                  "GlobalProductCode": "075"
+                }
+              ],
+              "ReferenceId": 0
+            }
+          ],
+          "Products": [
+            {
+              "Description": "Diesel AGO",
+              "GlobalProductCode": "030"
+            },
+            {
+              "Description": "GTL",
+              "GlobalProductCode": "031"
+            },
+            {
+              "Description": "Fuel Economy Diesel (AGO Low Sulphur)",
+              "GlobalProductCode": "032"
+            },
+            {
+              "Description": "Two Stroke",
+              "GlobalProductCode": "035"
+            },
+            {
+              "Description": "HVO-100",
+              "GlobalProductCode": "036"
+            },
+            {
+              "Description": "Industrial GasOil",
+              "GlobalProductCode": "037"
+            },
+            {
+              "Description": "AdBlue Bulk",
+              "GlobalProductCode": "038"
+            },
+            {
+              "Description": "AdBlue Packed",
+              "GlobalProductCode": "039"
+            },
+            {
+              "Description": "Automatic Carwash",
+              "GlobalProductCode": "065"
+            },
+            {
+              "Description": "Electric Charge",
+              "GlobalProductCode": "018"
+            },
+            {
+              "Description": "Electric Charge - Time",
+              "GlobalProductCode": "087"
+            },
+            {
+              "Description": "Electric Charge - Home",
+              "GlobalProductCode": "088"
+            },
+            {
+              "Description": "Unspecified Unleaded",
+              "GlobalProductCode": "020"
+            },
+            {
+              "Description": "Unleaded - High octane",
+              "GlobalProductCode": "021"
+            },
+            {
+              "Description": "Unleaded - Medium octane",
+              "GlobalProductCode": "022"
+            },
+            {
+              "Description": "Unleaded - Low octane",
+              "GlobalProductCode": "023"
+            },
+            {
+              "Description": "Unleaded Environmental",
+              "GlobalProductCode": "024"
+            },
+            {
+              "Description": "Leaded and Lead Replacement",
+              "GlobalProductCode": "025"
+            },
+            {
+              "Description": "Public transport and taxi",
+              "GlobalProductCode": "063"
+            },
+            {
+              "Description": "Others",
+              "GlobalProductCode": "080"
+            },
+            {
+              "Description": "Car hire",
+              "GlobalProductCode": "081"
+            },
+            {
+              "Description": "Hotels",
+              "GlobalProductCode": "082"
+            },
+            {
+              "Description": "Restaurant",
+              "GlobalProductCode": "083"
+            },
+            {
+              "Description": "Telephone",
+              "GlobalProductCode": "089"
+            },
+            {
+              "Description": "Food (low VAT)",
+              "GlobalProductCode": "071"
+            },
+            {
+              "Description": "Non-alcoholic drinks",
+              "GlobalProductCode": "072"
+            },
+            {
+              "Description": "Food (high VAT)",
+              "GlobalProductCode": "075"
+            },
+            {
+              "Description": "Alcoholic drinks",
+              "GlobalProductCode": "073"
+            }
+          ],
+          "PurchaseCategoryCode": "null",
+          "PurchaseCategoryId": 0
+        },
+        "UsageRestrictions": null
+      },
+      "RestrictionCurrencyCode": null,
+      "RestrictionCurrencySymbol": null,
+      "AccountId": 449,
+      "AccountName": "Test Card Customer Do Not Block",
+      "AccountNumber": "SG00000446",
+      "AccountShortName": "Test Card Customer Do Not Block",
+      "CardId": 6215,
+      "CardTypeCode": "7002872",
+      "CardTypeId": 15,
+      "CardTypeName": "SG FLE NAT SIN R2",
+      "ColCoCurrencyCode": "SGD",
+      "ColCoCurrencySymbol": "$",
+      "CurrencyCode": "SGD",
+      "CurrencySymbol": "$",
+      "DriverName": "P1D3 FEB 16TH",
+      "ExpiryDate": "20270430",
+      "IsCRT": false,
+      "IsFleet": true,
+      "IsInternational": false,
+      "IsNational": true,
+      "IsPartnerSitesIncluded": true,
+      "IsShellSitesOnly": false,
+      "IssueDate": "20240301",
+      "IssueNumber": 1,
+      "IsSuperseded": false,
+      "IsVirtualCard": false,
+      "PAN": "7002872532799004748",
+      "PurchaseCategoryCode": "1",
+      "PurchaseCategoryId": 55,
+      "PurchaseCategoryName": "1 - All Fuel Products",
+      "StatusDescription": "Active",
+      "StatusId": 1,
+      "VRN": "1234",
+      "MediumTypeID": 1,
+      "MediumType": "Fuel Card"
+    }
+  ],
+  "Error": {
+    "Code": "0000",
+    "Description": "Unable to fetch Usage Restriction / Day Time Restriction / Location Restriction details for few/all the cards."
+  },
+  "RequestId": "91bbb8f0-ec5c-473b-aa3a-a4eeca5ad594"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`FleetmanagementV2RestrictionSearchcard401ErrorException`](../../doc/models/fleetmanagement-v2-restriction-searchcard-401-error-exception.md) |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | [`FleetmanagementV2RestrictionSearchcard500ErrorException`](../../doc/models/fleetmanagement-v2-restriction-searchcard-500-error-exception.md) |
+
+
+# Apply Restriction
+
+The Card Limit and Restriction API is REST-based and employs Basic and ApiKey authentication. The API endpoints accept JSON-encoded request bodies, return JSON-encoded responses and use standard HTTP response codes.
+
+All resources are located in the Shell Card Platform.  The Shell Card Platform is the overall platform that encompasses all the internal Shell systems used to manage resources. The internal workings of the platform are not important when interacting with the API. However, it is worth noting that the platform uses a microservice architecture to communicate with various backend systems and some API calls are processed asynchronously.
+
+All endpoints use the `POST` verb for retrieving, updating, creating and deleting resources in the Shell Card Platform. The endpoints that retrieve resources from the Shell Card Platform allow flexible search parameters in the API request body.
+
+**Important Note** - This operation allows setting or updating the restrictions on existing cards. (For up to 3 cards in a single call).
+
+All restrictions of the cards are submitted and executed after successful below condition.
+•	The card exists.
+•	Day time restriction cannot be set to restrict the use of a card on all days of the week i.e., the values for all the days in the restriction cannot be set to false.
+•	Either of the usage, daytime, location or product restriction ‘Reset’ is set to ‘True’ or applied on the card.
+•	All the limits in the usage restriction profile for a card is not set to ‘0’/null.
+•	If IsVelocityCeiling is ‘true’, API will validate below condition:
+Usage restrictions for a card are lower than Customer Card Type level limits, if there are no customer level overrides available then lower than OU card type limits.
+•	In usage restrictions, the limits per transaction should be less than or equal to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal to Monthly, Monthly should be less than or equal to Yearly (Annually). Exception being null/blank will be skipped. i.e., Daily value should be less than equal to Monthly value if Weekly value is null/blank. Lifetime limit is not considered for usage restrictions limits validation.
+•	Apply the card type limit to Gateway when a value is NULL in the input. However, if the card type limit is NULL for the same field, then no limit will be applied in Gateway.
+•	If ‘SetDefaultOnVelocityUpdate’ is ‘true’ then the operation will apply customer cardtype or OU level velocity limits on existing cards when restrictions are modified without providing custom values for all fields.
+
+```java
+CompletableFuture<CardRestrictionResponse> applyRestrictionAsync(
+    final String apikey,
+    final String requestId,
+    final CardRestrictionReq body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
+| `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
+| `body` | [`CardRestrictionReq`](../../doc/models/card-restriction-req.md) | Body, Optional | Card Restriction request body |
+
+## Response Type
+
+[`CardRestrictionResponse`](../../doc/models/card-restriction-response.md)
+
+## Example Usage
+
+```java
+String apikey = "apikey6";
+String requestId = "RequestId8";
+restrictionController.applyRestrictionAsync(apikey, requestId, null).thenAccept(result -> {
+    // TODO success callback handler
+    System.out.println(result);
+}).exceptionally(exception -> {
+    // TODO failure callback handler
+    exception.printStackTrace();
+    return null;
+});
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
+
+
+# Create Bundle
 
 This API enables clients to create a new card bundle and apply restrictions.
 
@@ -47,7 +557,8 @@ The following are the key validation rules with the associated error codes for f
 * `0007` - Error returned if request parameters fail validation e.g. mandatory check.
 
 ```java
-CompletableFuture<CreateBundleResponse> restrictionBundleCreateAsync(
+CompletableFuture<CreateBundleResponse> createBundleAsync(
+    final String apikey,
     final String requestId,
     final CreateBundleRequest body)
 ```
@@ -56,8 +567,9 @@ CompletableFuture<CreateBundleResponse> restrictionBundleCreateAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`CreateBundleRequest`](../../doc/models/create-bundle-request.md) | Body, Optional | Create Bundle Request body |
+| `body` | [`CreateBundleRequest`](../../doc/models/create-bundle-request.md) | Body, Optional | CreateBundle request body |
 
 ## Response Type
 
@@ -66,58 +578,9 @@ CompletableFuture<CreateBundleResponse> restrictionBundleCreateAsync(
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
-CreateBundleRequest body = new CreateBundleRequest.Builder(
-    "",
-    Arrays.asList(
-        "7077141000589242081",
-        "7077141000589242099"
-    )
-)
-.colCoId(14)
-.payerId(22884)
-.accountId(22884)
-.externalBundleId("SIT3Bundle04FEB-2")
-.restrictions(new CreateBundleRequestRestrictions.Builder(
-        "None",
-        "Add",
-        "Add"
-    )
-    .dayTimeRestrictions(new DayTimeRestrictions.Builder()
-            .friday(true)
-            .monday(false)
-            .saturday(true)
-            .sunday(true)
-            .thursday(false)
-            .timeFrom("03:10:00")
-            .timeTo("12:00:00")
-            .tuesday(false)
-            .wednesday(false)
-            .build())
-    .locationRestrictions(new LocationRestrictions.Builder()
-            .build())
-    .productRestrictions(new ProductRestrictions.Builder()
-            .products(Arrays.asList(
-                "010",
-                "011"
-            ))
-            .build())
-    .usageRestrictions(new UsageRestrictions.Builder()
-            .dailySpend(1000D)
-            .monthlySpend(14000D)
-            .perTransactionSpend(800D)
-            .dailyVolume(10)
-            .weeklyVolume(100)
-            .monthlyVolume(1000)
-            .perTransactionVolume(10)
-            .dailyTransactionCount(3D)
-            .weeklyTransactionCount(9D)
-            .monthlyTransactionCount(20D)
-            .build())
-    .build())
-.build();
-
-restrictionController.restrictionBundleCreateAsync(requestId, body).thenAccept(result -> {
+restrictionController.createBundleAsync(apikey, requestId, null).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -127,36 +590,18 @@ restrictionController.restrictionBundleCreateAsync(requestId, body).thenAccept(r
 });
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "RequestId": "254745ea-7573-4eed-e714-f2a42506dba0",
-  "Status": "Success",
-  "Data": [
-    {
-      "BundleId": "31183",
-      "Cards": null,
-      "DayTimeRestrictionProfileId": "33395",
-      "LocationRestrictionProfileId": "32326",
-      "ProductRestrictionProfileId": "38029"
-    }
-  ]
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Restriction Bundle Update
+# Update Bundle
 
 This API enables clients to update an existing card bundle and its associated restrictions.
 
@@ -183,7 +628,8 @@ The following are the key validation rules with the associated error codes for f
 * `0007` - Error returned if request parameters fail validation e.g. at least one card must be provided in the input.
 
 ```java
-CompletableFuture<UpdateBundleResponse> restrictionBundleUpdateAsync(
+CompletableFuture<UpdateBundleResponse> updateBundleAsync(
+    final String apikey,
     final String requestId,
     final UpdateBundleRequest body)
 ```
@@ -192,8 +638,9 @@ CompletableFuture<UpdateBundleResponse> restrictionBundleUpdateAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`UpdateBundleRequest`](../../doc/models/update-bundle-request.md) | Body, Optional | Update Bundle Request body |
+| `body` | [`UpdateBundleRequest`](../../doc/models/update-bundle-request.md) | Body, Optional | Update Bundle request body |
 
 ## Response Type
 
@@ -202,23 +649,9 @@ CompletableFuture<UpdateBundleResponse> restrictionBundleUpdateAsync(
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
-UpdateBundleRequest body = new UpdateBundleRequest.Builder(
-    "2207",
-    "Add"
-)
-.colCoId(32)
-.payerId(1223)
-.accountId(1223)
-.cards(Arrays.asList(
-        "7077327290224797344"
-    ))
-.usageRestrictionAction("Update")
-.restrictions(new BundleRestriction.Builder()
-        .build())
-.build();
-
-restrictionController.restrictionBundleUpdateAsync(requestId, body).thenAccept(result -> {
+restrictionController.updateBundleAsync(apikey, requestId, null).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -228,27 +661,18 @@ restrictionController.restrictionBundleUpdateAsync(requestId, body).thenAccept(r
 });
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "RequestId": "13cb37b6-991f-4f37-c8c2-f4b29c916735",
-  "Status": "Success"
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Restriction Bundle Delete
+# Delete Bundle
 
 This API enables clients to delete an existing card bundle in the Shell Card Platform. Once the card bundle is deleted the usage and product restrictions of the cards that were present in the bundle will be reset based on the request.
 
@@ -264,7 +688,8 @@ The following are the key validation rules with the associated error codes for f
 * `0007` - Error returned if request parameters fail validation e.g. mandatory check.
 
 ```java
-CompletableFuture<DeleteBundleResponse> restrictionBundleDeleteAsync(
+CompletableFuture<DeleteBundleResponse> deleteBundleAsync(
+    final String apikey,
     final String requestId,
     final DeleteBundleRequest body)
 ```
@@ -273,8 +698,9 @@ CompletableFuture<DeleteBundleResponse> restrictionBundleDeleteAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`DeleteBundleRequest`](../../doc/models/delete-bundle-request.md) | Body, Optional | Delete Bundle Request body |
+| `body` | [`DeleteBundleRequest`](../../doc/models/delete-bundle-request.md) | Body, Optional | Update Bundle request body |
 
 ## Response Type
 
@@ -283,16 +709,20 @@ CompletableFuture<DeleteBundleResponse> restrictionBundleDeleteAsync(
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
 DeleteBundleRequest body = new DeleteBundleRequest.Builder(
-    "31189"
+    "123"
 )
-.colCoId(14)
-.payerId(22884)
-.accountId(22884)
+.colCoCode(86)
+.colCoId(1)
+.payerNumber("PH50000843")
+.payerId(853)
+.accountId(854)
+.accountNumber("PH50000844")
 .build();
 
-restrictionController.restrictionBundleDeleteAsync(requestId, body).thenAccept(result -> {
+restrictionController.deleteBundleAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -306,8 +736,11 @@ restrictionController.restrictionBundleDeleteAsync(requestId, body).thenAccept(r
 
 ```json
 {
-  "RequestId": "13cb37b6-991f-4f37-c8c2-f4b29c916735",
-  "Status": "Success"
+  "Error": {
+    "Description": "Success",
+    "Code": "0000"
+  },
+  "RequestId": "ed557f02-c7d7-4c01-b3e5-11bf3239c8ed"
 }
 ```
 
@@ -315,14 +748,14 @@ restrictionController.restrictionBundleDeleteAsync(requestId, body).thenAccept(r
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Restriction Bundle Summary
+# Summaryofbundles
 
 This API allows clients to get a summary of card bundles associated with Payer/Account. This API will return the basic bundle details including card and restriction details. Optionally the API will also include a count of cards that are not associated with the bundle but returned by the search criteria.
 
@@ -333,41 +766,33 @@ Note - to include count of cards of an account that are not associated with any 
 * Get summary of bundles by list of bundle Ids
 
 ```java
-CompletableFuture<SummaryOfBundleResponse> restrictionBundleSummaryAsync(
+CompletableFuture<SummaryofbundleResponse> summaryofbundlesAsync(
+    final String apikey,
     final String requestId,
-    final SummaryOfBundleRequest body)
+    final SummaryofbundlerRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`SummaryOfBundleRequest`](../../doc/models/summary-of-bundle-request.md) | Body, Optional | Summary Bundle Request body |
+| `body` | [`SummaryofbundlerRequest`](../../doc/models/summaryofbundler-request.md) | Body, Optional | Summary of Bundle request body |
 
 ## Response Type
 
-[`SummaryOfBundleResponse`](../../doc/models/summary-of-bundle-response.md)
+[`SummaryofbundleResponse`](../../doc/models/summaryofbundle-response.md)
 
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
-SummaryOfBundleRequest body = new SummaryOfBundleRequest.Builder()
-    .filters(new SummaryofBundle.Builder(
-        Arrays.asList(
-            "2343"
-        )
-    )
-    .colCoId(5)
-    .payerNumber("GB00000235")
-    .payerId(291)
-    .accountId(291)
-    .accountNumber("GB00000235")
-    .build())
+SummaryofbundlerRequest body = new SummaryofbundlerRequest.Builder()
     .build();
 
-restrictionController.restrictionBundleSummaryAsync(requestId, body).thenAccept(result -> {
+restrictionController.summaryofbundlesAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -377,194 +802,31 @@ restrictionController.restrictionBundleSummaryAsync(requestId, body).thenAccept(
 });
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "RequestId": "cf142c58-bdfa-4414-81c5-f099c0c829d7",
-  "Status": "Success",
-  "Data": [
-    {
-      "PayerId": 291,
-      "PayerNumber": "GB00000235",
-      "AccountId": 291,
-      "AccountNumber": "GB00000235",
-      "CountOfCardsNotInBundle": 205,
-      "CardBundles": [
-        {
-          "BundleId": "1234",
-          "ExternalBundleId": "2343",
-          "Description": "CardBundle1",
-          "TotalCards": 1250
-        }
-      ]
-    }
-  ]
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Card Restriction
+# Restriction Account
 
-This API allows to set or update the restrictions for existing cards or newly ordered cards under the same payer.
+This API allows setting or updating the usage restrictions of an existing account.
 
-#### Supported operations
+Then validation rules applied for this API.
 
-* Set or reset usage restrictions for cards
-* Set or reset day/time restrictions for cards
-* Set or reset product restrictions for cards
-* Set or reset location restrictions for cards
-
-```java
-CompletableFuture<RestrictionCardResponse> cardRestrictionAsync(
-    final String requestId,
-    final RestrictionCardRequest body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`RestrictionCardRequest`](../../doc/models/restriction-card-request.md) | Body, Optional | Summary Bundle Request body |
-
-## Response Type
-
-[`RestrictionCardResponse`](../../doc/models/restriction-card-response.md)
-
-## Example Usage
+•	The account exists.
+•	Day time restriction cannot be set to restrict the use of a card, under the account, on all days of the week.
+•	Either of the usage, daytime or location is either marked for reset or new restriction values provided for the account.
+•	In usage restrictions, the limits per transaction should be less than or equal to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal to Monthly. Exception being 0/blank will be skipped, i.e., Daily value should be less than equal to Monthly value if Weekly value is 0/blank.
 
 ```java
-String requestId = "RequestId8";
-RestrictionCardRequest body = new RestrictionCardRequest.Builder()
-    .colCoId(5)
-    .payerNumber("GB00000235")
-    .payerId(291)
-    .cards(Arrays.asList(
-        new RestrictionCardRequestCardsItems.Builder()
-            .accountNumber("GB00000235")
-            .accountId(291)
-            .pAN("7002057035956000019")
-            .cardId(205113)
-            .resetUsageRestrictions(false)
-            .resetDayTimeRestrictions(false)
-            .resetProductRestrictions(false)
-            .resetLocationRestrictions(false)
-            .dayTimeRestrictions(new DayTimeRestrictions.Builder()
-                .friday(true)
-                .monday(true)
-                .saturday(false)
-                .sunday(false)
-                .thursday(true)
-                .timeFrom("01:00:00")
-                .timeTo("10:00:00")
-                .tuesday(true)
-                .wednesday(true)
-                .build())
-            .locationRestrictions(new LocationRestrictions.Builder()
-                .shellSiteRestrictions(Arrays.asList(
-                    new LocationRestrictionsShellSiteRestrictionsItems.Builder()
-                        .build()
-                ))
-                .partnerSiteRestrictions(Arrays.asList(
-                    new LocationRestrictionsPartnerSiteRestrictionsItems.Builder(
-                        "0452301643"
-                    )
-                    .build()
-                ))
-                .build())
-            .productRestrictions(new ProductRestrictions.Builder()
-                .build())
-            .usageRestrictions(new UsageRestrictions.Builder()
-                .dailySpend(1010D)
-                .weeklySpend(1620D)
-                .monthlySpend(15020D)
-                .perTransactionSpend(920D)
-                .dailyVolume(10)
-                .weeklyVolume(100)
-                .monthlyVolume(1000)
-                .perTransactionVolume(10)
-                .dailyTransactionCount(6D)
-                .weeklyTransactionCount(18D)
-                .monthlyTransactionCount(32D)
-                .build())
-            .build()
-    ))
-    .build();
-
-restrictionController.cardRestrictionAsync(requestId, body).thenAccept(result -> {
-    // TODO success callback handler
-    System.out.println(result);
-}).exceptionally(exception -> {
-    // TODO failure callback handler
-    exception.printStackTrace();
-    return null;
-});
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "MainReference": 1234,
-  "RequestId": "cf142c58-bdfa-4414-81c5-f099c0c829d7",
-  "Status": "Success",
-  "Data": [
-    {
-      "AccountId": 291,
-      "AccountNumber": "GB00000235",
-      "CardId": 205113,
-      "CardProductReference": null,
-      "DayTimeRestrictionDescription": "0000 - Success",
-      "DayTimeRestrictionStatus": "Success",
-      "LocationRestrictionDescription": "0000 - Success",
-      "LocationRestrictionStatus": "Success",
-      "PAN": "7002057035956000019",
-      "ProductRestrictionDescription": "0000 - Success",
-      "ProductRestrictionStatus": "Success",
-      "UsageRestrictionDescription": "0000 - Success",
-      "UsageRestrictionStatus": "Success",
-      "ValidationErrorCode": null,
-      "ValidationErrorDescription": null
-    }
-  ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-
-
-# Account Restriction
-
-This operation allows setting or updating the usage restrictions of an existing account.
-
-#### Validation rules
-
-* The account exists.
-* Day time restriction cannot be set to restrict the use of a card, under the account, on all days of the week.
-* Either of the usage, daytime or location is either marked for reset or new restriction values provided for the account.
-* In usage restrictions, the limits per transaction should be less than or equal to Daily, Daily should be less than or equal to Weekly, Weekly should be less than or equal to Monthly. Exception being 0/blank will be skipped, i.e., Daily value should be less than equal to Monthly value if Weekly value is 0/blank.
-
-```java
-CompletableFuture<AccountRestrictionResponse> accountRestrictionAsync(
+CompletableFuture<AccountRestrictionResponse> restrictionAccountAsync(
+    final String apikey,
     final String requestId,
     final AccountRestrictionRequest body)
 ```
@@ -573,8 +835,9 @@ CompletableFuture<AccountRestrictionResponse> accountRestrictionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`AccountRestrictionRequest`](../../doc/models/account-restriction-request.md) | Body, Optional | Summary Bundle Request body |
+| `body` | [`AccountRestrictionRequest`](../../doc/models/account-restriction-request.md) | Body, Optional | Account Restriction request body |
 
 ## Response Type
 
@@ -583,35 +846,9 @@ CompletableFuture<AccountRestrictionResponse> accountRestrictionAsync(
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
-AccountRestrictionRequest body = new AccountRestrictionRequest.Builder()
-    .colCoId(32)
-    .colCoCode(3)
-    .payerNumber("CZ00000927")
-    .accountNumber("CZ00000928")
-    .resetUsageRestrictions(false)
-    .usageRestrictions(new UsageRestrictions.Builder()
-        .dailySpend(10D)
-        .weeklySpend(30D)
-        .monthlySpend(100D)
-        .perTransactionSpend(3D)
-        .dailyVolume(10)
-        .weeklyVolume(146)
-        .monthlyVolume(625)
-        .perTransactionVolume(5)
-        .dailyTransactionCount(5D)
-        .weeklyTransactionCount(15D)
-        .monthlyTransactionCount(20D)
-        .annualSpend(500D)
-        .lifeTimeSpend(50000D)
-        .annualVolume(1000D)
-        .lifeTimeVolume(5000D)
-        .annualTransactionCount(50D)
-        .lifeTimeTransactionCount(100D)
-        .build())
-    .build();
-
-restrictionController.accountRestrictionAsync(requestId, body).thenAccept(result -> {
+restrictionController.restrictionAccountAsync(apikey, requestId, null).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -621,33 +858,24 @@ restrictionController.accountRestrictionAsync(requestId, body).thenAccept(result
 });
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "RequestId": "18c955d1-b3ec-4dc0-95da-76e67afb891a",
-  "Status": "SUCCESS"
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
 # Search Account Limit
 
-This operation will allow user to get account level limits for the given account.
-It returns the velocity limits if its overridden at the account else the values will be null/empty.
+This API will allow user to get account level limits for the given account. It returns the velocity limits if its overridden at the account else the values will be null/empty.
 
 ```java
 CompletableFuture<SearchAccountLimitResponse> searchAccountLimitAsync(
+    final String apikey,
     final String requestId,
     final SearchAccountLimitRequest body)
 ```
@@ -656,8 +884,9 @@ CompletableFuture<SearchAccountLimitResponse> searchAccountLimitAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`SearchAccountLimitRequest`](../../doc/models/search-account-limit-request.md) | Body, Optional | Summary Bundle Request body |
+| `body` | [`SearchAccountLimitRequest`](../../doc/models/search-account-limit-request.md) | Body, Optional | Search Account Limit RequestBody |
 
 ## Response Type
 
@@ -666,19 +895,15 @@ CompletableFuture<SearchAccountLimitResponse> searchAccountLimitAsync(
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
 SearchAccountLimitRequest body = new SearchAccountLimitRequest.Builder()
-    .filters(new SearchAccountLimitRequestFilters.Builder()
-        .colCoId(14)
-        .colCoCode(14)
-        .payerId(1234)
-        .payerNumber("GB99215176")
-        .accountId(29484)
-        .accountNumber("GB99215176")
-        .build())
+    .colCoCode(32)
+    .payerId(1240)
+    .accountId(1232)
     .build();
 
-restrictionController.searchAccountLimitAsync(requestId, body).thenAccept(result -> {
+restrictionController.searchAccountLimitAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -692,25 +917,25 @@ restrictionController.searchAccountLimitAsync(requestId, body).thenAccept(result
 
 ```json
 {
-  "RequestId": "27ec111b-0310-425d-b2a0-0fc2b1bfabb7",
-  "Status": "SUCCESS",
-  "Data": {
-    "AccountId": 29484,
-    "AccountNumber": "GB99215176",
-    "ReferenceProduct": "021",
-    "RestrictionCondition": "DECLINE_ALERT",
-    "VelocityLimits": [
-      {
-        "Type": "VALUE",
-        "Period": "DAILY",
-        "Limit": 1500.55,
-        "Accumulation": 1100.55,
-        "Balance": 400.55,
-        "Override": true,
-        "ProductGroup": "RoadSvc",
-        "Threshold": 50.55
-      }
-    ]
+  "RequestId": "2ace3991-5d03-4a68-ac68-ca9119b25101",
+  "AccountId": 1232,
+  "ReferenceProduct": "021",
+  "RestrictionCondition": "DECLINE_ALERT",
+  "VelocityLimits": [
+    {
+      "Type": "VALUE",
+      "Period": "MONTHLY",
+      "Limit": 330,
+      "Accumulation": 2220,
+      "Balance": 230,
+      "Override": true,
+      "ProductGroup": "RoadSvc",
+      "Threshold": 3230
+    }
+  ],
+  "Error": {
+    "Code": "0000",
+    "Description": "Success"
   }
 }
 ```
@@ -719,63 +944,49 @@ restrictionController.searchAccountLimitAsync(requestId, body).thenAccept(result
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Search Card Restriction
+# Bundledetails
 
-This API will allows querying card details including the day/time and product restrictions.
-
-#### Supported operations
-
-* Search by list of cards or bundle
-* Include card bundle details (optional)
+This API allows to get the details of a specific card bundle. It returns the bundle basic details along with the cards in the bundle and restrictions applied on them.
 
 ```java
-CompletableFuture<RestrictionSearchCardResponse> searchCardRestrictionAsync(
+CompletableFuture<BundleDetailsResponse> bundledetailsAsync(
+    final String apikey,
     final String requestId,
-    final RestrictionSearchCardRequest body)
+    final BudleDetailsRequest body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `apikey` | `String` | Header, Required | This is the API key of the specific environment which needs to be passed by the client. |
 | `requestId` | `String` | Header, Required | Mandatory UUID (according to RFC 4122 standards) for requests and responses. This will be played back in the response from the request. |
-| `body` | [`RestrictionSearchCardRequest`](../../doc/models/restriction-search-card-request.md) | Body, Optional | Summary Bundle Request body |
+| `body` | [`BudleDetailsRequest`](../../doc/models/budle-details-request.md) | Body, Optional | Bundle Details Request body |
 
 ## Response Type
 
-[`RestrictionSearchCardResponse`](../../doc/models/restriction-search-card-response.md)
+[`BundleDetailsResponse`](../../doc/models/bundle-details-response.md)
 
 ## Example Usage
 
 ```java
+String apikey = "apikey6";
 String requestId = "RequestId8";
-RestrictionSearchCardRequest body = new RestrictionSearchCardRequest.Builder()
-    .filters(new RestrictionSearchCardRequestFilters.Builder()
-        .colCoCode(32)
-        .colCoId(32)
-        .payerNumber("CZ00000923")
-        .payerId(1223)
-        .bundleId("BundleId8")
-        .cards(Arrays.asList(
-            new RestrictionSearchCardRequestFiltersCardsItems.Builder()
-                .pAN("7077327290223419353")
-                .cardId(459629)
-                .build()
-        ))
-        .includeLocationRestrictions(true)
-        .includeInheritedLimits(true)
-        .includeBundleDetails(true)
-        .build())
+BudleDetailsRequest body = new BudleDetailsRequest.Builder()
+    .colCoCode(32)
+    .payerNumber("CZ00000927")
+    .accountNumber("CZ00000927")
+    .bundleId("1060")
     .build();
 
-restrictionController.searchCardRestrictionAsync(requestId, body).thenAccept(result -> {
+restrictionController.bundledetailsAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -785,202 +996,13 @@ restrictionController.searchCardRestrictionAsync(requestId, body).thenAccept(res
 });
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "RequestId": "cf142c58-bdfa-4414-81c5-f099c0c829d7",
-  "Status": "Success",
-  "Data": [
-    {
-      "BundleId": 100,
-      "Restrictions": {
-        "DayTimeRestrictions": {
-          "Friday": true,
-          "Monday": true,
-          "Saturday": false,
-          "Sunday": false,
-          "Thursday": true,
-          "TimeFrom": "01:00:00",
-          "TimeTo": "10:00:00",
-          "Tuesday": true,
-          "Wednesday": true
-        },
-        "LocationRestrictions": {
-          "CountryRestrictions": {
-            "Countries": [
-              "203"
-            ],
-            "Exclusive": true
-          },
-          "NetworkRestrictions": [
-            {
-              "Country": "826",
-              "Exclusive": false,
-              "Networks": [
-                "0002003826"
-              ]
-            }
-          ],
-          "PartnerSiteRestrictions": [
-            {
-              "Exclusive": false,
-              "NetworkCode": "0452301643",
-              "SiteGroups": [
-                "P1"
-              ],
-              "Sites": []
-            }
-          ],
-          "ShellSiteRestrictions": [
-            {
-              "Country": "276",
-              "Exclusive": true,
-              "SiteGroups": [
-                "P2"
-              ],
-              "Sites": []
-            }
-          ]
-        },
-        "ProductRestrictions": {
-          "FuelSetId": 0,
-          "FuelSetName": null,
-          "NonFuelSets": null,
-          "ProductGroups": [
-            {
-              "IsDefault": true,
-              "IsFuelType": true,
-              "Name": "Premium Diesel",
-              "ProductGroupId": "P103",
-              "Products": [
-                {
-                  "Description": "High Performance Diesel",
-                  "GlobalProductCode": "033"
-                }
-              ],
-              "ReferenceId": 100
-            }
-          ],
-          "Products": [],
-          "PurchaseCategoryCode": "",
-          "PurchaseCategoryId": 0
-        },
-        "UsageRestrictions": {
-          "AnnualSpend": 9999999999.99,
-          "AnnualSpendAccumulated": 0,
-          "AnnualSpendBalance": 9999999999.99,
-          "AnnualTransactionAccumulated": 0,
-          "AnnualTransactionBalance": 999999999999,
-          "AnnualTransactionCount": 999999999999,
-          "AnnualVolume": 9999999999.99,
-          "AnnualVolumeAccumulated": 0,
-          "AnnualVolumeBalance": 9999999999.99,
-          "DailySpend": 1010,
-          "DailySpendAccumulated": 0,
-          "DailySpendBalance": 1010,
-          "DailyTransactionAccumulated": 0,
-          "DailyTransactionBalance": 6,
-          "DailyTransactionCount": 6,
-          "DailyVolume": 10,
-          "DailyVolumeAccumulated": 0,
-          "DailyVolumeBalance": 10,
-          "Level": "Card",
-          "LifeTimeSpend": null,
-          "LifeTimeSpendAccumulated": null,
-          "LifeTimeSpendBalance": null,
-          "LifeTimeTransactionAccumulated": null,
-          "LifeTimeTransactionBalance": null,
-          "LifeTimeTransactionCount": null,
-          "LifeTimeVolume": null,
-          "LifeTimeVolumeAccumulated": null,
-          "LifeTimeVolumeBalance": null,
-          "MonthlySpend": 15020,
-          "MonthlySpendAccumulated": 0,
-          "MonthlySpendBalance": 15020,
-          "MonthlyTransactionAccumulated": 0,
-          "MonthlyTransactionBalance": 32,
-          "MonthlyTransactionCount": 32,
-          "MonthlyVolume": 1000,
-          "MonthlyVolumeAccumulated": 0,
-          "MonthlyVolumeBalance": 1000,
-          "PerTransactionSpend": 920,
-          "PerTransactionVolume": 10,
-          "WeeklySpend": 1620,
-          "WeeklySpendAccumulated": 0,
-          "WeeklySpendBalance": 1620,
-          "WeeklyTransactionAccumulated": 0,
-          "WeeklyTransactionBalance": 18,
-          "WeeklyTransactionCount": 18,
-          "WeeklyVolume": 100,
-          "WeeklyVolumeAccumulated": 0,
-          "WeeklyVolumeBalance": 100,
-          "AnnualSpendOverride": false,
-          "DailySpendOverride": true,
-          "LifeTimeSpendOverride": false,
-          "MonthlySpendOverride": true,
-          "PerTransactionSpendOverride": true,
-          "WeeklySpendOverride": true,
-          "DailyVolumeOverride": true,
-          "WeeklyVolumeOverride": true,
-          "MonthlyVolumeOverride": true,
-          "PerTransactionVolumeOverride": true,
-          "AnnualVolumeOverride": false,
-          "LifeTimeVolumeOverride": false,
-          "DailyTransactionOverride": true,
-          "WeeklyTransactionOverride": true,
-          "MonthlyTransactionOverride": true,
-          "AnnualTransactionOverride": false,
-          "LifeTimeTransactionOverride": false
-        }
-      },
-      "RestrictionCurrencyCode": "CZK",
-      "RestrictionCurrencySymbol": "Kč",
-      "AccountId": 1223,
-      "AccountName": "NewtestPandB",
-      "AccountNumber": "CZ00000923",
-      "AccountShortName": "NewtestPandB",
-      "CardId": 459629,
-      "CardTypeCode": "7077327",
-      "CardTypeId": 105,
-      "CardTypeName": "CZ CRT INT MUL R7",
-      "ColCoCurrencyCode": "CZK",
-      "ColCoCurrencySymbol": "Kč",
-      "CurrencyCode": "EUR",
-      "CurrencySymbol": "€",
-      "DriverName": "XYZ 1504",
-      "ExpiryDate": "20240731",
-      "IsCRT": true,
-      "IsFleet": false,
-      "IsInternational": true,
-      "IsNational": false,
-      "IsPartnerSitesIncluded": true,
-      "IsShellSitesOnly": false,
-      "IssueDate": "20200722",
-      "IssueNumber": 1,
-      "IsSuperseded": false,
-      "IsVirtualCard": false,
-      "PAN": "7077327290223419353",
-      "PurchaseCategoryCode": "0",
-      "PurchaseCategoryId": 100,
-      "PurchaseCategoryName": "0 - Diesel Products and TMF",
-      "StatusDescription": "Active",
-      "StatusId": 1,
-      "VRN": "ABC 1504",
-      "MediumTypeID": 5,
-      "MediumType": "Key fob"
-    }
-  ]
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 403 | Forbidden | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
-| 500 | The server encountered an unexpected condition that  prevented it from fulfilling the request. | [`ErrorObjectException`](../../doc/models/error-object-exception.md) |
+| 400 | The server cannot or will not process the request  due to something that is perceived to be a client<br>error (e.g., malformed request syntax, invalid<br>request message framing, or deceptive request routing). | `ApiException` |
+| 401 | The request has not been applied because it lacks valid  authentication credentials for the target resource. | `ApiException` |
+| 403 | The server understood the request but refuses to authorize it. | `ApiException` |
+| 404 | The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists. | `ApiException` |
+| 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class DeleteBundleResponse {
     private String requestId;
-    private String status;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
@@ -26,13 +26,13 @@ public class DeleteBundleResponse {
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
+     * @param  error  ErrorStatus value for error.
      */
     public DeleteBundleResponse(
             String requestId,
-            String status) {
+            ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
+        this.error = error;
     }
 
     /**
@@ -57,24 +57,22 @@ public class DeleteBundleResponse {
     }
 
     /**
-     * Getter for Status.
-     * API Response Status
-     * @return Returns the String
+     * Getter for Error.
+     * @return Returns the ErrorStatus
      */
-    @JsonGetter("Status")
+    @JsonGetter("Error")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public ErrorStatus getError() {
+        return error;
     }
 
     /**
-     * Setter for Status.
-     * API Response Status
-     * @param status Value for String
+     * Setter for Error.
+     * @param error Value for ErrorStatus
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
     }
 
     /**
@@ -83,7 +81,7 @@ public class DeleteBundleResponse {
      */
     @Override
     public String toString() {
-        return "DeleteBundleResponse [" + "requestId=" + requestId + ", status=" + status + "]";
+        return "DeleteBundleResponse [" + "requestId=" + requestId + ", error=" + error + "]";
     }
 
     /**
@@ -94,7 +92,7 @@ public class DeleteBundleResponse {
     public Builder toBuilder() {
         Builder builder = new Builder()
                 .requestId(getRequestId())
-                .status(getStatus());
+                .error(getError());
         return builder;
     }
 
@@ -103,7 +101,7 @@ public class DeleteBundleResponse {
      */
     public static class Builder {
         private String requestId;
-        private String status;
+        private ErrorStatus error;
 
 
 
@@ -118,12 +116,12 @@ public class DeleteBundleResponse {
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder error(ErrorStatus error) {
+            this.error = error;
             return this;
         }
 
@@ -132,7 +130,7 @@ public class DeleteBundleResponse {
          * @return {@link DeleteBundleResponse}
          */
         public DeleteBundleResponse build() {
-            return new DeleteBundleResponse(requestId, status);
+            return new DeleteBundleResponse(requestId, error);
         }
     }
 }

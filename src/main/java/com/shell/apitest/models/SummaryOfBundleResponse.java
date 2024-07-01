@@ -9,124 +9,305 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
- * This is a model class for SummaryOfBundleResponse type.
+ * This is a model class for SummaryofbundleResponse type.
  */
-public class SummaryOfBundleResponse {
-    private String requestId;
-    private String status;
-    private List<SummaryOfBundleResponseDataItems> data;
+public class SummaryofbundleResponse {
+    private OptionalNullable<String> requestId;
+    private Integer payerId;
+    private String payerNumber;
+    private Integer accountId;
+    private String accountNumber;
+    private Integer countOfCardsNotInBundle;
+    private CardBundle cardBundles;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
      */
-    public SummaryOfBundleResponse() {
+    public SummaryofbundleResponse() {
     }
 
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
-     * @param  data  List of SummaryOfBundleResponseDataItems value for data.
+     * @param  payerId  Integer value for payerId.
+     * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  countOfCardsNotInBundle  Integer value for countOfCardsNotInBundle.
+     * @param  cardBundles  CardBundle value for cardBundles.
+     * @param  error  ErrorStatus value for error.
      */
-    public SummaryOfBundleResponse(
+    public SummaryofbundleResponse(
             String requestId,
-            String status,
-            List<SummaryOfBundleResponseDataItems> data) {
+            Integer payerId,
+            String payerNumber,
+            Integer accountId,
+            String accountNumber,
+            Integer countOfCardsNotInBundle,
+            CardBundle cardBundles,
+            ErrorStatus error) {
+        this.requestId = OptionalNullable.of(requestId);
+        this.payerId = payerId;
+        this.payerNumber = payerNumber;
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.countOfCardsNotInBundle = countOfCardsNotInBundle;
+        this.cardBundles = cardBundles;
+        this.error = error;
+    }
+
+    /**
+     * Initialization constructor.
+     * @param  requestId  String value for requestId.
+     * @param  payerId  Integer value for payerId.
+     * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
+     * @param  countOfCardsNotInBundle  Integer value for countOfCardsNotInBundle.
+     * @param  cardBundles  CardBundle value for cardBundles.
+     * @param  error  ErrorStatus value for error.
+     */
+
+    protected SummaryofbundleResponse(OptionalNullable<String> requestId, Integer payerId,
+            String payerNumber, Integer accountId, String accountNumber,
+            Integer countOfCardsNotInBundle, CardBundle cardBundles, ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
-        this.data = data;
+        this.payerId = payerId;
+        this.payerNumber = payerNumber;
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+        this.countOfCardsNotInBundle = countOfCardsNotInBundle;
+        this.cardBundles = cardBundles;
+        this.error = error;
+    }
+
+    /**
+     * Internal Getter for RequestId.
+     * Request Id of the API call
+     * @return Returns the Internal String
+     */
+    @JsonGetter("RequestId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetRequestId() {
+        return this.requestId;
     }
 
     /**
      * Getter for RequestId.
+     * Request Id of the API call
      * @return Returns the String
      */
-    @JsonGetter("RequestId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getRequestId() {
-        return requestId;
+        return OptionalNullable.getFrom(requestId);
     }
 
     /**
      * Setter for RequestId.
+     * Request Id of the API call
      * @param requestId Value for String
      */
     @JsonSetter("RequestId")
     public void setRequestId(String requestId) {
-        this.requestId = requestId;
+        this.requestId = OptionalNullable.of(requestId);
     }
 
     /**
-     * Getter for Status.
+     * UnSetter for RequestId.
+     * Request Id of the API call
+     */
+    public void unsetRequestId() {
+        requestId = null;
+    }
+
+    /**
+     * Getter for PayerId.
+     * Payer Id of the bundles and cards. Example: 123456
+     * @return Returns the Integer
+     */
+    @JsonGetter("PayerId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getPayerId() {
+        return payerId;
+    }
+
+    /**
+     * Setter for PayerId.
+     * Payer Id of the bundles and cards. Example: 123456
+     * @param payerId Value for Integer
+     */
+    @JsonSetter("PayerId")
+    public void setPayerId(Integer payerId) {
+        this.payerId = payerId;
+    }
+
+    /**
+     * Getter for PayerNumber.
+     * Payer Number of the bundles and cards. Example: GB000000123
      * @return Returns the String
      */
-    @JsonGetter("Status")
+    @JsonGetter("PayerNumber")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public String getPayerNumber() {
+        return payerNumber;
     }
 
     /**
-     * Setter for Status.
-     * @param status Value for String
+     * Setter for PayerNumber.
+     * Payer Number of the bundles and cards. Example: GB000000123
+     * @param payerNumber Value for String
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("PayerNumber")
+    public void setPayerNumber(String payerNumber) {
+        this.payerNumber = payerNumber;
     }
 
     /**
-     * Getter for Data.
-     * @return Returns the List of SummaryOfBundleResponseDataItems
+     * Getter for AccountId.
+     * @return Returns the Integer
      */
-    @JsonGetter("Data")
+    @JsonGetter("AccountId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<SummaryOfBundleResponseDataItems> getData() {
-        return data;
+    public Integer getAccountId() {
+        return accountId;
     }
 
     /**
-     * Setter for Data.
-     * @param data Value for List of SummaryOfBundleResponseDataItems
+     * Setter for AccountId.
+     * @param accountId Value for Integer
      */
-    @JsonSetter("Data")
-    public void setData(List<SummaryOfBundleResponseDataItems> data) {
-        this.data = data;
+    @JsonSetter("AccountId")
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     /**
-     * Converts this SummaryOfBundleResponse into string format.
+     * Getter for AccountNumber.
+     * Account Number of the bundle. Example: GB000000123
+     * @return Returns the String
+     */
+    @JsonGetter("AccountNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    /**
+     * Setter for AccountNumber.
+     * Account Number of the bundle. Example: GB000000123
+     * @param accountNumber Value for String
+     */
+    @JsonSetter("AccountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    /**
+     * Getter for CountOfCardsNotInBundle.
+     * Count of cards that are not part of the bundle in a given account.
+     * @return Returns the Integer
+     */
+    @JsonGetter("CountOfCardsNotInBundle")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getCountOfCardsNotInBundle() {
+        return countOfCardsNotInBundle;
+    }
+
+    /**
+     * Setter for CountOfCardsNotInBundle.
+     * Count of cards that are not part of the bundle in a given account.
+     * @param countOfCardsNotInBundle Value for Integer
+     */
+    @JsonSetter("CountOfCardsNotInBundle")
+    public void setCountOfCardsNotInBundle(Integer countOfCardsNotInBundle) {
+        this.countOfCardsNotInBundle = countOfCardsNotInBundle;
+    }
+
+    /**
+     * Getter for CardBundles.
+     * @return Returns the CardBundle
+     */
+    @JsonGetter("CardBundles")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public CardBundle getCardBundles() {
+        return cardBundles;
+    }
+
+    /**
+     * Setter for CardBundles.
+     * @param cardBundles Value for CardBundle
+     */
+    @JsonSetter("CardBundles")
+    public void setCardBundles(CardBundle cardBundles) {
+        this.cardBundles = cardBundles;
+    }
+
+    /**
+     * Getter for Error.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("Error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getError() {
+        return error;
+    }
+
+    /**
+     * Setter for Error.
+     * @param error Value for ErrorStatus
+     */
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
+    }
+
+    /**
+     * Converts this SummaryofbundleResponse into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
-        return "SummaryOfBundleResponse [" + "requestId=" + requestId + ", status=" + status
-                + ", data=" + data + "]";
+        return "SummaryofbundleResponse [" + "requestId=" + requestId + ", payerId=" + payerId
+                + ", payerNumber=" + payerNumber + ", accountId=" + accountId + ", accountNumber="
+                + accountNumber + ", countOfCardsNotInBundle=" + countOfCardsNotInBundle
+                + ", cardBundles=" + cardBundles + ", error=" + error + "]";
     }
 
     /**
-     * Builds a new {@link SummaryOfBundleResponse.Builder} object.
+     * Builds a new {@link SummaryofbundleResponse.Builder} object.
      * Creates the instance with the state of the current model.
-     * @return a new {@link SummaryOfBundleResponse.Builder} object
+     * @return a new {@link SummaryofbundleResponse.Builder} object
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .requestId(getRequestId())
-                .status(getStatus())
-                .data(getData());
+                .payerId(getPayerId())
+                .payerNumber(getPayerNumber())
+                .accountId(getAccountId())
+                .accountNumber(getAccountNumber())
+                .countOfCardsNotInBundle(getCountOfCardsNotInBundle())
+                .cardBundles(getCardBundles())
+                .error(getError());
+        builder.requestId = internalGetRequestId();
         return builder;
     }
 
     /**
-     * Class to build instances of {@link SummaryOfBundleResponse}.
+     * Class to build instances of {@link SummaryofbundleResponse}.
      */
     public static class Builder {
-        private String requestId;
-        private String status;
-        private List<SummaryOfBundleResponseDataItems> data;
+        private OptionalNullable<String> requestId;
+        private Integer payerId;
+        private String payerNumber;
+        private Integer accountId;
+        private String accountNumber;
+        private Integer countOfCardsNotInBundle;
+        private CardBundle cardBundles;
+        private ErrorStatus error;
 
 
 
@@ -136,36 +317,96 @@ public class SummaryOfBundleResponse {
          * @return Builder
          */
         public Builder requestId(String requestId) {
-            this.requestId = requestId;
+            this.requestId = OptionalNullable.of(requestId);
             return this;
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * UnSetter for requestId.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder unsetRequestId() {
+            requestId = null;
             return this;
         }
 
         /**
-         * Setter for data.
-         * @param  data  List of SummaryOfBundleResponseDataItems value for data.
+         * Setter for payerId.
+         * @param  payerId  Integer value for payerId.
          * @return Builder
          */
-        public Builder data(List<SummaryOfBundleResponseDataItems> data) {
-            this.data = data;
+        public Builder payerId(Integer payerId) {
+            this.payerId = payerId;
             return this;
         }
 
         /**
-         * Builds a new {@link SummaryOfBundleResponse} object using the set fields.
-         * @return {@link SummaryOfBundleResponse}
+         * Setter for payerNumber.
+         * @param  payerNumber  String value for payerNumber.
+         * @return Builder
          */
-        public SummaryOfBundleResponse build() {
-            return new SummaryOfBundleResponse(requestId, status, data);
+        public Builder payerNumber(String payerNumber) {
+            this.payerNumber = payerNumber;
+            return this;
+        }
+
+        /**
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
+         * @return Builder
+         */
+        public Builder accountId(Integer accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        /**
+         * Setter for accountNumber.
+         * @param  accountNumber  String value for accountNumber.
+         * @return Builder
+         */
+        public Builder accountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Setter for countOfCardsNotInBundle.
+         * @param  countOfCardsNotInBundle  Integer value for countOfCardsNotInBundle.
+         * @return Builder
+         */
+        public Builder countOfCardsNotInBundle(Integer countOfCardsNotInBundle) {
+            this.countOfCardsNotInBundle = countOfCardsNotInBundle;
+            return this;
+        }
+
+        /**
+         * Setter for cardBundles.
+         * @param  cardBundles  CardBundle value for cardBundles.
+         * @return Builder
+         */
+        public Builder cardBundles(CardBundle cardBundles) {
+            this.cardBundles = cardBundles;
+            return this;
+        }
+
+        /**
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
+         * @return Builder
+         */
+        public Builder error(ErrorStatus error) {
+            this.error = error;
+            return this;
+        }
+
+        /**
+         * Builds a new {@link SummaryofbundleResponse} object using the set fields.
+         * @return {@link SummaryofbundleResponse}
+         */
+        public SummaryofbundleResponse build() {
+            return new SummaryofbundleResponse(requestId, payerId, payerNumber, accountId,
+                    accountNumber, countOfCardsNotInBundle, cardBundles, error);
         }
     }
 }

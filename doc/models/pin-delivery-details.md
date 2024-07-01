@@ -22,7 +22,7 @@ This is mandatory if PINContactType is 4 else optional and ignored.
 | `CountryID` | `Integer` | Optional | Country | Integer getCountryID() | setCountryID(Integer countryID) |
 | `PhoneNumber` | `String` | Optional | Cardholder phone number for PIN delivery. | String getPhoneNumber() | setPhoneNumber(String phoneNumber) |
 | `EmailAddress` | `String` | Optional | Cardholder email address for PIN delivery<br>Max Length : 90<br>Example: xxxxxx@example.com <br/>Note:Based on the international standard that there can be Max Length 64 before the @ (the 'Local part’) =64(minimum of 1) Max Lenth after the (the domain) = 88 (Minimum of 2) | String getEmailAddress() | setEmailAddress(String emailAddress) |
-| `SavePINReminder` | `Boolean` | Optional | Save PIN Reminder<br>If SavePINReminder is true, the contact address will be saved database for PIN reminder.<br><br/>Only allowed for PIN Advice paper delivery. | Boolean getSavePINReminder() | setSavePINReminder(Boolean savePINReminder) |
+| `SavePINReminder` | `Boolean` | Optional | Save PIN Reminder<br>If SavePINReminder is true, the contact address will be saved database for PIN reminder.<br><br><br/>Only allowed for PIN Advice paper delivery. | Boolean getSavePINReminder() | setSavePINReminder(Boolean savePINReminder) |
 
 ## Example (as JSON)
 

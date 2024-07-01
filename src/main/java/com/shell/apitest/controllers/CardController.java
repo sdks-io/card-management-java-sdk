@@ -10,16 +10,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.shell.apitest.ApiHelper;
 import com.shell.apitest.Server;
 import com.shell.apitest.exceptions.ApiException;
-import com.shell.apitest.exceptions.DefaultErrorException;
 import com.shell.apitest.exceptions.ErrorObjectException;
-import com.shell.apitest.exceptions.ErrorUserAccessError1Exception;
 import com.shell.apitest.http.request.HttpMethod;
 import com.shell.apitest.models.AutoRenewCardRequest;
 import com.shell.apitest.models.AutoRenewCardResponse;
-import com.shell.apitest.models.CancelCardRequest;
 import com.shell.apitest.models.CancelCardResponse;
 import com.shell.apitest.models.CardDetailsRequest;
 import com.shell.apitest.models.CardDetailsResponse;
+import com.shell.apitest.models.CardManagementV1CancelRequest;
+import com.shell.apitest.models.CardManagementV1OrdercardRequest;
+import com.shell.apitest.models.CardManagementV1PinreminderRequest;
+import com.shell.apitest.models.CardManagementV1UpdatestatusRequest;
 import com.shell.apitest.models.CardMoveRequest;
 import com.shell.apitest.models.CardMoveResponse;
 import com.shell.apitest.models.CardSearchResponse;
@@ -30,16 +31,13 @@ import com.shell.apitest.models.DeliveryAddressUpdateResponse;
 import com.shell.apitest.models.GeneratePINKeyResponse;
 import com.shell.apitest.models.OrderCardEnquiryRequest;
 import com.shell.apitest.models.OrderCardEnquiryResponse;
-import com.shell.apitest.models.OrderCardRequest;
 import com.shell.apitest.models.OrderCardResponse;
-import com.shell.apitest.models.PINReminderRequest;
 import com.shell.apitest.models.PINReminderResponse;
 import com.shell.apitest.models.PurchaseCategoryRequest;
 import com.shell.apitest.models.PurchaseCategoryResponse;
 import com.shell.apitest.models.ScheduleCardBlockRequest;
 import com.shell.apitest.models.ScheduleCardBlockResponse;
 import com.shell.apitest.models.SearchCardRequest;
-import com.shell.apitest.models.UpdateCardStatusRequest;
 import com.shell.apitest.models.UpdateCardStatusResponse;
 import com.shell.apitest.models.UpdateMPayRegStatusRequest;
 import com.shell.apitest.models.UpdateMPayRegStatusResponse;
@@ -79,10 +77,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardSearchResponse searchCard(
+    public CardSearchResponse searchcard(
             final String requestId,
             final SearchCardRequest body) throws ApiException, IOException {
-        return prepareSearchCardRequest(requestId, body).execute();
+        return prepareSearchcardRequest(requestId, body).execute();
     }
 
     /**
@@ -99,26 +97,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: requestbody
      * @return    Returns the CardSearchResponse response from the API call
      */
-    public CompletableFuture<CardSearchResponse> searchCardAsync(
+    public CompletableFuture<CardSearchResponse> searchcardAsync(
             final String requestId,
             final SearchCardRequest body) {
         try { 
-            return prepareSearchCardRequest(requestId, body).executeAsync(); 
+            return prepareSearchcardRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for searchCard.
+     * Builds the ApiCall object for searchcard.
      */
-    private ApiCall<CardSearchResponse, ApiException> prepareSearchCardRequest(
+    private ApiCall<CardSearchResponse, ApiException> prepareSearchcardRequest(
             final String requestId,
             final SearchCardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CardSearchResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/search")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -135,19 +133,19 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, CardSearchResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
@@ -168,10 +166,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardSummaryResponse cardSummary(
+    public CardSummaryResponse cardsummary(
             final String requestId,
             final CardSummaryRequest body) throws ApiException, IOException {
-        return prepareCardSummaryRequest(requestId, body).execute();
+        return prepareCardsummaryRequest(requestId, body).execute();
     }
 
     /**
@@ -187,26 +185,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: summary request body
      * @return    Returns the CardSummaryResponse response from the API call
      */
-    public CompletableFuture<CardSummaryResponse> cardSummaryAsync(
+    public CompletableFuture<CardSummaryResponse> cardsummaryAsync(
             final String requestId,
             final CardSummaryRequest body) {
         try { 
-            return prepareCardSummaryRequest(requestId, body).executeAsync(); 
+            return prepareCardsummaryRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardSummary.
+     * Builds the ApiCall object for cardsummary.
      */
-    private ApiCall<CardSummaryResponse, ApiException> prepareCardSummaryRequest(
+    private ApiCall<CardSummaryResponse, ApiException> prepareCardsummaryRequest(
             final String requestId,
             final CardSummaryRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CardSummaryResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/summary")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -223,19 +221,19 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, CardSummaryResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
@@ -265,10 +263,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public OrderCardResponse orderCard(
+    public OrderCardResponse cardordercard(
             final String requestId,
-            final OrderCardRequest body) throws ApiException, IOException {
-        return prepareOrderCardRequest(requestId, body).execute();
+            final CardManagementV1OrdercardRequest body) throws ApiException, IOException {
+        return prepareCardordercardRequest(requestId, body).execute();
     }
 
     /**
@@ -293,26 +291,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Order card request body
      * @return    Returns the OrderCardResponse response from the API call
      */
-    public CompletableFuture<OrderCardResponse> orderCardAsync(
+    public CompletableFuture<OrderCardResponse> cardordercardAsync(
             final String requestId,
-            final OrderCardRequest body) {
+            final CardManagementV1OrdercardRequest body) {
         try { 
-            return prepareOrderCardRequest(requestId, body).executeAsync(); 
+            return prepareCardordercardRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for orderCard.
+     * Builds the ApiCall object for cardordercard.
      */
-    private ApiCall<OrderCardResponse, ApiException> prepareOrderCardRequest(
+    private ApiCall<OrderCardResponse, ApiException> prepareCardordercardRequest(
             final String requestId,
-            final OrderCardRequest body) throws JsonProcessingException, IOException {
+            final CardManagementV1OrdercardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<OrderCardResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/ordercard")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -329,20 +327,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, OrderCardResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -361,10 +359,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public OrderCardEnquiryResponse orderCardEnquiry(
+    public OrderCardEnquiryResponse cardordercardenquiry(
             final String requestId,
             final OrderCardEnquiryRequest body) throws ApiException, IOException {
-        return prepareOrderCardEnquiryRequest(requestId, body).execute();
+        return prepareCardordercardenquiryRequest(requestId, body).execute();
     }
 
     /**
@@ -379,26 +377,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Order Card Enquiry request body
      * @return    Returns the OrderCardEnquiryResponse response from the API call
      */
-    public CompletableFuture<OrderCardEnquiryResponse> orderCardEnquiryAsync(
+    public CompletableFuture<OrderCardEnquiryResponse> cardordercardenquiryAsync(
             final String requestId,
             final OrderCardEnquiryRequest body) {
         try { 
-            return prepareOrderCardEnquiryRequest(requestId, body).executeAsync(); 
+            return prepareCardordercardenquiryRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for orderCardEnquiry.
+     * Builds the ApiCall object for cardordercardenquiry.
      */
-    private ApiCall<OrderCardEnquiryResponse, ApiException> prepareOrderCardEnquiryRequest(
+    private ApiCall<OrderCardEnquiryResponse, ApiException> prepareCardordercardenquiryRequest(
             final String requestId,
             final OrderCardEnquiryRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<OrderCardEnquiryResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/ordercardenquiry")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -415,20 +413,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, OrderCardEnquiryResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -466,10 +464,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CancelCardResponse cardCancel(
+    public CancelCardResponse cardcancel(
             final String requestId,
-            final CancelCardRequest body) throws ApiException, IOException {
-        return prepareCardCancelRequest(requestId, body).execute();
+            final CardManagementV1CancelRequest body) throws ApiException, IOException {
+        return prepareCardcancelRequest(requestId, body).execute();
     }
 
     /**
@@ -503,26 +501,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Update status request body
      * @return    Returns the CancelCardResponse response from the API call
      */
-    public CompletableFuture<CancelCardResponse> cardCancelAsync(
+    public CompletableFuture<CancelCardResponse> cardcancelAsync(
             final String requestId,
-            final CancelCardRequest body) {
+            final CardManagementV1CancelRequest body) {
         try { 
-            return prepareCardCancelRequest(requestId, body).executeAsync(); 
+            return prepareCardcancelRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardCancel.
+     * Builds the ApiCall object for cardcancel.
      */
-    private ApiCall<CancelCardResponse, ApiException> prepareCardCancelRequest(
+    private ApiCall<CancelCardResponse, ApiException> prepareCardcancelRequest(
             final String requestId,
-            final CancelCardRequest body) throws JsonProcessingException, IOException {
+            final CardManagementV1CancelRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CancelCardResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/cancel")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -539,20 +537,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, CancelCardResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -604,10 +602,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateCardStatusResponse cardUpdateStatus(
+    public UpdateCardStatusResponse cardupdatestatus(
             final String requestId,
-            final UpdateCardStatusRequest body) throws ApiException, IOException {
-        return prepareCardUpdateStatusRequest(requestId, body).execute();
+            final CardManagementV1UpdatestatusRequest body) throws ApiException, IOException {
+        return prepareCardupdatestatusRequest(requestId, body).execute();
     }
 
     /**
@@ -655,26 +653,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Update status request body
      * @return    Returns the UpdateCardStatusResponse response from the API call
      */
-    public CompletableFuture<UpdateCardStatusResponse> cardUpdateStatusAsync(
+    public CompletableFuture<UpdateCardStatusResponse> cardupdatestatusAsync(
             final String requestId,
-            final UpdateCardStatusRequest body) {
+            final CardManagementV1UpdatestatusRequest body) {
         try { 
-            return prepareCardUpdateStatusRequest(requestId, body).executeAsync(); 
+            return prepareCardupdatestatusRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardUpdateStatus.
+     * Builds the ApiCall object for cardupdatestatus.
      */
-    private ApiCall<UpdateCardStatusResponse, ApiException> prepareCardUpdateStatusRequest(
+    private ApiCall<UpdateCardStatusResponse, ApiException> prepareCardupdatestatusRequest(
             final String requestId,
-            final UpdateCardStatusRequest body) throws JsonProcessingException, IOException {
+            final CardManagementV1UpdatestatusRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<UpdateCardStatusResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/updatestatus")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -691,20 +689,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, UpdateCardStatusResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -763,7 +761,7 @@ public final class CardController extends BaseController {
         return new ApiCall.Builder<PurchaseCategoryResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/fleetmanagement/v1/master/purchasecategory")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -775,7 +773,7 @@ public final class CardController extends BaseController {
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BasicAuth"))
+                                .add("BearerToken"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
@@ -783,19 +781,19 @@ public final class CardController extends BaseController {
                         .nullify404(false)
                         .localErrorCase("400",
                                  ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.\r\n",
-                                (reason, context) -> new ErrorUserAccessError1Exception(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -815,11 +813,11 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardDetailsResponse cardDetails(
+    public CardDetailsResponse carddetails(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) throws ApiException, IOException {
-        return prepareCardDetailsRequest(apikey, requestId, body).execute();
+        return prepareCarddetailsRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -835,28 +833,28 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Card details request body
      * @return    Returns the CardDetailsResponse response from the API call
      */
-    public CompletableFuture<CardDetailsResponse> cardDetailsAsync(
+    public CompletableFuture<CardDetailsResponse> carddetailsAsync(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) {
         try { 
-            return prepareCardDetailsRequest(apikey, requestId, body).executeAsync(); 
+            return prepareCarddetailsRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardDetails.
+     * Builds the ApiCall object for carddetails.
      */
-    private ApiCall<CardDetailsResponse, ApiException> prepareCardDetailsRequest(
+    private ApiCall<CardDetailsResponse, ApiException> prepareCarddetailsRequest(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CardDetailsResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/fleetmanagement/v1/card/card")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -868,7 +866,7 @@ public final class CardController extends BaseController {
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BasicAuth"))
+                                .add("BearerToken"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
@@ -876,19 +874,19 @@ public final class CardController extends BaseController {
                         .nullify404(false)
                         .localErrorCase("400",
                                  ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.\r\n",
-                                (reason, context) -> new ErrorUserAccessError1Exception(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -969,7 +967,7 @@ public final class CardController extends BaseController {
         return new ApiCall.Builder<CardMoveResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/fleetmanagement/v1/card/move")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -981,7 +979,7 @@ public final class CardController extends BaseController {
                                 .value("application/json").isRequired(false))
                         .headerParam(param -> param.key("accept").value("application/json"))
                         .withAuth(auth -> auth
-                                .add("BasicAuth"))
+                                .add("BearerToken"))
                         .httpMethod(HttpMethod.POST))
                 .responseHandler(responseHandler -> responseHandler
                         .deserializer(
@@ -989,19 +987,19 @@ public final class CardController extends BaseController {
                         .nullify404(false)
                         .localErrorCase("400",
                                  ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.\r\n",
-                                (reason, context) -> new ErrorUserAccessError1Exception(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -1027,10 +1025,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public PINReminderResponse cardPinReminder(
+    public PINReminderResponse cardpinreminder(
             final String requestId,
-            final PINReminderRequest body) throws ApiException, IOException {
-        return prepareCardPinReminderRequest(requestId, body).execute();
+            final CardManagementV1PinreminderRequest body) throws ApiException, IOException {
+        return prepareCardpinreminderRequest(requestId, body).execute();
     }
 
     /**
@@ -1052,26 +1050,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: PIN reminder request body
      * @return    Returns the PINReminderResponse response from the API call
      */
-    public CompletableFuture<PINReminderResponse> cardPinReminderAsync(
+    public CompletableFuture<PINReminderResponse> cardpinreminderAsync(
             final String requestId,
-            final PINReminderRequest body) {
+            final CardManagementV1PinreminderRequest body) {
         try { 
-            return prepareCardPinReminderRequest(requestId, body).executeAsync(); 
+            return prepareCardpinreminderRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardPinReminder.
+     * Builds the ApiCall object for cardpinreminder.
      */
-    private ApiCall<PINReminderResponse, ApiException> prepareCardPinReminderRequest(
+    private ApiCall<PINReminderResponse, ApiException> prepareCardpinreminderRequest(
             final String requestId,
-            final PINReminderRequest body) throws JsonProcessingException, IOException {
+            final CardManagementV1PinreminderRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<PINReminderResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/pinreminder")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -1088,19 +1086,19 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, PINReminderResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\r\n",
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\r\n",
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
@@ -1195,7 +1193,7 @@ public final class CardController extends BaseController {
         return new ApiCall.Builder<ScheduleCardBlockResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/schedulecardblock")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -1212,20 +1210,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, ScheduleCardBlockResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -1250,10 +1248,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public AutoRenewCardResponse autoRenew(
+    public AutoRenewCardResponse autorenew(
             final String requestId,
             final AutoRenewCardRequest body) throws ApiException, IOException {
-        return prepareAutoRenewRequest(requestId, body).execute();
+        return prepareAutorenewRequest(requestId, body).execute();
     }
 
     /**
@@ -1274,26 +1272,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Auto renew request body
      * @return    Returns the AutoRenewCardResponse response from the API call
      */
-    public CompletableFuture<AutoRenewCardResponse> autoRenewAsync(
+    public CompletableFuture<AutoRenewCardResponse> autorenewAsync(
             final String requestId,
             final AutoRenewCardRequest body) {
         try { 
-            return prepareAutoRenewRequest(requestId, body).executeAsync(); 
+            return prepareAutorenewRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for autoRenew.
+     * Builds the ApiCall object for autorenew.
      */
-    private ApiCall<AutoRenewCardResponse, ApiException> prepareAutoRenewRequest(
+    private ApiCall<AutoRenewCardResponse, ApiException> prepareAutorenewRequest(
             final String requestId,
             final AutoRenewCardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<AutoRenewCardResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/autorenew")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -1310,20 +1308,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, AutoRenewCardResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -1340,10 +1338,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateMPayRegStatusResponse updateMobilePaymentRegistrationStatus(
+    public UpdateMPayRegStatusResponse updatemobilepaymentregistrationstatus(
             final String requestId,
             final UpdateMPayRegStatusRequest body) throws ApiException, IOException {
-        return prepareUpdateMobilePaymentRegistrationStatusRequest(requestId, body).execute();
+        return prepareUpdatemobilepaymentregistrationstatusRequest(requestId, body).execute();
     }
 
     /**
@@ -1356,26 +1354,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Request body
      * @return    Returns the UpdateMPayRegStatusResponse response from the API call
      */
-    public CompletableFuture<UpdateMPayRegStatusResponse> updateMobilePaymentRegistrationStatusAsync(
+    public CompletableFuture<UpdateMPayRegStatusResponse> updatemobilepaymentregistrationstatusAsync(
             final String requestId,
             final UpdateMPayRegStatusRequest body) {
         try { 
-            return prepareUpdateMobilePaymentRegistrationStatusRequest(requestId, body).executeAsync(); 
+            return prepareUpdatemobilepaymentregistrationstatusRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for updateMobilePaymentRegistrationStatus.
+     * Builds the ApiCall object for updatemobilepaymentregistrationstatus.
      */
-    private ApiCall<UpdateMPayRegStatusResponse, ApiException> prepareUpdateMobilePaymentRegistrationStatusRequest(
+    private ApiCall<UpdateMPayRegStatusResponse, ApiException> prepareUpdatemobilepaymentregistrationstatusRequest(
             final String requestId,
             final UpdateMPayRegStatusRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<UpdateMPayRegStatusResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/card-management/v1/updatemobilepaymentregistrationstatus")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -1392,20 +1390,20 @@ public final class CardController extends BaseController {
                                 response -> ApiHelper.deserialize(response, UpdateMPayRegStatusResponse.class))
                         .nullify404(false)
                         .localErrorCase("400",
-                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).\n",
+                                 ErrorCase.setReason("The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).",
                                 (reason, context) -> new ErrorObjectException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
                                  ErrorCase.setReason("Forbidden",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.\n",
-                                (reason, context) -> new ErrorObjectException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition that  prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -1423,10 +1421,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public GeneratePINKeyResponse getKey(
+    public GeneratePINKeyResponse getkey(
             final String requestId,
             final Boolean fleet) throws ApiException, IOException {
-        return prepareGetKeyRequest(requestId, fleet).execute();
+        return prepareGetkeyRequest(requestId, fleet).execute();
     }
 
     /**
@@ -1440,26 +1438,26 @@ public final class CardController extends BaseController {
      *         default value will be false.
      * @return    Returns the GeneratePINKeyResponse response from the API call
      */
-    public CompletableFuture<GeneratePINKeyResponse> getKeyAsync(
+    public CompletableFuture<GeneratePINKeyResponse> getkeyAsync(
             final String requestId,
             final Boolean fleet) {
         try { 
-            return prepareGetKeyRequest(requestId, fleet).executeAsync(); 
+            return prepareGetkeyRequest(requestId, fleet).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for getKey.
+     * Builds the ApiCall object for getkey.
      */
-    private ApiCall<GeneratePINKeyResponse, ApiException> prepareGetKeyRequest(
+    private ApiCall<GeneratePINKeyResponse, ApiException> prepareGetkeyRequest(
             final String requestId,
             final Boolean fleet) throws IOException {
         return new ApiCall.Builder<GeneratePINKeyResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/pin-management/v1/generatepinkeys")
                         .queryParam(param -> param.key("fleet")
                                 .value(fleet).isRequired(false))
@@ -1475,19 +1473,19 @@ public final class CardController extends BaseController {
                         .nullify404(false)
                         .localErrorCase("400",
                                  ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.\r\n",
-                                (reason, context) -> new ErrorUserAccessError1Exception(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }
@@ -1503,10 +1501,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public DeliveryAddressUpdateResponse deliveryAddressUpdate(
+    public DeliveryAddressUpdateResponse deliveryaddressupdate(
             final String apikey,
             final DeliveryAddressUpdateRequest body) throws ApiException, IOException {
-        return prepareDeliveryAddressUpdateRequest(apikey, body).execute();
+        return prepareDeliveryaddressupdateRequest(apikey, body).execute();
     }
 
     /**
@@ -1518,26 +1516,26 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Delivery Address Update Request Body
      * @return    Returns the DeliveryAddressUpdateResponse response from the API call
      */
-    public CompletableFuture<DeliveryAddressUpdateResponse> deliveryAddressUpdateAsync(
+    public CompletableFuture<DeliveryAddressUpdateResponse> deliveryaddressupdateAsync(
             final String apikey,
             final DeliveryAddressUpdateRequest body) {
         try { 
-            return prepareDeliveryAddressUpdateRequest(apikey, body).executeAsync(); 
+            return prepareDeliveryaddressupdateRequest(apikey, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for deliveryAddressUpdate.
+     * Builds the ApiCall object for deliveryaddressupdate.
      */
-    private ApiCall<DeliveryAddressUpdateResponse, ApiException> prepareDeliveryAddressUpdateRequest(
+    private ApiCall<DeliveryAddressUpdateResponse, ApiException> prepareDeliveryaddressupdateRequest(
             final String apikey,
             final DeliveryAddressUpdateRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<DeliveryAddressUpdateResponse, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
-                        .server(Server.ENUM_DEFAULT.value())
+                        .server(Server.SHELL.value())
                         .path("/fleetmanagement/v1/card/deliveryaddressupdate")
                         .bodyParam(param -> param.value(body).isRequired(false))
                         .bodySerializer(() ->  ApiHelper.serialize(body))
@@ -1555,19 +1553,19 @@ public final class CardController extends BaseController {
                         .nullify404(false)
                         .localErrorCase("400",
                                  ErrorCase.setReason("The server cannot or will not process the request  due to something that is perceived to be a client\r\n error (e.g., malformed request syntax, invalid \r\n request message framing, or deceptive request routing).",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("401",
-                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The request has not been applied because it lacks valid  authentication credentials for the target resource.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("403",
-                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.\r\n",
-                                (reason, context) -> new ErrorUserAccessError1Exception(reason, context)))
+                                 ErrorCase.setReason("The server understood the request but refuses to authorize it.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("404",
-                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The origin server did not find a current representation  for the target resource or is not willing to disclose  that one exists.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .localErrorCase("500",
-                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.\r\n",
-                                (reason, context) -> new DefaultErrorException(reason, context)))
+                                 ErrorCase.setReason("The server encountered an unexpected condition the prevented it from fulfilling the request.",
+                                (reason, context) -> new ApiException(reason, context)))
                         .globalErrorCase(GLOBAL_ERROR_CASES))
                 .build();
     }

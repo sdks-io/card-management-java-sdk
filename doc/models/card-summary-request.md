@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Filters` | [`SummaryRequest`](../../doc/models/summary-request.md) | Optional | Encapsulates the details of a Summary Request.<br>Summary Request fields are same as the Search Request base class and no new fields are required. | SummaryRequest getFilters() | setFilters(SummaryRequest filters) |
+| `Filters` | [`Filters1`](../../doc/models/filters-1.md) | Optional | - | Filters1 getFilters() | setFilters(Filters1 filters) |
 
 ## Example (as JSON)
 

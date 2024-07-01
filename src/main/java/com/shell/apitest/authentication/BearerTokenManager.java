@@ -189,13 +189,14 @@ public class BearerTokenManager extends HeaderAuth implements BearerTokenCredent
      * @param oAuthToken The OAuth token for whose expiry is to check.
      * @return True if expired
      */
-    private boolean isTokenExpired(OAuthToken oAuthToken) {
+    public boolean isTokenExpired(OAuthToken oAuthToken) {
         if (oAuthToken == null) {
             throw new IllegalStateException("OAuth token is missing.");
         }
 
         return oAuthToken.getExpiry() != null 
-            && oAuthToken.getExpiry() < (System.currentTimeMillis() / 1000L); 
+            && oAuthToken.getExpiry() - authModel.getOAuthClockSkew()
+                < (System.currentTimeMillis() / 1000L);
     }
 
     /**

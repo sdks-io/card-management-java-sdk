@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Filters` | [`SearchRequest`](../../doc/models/search-request.md) | Optional | Encapsulate the Search details request. | SearchRequest getFilters() | setFilters(SearchRequest filters) |
+| `Filters` | [`Filters`](../../doc/models/filters.md) | Optional | - | Filters getFilters() | setFilters(Filters filters) |
 | `PageSize` | `String` | Optional | Page Size – Number of records to show on a page<br>Optional<br>Default value 50 | String getPageSize() | setPageSize(String pageSize) |
 | `Page` | `String` | Optional | Page Number | String getPage() | setPage(String page) |
 

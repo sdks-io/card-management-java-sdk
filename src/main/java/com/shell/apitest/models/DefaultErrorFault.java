@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  */
 public class DefaultErrorFault {
     private String faultstring;
-    private DefaultErrorFaultDetail detail;
+    private Detail detail;
 
     /**
      * Default constructor.
@@ -26,11 +26,11 @@ public class DefaultErrorFault {
     /**
      * Initialization constructor.
      * @param  faultstring  String value for faultstring.
-     * @param  detail  DefaultErrorFaultDetail value for detail.
+     * @param  detail  Detail value for detail.
      */
     public DefaultErrorFault(
             String faultstring,
-            DefaultErrorFaultDetail detail) {
+            Detail detail) {
         this.faultstring = faultstring;
         this.detail = detail;
     }
@@ -58,22 +58,20 @@ public class DefaultErrorFault {
 
     /**
      * Getter for Detail.
-     * Details about the error
-     * @return Returns the DefaultErrorFaultDetail
+     * @return Returns the Detail
      */
     @JsonGetter("detail")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public DefaultErrorFaultDetail getDetail() {
+    public Detail getDetail() {
         return detail;
     }
 
     /**
      * Setter for Detail.
-     * Details about the error
-     * @param detail Value for DefaultErrorFaultDetail
+     * @param detail Value for Detail
      */
     @JsonSetter("detail")
-    public void setDetail(DefaultErrorFaultDetail detail) {
+    public void setDetail(Detail detail) {
         this.detail = detail;
     }
 
@@ -103,7 +101,7 @@ public class DefaultErrorFault {
      */
     public static class Builder {
         private String faultstring;
-        private DefaultErrorFaultDetail detail;
+        private Detail detail;
 
 
 
@@ -119,10 +117,10 @@ public class DefaultErrorFault {
 
         /**
          * Setter for detail.
-         * @param  detail  DefaultErrorFaultDetail value for detail.
+         * @param  detail  Detail value for detail.
          * @return Builder
          */
-        public Builder detail(DefaultErrorFaultDetail detail) {
+        public Builder detail(Detail detail) {
             this.detail = detail;
             return this;
         }

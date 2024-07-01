@@ -9,14 +9,20 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for UpdateBundleResponse type.
  */
 public class UpdateBundleResponse {
-    private String requestId;
-    private String status;
-    private ErrorDetails errors;
+    private OptionalNullable<String> requestId;
+    private ErrorStatus requestActionStatus;
+    private ErrorStatus dayTimeRestrictionStatus;
+    private ErrorStatus locationRestrictionStatus;
+    private ErrorStatus productRestrictionStatus;
+    private ErrorStatus usageRestrictionStatus;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
@@ -27,77 +33,205 @@ public class UpdateBundleResponse {
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
-     * @param  errors  ErrorDetails value for errors.
+     * @param  requestActionStatus  ErrorStatus value for requestActionStatus.
+     * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+     * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+     * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+     * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+     * @param  error  ErrorStatus value for error.
      */
     public UpdateBundleResponse(
             String requestId,
-            String status,
-            ErrorDetails errors) {
+            ErrorStatus requestActionStatus,
+            ErrorStatus dayTimeRestrictionStatus,
+            ErrorStatus locationRestrictionStatus,
+            ErrorStatus productRestrictionStatus,
+            ErrorStatus usageRestrictionStatus,
+            ErrorStatus error) {
+        this.requestId = OptionalNullable.of(requestId);
+        this.requestActionStatus = requestActionStatus;
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+        this.locationRestrictionStatus = locationRestrictionStatus;
+        this.productRestrictionStatus = productRestrictionStatus;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.error = error;
+    }
+
+    /**
+     * Initialization constructor.
+     * @param  requestId  String value for requestId.
+     * @param  requestActionStatus  ErrorStatus value for requestActionStatus.
+     * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+     * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+     * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+     * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+     * @param  error  ErrorStatus value for error.
+     */
+
+    protected UpdateBundleResponse(OptionalNullable<String> requestId,
+            ErrorStatus requestActionStatus, ErrorStatus dayTimeRestrictionStatus,
+            ErrorStatus locationRestrictionStatus, ErrorStatus productRestrictionStatus,
+            ErrorStatus usageRestrictionStatus, ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
-        this.errors = errors;
+        this.requestActionStatus = requestActionStatus;
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+        this.locationRestrictionStatus = locationRestrictionStatus;
+        this.productRestrictionStatus = productRestrictionStatus;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.error = error;
+    }
+
+    /**
+     * Internal Getter for RequestId.
+     * Request Id of the API call
+     * @return Returns the Internal String
+     */
+    @JsonGetter("RequestId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetRequestId() {
+        return this.requestId;
     }
 
     /**
      * Getter for RequestId.
-     * API Request Id
+     * Request Id of the API call
      * @return Returns the String
      */
-    @JsonGetter("RequestId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getRequestId() {
-        return requestId;
+        return OptionalNullable.getFrom(requestId);
     }
 
     /**
      * Setter for RequestId.
-     * API Request Id
+     * Request Id of the API call
      * @param requestId Value for String
      */
     @JsonSetter("RequestId")
     public void setRequestId(String requestId) {
-        this.requestId = requestId;
+        this.requestId = OptionalNullable.of(requestId);
     }
 
     /**
-     * Getter for Status.
-     * API Response Status
-     * @return Returns the String
+     * UnSetter for RequestId.
+     * Request Id of the API call
      */
-    @JsonGetter("Status")
+    public void unsetRequestId() {
+        requestId = null;
+    }
+
+    /**
+     * Getter for RequestActionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("RequestActionStatus")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public ErrorStatus getRequestActionStatus() {
+        return requestActionStatus;
     }
 
     /**
-     * Setter for Status.
-     * API Response Status
-     * @param status Value for String
+     * Setter for RequestActionStatus.
+     * @param requestActionStatus Value for ErrorStatus
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("RequestActionStatus")
+    public void setRequestActionStatus(ErrorStatus requestActionStatus) {
+        this.requestActionStatus = requestActionStatus;
     }
 
     /**
-     * Getter for Errors.
-     * @return Returns the ErrorDetails
+     * Getter for DayTimeRestrictionStatus.
+     * @return Returns the ErrorStatus
      */
-    @JsonGetter("Errors")
+    @JsonGetter("DayTimeRestrictionStatus")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public ErrorDetails getErrors() {
-        return errors;
+    public ErrorStatus getDayTimeRestrictionStatus() {
+        return dayTimeRestrictionStatus;
     }
 
     /**
-     * Setter for Errors.
-     * @param errors Value for ErrorDetails
+     * Setter for DayTimeRestrictionStatus.
+     * @param dayTimeRestrictionStatus Value for ErrorStatus
      */
-    @JsonSetter("Errors")
-    public void setErrors(ErrorDetails errors) {
-        this.errors = errors;
+    @JsonSetter("DayTimeRestrictionStatus")
+    public void setDayTimeRestrictionStatus(ErrorStatus dayTimeRestrictionStatus) {
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+    }
+
+    /**
+     * Getter for LocationRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("LocationRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getLocationRestrictionStatus() {
+        return locationRestrictionStatus;
+    }
+
+    /**
+     * Setter for LocationRestrictionStatus.
+     * @param locationRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("LocationRestrictionStatus")
+    public void setLocationRestrictionStatus(ErrorStatus locationRestrictionStatus) {
+        this.locationRestrictionStatus = locationRestrictionStatus;
+    }
+
+    /**
+     * Getter for ProductRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("ProductRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getProductRestrictionStatus() {
+        return productRestrictionStatus;
+    }
+
+    /**
+     * Setter for ProductRestrictionStatus.
+     * @param productRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("ProductRestrictionStatus")
+    public void setProductRestrictionStatus(ErrorStatus productRestrictionStatus) {
+        this.productRestrictionStatus = productRestrictionStatus;
+    }
+
+    /**
+     * Getter for UsageRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("UsageRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getUsageRestrictionStatus() {
+        return usageRestrictionStatus;
+    }
+
+    /**
+     * Setter for UsageRestrictionStatus.
+     * @param usageRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("UsageRestrictionStatus")
+    public void setUsageRestrictionStatus(ErrorStatus usageRestrictionStatus) {
+        this.usageRestrictionStatus = usageRestrictionStatus;
+    }
+
+    /**
+     * Getter for Error.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("Error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getError() {
+        return error;
+    }
+
+    /**
+     * Setter for Error.
+     * @param error Value for ErrorStatus
+     */
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
     }
 
     /**
@@ -106,8 +240,11 @@ public class UpdateBundleResponse {
      */
     @Override
     public String toString() {
-        return "UpdateBundleResponse [" + "requestId=" + requestId + ", status=" + status
-                + ", errors=" + errors + "]";
+        return "UpdateBundleResponse [" + "requestId=" + requestId + ", requestActionStatus="
+                + requestActionStatus + ", dayTimeRestrictionStatus=" + dayTimeRestrictionStatus
+                + ", locationRestrictionStatus=" + locationRestrictionStatus
+                + ", productRestrictionStatus=" + productRestrictionStatus
+                + ", usageRestrictionStatus=" + usageRestrictionStatus + ", error=" + error + "]";
     }
 
     /**
@@ -117,9 +254,13 @@ public class UpdateBundleResponse {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .requestId(getRequestId())
-                .status(getStatus())
-                .errors(getErrors());
+                .requestActionStatus(getRequestActionStatus())
+                .dayTimeRestrictionStatus(getDayTimeRestrictionStatus())
+                .locationRestrictionStatus(getLocationRestrictionStatus())
+                .productRestrictionStatus(getProductRestrictionStatus())
+                .usageRestrictionStatus(getUsageRestrictionStatus())
+                .error(getError());
+        builder.requestId = internalGetRequestId();
         return builder;
     }
 
@@ -127,9 +268,13 @@ public class UpdateBundleResponse {
      * Class to build instances of {@link UpdateBundleResponse}.
      */
     public static class Builder {
-        private String requestId;
-        private String status;
-        private ErrorDetails errors;
+        private OptionalNullable<String> requestId;
+        private ErrorStatus requestActionStatus;
+        private ErrorStatus dayTimeRestrictionStatus;
+        private ErrorStatus locationRestrictionStatus;
+        private ErrorStatus productRestrictionStatus;
+        private ErrorStatus usageRestrictionStatus;
+        private ErrorStatus error;
 
 
 
@@ -139,27 +284,76 @@ public class UpdateBundleResponse {
          * @return Builder
          */
         public Builder requestId(String requestId) {
-            this.requestId = requestId;
+            this.requestId = OptionalNullable.of(requestId);
             return this;
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * UnSetter for requestId.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder unsetRequestId() {
+            requestId = null;
             return this;
         }
 
         /**
-         * Setter for errors.
-         * @param  errors  ErrorDetails value for errors.
+         * Setter for requestActionStatus.
+         * @param  requestActionStatus  ErrorStatus value for requestActionStatus.
          * @return Builder
          */
-        public Builder errors(ErrorDetails errors) {
-            this.errors = errors;
+        public Builder requestActionStatus(ErrorStatus requestActionStatus) {
+            this.requestActionStatus = requestActionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for dayTimeRestrictionStatus.
+         * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+         * @return Builder
+         */
+        public Builder dayTimeRestrictionStatus(ErrorStatus dayTimeRestrictionStatus) {
+            this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for locationRestrictionStatus.
+         * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+         * @return Builder
+         */
+        public Builder locationRestrictionStatus(ErrorStatus locationRestrictionStatus) {
+            this.locationRestrictionStatus = locationRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for productRestrictionStatus.
+         * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+         * @return Builder
+         */
+        public Builder productRestrictionStatus(ErrorStatus productRestrictionStatus) {
+            this.productRestrictionStatus = productRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for usageRestrictionStatus.
+         * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+         * @return Builder
+         */
+        public Builder usageRestrictionStatus(ErrorStatus usageRestrictionStatus) {
+            this.usageRestrictionStatus = usageRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
+         * @return Builder
+         */
+        public Builder error(ErrorStatus error) {
+            this.error = error;
             return this;
         }
 
@@ -168,7 +362,9 @@ public class UpdateBundleResponse {
          * @return {@link UpdateBundleResponse}
          */
         public UpdateBundleResponse build() {
-            return new UpdateBundleResponse(requestId, status, errors);
+            return new UpdateBundleResponse(requestId, requestActionStatus,
+                    dayTimeRestrictionStatus, locationRestrictionStatus, productRestrictionStatus,
+                    usageRestrictionStatus, error);
         }
     }
 }

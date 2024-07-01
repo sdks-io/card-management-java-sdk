@@ -9,12 +9,19 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for SearchAccountLimitRequest type.
  */
 public class SearchAccountLimitRequest {
-    private SearchAccountLimitRequestFilters filters;
+    private OptionalNullable<Integer> colCoId;
+    private OptionalNullable<Integer> colCoCode;
+    private OptionalNullable<Integer> payerId;
+    private OptionalNullable<String> payerNumber;
+    private OptionalNullable<Integer> accountId;
+    private OptionalNullable<String> accountNumber;
 
     /**
      * Default constructor.
@@ -24,30 +31,310 @@ public class SearchAccountLimitRequest {
 
     /**
      * Initialization constructor.
-     * @param  filters  SearchAccountLimitRequestFilters value for filters.
+     * @param  colCoId  Integer value for colCoId.
+     * @param  colCoCode  Integer value for colCoCode.
+     * @param  payerId  Integer value for payerId.
+     * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
      */
     public SearchAccountLimitRequest(
-            SearchAccountLimitRequestFilters filters) {
-        this.filters = filters;
+            Integer colCoId,
+            Integer colCoCode,
+            Integer payerId,
+            String payerNumber,
+            Integer accountId,
+            String accountNumber) {
+        this.colCoId = OptionalNullable.of(colCoId);
+        this.colCoCode = OptionalNullable.of(colCoCode);
+        this.payerId = OptionalNullable.of(payerId);
+        this.payerNumber = OptionalNullable.of(payerNumber);
+        this.accountId = OptionalNullable.of(accountId);
+        this.accountNumber = OptionalNullable.of(accountNumber);
     }
 
     /**
-     * Getter for Filters.
-     * @return Returns the SearchAccountLimitRequestFilters
+     * Initialization constructor.
+     * @param  colCoId  Integer value for colCoId.
+     * @param  colCoCode  Integer value for colCoCode.
+     * @param  payerId  Integer value for payerId.
+     * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
+     * @param  accountNumber  String value for accountNumber.
      */
-    @JsonGetter("Filters")
+
+    protected SearchAccountLimitRequest(OptionalNullable<Integer> colCoId,
+            OptionalNullable<Integer> colCoCode, OptionalNullable<Integer> payerId,
+            OptionalNullable<String> payerNumber, OptionalNullable<Integer> accountId,
+            OptionalNullable<String> accountNumber) {
+        this.colCoId = colCoId;
+        this.colCoCode = colCoCode;
+        this.payerId = payerId;
+        this.payerNumber = payerNumber;
+        this.accountId = accountId;
+        this.accountNumber = accountNumber;
+    }
+
+    /**
+     * Internal Getter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example:
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("ColCoId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchAccountLimitRequestFilters getFilters() {
-        return filters;
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetColCoId() {
+        return this.colCoId;
     }
 
     /**
-     * Setter for Filters.
-     * @param filters Value for SearchAccountLimitRequestFilters
+     * Getter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example:
+     * @return Returns the Integer
      */
-    @JsonSetter("Filters")
-    public void setFilters(SearchAccountLimitRequestFilters filters) {
-        this.filters = filters;
+    public Integer getColCoId() {
+        return OptionalNullable.getFrom(colCoId);
+    }
+
+    /**
+     * Setter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example:
+     * @param colCoId Value for Integer
+     */
+    @JsonSetter("ColCoId")
+    public void setColCoId(Integer colCoId) {
+        this.colCoId = OptionalNullable.of(colCoId);
+    }
+
+    /**
+     * UnSetter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example:
+     */
+    public void unsetColCoId() {
+        colCoId = null;
+    }
+
+    /**
+     * Internal Getter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("ColCoCode")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetColCoCode() {
+        return this.colCoCode;
+    }
+
+    /**
+     * Getter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Integer
+     */
+    public Integer getColCoCode() {
+        return OptionalNullable.getFrom(colCoCode);
+    }
+
+    /**
+     * Setter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @param colCoCode Value for Integer
+     */
+    @JsonSetter("ColCoCode")
+    public void setColCoCode(Integer colCoCode) {
+        this.colCoCode = OptionalNullable.of(colCoCode);
+    }
+
+    /**
+     * UnSetter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     */
+    public void unsetColCoCode() {
+        colCoCode = null;
+    }
+
+    /**
+     * Internal Getter for PayerId.
+     * Payer Id of the selected payer. Optional if PayerNumber is passed else Mandatory Example:
+     * 123456
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("PayerId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetPayerId() {
+        return this.payerId;
+    }
+
+    /**
+     * Getter for PayerId.
+     * Payer Id of the selected payer. Optional if PayerNumber is passed else Mandatory Example:
+     * 123456
+     * @return Returns the Integer
+     */
+    public Integer getPayerId() {
+        return OptionalNullable.getFrom(payerId);
+    }
+
+    /**
+     * Setter for PayerId.
+     * Payer Id of the selected payer. Optional if PayerNumber is passed else Mandatory Example:
+     * 123456
+     * @param payerId Value for Integer
+     */
+    @JsonSetter("PayerId")
+    public void setPayerId(Integer payerId) {
+        this.payerId = OptionalNullable.of(payerId);
+    }
+
+    /**
+     * UnSetter for PayerId.
+     * Payer Id of the selected payer. Optional if PayerNumber is passed else Mandatory Example:
+     * 123456
+     */
+    public void unsetPayerId() {
+        payerId = null;
+    }
+
+    /**
+     * Internal Getter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("PayerNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetPayerNumber() {
+        return this.payerNumber;
+    }
+
+    /**
+     * Getter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     * @return Returns the String
+     */
+    public String getPayerNumber() {
+        return OptionalNullable.getFrom(payerNumber);
+    }
+
+    /**
+     * Setter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     * @param payerNumber Value for String
+     */
+    @JsonSetter("PayerNumber")
+    public void setPayerNumber(String payerNumber) {
+        this.payerNumber = OptionalNullable.of(payerNumber);
+    }
+
+    /**
+     * UnSetter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     */
+    public void unsetPayerNumber() {
+        payerNumber = null;
+    }
+
+    /**
+     * Internal Getter for AccountId.
+     * Account ID of the customer. Optional if AccountNumber is passed else Mandatory Example:
+     * 123456
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("AccountId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetAccountId() {
+        return this.accountId;
+    }
+
+    /**
+     * Getter for AccountId.
+     * Account ID of the customer. Optional if AccountNumber is passed else Mandatory Example:
+     * 123456
+     * @return Returns the Integer
+     */
+    public Integer getAccountId() {
+        return OptionalNullable.getFrom(accountId);
+    }
+
+    /**
+     * Setter for AccountId.
+     * Account ID of the customer. Optional if AccountNumber is passed else Mandatory Example:
+     * 123456
+     * @param accountId Value for Integer
+     */
+    @JsonSetter("AccountId")
+    public void setAccountId(Integer accountId) {
+        this.accountId = OptionalNullable.of(accountId);
+    }
+
+    /**
+     * UnSetter for AccountId.
+     * Account ID of the customer. Optional if AccountNumber is passed else Mandatory Example:
+     * 123456
+     */
+    public void unsetAccountId() {
+        accountId = null;
+    }
+
+    /**
+     * Internal Getter for AccountNumber.
+     * Account Number of the customer. Optional if AccountId is passed else Mandatory Example:
+     * GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("AccountNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetAccountNumber() {
+        return this.accountNumber;
+    }
+
+    /**
+     * Getter for AccountNumber.
+     * Account Number of the customer. Optional if AccountId is passed else Mandatory Example:
+     * GB000000123
+     * @return Returns the String
+     */
+    public String getAccountNumber() {
+        return OptionalNullable.getFrom(accountNumber);
+    }
+
+    /**
+     * Setter for AccountNumber.
+     * Account Number of the customer. Optional if AccountId is passed else Mandatory Example:
+     * GB000000123
+     * @param accountNumber Value for String
+     */
+    @JsonSetter("AccountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = OptionalNullable.of(accountNumber);
+    }
+
+    /**
+     * UnSetter for AccountNumber.
+     * Account Number of the customer. Optional if AccountId is passed else Mandatory Example:
+     * GB000000123
+     */
+    public void unsetAccountNumber() {
+        accountNumber = null;
     }
 
     /**
@@ -56,7 +343,9 @@ public class SearchAccountLimitRequest {
      */
     @Override
     public String toString() {
-        return "SearchAccountLimitRequest [" + "filters=" + filters + "]";
+        return "SearchAccountLimitRequest [" + "colCoId=" + colCoId + ", colCoCode=" + colCoCode
+                + ", payerId=" + payerId + ", payerNumber=" + payerNumber + ", accountId="
+                + accountId + ", accountNumber=" + accountNumber + "]";
     }
 
     /**
@@ -65,8 +354,13 @@ public class SearchAccountLimitRequest {
      * @return a new {@link SearchAccountLimitRequest.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder()
-                .filters(getFilters());
+        Builder builder = new Builder();
+        builder.colCoId = internalGetColCoId();
+        builder.colCoCode = internalGetColCoCode();
+        builder.payerId = internalGetPayerId();
+        builder.payerNumber = internalGetPayerNumber();
+        builder.accountId = internalGetAccountId();
+        builder.accountNumber = internalGetAccountNumber();
         return builder;
     }
 
@@ -74,17 +368,126 @@ public class SearchAccountLimitRequest {
      * Class to build instances of {@link SearchAccountLimitRequest}.
      */
     public static class Builder {
-        private SearchAccountLimitRequestFilters filters;
+        private OptionalNullable<Integer> colCoId;
+        private OptionalNullable<Integer> colCoCode;
+        private OptionalNullable<Integer> payerId;
+        private OptionalNullable<String> payerNumber;
+        private OptionalNullable<Integer> accountId;
+        private OptionalNullable<String> accountNumber;
 
 
 
         /**
-         * Setter for filters.
-         * @param  filters  SearchAccountLimitRequestFilters value for filters.
+         * Setter for colCoId.
+         * @param  colCoId  Integer value for colCoId.
          * @return Builder
          */
-        public Builder filters(SearchAccountLimitRequestFilters filters) {
-            this.filters = filters;
+        public Builder colCoId(Integer colCoId) {
+            this.colCoId = OptionalNullable.of(colCoId);
+            return this;
+        }
+
+        /**
+         * UnSetter for colCoId.
+         * @return Builder
+         */
+        public Builder unsetColCoId() {
+            colCoId = null;
+            return this;
+        }
+
+        /**
+         * Setter for colCoCode.
+         * @param  colCoCode  Integer value for colCoCode.
+         * @return Builder
+         */
+        public Builder colCoCode(Integer colCoCode) {
+            this.colCoCode = OptionalNullable.of(colCoCode);
+            return this;
+        }
+
+        /**
+         * UnSetter for colCoCode.
+         * @return Builder
+         */
+        public Builder unsetColCoCode() {
+            colCoCode = null;
+            return this;
+        }
+
+        /**
+         * Setter for payerId.
+         * @param  payerId  Integer value for payerId.
+         * @return Builder
+         */
+        public Builder payerId(Integer payerId) {
+            this.payerId = OptionalNullable.of(payerId);
+            return this;
+        }
+
+        /**
+         * UnSetter for payerId.
+         * @return Builder
+         */
+        public Builder unsetPayerId() {
+            payerId = null;
+            return this;
+        }
+
+        /**
+         * Setter for payerNumber.
+         * @param  payerNumber  String value for payerNumber.
+         * @return Builder
+         */
+        public Builder payerNumber(String payerNumber) {
+            this.payerNumber = OptionalNullable.of(payerNumber);
+            return this;
+        }
+
+        /**
+         * UnSetter for payerNumber.
+         * @return Builder
+         */
+        public Builder unsetPayerNumber() {
+            payerNumber = null;
+            return this;
+        }
+
+        /**
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
+         * @return Builder
+         */
+        public Builder accountId(Integer accountId) {
+            this.accountId = OptionalNullable.of(accountId);
+            return this;
+        }
+
+        /**
+         * UnSetter for accountId.
+         * @return Builder
+         */
+        public Builder unsetAccountId() {
+            accountId = null;
+            return this;
+        }
+
+        /**
+         * Setter for accountNumber.
+         * @param  accountNumber  String value for accountNumber.
+         * @return Builder
+         */
+        public Builder accountNumber(String accountNumber) {
+            this.accountNumber = OptionalNullable.of(accountNumber);
+            return this;
+        }
+
+        /**
+         * UnSetter for accountNumber.
+         * @return Builder
+         */
+        public Builder unsetAccountNumber() {
+            accountNumber = null;
             return this;
         }
 
@@ -93,7 +496,8 @@ public class SearchAccountLimitRequest {
          * @return {@link SearchAccountLimitRequest}
          */
         public SearchAccountLimitRequest build() {
-            return new SearchAccountLimitRequest(filters);
+            return new SearchAccountLimitRequest(colCoId, colCoCode, payerId, payerNumber,
+                    accountId, accountNumber);
         }
     }
 }

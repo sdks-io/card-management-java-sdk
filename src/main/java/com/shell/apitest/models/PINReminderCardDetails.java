@@ -22,7 +22,7 @@ public class PINReminderCardDetails {
     private OptionalNullable<String> cardExpiryDate;
     private int pINAdviceType;
     private Integer pINContactType;
-    private PINDeliveryDetails pINDeliverTo;
+    private PINDeliverTo pINDeliverTo;
 
     /**
      * Default constructor.
@@ -38,7 +38,7 @@ public class PINReminderCardDetails {
      * @param  pAN  String value for pAN.
      * @param  cardExpiryDate  String value for cardExpiryDate.
      * @param  pINContactType  Integer value for pINContactType.
-     * @param  pINDeliverTo  PINDeliveryDetails value for pINDeliverTo.
+     * @param  pINDeliverTo  PINDeliverTo value for pINDeliverTo.
      */
     public PINReminderCardDetails(
             int pINAdviceType,
@@ -47,7 +47,7 @@ public class PINReminderCardDetails {
             String pAN,
             String cardExpiryDate,
             Integer pINContactType,
-            PINDeliveryDetails pINDeliverTo) {
+            PINDeliverTo pINDeliverTo) {
         this.cardId = cardId;
         this.pANID = pANID;
         this.pAN = pAN;
@@ -65,12 +65,12 @@ public class PINReminderCardDetails {
      * @param  pAN  String value for pAN.
      * @param  cardExpiryDate  String value for cardExpiryDate.
      * @param  pINContactType  Integer value for pINContactType.
-     * @param  pINDeliverTo  PINDeliveryDetails value for pINDeliverTo.
+     * @param  pINDeliverTo  PINDeliverTo value for pINDeliverTo.
      */
 
     protected PINReminderCardDetails(int pINAdviceType, Integer cardId, Integer pANID, String pAN,
             OptionalNullable<String> cardExpiryDate, Integer pINContactType,
-            PINDeliveryDetails pINDeliverTo) {
+            PINDeliverTo pINDeliverTo) {
         this.cardId = cardId;
         this.pANID = pANID;
         this.pAN = pAN;
@@ -245,24 +245,20 @@ public class PINReminderCardDetails {
 
     /**
      * Getter for PINDeliverTo.
-     * PINDeliverDetails entity. The fields of this entity are described below. This is mandatory if
-     * PINContactType is 4 else optional and ignored.
-     * @return Returns the PINDeliveryDetails
+     * @return Returns the PINDeliverTo
      */
     @JsonGetter("PINDeliverTo")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public PINDeliveryDetails getPINDeliverTo() {
+    public PINDeliverTo getPINDeliverTo() {
         return pINDeliverTo;
     }
 
     /**
      * Setter for PINDeliverTo.
-     * PINDeliverDetails entity. The fields of this entity are described below. This is mandatory if
-     * PINContactType is 4 else optional and ignored.
-     * @param pINDeliverTo Value for PINDeliveryDetails
+     * @param pINDeliverTo Value for PINDeliverTo
      */
     @JsonSetter("PINDeliverTo")
-    public void setPINDeliverTo(PINDeliveryDetails pINDeliverTo) {
+    public void setPINDeliverTo(PINDeliverTo pINDeliverTo) {
         this.pINDeliverTo = pINDeliverTo;
     }
 
@@ -303,7 +299,7 @@ public class PINReminderCardDetails {
         private String pAN;
         private OptionalNullable<String> cardExpiryDate;
         private Integer pINContactType;
-        private PINDeliveryDetails pINDeliverTo;
+        private PINDeliverTo pINDeliverTo;
 
         /**
          * Initialization constructor.
@@ -390,10 +386,10 @@ public class PINReminderCardDetails {
 
         /**
          * Setter for pINDeliverTo.
-         * @param  pINDeliverTo  PINDeliveryDetails value for pINDeliverTo.
+         * @param  pINDeliverTo  PINDeliverTo value for pINDeliverTo.
          * @return Builder
          */
-        public Builder pINDeliverTo(PINDeliveryDetails pINDeliverTo) {
+        public Builder pINDeliverTo(PINDeliverTo pINDeliverTo) {
             this.pINDeliverTo = pINDeliverTo;
             return this;
         }

@@ -16,19 +16,19 @@ import io.apimatic.core.types.OptionalNullable;
  * This is a model class for AccountRestrictionRequest type.
  */
 public class AccountRestrictionRequest {
-    private Integer colCoId;
-    private Integer colCoCode;
+    private OptionalNullable<Integer> colCoId;
+    private OptionalNullable<Integer> colCoCode;
     private OptionalNullable<Integer> payerId;
-    private String payerNumber;
-    private String accountNumber;
-    private Boolean resetUsageRestrictions;
-    private UsageRestrictions usageRestrictions;
+    private OptionalNullable<String> payerNumber;
+    private OptionalNullable<Integer> accountId;
+    private OptionalNullable<String> accountNumber;
+    private OptionalNullable<Boolean> resetUsageRestrictions;
+    private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
 
     /**
      * Default constructor.
      */
     public AccountRestrictionRequest() {
-        resetUsageRestrictions = false;
     }
 
     /**
@@ -37,25 +37,28 @@ public class AccountRestrictionRequest {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  resetUsageRestrictions  Boolean value for resetUsageRestrictions.
-     * @param  usageRestrictions  UsageRestrictions value for usageRestrictions.
+     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
      */
     public AccountRestrictionRequest(
             Integer colCoId,
             Integer colCoCode,
             Integer payerId,
             String payerNumber,
+            Integer accountId,
             String accountNumber,
             Boolean resetUsageRestrictions,
-            UsageRestrictions usageRestrictions) {
-        this.colCoId = colCoId;
-        this.colCoCode = colCoCode;
+            UsageRestrictionsCard usageRestrictions) {
+        this.colCoId = OptionalNullable.of(colCoId);
+        this.colCoCode = OptionalNullable.of(colCoCode);
         this.payerId = OptionalNullable.of(payerId);
-        this.payerNumber = payerNumber;
-        this.accountNumber = accountNumber;
-        this.resetUsageRestrictions = resetUsageRestrictions;
-        this.usageRestrictions = usageRestrictions;
+        this.payerNumber = OptionalNullable.of(payerNumber);
+        this.accountId = OptionalNullable.of(accountId);
+        this.accountNumber = OptionalNullable.of(accountNumber);
+        this.resetUsageRestrictions = OptionalNullable.of(resetUsageRestrictions);
+        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
     }
 
     /**
@@ -64,21 +67,39 @@ public class AccountRestrictionRequest {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  resetUsageRestrictions  Boolean value for resetUsageRestrictions.
-     * @param  usageRestrictions  UsageRestrictions value for usageRestrictions.
+     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
      */
 
-    protected AccountRestrictionRequest(Integer colCoId, Integer colCoCode,
-            OptionalNullable<Integer> payerId, String payerNumber, String accountNumber,
-            Boolean resetUsageRestrictions, UsageRestrictions usageRestrictions) {
+    protected AccountRestrictionRequest(OptionalNullable<Integer> colCoId,
+            OptionalNullable<Integer> colCoCode, OptionalNullable<Integer> payerId,
+            OptionalNullable<String> payerNumber, OptionalNullable<Integer> accountId,
+            OptionalNullable<String> accountNumber,
+            OptionalNullable<Boolean> resetUsageRestrictions,
+            OptionalNullable<UsageRestrictionsCard> usageRestrictions) {
         this.colCoId = colCoId;
         this.colCoCode = colCoCode;
         this.payerId = payerId;
         this.payerNumber = payerNumber;
+        this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.resetUsageRestrictions = resetUsageRestrictions;
         this.usageRestrictions = usageRestrictions;
+    }
+
+    /**
+     * Internal Getter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example: 1 for Philippines 5 for UK
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("ColCoId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetColCoId() {
+        return this.colCoId;
     }
 
     /**
@@ -87,10 +108,8 @@ public class AccountRestrictionRequest {
      * Example: 1 for Philippines 5 for UK
      * @return Returns the Integer
      */
-    @JsonGetter("ColCoId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getColCoId() {
-        return colCoId;
+        return OptionalNullable.getFrom(colCoId);
     }
 
     /**
@@ -101,7 +120,30 @@ public class AccountRestrictionRequest {
      */
     @JsonSetter("ColCoId")
     public void setColCoId(Integer colCoId) {
-        this.colCoId = colCoId;
+        this.colCoId = OptionalNullable.of(colCoId);
+    }
+
+    /**
+     * UnSetter for ColCoId.
+     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
+     * Example: 1 for Philippines 5 for UK
+     */
+    public void unsetColCoId() {
+        colCoId = null;
+    }
+
+    /**
+     * Internal Getter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("ColCoCode")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetColCoCode() {
+        return this.colCoCode;
     }
 
     /**
@@ -111,10 +153,8 @@ public class AccountRestrictionRequest {
      * ColCoID is provided. Example: 86 for Philippines 5 for UK
      * @return Returns the Integer
      */
-    @JsonGetter("ColCoCode")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getColCoCode() {
-        return colCoCode;
+        return OptionalNullable.getFrom(colCoCode);
     }
 
     /**
@@ -126,7 +166,17 @@ public class AccountRestrictionRequest {
      */
     @JsonSetter("ColCoCode")
     public void setColCoCode(Integer colCoCode) {
-        this.colCoCode = colCoCode;
+        this.colCoCode = OptionalNullable.of(colCoCode);
+    }
+
+    /**
+     * UnSetter for ColCoCode.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     */
+    public void unsetColCoCode() {
+        colCoCode = null;
     }
 
     /**
@@ -173,15 +223,26 @@ public class AccountRestrictionRequest {
     }
 
     /**
+     * Internal Getter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("PayerNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetPayerNumber() {
+        return this.payerNumber;
+    }
+
+    /**
      * Getter for PayerNumber.
      * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
      * GB000000123
      * @return Returns the String
      */
-    @JsonGetter("PayerNumber")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPayerNumber() {
-        return payerNumber;
+        return OptionalNullable.getFrom(payerNumber);
     }
 
     /**
@@ -192,72 +253,180 @@ public class AccountRestrictionRequest {
      */
     @JsonSetter("PayerNumber")
     public void setPayerNumber(String payerNumber) {
-        this.payerNumber = payerNumber;
+        this.payerNumber = OptionalNullable.of(payerNumber);
+    }
+
+    /**
+     * UnSetter for PayerNumber.
+     * Payer Number of the selected payer. Optional if PayerId is passed else Mandatory Example:
+     * GB000000123
+     */
+    public void unsetPayerNumber() {
+        payerNumber = null;
+    }
+
+    /**
+     * Internal Getter for AccountId.
+     * Account ID of the customer on which the restrictions will be applied. Optional if
+     * AccountNumber is passed, else Mandatory. Example: 123456
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("AccountId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetAccountId() {
+        return this.accountId;
+    }
+
+    /**
+     * Getter for AccountId.
+     * Account ID of the customer on which the restrictions will be applied. Optional if
+     * AccountNumber is passed, else Mandatory. Example: 123456
+     * @return Returns the Integer
+     */
+    public Integer getAccountId() {
+        return OptionalNullable.getFrom(accountId);
+    }
+
+    /**
+     * Setter for AccountId.
+     * Account ID of the customer on which the restrictions will be applied. Optional if
+     * AccountNumber is passed, else Mandatory. Example: 123456
+     * @param accountId Value for Integer
+     */
+    @JsonSetter("AccountId")
+    public void setAccountId(Integer accountId) {
+        this.accountId = OptionalNullable.of(accountId);
+    }
+
+    /**
+     * UnSetter for AccountId.
+     * Account ID of the customer on which the restrictions will be applied. Optional if
+     * AccountNumber is passed, else Mandatory. Example: 123456
+     */
+    public void unsetAccountId() {
+        accountId = null;
+    }
+
+    /**
+     * Internal Getter for AccountNumber.
+     * Account Number of the customer on which the restrictions will be applied. Optional if
+     * AccountId is passed, else Mandatory. Example: GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("AccountNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetAccountNumber() {
+        return this.accountNumber;
     }
 
     /**
      * Getter for AccountNumber.
      * Account Number of the customer on which the restrictions will be applied. Optional if
-     * AccountId is passed, else Mandatory.
+     * AccountId is passed, else Mandatory. Example: GB000000123
      * @return Returns the String
      */
-    @JsonGetter("AccountNumber")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getAccountNumber() {
-        return accountNumber;
+        return OptionalNullable.getFrom(accountNumber);
     }
 
     /**
      * Setter for AccountNumber.
      * Account Number of the customer on which the restrictions will be applied. Optional if
-     * AccountId is passed, else Mandatory.
+     * AccountId is passed, else Mandatory. Example: GB000000123
      * @param accountNumber Value for String
      */
     @JsonSetter("AccountNumber")
     public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+        this.accountNumber = OptionalNullable.of(accountNumber);
+    }
+
+    /**
+     * UnSetter for AccountNumber.
+     * Account Number of the customer on which the restrictions will be applied. Optional if
+     * AccountId is passed, else Mandatory. Example: GB000000123
+     */
+    public void unsetAccountNumber() {
+        accountNumber = null;
+    }
+
+    /**
+     * Internal Getter for ResetUsageRestrictions.
+     * True/False. If true, the usage restrictions applied on the account will be removed. Optional
+     * Default: False
+     * @return Returns the Internal Boolean
+     */
+    @JsonGetter("ResetUsageRestrictions")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Boolean> internalGetResetUsageRestrictions() {
+        return this.resetUsageRestrictions;
     }
 
     /**
      * Getter for ResetUsageRestrictions.
-     * If true, the usage restrictions applied on the account will be removed. Optional Default:
-     * False
+     * True/False. If true, the usage restrictions applied on the account will be removed. Optional
+     * Default: False
      * @return Returns the Boolean
      */
-    @JsonGetter("ResetUsageRestrictions")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getResetUsageRestrictions() {
-        return resetUsageRestrictions;
+        return OptionalNullable.getFrom(resetUsageRestrictions);
     }
 
     /**
      * Setter for ResetUsageRestrictions.
-     * If true, the usage restrictions applied on the account will be removed. Optional Default:
-     * False
+     * True/False. If true, the usage restrictions applied on the account will be removed. Optional
+     * Default: False
      * @param resetUsageRestrictions Value for Boolean
      */
     @JsonSetter("ResetUsageRestrictions")
     public void setResetUsageRestrictions(Boolean resetUsageRestrictions) {
-        this.resetUsageRestrictions = resetUsageRestrictions;
+        this.resetUsageRestrictions = OptionalNullable.of(resetUsageRestrictions);
+    }
+
+    /**
+     * UnSetter for ResetUsageRestrictions.
+     * True/False. If true, the usage restrictions applied on the account will be removed. Optional
+     * Default: False
+     */
+    public void unsetResetUsageRestrictions() {
+        resetUsageRestrictions = null;
+    }
+
+    /**
+     * Internal Getter for UsageRestrictions.
+     * @return Returns the Internal UsageRestrictionsCard
+     */
+    @JsonGetter("UsageRestrictions")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<UsageRestrictionsCard> internalGetUsageRestrictions() {
+        return this.usageRestrictions;
     }
 
     /**
      * Getter for UsageRestrictions.
-     * @return Returns the UsageRestrictions
+     * @return Returns the UsageRestrictionsCard
      */
-    @JsonGetter("UsageRestrictions")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public UsageRestrictions getUsageRestrictions() {
-        return usageRestrictions;
+    public UsageRestrictionsCard getUsageRestrictions() {
+        return OptionalNullable.getFrom(usageRestrictions);
     }
 
     /**
      * Setter for UsageRestrictions.
-     * @param usageRestrictions Value for UsageRestrictions
+     * @param usageRestrictions Value for UsageRestrictionsCard
      */
     @JsonSetter("UsageRestrictions")
-    public void setUsageRestrictions(UsageRestrictions usageRestrictions) {
-        this.usageRestrictions = usageRestrictions;
+    public void setUsageRestrictions(UsageRestrictionsCard usageRestrictions) {
+        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+    }
+
+    /**
+     * UnSetter for UsageRestrictions.
+     */
+    public void unsetUsageRestrictions() {
+        usageRestrictions = null;
     }
 
     /**
@@ -267,9 +436,9 @@ public class AccountRestrictionRequest {
     @Override
     public String toString() {
         return "AccountRestrictionRequest [" + "colCoId=" + colCoId + ", colCoCode=" + colCoCode
-                + ", payerId=" + payerId + ", payerNumber=" + payerNumber + ", accountNumber="
-                + accountNumber + ", resetUsageRestrictions=" + resetUsageRestrictions
-                + ", usageRestrictions=" + usageRestrictions + "]";
+                + ", payerId=" + payerId + ", payerNumber=" + payerNumber + ", accountId="
+                + accountId + ", accountNumber=" + accountNumber + ", resetUsageRestrictions="
+                + resetUsageRestrictions + ", usageRestrictions=" + usageRestrictions + "]";
     }
 
     /**
@@ -278,14 +447,15 @@ public class AccountRestrictionRequest {
      * @return a new {@link AccountRestrictionRequest.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder()
-                .colCoId(getColCoId())
-                .colCoCode(getColCoCode())
-                .payerNumber(getPayerNumber())
-                .accountNumber(getAccountNumber())
-                .resetUsageRestrictions(getResetUsageRestrictions())
-                .usageRestrictions(getUsageRestrictions());
+        Builder builder = new Builder();
+        builder.colCoId = internalGetColCoId();
+        builder.colCoCode = internalGetColCoCode();
         builder.payerId = internalGetPayerId();
+        builder.payerNumber = internalGetPayerNumber();
+        builder.accountId = internalGetAccountId();
+        builder.accountNumber = internalGetAccountNumber();
+        builder.resetUsageRestrictions = internalGetResetUsageRestrictions();
+        builder.usageRestrictions = internalGetUsageRestrictions();
         return builder;
     }
 
@@ -293,13 +463,14 @@ public class AccountRestrictionRequest {
      * Class to build instances of {@link AccountRestrictionRequest}.
      */
     public static class Builder {
-        private Integer colCoId;
-        private Integer colCoCode;
+        private OptionalNullable<Integer> colCoId;
+        private OptionalNullable<Integer> colCoCode;
         private OptionalNullable<Integer> payerId;
-        private String payerNumber;
-        private String accountNumber;
-        private Boolean resetUsageRestrictions = false;
-        private UsageRestrictions usageRestrictions;
+        private OptionalNullable<String> payerNumber;
+        private OptionalNullable<Integer> accountId;
+        private OptionalNullable<String> accountNumber;
+        private OptionalNullable<Boolean> resetUsageRestrictions;
+        private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
 
 
 
@@ -309,7 +480,16 @@ public class AccountRestrictionRequest {
          * @return Builder
          */
         public Builder colCoId(Integer colCoId) {
-            this.colCoId = colCoId;
+            this.colCoId = OptionalNullable.of(colCoId);
+            return this;
+        }
+
+        /**
+         * UnSetter for colCoId.
+         * @return Builder
+         */
+        public Builder unsetColCoId() {
+            colCoId = null;
             return this;
         }
 
@@ -319,7 +499,16 @@ public class AccountRestrictionRequest {
          * @return Builder
          */
         public Builder colCoCode(Integer colCoCode) {
-            this.colCoCode = colCoCode;
+            this.colCoCode = OptionalNullable.of(colCoCode);
+            return this;
+        }
+
+        /**
+         * UnSetter for colCoCode.
+         * @return Builder
+         */
+        public Builder unsetColCoCode() {
+            colCoCode = null;
             return this;
         }
 
@@ -348,7 +537,35 @@ public class AccountRestrictionRequest {
          * @return Builder
          */
         public Builder payerNumber(String payerNumber) {
-            this.payerNumber = payerNumber;
+            this.payerNumber = OptionalNullable.of(payerNumber);
+            return this;
+        }
+
+        /**
+         * UnSetter for payerNumber.
+         * @return Builder
+         */
+        public Builder unsetPayerNumber() {
+            payerNumber = null;
+            return this;
+        }
+
+        /**
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
+         * @return Builder
+         */
+        public Builder accountId(Integer accountId) {
+            this.accountId = OptionalNullable.of(accountId);
+            return this;
+        }
+
+        /**
+         * UnSetter for accountId.
+         * @return Builder
+         */
+        public Builder unsetAccountId() {
+            accountId = null;
             return this;
         }
 
@@ -358,7 +575,16 @@ public class AccountRestrictionRequest {
          * @return Builder
          */
         public Builder accountNumber(String accountNumber) {
-            this.accountNumber = accountNumber;
+            this.accountNumber = OptionalNullable.of(accountNumber);
+            return this;
+        }
+
+        /**
+         * UnSetter for accountNumber.
+         * @return Builder
+         */
+        public Builder unsetAccountNumber() {
+            accountNumber = null;
             return this;
         }
 
@@ -368,17 +594,35 @@ public class AccountRestrictionRequest {
          * @return Builder
          */
         public Builder resetUsageRestrictions(Boolean resetUsageRestrictions) {
-            this.resetUsageRestrictions = resetUsageRestrictions;
+            this.resetUsageRestrictions = OptionalNullable.of(resetUsageRestrictions);
+            return this;
+        }
+
+        /**
+         * UnSetter for resetUsageRestrictions.
+         * @return Builder
+         */
+        public Builder unsetResetUsageRestrictions() {
+            resetUsageRestrictions = null;
             return this;
         }
 
         /**
          * Setter for usageRestrictions.
-         * @param  usageRestrictions  UsageRestrictions value for usageRestrictions.
+         * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
          * @return Builder
          */
-        public Builder usageRestrictions(UsageRestrictions usageRestrictions) {
-            this.usageRestrictions = usageRestrictions;
+        public Builder usageRestrictions(UsageRestrictionsCard usageRestrictions) {
+            this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+            return this;
+        }
+
+        /**
+         * UnSetter for usageRestrictions.
+         * @return Builder
+         */
+        public Builder unsetUsageRestrictions() {
+            usageRestrictions = null;
             return this;
         }
 
@@ -388,7 +632,7 @@ public class AccountRestrictionRequest {
          */
         public AccountRestrictionRequest build() {
             return new AccountRestrictionRequest(colCoId, colCoCode, payerId, payerNumber,
-                    accountNumber, resetUsageRestrictions, usageRestrictions);
+                    accountId, accountNumber, resetUsageRestrictions, usageRestrictions);
         }
     }
 }

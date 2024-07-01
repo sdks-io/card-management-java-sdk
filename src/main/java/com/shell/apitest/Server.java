@@ -17,20 +17,20 @@ import java.util.TreeMap;
  * Server to be used.
  */
 public enum Server {
-    ENUM_DEFAULT,
+    OAUTH_SERVER,
 
-    ACCESS_TOKEN_SERVER;
+    SHELL;
 
 
     private static TreeMap<String, Server> valueMap = new TreeMap<>();
     private String value;
 
     static {
-        ENUM_DEFAULT.value = "default";
-        ACCESS_TOKEN_SERVER.value = "access token server";
+        OAUTH_SERVER.value = "OAuth Server";
+        SHELL.value = "Shell";
 
-        valueMap.put("default", ENUM_DEFAULT);
-        valueMap.put("access token server", ACCESS_TOKEN_SERVER);
+        valueMap.put("OAuth Server", OAUTH_SERVER);
+        valueMap.put("Shell", SHELL);
     }
 
     /**

@@ -18,7 +18,6 @@ import com.shell.apitest.controllers.OAuthAuthorizationController;
 import com.shell.apitest.controllers.RestrictionController;
 import com.shell.apitest.http.client.HttpClientConfiguration;
 import com.shell.apitest.http.client.ReadonlyHttpClientConfiguration;
-import com.shell.apitest.models.UrlEnum;
 import io.apimatic.core.GlobalConfiguration;
 import io.apimatic.coreinterfaces.authentication.Authentication;
 import io.apimatic.coreinterfaces.compatibility.CompatibilityFactory;
@@ -55,11 +54,6 @@ public final class ShellCardManagementAPIsClient implements Configuration {
     private final Environment environment;
 
     /**
-     * This variable specifies the type of environment. Environments:   * `api.shell.com` - Production   * `api-test.shell.com` - SIT
-     */
-    private final UrlEnum url;
-
-    /**
      * The HTTP Client instance to use for making HTTP requests.
      */
     private final HttpClient httpClient;
@@ -94,11 +88,10 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      */
     private Map<String, Authentication> authentications = new HashMap<String, Authentication>();
 
-    private ShellCardManagementAPIsClient(Environment environment, UrlEnum url,
-            HttpClient httpClient, ReadonlyHttpClientConfiguration httpClientConfig,
-            BasicAuthModel basicAuthModel, BearerTokenModel bearerTokenModel) {
+    private ShellCardManagementAPIsClient(Environment environment, HttpClient httpClient,
+            ReadonlyHttpClientConfiguration httpClientConfig, BasicAuthModel basicAuthModel,
+            BearerTokenModel bearerTokenModel) {
         this.environment = environment;
-        this.url = url;
         this.httpClient = httpClient;
         this.httpClientConfig = httpClientConfig;
 
@@ -173,14 +166,6 @@ public final class ShellCardManagementAPIsClient implements Configuration {
     }
 
     /**
-     * This variable specifies the type of environment. Environments:   * `api.shell.com` - Production   * `api-test.shell.com` - SIT
-     * @return url
-     */
-    public UrlEnum getUrl() {
-        return url;
-    }
-
-    /**
      * The HTTP Client instance to use for making HTTP requests.
      * @return httpClient
      */
@@ -245,8 +230,6 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      */
     public String getBaseUri(Server server) {
         Map<String, SimpleEntry<Object, Boolean>> parameters = new HashMap<>();
-        parameters.put("url",
-                new SimpleEntry<Object, Boolean>(this.url, false));
         StringBuilder baseUrl = new StringBuilder(environmentMapper(environment, server));
         ApiHelper.appendUrlWithTemplateParameters(baseUrl, parameters);
         return baseUrl.toString();
@@ -257,7 +240,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      * @return Processed base URI
      */
     public String getBaseUri() {
-        return getBaseUri(Server.ENUM_DEFAULT);
+        return getBaseUri(Server.SHELL);
     }
 
 
@@ -279,15 +262,23 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      * @return base URL
      */
     private static String environmentMapper(Environment environment, Server server) {
-        if (environment.equals(Environment.PRODUCTION)) {
-            if (server.equals(Server.ENUM_DEFAULT)) {
-                return "https://{url}";
+        if (environment.equals(Environment.SIT)) {
+            if (server.equals(Server.OAUTH_SERVER)) {
+                return "https://api-test.shell.com";
             }
-            if (server.equals(Server.ACCESS_TOKEN_SERVER)) {
-                return "https://api-test.shell.com/v1/oauth";
+            if (server.equals(Server.SHELL)) {
+                return "https://api-test.shell.com/test";
             }
         }
-        return "https://{url}";
+        if (environment.equals(Environment.PRODUCTION)) {
+            if (server.equals(Server.OAUTH_SERVER)) {
+                return "https://api.shell.com";
+            }
+            if (server.equals(Server.SHELL)) {
+                return "https://api.shell.com";
+            }
+        }
+        return "https://api-test.shell.com/test";
     }
 
     /**
@@ -296,7 +287,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      */
     @Override
     public String toString() {
-        return "ShellCardManagementAPIsClient [" + "environment=" + environment + ", url=" + url
+        return "ShellCardManagementAPIsClient [" + "environment=" + environment
                 + ", httpClientConfig=" + httpClientConfig + ", authentications=" + authentications
                 + "]";
     }
@@ -309,7 +300,6 @@ public final class ShellCardManagementAPIsClient implements Configuration {
     public Builder newBuilder() {
         Builder builder = new Builder();
         builder.environment = getEnvironment();
-        builder.url = getUrl();
         builder.httpClient = getHttpClient();
         builder.basicAuthCredentials(getBasicAuthModel()
                 .toBuilder().build());
@@ -324,8 +314,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      */
     public static class Builder {
 
-        private Environment environment = Environment.PRODUCTION;
-        private UrlEnum url = UrlEnum.ENUM_APITESTSHELLCOMTEST;
+        private Environment environment = Environment.SIT;
         private HttpClient httpClient;
         private BasicAuthModel basicAuthModel = new BasicAuthModel.Builder("", "").build();
         private BearerTokenModel bearerTokenModel = new BearerTokenModel.Builder("", "").build();
@@ -360,16 +349,6 @@ public final class ShellCardManagementAPIsClient implements Configuration {
          */
         public Builder environment(Environment environment) {
             this.environment = environment;
-            return this;
-        }
-
-        /**
-         * This variable specifies the type of environment. Environments:   * `api.shell.com` - Production   * `api-test.shell.com` - SIT
-         * @param url The url for client.
-         * @return Builder
-         */
-        public Builder url(UrlEnum url) {
-            this.url = url;
             return this;
         }
 
@@ -418,7 +397,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
             HttpClientConfiguration httpClientConfig = httpClientConfigBuilder.build();
             httpClient = new OkClient(httpClientConfig.getConfiguration(), compatibilityFactory);
 
-            return new ShellCardManagementAPIsClient(environment, url, httpClient, httpClientConfig,
+            return new ShellCardManagementAPIsClient(environment, httpClient, httpClientConfig,
                     basicAuthModel, bearerTokenModel);
         }
     }

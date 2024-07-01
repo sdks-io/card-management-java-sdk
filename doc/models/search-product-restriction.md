@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Products` | [`List<ProductAllOf0>`](../../doc/models/product-all-of-0.md) | Optional | - | List<ProductAllOf0> getProducts() | setProducts(List<ProductAllOf0> products) |
+| `Products` | [`List<RestrictionProduct>`](../../doc/models/restriction-product.md) | Optional | - | List<RestrictionProduct> getProducts() | setProducts(List<RestrictionProduct> products) |
 | `ProductGroups` | [`List<ProductGroup>`](../../doc/models/product-group.md) | Optional | - | List<ProductGroup> getProductGroups() | setProductGroups(List<ProductGroup> productGroups) |
 
 ## Example (as JSON)

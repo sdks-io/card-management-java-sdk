@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for SearchCardRequest type.
  */
 public class SearchCardRequest {
-    private SearchRequest filters;
+    private Filters filters;
     private String pageSize;
     private String page;
 
@@ -26,12 +26,12 @@ public class SearchCardRequest {
 
     /**
      * Initialization constructor.
-     * @param  filters  SearchRequest value for filters.
+     * @param  filters  Filters value for filters.
      * @param  pageSize  String value for pageSize.
      * @param  page  String value for page.
      */
     public SearchCardRequest(
-            SearchRequest filters,
+            Filters filters,
             String pageSize,
             String page) {
         this.filters = filters;
@@ -41,22 +41,20 @@ public class SearchCardRequest {
 
     /**
      * Getter for Filters.
-     * Encapsulate the Search details request.
-     * @return Returns the SearchRequest
+     * @return Returns the Filters
      */
     @JsonGetter("Filters")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchRequest getFilters() {
+    public Filters getFilters() {
         return filters;
     }
 
     /**
      * Setter for Filters.
-     * Encapsulate the Search details request.
-     * @param filters Value for SearchRequest
+     * @param filters Value for Filters
      */
     @JsonSetter("Filters")
-    public void setFilters(SearchRequest filters) {
+    public void setFilters(Filters filters) {
         this.filters = filters;
     }
 
@@ -129,7 +127,7 @@ public class SearchCardRequest {
      * Class to build instances of {@link SearchCardRequest}.
      */
     public static class Builder {
-        private SearchRequest filters;
+        private Filters filters;
         private String pageSize;
         private String page;
 
@@ -137,10 +135,10 @@ public class SearchCardRequest {
 
         /**
          * Setter for filters.
-         * @param  filters  SearchRequest value for filters.
+         * @param  filters  Filters value for filters.
          * @return Builder
          */
-        public Builder filters(SearchRequest filters) {
+        public Builder filters(Filters filters) {
             this.filters = filters;
             return this;
         }

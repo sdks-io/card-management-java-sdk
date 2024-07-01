@@ -15,7 +15,7 @@ import java.util.List;
  * This is a model class for SearchProductRestriction type.
  */
 public class SearchProductRestriction {
-    private List<ProductAllOf0> products;
+    private List<RestrictionProduct> products;
     private List<ProductGroup> productGroups;
 
     /**
@@ -26,11 +26,11 @@ public class SearchProductRestriction {
 
     /**
      * Initialization constructor.
-     * @param  products  List of ProductAllOf0 value for products.
+     * @param  products  List of RestrictionProduct value for products.
      * @param  productGroups  List of ProductGroup value for productGroups.
      */
     public SearchProductRestriction(
-            List<ProductAllOf0> products,
+            List<RestrictionProduct> products,
             List<ProductGroup> productGroups) {
         this.products = products;
         this.productGroups = productGroups;
@@ -38,20 +38,20 @@ public class SearchProductRestriction {
 
     /**
      * Getter for Products.
-     * @return Returns the List of ProductAllOf0
+     * @return Returns the List of RestrictionProduct
      */
     @JsonGetter("Products")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<ProductAllOf0> getProducts() {
+    public List<RestrictionProduct> getProducts() {
         return products;
     }
 
     /**
      * Setter for Products.
-     * @param products Value for List of ProductAllOf0
+     * @param products Value for List of RestrictionProduct
      */
     @JsonSetter("Products")
-    public void setProducts(List<ProductAllOf0> products) {
+    public void setProducts(List<RestrictionProduct> products) {
         this.products = products;
     }
 
@@ -100,17 +100,17 @@ public class SearchProductRestriction {
      * Class to build instances of {@link SearchProductRestriction}.
      */
     public static class Builder {
-        private List<ProductAllOf0> products;
+        private List<RestrictionProduct> products;
         private List<ProductGroup> productGroups;
 
 
 
         /**
          * Setter for products.
-         * @param  products  List of ProductAllOf0 value for products.
+         * @param  products  List of RestrictionProduct value for products.
          * @return Builder
          */
-        public Builder products(List<ProductAllOf0> products) {
+        public Builder products(List<RestrictionProduct> products) {
             this.products = products;
             return this;
         }

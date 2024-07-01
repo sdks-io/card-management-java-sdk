@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for DeleteBundleRequest type.
  */
 public class DeleteBundleRequest {
-    private Integer colCoId;
     private Integer colCoCode;
+    private Integer colCoId;
     private String payerNumber;
     private Integer payerId;
     private Integer accountId;
@@ -31,8 +31,8 @@ public class DeleteBundleRequest {
     /**
      * Initialization constructor.
      * @param  bundleId  String value for bundleId.
-     * @param  colCoId  Integer value for colCoId.
      * @param  colCoCode  Integer value for colCoCode.
+     * @param  colCoId  Integer value for colCoId.
      * @param  payerNumber  String value for payerNumber.
      * @param  payerId  Integer value for payerId.
      * @param  accountId  Integer value for accountId.
@@ -40,42 +40,19 @@ public class DeleteBundleRequest {
      */
     public DeleteBundleRequest(
             String bundleId,
-            Integer colCoId,
             Integer colCoCode,
+            Integer colCoId,
             String payerNumber,
             Integer payerId,
             Integer accountId,
             String accountNumber) {
-        this.colCoId = colCoId;
         this.colCoCode = colCoCode;
+        this.colCoId = colCoId;
         this.payerNumber = payerNumber;
         this.payerId = payerId;
         this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.bundleId = bundleId;
-    }
-
-    /**
-     * Getter for ColCoId.
-     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
-     * Example: 1 for Philippines
-     * @return Returns the Integer
-     */
-    @JsonGetter("ColCoId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getColCoId() {
-        return colCoId;
-    }
-
-    /**
-     * Setter for ColCoId.
-     * Collecting Company Id of the selected payer. Optional if ColCoCode is passed else Mandatory.
-     * Example: 1 for Philippines
-     * @param colCoId Value for Integer
-     */
-    @JsonSetter("ColCoId")
-    public void setColCoId(Integer colCoId) {
-        this.colCoId = colCoId;
     }
 
     /**
@@ -101,6 +78,31 @@ public class DeleteBundleRequest {
     @JsonSetter("ColCoCode")
     public void setColCoCode(Integer colCoCode) {
         this.colCoCode = colCoCode;
+    }
+
+    /**
+     * Getter for ColCoId.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Integer
+     */
+    @JsonGetter("ColCoId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer getColCoId() {
+        return colCoId;
+    }
+
+    /**
+     * Setter for ColCoId.
+     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
+     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
+     * ColCoID is provided. Example: 86 for Philippines 5 for UK
+     * @param colCoId Value for Integer
+     */
+    @JsonSetter("ColCoId")
+    public void setColCoId(Integer colCoId) {
+        this.colCoId = colCoId;
     }
 
     /**
@@ -221,9 +223,9 @@ public class DeleteBundleRequest {
      */
     @Override
     public String toString() {
-        return "DeleteBundleRequest [" + "bundleId=" + bundleId + ", colCoId=" + colCoId
-                + ", colCoCode=" + colCoCode + ", payerNumber=" + payerNumber + ", payerId="
-                + payerId + ", accountId=" + accountId + ", accountNumber=" + accountNumber + "]";
+        return "DeleteBundleRequest [" + "bundleId=" + bundleId + ", colCoCode=" + colCoCode
+                + ", colCoId=" + colCoId + ", payerNumber=" + payerNumber + ", payerId=" + payerId
+                + ", accountId=" + accountId + ", accountNumber=" + accountNumber + "]";
     }
 
     /**
@@ -233,8 +235,8 @@ public class DeleteBundleRequest {
      */
     public Builder toBuilder() {
         Builder builder = new Builder(bundleId)
-                .colCoId(getColCoId())
                 .colCoCode(getColCoCode())
+                .colCoId(getColCoId())
                 .payerNumber(getPayerNumber())
                 .payerId(getPayerId())
                 .accountId(getAccountId())
@@ -247,8 +249,8 @@ public class DeleteBundleRequest {
      */
     public static class Builder {
         private String bundleId;
-        private Integer colCoId;
         private Integer colCoCode;
+        private Integer colCoId;
         private String payerNumber;
         private Integer payerId;
         private Integer accountId;
@@ -279,22 +281,22 @@ public class DeleteBundleRequest {
         }
 
         /**
-         * Setter for colCoId.
-         * @param  colCoId  Integer value for colCoId.
-         * @return Builder
-         */
-        public Builder colCoId(Integer colCoId) {
-            this.colCoId = colCoId;
-            return this;
-        }
-
-        /**
          * Setter for colCoCode.
          * @param  colCoCode  Integer value for colCoCode.
          * @return Builder
          */
         public Builder colCoCode(Integer colCoCode) {
             this.colCoCode = colCoCode;
+            return this;
+        }
+
+        /**
+         * Setter for colCoId.
+         * @param  colCoId  Integer value for colCoId.
+         * @return Builder
+         */
+        public Builder colCoId(Integer colCoId) {
+            this.colCoId = colCoId;
             return this;
         }
 
@@ -343,7 +345,7 @@ public class DeleteBundleRequest {
          * @return {@link DeleteBundleRequest}
          */
         public DeleteBundleRequest build() {
-            return new DeleteBundleRequest(bundleId, colCoId, colCoCode, payerNumber, payerId,
+            return new DeleteBundleRequest(bundleId, colCoCode, colCoId, payerNumber, payerId,
                     accountId, accountNumber);
         }
     }

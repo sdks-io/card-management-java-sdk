@@ -10,14 +10,17 @@
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
 | `RequestId` | `String` | Optional | API Request Id | String getRequestId() | setRequestId(String requestId) |
-| `Status` | `String` | Optional | API Response Status | String getStatus() | setStatus(String status) |
+| `Error` | [`ErrorStatus`](../../doc/models/error-status.md) | Optional | - | ErrorStatus getError() | setError(ErrorStatus error) |
 
 ## Example (as JSON)
 
 ```json
 {
   "RequestId": "RequestId4",
-  "Status": "Status0"
+  "Error": {
+    "Code": "Code4",
+    "Description": "Description2"
+  }
 }
 ```
 

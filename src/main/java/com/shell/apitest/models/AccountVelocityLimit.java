@@ -9,21 +9,19 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for AccountVelocityLimit type.
  */
 public class AccountVelocityLimit {
-    private OptionalNullable<String> type;
-    private OptionalNullable<String> period;
-    private OptionalNullable<Double> limit;
-    private OptionalNullable<Double> accumulation;
-    private OptionalNullable<Double> balance;
-    private OptionalNullable<Boolean> override;
-    private OptionalNullable<String> productGroup;
-    private OptionalNullable<Double> threshold;
+    private String type;
+    private String period;
+    private Double limit;
+    private Double accumulation;
+    private Double balance;
+    private Boolean override;
+    private String productGroup;
+    private Double threshold;
 
     /**
      * Default constructor.
@@ -51,32 +49,6 @@ public class AccountVelocityLimit {
             Boolean override,
             String productGroup,
             Double threshold) {
-        this.type = OptionalNullable.of(type);
-        this.period = OptionalNullable.of(period);
-        this.limit = OptionalNullable.of(limit);
-        this.accumulation = OptionalNullable.of(accumulation);
-        this.balance = OptionalNullable.of(balance);
-        this.override = OptionalNullable.of(override);
-        this.productGroup = OptionalNullable.of(productGroup);
-        this.threshold = OptionalNullable.of(threshold);
-    }
-
-    /**
-     * Initialization constructor.
-     * @param  type  String value for type.
-     * @param  period  String value for period.
-     * @param  limit  Double value for limit.
-     * @param  accumulation  Double value for accumulation.
-     * @param  balance  Double value for balance.
-     * @param  override  Boolean value for override.
-     * @param  productGroup  String value for productGroup.
-     * @param  threshold  Double value for threshold.
-     */
-
-    protected AccountVelocityLimit(OptionalNullable<String> type, OptionalNullable<String> period,
-            OptionalNullable<Double> limit, OptionalNullable<Double> accumulation,
-            OptionalNullable<Double> balance, OptionalNullable<Boolean> override,
-            OptionalNullable<String> productGroup, OptionalNullable<Double> threshold) {
         this.type = type;
         this.period = period;
         this.limit = limit;
@@ -88,26 +60,15 @@ public class AccountVelocityLimit {
     }
 
     /**
-     * Internal Getter for Type.
-     * Type of velocity (COUNT type is not present for limits of PERTRX period Possible Values:
-     * VALUE, VOLUME, COUNT
-     * @return Returns the Internal String
-     */
-    @JsonGetter("Type")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetType() {
-        return this.type;
-    }
-
-    /**
      * Getter for Type.
      * Type of velocity (COUNT type is not present for limits of PERTRX period Possible Values:
      * VALUE, VOLUME, COUNT
      * @return Returns the String
      */
+    @JsonGetter("Type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getType() {
-        return OptionalNullable.getFrom(type);
+        return type;
     }
 
     /**
@@ -118,29 +79,7 @@ public class AccountVelocityLimit {
      */
     @JsonSetter("Type")
     public void setType(String type) {
-        this.type = OptionalNullable.of(type);
-    }
-
-    /**
-     * UnSetter for Type.
-     * Type of velocity (COUNT type is not present for limits of PERTRX period Possible Values:
-     * VALUE, VOLUME, COUNT
-     */
-    public void unsetType() {
-        type = null;
-    }
-
-    /**
-     * Internal Getter for Period.
-     * Duration of the velocity or threshold alert. Possible Values: DAILY, WEEKLY, MONTHLY, ANNUAL,
-     * LIFETIME, PERTRX
-     * @return Returns the Internal String
-     */
-    @JsonGetter("Period")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetPeriod() {
-        return this.period;
+        this.type = type;
     }
 
     /**
@@ -149,8 +88,10 @@ public class AccountVelocityLimit {
      * LIFETIME, PERTRX
      * @return Returns the String
      */
+    @JsonGetter("Period")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getPeriod() {
-        return OptionalNullable.getFrom(period);
+        return period;
     }
 
     /**
@@ -161,209 +102,103 @@ public class AccountVelocityLimit {
      */
     @JsonSetter("Period")
     public void setPeriod(String period) {
-        this.period = OptionalNullable.of(period);
-    }
-
-    /**
-     * UnSetter for Period.
-     * Duration of the velocity or threshold alert. Possible Values: DAILY, WEEKLY, MONTHLY, ANNUAL,
-     * LIFETIME, PERTRX
-     */
-    public void unsetPeriod() {
-        period = null;
-    }
-
-    /**
-     * Internal Getter for Limit.
-     * The limit associated with this velocity with the correct number of digits after the decimal
-     * point according to the minor denomination of the currency of the card issuer (except for
-     * COUNT type velocity).
-     * @return Returns the Internal Double
-     */
-    @JsonGetter("Limit")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Double> internalGetLimit() {
-        return this.limit;
+        this.period = period;
     }
 
     /**
      * Getter for Limit.
      * The limit associated with this velocity with the correct number of digits after the decimal
-     * point according to the minor denomination of the currency of the card issuer (except for
-     * COUNT type velocity).
+     * point according to the minor denomination of the currency of the card issuer. Example:
+     * 1500.55
      * @return Returns the Double
      */
+    @JsonGetter("Limit")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getLimit() {
-        return OptionalNullable.getFrom(limit);
+        return limit;
     }
 
     /**
      * Setter for Limit.
      * The limit associated with this velocity with the correct number of digits after the decimal
-     * point according to the minor denomination of the currency of the card issuer (except for
-     * COUNT type velocity).
+     * point according to the minor denomination of the currency of the card issuer. Example:
+     * 1500.55
      * @param limit Value for Double
      */
     @JsonSetter("Limit")
     public void setLimit(Double limit) {
-        this.limit = OptionalNullable.of(limit);
-    }
-
-    /**
-     * UnSetter for Limit.
-     * The limit associated with this velocity with the correct number of digits after the decimal
-     * point according to the minor denomination of the currency of the card issuer (except for
-     * COUNT type velocity).
-     */
-    public void unsetLimit() {
-        limit = null;
-    }
-
-    /**
-     * Internal Getter for Accumulation.
-     * The transaction accumulation during the current period with the correct number of digits
-     * after the decimal point according to the minor denomination of the currency of the card
-     * issuer (except for COUNT type velocity). Not present for PERTRX period.
-     * @return Returns the Internal Double
-     */
-    @JsonGetter("Accumulation")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Double> internalGetAccumulation() {
-        return this.accumulation;
+        this.limit = limit;
     }
 
     /**
      * Getter for Accumulation.
      * The transaction accumulation during the current period with the correct number of digits
      * after the decimal point according to the minor denomination of the currency of the card
-     * issuer (except for COUNT type velocity). Not present for PERTRX period.
+     * issuer (except for COUNT type velocity). Not present for PERTRX period. Example: 1100.55
      * @return Returns the Double
      */
+    @JsonGetter("Accumulation")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getAccumulation() {
-        return OptionalNullable.getFrom(accumulation);
+        return accumulation;
     }
 
     /**
      * Setter for Accumulation.
      * The transaction accumulation during the current period with the correct number of digits
      * after the decimal point according to the minor denomination of the currency of the card
-     * issuer (except for COUNT type velocity). Not present for PERTRX period.
+     * issuer (except for COUNT type velocity). Not present for PERTRX period. Example: 1100.55
      * @param accumulation Value for Double
      */
     @JsonSetter("Accumulation")
     public void setAccumulation(Double accumulation) {
-        this.accumulation = OptionalNullable.of(accumulation);
-    }
-
-    /**
-     * UnSetter for Accumulation.
-     * The transaction accumulation during the current period with the correct number of digits
-     * after the decimal point according to the minor denomination of the currency of the card
-     * issuer (except for COUNT type velocity). Not present for PERTRX period.
-     */
-    public void unsetAccumulation() {
-        accumulation = null;
-    }
-
-    /**
-     * Internal Getter for Balance.
-     * The remaining/available balance at this point in time with the correct number of digits after
-     * the decimal point according to the minor denomination of the currency of the card issuer
-     * (except for COUNT type velocity). Not present for PERTRX period.
-     * @return Returns the Internal Double
-     */
-    @JsonGetter("Balance")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Double> internalGetBalance() {
-        return this.balance;
+        this.accumulation = accumulation;
     }
 
     /**
      * Getter for Balance.
      * The remaining/available balance at this point in time with the correct number of digits after
      * the decimal point according to the minor denomination of the currency of the card issuer
-     * (except for COUNT type velocity). Not present for PERTRX period.
+     * (except for COUNT type velocity). Not present for PERTRX period. Example: 400.55
      * @return Returns the Double
      */
+    @JsonGetter("Balance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getBalance() {
-        return OptionalNullable.getFrom(balance);
+        return balance;
     }
 
     /**
      * Setter for Balance.
      * The remaining/available balance at this point in time with the correct number of digits after
      * the decimal point according to the minor denomination of the currency of the card issuer
-     * (except for COUNT type velocity). Not present for PERTRX period.
+     * (except for COUNT type velocity). Not present for PERTRX period. Example: 400.55
      * @param balance Value for Double
      */
     @JsonSetter("Balance")
     public void setBalance(Double balance) {
-        this.balance = OptionalNullable.of(balance);
-    }
-
-    /**
-     * UnSetter for Balance.
-     * The remaining/available balance at this point in time with the correct number of digits after
-     * the decimal point according to the minor denomination of the currency of the card issuer
-     * (except for COUNT type velocity). Not present for PERTRX period.
-     */
-    public void unsetBalance() {
-        balance = null;
-    }
-
-    /**
-     * Internal Getter for MOverride.
-     * Indicate if the limit is overridden or default. (false for default).
-     * @return Returns the Internal Boolean
-     */
-    @JsonGetter("Override")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Boolean> internalGetMOverride() {
-        return this.override;
+        this.balance = balance;
     }
 
     /**
      * Getter for MOverride.
-     * Indicate if the limit is overridden or default. (false for default).
+     * Indicate if the limit is overridden or default. (false for default). Example: false
      * @return Returns the Boolean
      */
+    @JsonGetter("Override")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Boolean getMOverride() {
-        return OptionalNullable.getFrom(override);
+        return override;
     }
 
     /**
      * Setter for MOverride.
-     * Indicate if the limit is overridden or default. (false for default).
+     * Indicate if the limit is overridden or default. (false for default). Example: false
      * @param override Value for Boolean
      */
     @JsonSetter("Override")
     public void setMOverride(Boolean override) {
-        this.override = OptionalNullable.of(override);
-    }
-
-    /**
-     * UnSetter for MOverride.
-     * Indicate if the limit is overridden or default. (false for default).
-     */
-    public void unsetMOverride() {
-        override = null;
-    }
-
-    /**
-     * Internal Getter for ProductGroup.
-     * The reference group name for product differentiated velocities. This field cannot be used
-     * with Volume type velocity. Example: RoadSvc This is an optional output field.
-     * @return Returns the Internal String
-     */
-    @JsonGetter("ProductGroup")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetProductGroup() {
-        return this.productGroup;
+        this.override = override;
     }
 
     /**
@@ -372,8 +207,10 @@ public class AccountVelocityLimit {
      * with Volume type velocity. Example: RoadSvc This is an optional output field.
      * @return Returns the String
      */
+    @JsonGetter("ProductGroup")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getProductGroup() {
-        return OptionalNullable.getFrom(productGroup);
+        return productGroup;
     }
 
     /**
@@ -384,63 +221,34 @@ public class AccountVelocityLimit {
      */
     @JsonSetter("ProductGroup")
     public void setProductGroup(String productGroup) {
-        this.productGroup = OptionalNullable.of(productGroup);
-    }
-
-    /**
-     * UnSetter for ProductGroup.
-     * The reference group name for product differentiated velocities. This field cannot be used
-     * with Volume type velocity. Example: RoadSvc This is an optional output field.
-     */
-    public void unsetProductGroup() {
-        productGroup = null;
-    }
-
-    /**
-     * Internal Getter for Threshold.
-     * The limit to trigger an alert if the balance after a transaction reaches it or below. 0
-     * indicates no alerts will be sent. Not present if not set (issuer value threshold limit
-     * applies if available). Not present for COUNT type velocity.
-     * @return Returns the Internal Double
-     */
-    @JsonGetter("Threshold")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Double> internalGetThreshold() {
-        return this.threshold;
+        this.productGroup = productGroup;
     }
 
     /**
      * Getter for Threshold.
      * The limit to trigger an alert if the balance after a transaction reaches it or below. 0
      * indicates no alerts will be sent. Not present if not set (issuer value threshold limit
-     * applies if available). Not present for COUNT type velocity.
+     * applies if available). Not present for COUNT type velocity. Example: 50.55 This is an
+     * optional output field.
      * @return Returns the Double
      */
+    @JsonGetter("Threshold")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Double getThreshold() {
-        return OptionalNullable.getFrom(threshold);
+        return threshold;
     }
 
     /**
      * Setter for Threshold.
      * The limit to trigger an alert if the balance after a transaction reaches it or below. 0
      * indicates no alerts will be sent. Not present if not set (issuer value threshold limit
-     * applies if available). Not present for COUNT type velocity.
+     * applies if available). Not present for COUNT type velocity. Example: 50.55 This is an
+     * optional output field.
      * @param threshold Value for Double
      */
     @JsonSetter("Threshold")
     public void setThreshold(Double threshold) {
-        this.threshold = OptionalNullable.of(threshold);
-    }
-
-    /**
-     * UnSetter for Threshold.
-     * The limit to trigger an alert if the balance after a transaction reaches it or below. 0
-     * indicates no alerts will be sent. Not present if not set (issuer value threshold limit
-     * applies if available). Not present for COUNT type velocity.
-     */
-    public void unsetThreshold() {
-        threshold = null;
+        this.threshold = threshold;
     }
 
     /**
@@ -460,15 +268,15 @@ public class AccountVelocityLimit {
      * @return a new {@link AccountVelocityLimit.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder();
-        builder.type = internalGetType();
-        builder.period = internalGetPeriod();
-        builder.limit = internalGetLimit();
-        builder.accumulation = internalGetAccumulation();
-        builder.balance = internalGetBalance();
-        builder.override = internalGetMOverride();
-        builder.productGroup = internalGetProductGroup();
-        builder.threshold = internalGetThreshold();
+        Builder builder = new Builder()
+                .type(getType())
+                .period(getPeriod())
+                .limit(getLimit())
+                .accumulation(getAccumulation())
+                .balance(getBalance())
+                .override(getMOverride())
+                .productGroup(getProductGroup())
+                .threshold(getThreshold());
         return builder;
     }
 
@@ -476,14 +284,14 @@ public class AccountVelocityLimit {
      * Class to build instances of {@link AccountVelocityLimit}.
      */
     public static class Builder {
-        private OptionalNullable<String> type;
-        private OptionalNullable<String> period;
-        private OptionalNullable<Double> limit;
-        private OptionalNullable<Double> accumulation;
-        private OptionalNullable<Double> balance;
-        private OptionalNullable<Boolean> override;
-        private OptionalNullable<String> productGroup;
-        private OptionalNullable<Double> threshold;
+        private String type;
+        private String period;
+        private Double limit;
+        private Double accumulation;
+        private Double balance;
+        private Boolean override;
+        private String productGroup;
+        private Double threshold;
 
 
 
@@ -493,16 +301,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder type(String type) {
-            this.type = OptionalNullable.of(type);
-            return this;
-        }
-
-        /**
-         * UnSetter for type.
-         * @return Builder
-         */
-        public Builder unsetType() {
-            type = null;
+            this.type = type;
             return this;
         }
 
@@ -512,16 +311,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder period(String period) {
-            this.period = OptionalNullable.of(period);
-            return this;
-        }
-
-        /**
-         * UnSetter for period.
-         * @return Builder
-         */
-        public Builder unsetPeriod() {
-            period = null;
+            this.period = period;
             return this;
         }
 
@@ -531,16 +321,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder limit(Double limit) {
-            this.limit = OptionalNullable.of(limit);
-            return this;
-        }
-
-        /**
-         * UnSetter for limit.
-         * @return Builder
-         */
-        public Builder unsetLimit() {
-            limit = null;
+            this.limit = limit;
             return this;
         }
 
@@ -550,16 +331,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder accumulation(Double accumulation) {
-            this.accumulation = OptionalNullable.of(accumulation);
-            return this;
-        }
-
-        /**
-         * UnSetter for accumulation.
-         * @return Builder
-         */
-        public Builder unsetAccumulation() {
-            accumulation = null;
+            this.accumulation = accumulation;
             return this;
         }
 
@@ -569,16 +341,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder balance(Double balance) {
-            this.balance = OptionalNullable.of(balance);
-            return this;
-        }
-
-        /**
-         * UnSetter for balance.
-         * @return Builder
-         */
-        public Builder unsetBalance() {
-            balance = null;
+            this.balance = balance;
             return this;
         }
 
@@ -588,16 +351,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder override(Boolean override) {
-            this.override = OptionalNullable.of(override);
-            return this;
-        }
-
-        /**
-         * UnSetter for override.
-         * @return Builder
-         */
-        public Builder unsetMOverride() {
-            override = null;
+            this.override = override;
             return this;
         }
 
@@ -607,16 +361,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder productGroup(String productGroup) {
-            this.productGroup = OptionalNullable.of(productGroup);
-            return this;
-        }
-
-        /**
-         * UnSetter for productGroup.
-         * @return Builder
-         */
-        public Builder unsetProductGroup() {
-            productGroup = null;
+            this.productGroup = productGroup;
             return this;
         }
 
@@ -626,16 +371,7 @@ public class AccountVelocityLimit {
          * @return Builder
          */
         public Builder threshold(Double threshold) {
-            this.threshold = OptionalNullable.of(threshold);
-            return this;
-        }
-
-        /**
-         * UnSetter for threshold.
-         * @return Builder
-         */
-        public Builder unsetThreshold() {
-            threshold = null;
+            this.threshold = threshold;
             return this;
         }
 

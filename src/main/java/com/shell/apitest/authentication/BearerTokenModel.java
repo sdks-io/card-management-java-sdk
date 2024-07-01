@@ -19,18 +19,20 @@ public class BearerTokenModel {
     private OAuthToken oAuthToken;
     private BiFunction<OAuthToken, BearerTokenCredentials, OAuthToken> oAuthTokenProvider;
     private Consumer<OAuthToken> oAuthOnTokenUpdate;
+    private long oAuthClockSkew;
 
     /**
      * A Constructor for BearerTokenModel.
      */
     private BearerTokenModel(String oAuthClientId, String oAuthClientSecret, OAuthToken oAuthToken,
             BiFunction<OAuthToken, BearerTokenCredentials, OAuthToken> oAuthTokenProvider,
-            Consumer<OAuthToken> oAuthOnTokenUpdate) {
+            Consumer<OAuthToken> oAuthOnTokenUpdate, long oAuthClockSkew) {
         this.oAuthClientId = oAuthClientId;
         this.oAuthClientSecret = oAuthClientSecret;
         this.oAuthToken = oAuthToken;
         this.oAuthTokenProvider = oAuthTokenProvider;
         this.oAuthOnTokenUpdate = oAuthOnTokenUpdate;
+        this.oAuthClockSkew = oAuthClockSkew;
     }
 
     /**
@@ -74,6 +76,14 @@ public class BearerTokenModel {
     }
 
     /**
+     * Getter for oAuthClockSkew.
+     * @return oAuthClockSkew The value of oAuthClockSkew.
+     */
+    public long getOAuthClockSkew() {
+        return this.oAuthClockSkew;
+    }
+
+    /**
      * Builds a new {@link BearerTokenModel.Builder} object.
      * Creates the instance with the state of the current auth model.
      * @return a new {@link BearerTokenModel.Builder} object.
@@ -82,7 +92,8 @@ public class BearerTokenModel {
         return new Builder(getOAuthClientId(), getOAuthClientSecret())
             .oAuthToken(getOAuthToken())
             .oAuthTokenProvider(getOAuthTokenProvider())
-            .oAuthOnTokenUpdate(getOAuthOnTokenUpdate());
+            .oAuthOnTokenUpdate(getOAuthOnTokenUpdate())
+            .oAuthClockSkew(getOAuthClockSkew());
     }
 
     /**
@@ -94,6 +105,7 @@ public class BearerTokenModel {
         private OAuthToken oAuthToken;
         private BiFunction<OAuthToken, BearerTokenCredentials, OAuthToken> oAuthTokenProvider;
         private Consumer<OAuthToken> oAuthOnTokenUpdate;
+        private long oAuthClockSkew;
 
         /**
          * The constructor with required auth credentials.
@@ -172,12 +184,22 @@ public class BearerTokenModel {
         }
 
         /**
+         * Setter for oAuthClockSkew.
+         * @param oAuthClockSkew The value of oAuthClockSkew.
+         * @return Builder The current instance of Builder.
+         */
+        public Builder oAuthClockSkew(long oAuthClockSkew) {
+            this.oAuthClockSkew = oAuthClockSkew;
+            return this;
+        }
+
+        /**
          * Builds the instance of BearerTokenModel using the provided credentials.
          * @return The instance of BearerTokenModel.
          */
         public BearerTokenModel build() {
             return new BearerTokenModel(oAuthClientId, oAuthClientSecret, oAuthToken,
-                    oAuthTokenProvider, oAuthOnTokenUpdate);
+                    oAuthTokenProvider, oAuthOnTokenUpdate, oAuthClockSkew);
         }
     }
 }

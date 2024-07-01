@@ -18,13 +18,12 @@ public class DeliveryAddressUpdate {
     private String pAN;
     private String cardExpiryDate;
     private boolean useCustomerDefaultAddress;
-    private UpdateCardRenewalAddress updateCardRenewalAddress;
+    private UpdateCardRenewalAddress2 updateCardRenewalAddress;
 
     /**
      * Default constructor.
      */
     public DeliveryAddressUpdate() {
-        useCustomerDefaultAddress = false;
     }
 
     /**
@@ -33,7 +32,7 @@ public class DeliveryAddressUpdate {
      * @param  cardId  Integer value for cardId.
      * @param  pAN  String value for pAN.
      * @param  cardExpiryDate  String value for cardExpiryDate.
-     * @param  updateCardRenewalAddress  UpdateCardRenewalAddress value for
+     * @param  updateCardRenewalAddress  UpdateCardRenewalAddress2 value for
      *         updateCardRenewalAddress.
      */
     public DeliveryAddressUpdate(
@@ -41,7 +40,7 @@ public class DeliveryAddressUpdate {
             Integer cardId,
             String pAN,
             String cardExpiryDate,
-            UpdateCardRenewalAddress updateCardRenewalAddress) {
+            UpdateCardRenewalAddress2 updateCardRenewalAddress) {
         this.cardId = cardId;
         this.pAN = pAN;
         this.cardExpiryDate = cardExpiryDate;
@@ -142,26 +141,20 @@ public class DeliveryAddressUpdate {
 
     /**
      * Getter for UpdateCardRenewalAddress.
-     * Delivery address of card. This address will be used for card reissue and PIN reminders in
-     * future. Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’. The field is
-     * ignored otherwise.
-     * @return Returns the UpdateCardRenewalAddress
+     * @return Returns the UpdateCardRenewalAddress2
      */
     @JsonGetter("UpdateCardRenewalAddress")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public UpdateCardRenewalAddress getUpdateCardRenewalAddress() {
+    public UpdateCardRenewalAddress2 getUpdateCardRenewalAddress() {
         return updateCardRenewalAddress;
     }
 
     /**
      * Setter for UpdateCardRenewalAddress.
-     * Delivery address of card. This address will be used for card reissue and PIN reminders in
-     * future. Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’. The field is
-     * ignored otherwise.
-     * @param updateCardRenewalAddress Value for UpdateCardRenewalAddress
+     * @param updateCardRenewalAddress Value for UpdateCardRenewalAddress2
      */
     @JsonSetter("UpdateCardRenewalAddress")
-    public void setUpdateCardRenewalAddress(UpdateCardRenewalAddress updateCardRenewalAddress) {
+    public void setUpdateCardRenewalAddress(UpdateCardRenewalAddress2 updateCardRenewalAddress) {
         this.updateCardRenewalAddress = updateCardRenewalAddress;
     }
 
@@ -194,11 +187,11 @@ public class DeliveryAddressUpdate {
      * Class to build instances of {@link DeliveryAddressUpdate}.
      */
     public static class Builder {
-        private boolean useCustomerDefaultAddress = false;
+        private boolean useCustomerDefaultAddress;
         private Integer cardId;
         private String pAN;
         private String cardExpiryDate;
-        private UpdateCardRenewalAddress updateCardRenewalAddress;
+        private UpdateCardRenewalAddress2 updateCardRenewalAddress;
 
         /**
          * Initialization constructor.
@@ -256,12 +249,12 @@ public class DeliveryAddressUpdate {
 
         /**
          * Setter for updateCardRenewalAddress.
-         * @param  updateCardRenewalAddress  UpdateCardRenewalAddress value for
+         * @param  updateCardRenewalAddress  UpdateCardRenewalAddress2 value for
          *         updateCardRenewalAddress.
          * @return Builder
          */
         public Builder updateCardRenewalAddress(
-                UpdateCardRenewalAddress updateCardRenewalAddress) {
+                UpdateCardRenewalAddress2 updateCardRenewalAddress) {
             this.updateCardRenewalAddress = updateCardRenewalAddress;
             return this;
         }

@@ -9,7 +9,6 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.List;
 
 /**
  * This is a model class for DeliveryAddressUpdateResponse type.
@@ -17,7 +16,7 @@ import java.util.List;
 public class DeliveryAddressUpdateResponse {
     private String requestId;
     private Integer serviceReference;
-    private List<DeliveryAddressUpdateReferences> deliveryAddressUpdateReferences;
+    private DeliveryAddressUpdateReferences2 deliveryAddressUpdateReferences;
     private ErrorStatus error;
 
     /**
@@ -30,14 +29,14 @@ public class DeliveryAddressUpdateResponse {
      * Initialization constructor.
      * @param  requestId  String value for requestId.
      * @param  serviceReference  Integer value for serviceReference.
-     * @param  deliveryAddressUpdateReferences  List of DeliveryAddressUpdateReferences value for
+     * @param  deliveryAddressUpdateReferences  DeliveryAddressUpdateReferences2 value for
      *         deliveryAddressUpdateReferences.
      * @param  error  ErrorStatus value for error.
      */
     public DeliveryAddressUpdateResponse(
             String requestId,
             Integer serviceReference,
-            List<DeliveryAddressUpdateReferences> deliveryAddressUpdateReferences,
+            DeliveryAddressUpdateReferences2 deliveryAddressUpdateReferences,
             ErrorStatus error) {
         this.requestId = requestId;
         this.serviceReference = serviceReference;
@@ -89,20 +88,20 @@ public class DeliveryAddressUpdateResponse {
 
     /**
      * Getter for DeliveryAddressUpdateReferences.
-     * @return Returns the List of DeliveryAddressUpdateReferences
+     * @return Returns the DeliveryAddressUpdateReferences2
      */
     @JsonGetter("DeliveryAddressUpdateReferences")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<DeliveryAddressUpdateReferences> getDeliveryAddressUpdateReferences() {
+    public DeliveryAddressUpdateReferences2 getDeliveryAddressUpdateReferences() {
         return deliveryAddressUpdateReferences;
     }
 
     /**
      * Setter for DeliveryAddressUpdateReferences.
-     * @param deliveryAddressUpdateReferences Value for List of DeliveryAddressUpdateReferences
+     * @param deliveryAddressUpdateReferences Value for DeliveryAddressUpdateReferences2
      */
     @JsonSetter("DeliveryAddressUpdateReferences")
-    public void setDeliveryAddressUpdateReferences(List<DeliveryAddressUpdateReferences> deliveryAddressUpdateReferences) {
+    public void setDeliveryAddressUpdateReferences(DeliveryAddressUpdateReferences2 deliveryAddressUpdateReferences) {
         this.deliveryAddressUpdateReferences = deliveryAddressUpdateReferences;
     }
 
@@ -156,7 +155,7 @@ public class DeliveryAddressUpdateResponse {
     public static class Builder {
         private String requestId;
         private Integer serviceReference;
-        private List<DeliveryAddressUpdateReferences> deliveryAddressUpdateReferences;
+        private DeliveryAddressUpdateReferences2 deliveryAddressUpdateReferences;
         private ErrorStatus error;
 
 
@@ -183,12 +182,12 @@ public class DeliveryAddressUpdateResponse {
 
         /**
          * Setter for deliveryAddressUpdateReferences.
-         * @param  deliveryAddressUpdateReferences  List of DeliveryAddressUpdateReferences value
-         *         for deliveryAddressUpdateReferences.
+         * @param  deliveryAddressUpdateReferences  DeliveryAddressUpdateReferences2 value for
+         *         deliveryAddressUpdateReferences.
          * @return Builder
          */
         public Builder deliveryAddressUpdateReferences(
-                List<DeliveryAddressUpdateReferences> deliveryAddressUpdateReferences) {
+                DeliveryAddressUpdateReferences2 deliveryAddressUpdateReferences) {
             this.deliveryAddressUpdateReferences = deliveryAddressUpdateReferences;
             return this;
         }

@@ -38,11 +38,11 @@ public class CardDetailsResponse {
     private Boolean unblockAllowed;
     private Boolean permanentBlockAllowed;
     private Integer issueNumber;
-    private OptionalNullable<CardDetailsResponseReissueSettingEnum> reissueSetting;
+    private Object reissueSetting;
     private CardDetailsResponseInternationalPOSLanguageIDEnum internationalPOSLanguageID;
     private CardDetailsResponseInternationalPOSLanguageCodeEnum internationalPOSLanguageCode;
-    private CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID;
-    private CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode;
+    private CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID;
+    private CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode;
     private OptionalNullable<String> cardTypeCode;
     private OptionalNullable<Integer> cardTypeId;
     private OptionalNullable<String> cardTypeName;
@@ -83,8 +83,8 @@ public class CardDetailsResponse {
     private OptionalNullable<String> effectiveDate;
     private OptionalNullable<String> lastModifiedDate;
     private OptionalNullable<String> bundleId;
-    private CardDetailsResponseCardDeliveryAddress cardDeliveryAddress;
-    private CardDetailsResponsePINDeliveryAddress pINDeliveryAddress;
+    private CardDeliveryAddress cardDeliveryAddress;
+    private PINDeliveryAddress pINDeliveryAddress;
     private OptionalNullable<List<CardDetailsResponseCardBlockSchedulesItemsAllOf0>> cardBlockSchedules;
     private ErrorStatus error;
     private String requestId;
@@ -118,14 +118,14 @@ public class CardDetailsResponse {
      * @param  unblockAllowed  Boolean value for unblockAllowed.
      * @param  permanentBlockAllowed  Boolean value for permanentBlockAllowed.
      * @param  issueNumber  Integer value for issueNumber.
-     * @param  reissueSetting  CardDetailsResponseReissueSettingEnum value for reissueSetting.
+     * @param  reissueSetting  Object value for reissueSetting.
      * @param  internationalPOSLanguageID  CardDetailsResponseInternationalPOSLanguageIDEnum value
      *         for internationalPOSLanguageID.
      * @param  internationalPOSLanguageCode  CardDetailsResponseInternationalPOSLanguageCodeEnum
      *         value for internationalPOSLanguageCode.
-     * @param  localPOSLanguageID  CardDetailsResponseLocalPOSLanguageIDEnum value for
+     * @param  localPOSLanguageID  CardDetailsResponseInternationalPOSLanguageIDEnum value for
      *         localPOSLanguageID.
-     * @param  localPOSLanguageCode  CardDetailsResponseLocalPOSLanguageCodeEnum value for
+     * @param  localPOSLanguageCode  CardDetailsResponseInternationalPOSLanguageCodeEnum value for
      *         localPOSLanguageCode.
      * @param  cardTypeCode  String value for cardTypeCode.
      * @param  cardTypeId  Integer value for cardTypeId.
@@ -168,10 +168,8 @@ public class CardDetailsResponse {
      * @param  effectiveDate  String value for effectiveDate.
      * @param  lastModifiedDate  String value for lastModifiedDate.
      * @param  bundleId  String value for bundleId.
-     * @param  cardDeliveryAddress  CardDetailsResponseCardDeliveryAddress value for
-     *         cardDeliveryAddress.
-     * @param  pINDeliveryAddress  CardDetailsResponsePINDeliveryAddress value for
-     *         pINDeliveryAddress.
+     * @param  cardDeliveryAddress  CardDeliveryAddress value for cardDeliveryAddress.
+     * @param  pINDeliveryAddress  PINDeliveryAddress value for pINDeliveryAddress.
      * @param  cardBlockSchedules  List of CardDetailsResponseCardBlockSchedulesItemsAllOf0 value
      *         for cardBlockSchedules.
      * @param  error  ErrorStatus value for error.
@@ -199,11 +197,11 @@ public class CardDetailsResponse {
             Boolean unblockAllowed,
             Boolean permanentBlockAllowed,
             Integer issueNumber,
-            CardDetailsResponseReissueSettingEnum reissueSetting,
+            Object reissueSetting,
             CardDetailsResponseInternationalPOSLanguageIDEnum internationalPOSLanguageID,
             CardDetailsResponseInternationalPOSLanguageCodeEnum internationalPOSLanguageCode,
-            CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID,
-            CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode,
+            CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID,
+            CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode,
             String cardTypeCode,
             Integer cardTypeId,
             String cardTypeName,
@@ -244,8 +242,8 @@ public class CardDetailsResponse {
             String effectiveDate,
             String lastModifiedDate,
             String bundleId,
-            CardDetailsResponseCardDeliveryAddress cardDeliveryAddress,
-            CardDetailsResponsePINDeliveryAddress pINDeliveryAddress,
+            CardDeliveryAddress cardDeliveryAddress,
+            PINDeliveryAddress pINDeliveryAddress,
             List<CardDetailsResponseCardBlockSchedulesItemsAllOf0> cardBlockSchedules,
             ErrorStatus error,
             String requestId) {
@@ -270,7 +268,7 @@ public class CardDetailsResponse {
         this.unblockAllowed = unblockAllowed;
         this.permanentBlockAllowed = permanentBlockAllowed;
         this.issueNumber = issueNumber;
-        this.reissueSetting = OptionalNullable.of(reissueSetting);
+        this.reissueSetting = reissueSetting;
         this.internationalPOSLanguageID = internationalPOSLanguageID;
         this.internationalPOSLanguageCode = internationalPOSLanguageCode;
         this.localPOSLanguageID = localPOSLanguageID;
@@ -345,14 +343,14 @@ public class CardDetailsResponse {
      * @param  unblockAllowed  Boolean value for unblockAllowed.
      * @param  permanentBlockAllowed  Boolean value for permanentBlockAllowed.
      * @param  issueNumber  Integer value for issueNumber.
-     * @param  reissueSetting  CardDetailsResponseReissueSettingEnum value for reissueSetting.
+     * @param  reissueSetting  Object value for reissueSetting.
      * @param  internationalPOSLanguageID  CardDetailsResponseInternationalPOSLanguageIDEnum value
      *         for internationalPOSLanguageID.
      * @param  internationalPOSLanguageCode  CardDetailsResponseInternationalPOSLanguageCodeEnum
      *         value for internationalPOSLanguageCode.
-     * @param  localPOSLanguageID  CardDetailsResponseLocalPOSLanguageIDEnum value for
+     * @param  localPOSLanguageID  CardDetailsResponseInternationalPOSLanguageIDEnum value for
      *         localPOSLanguageID.
-     * @param  localPOSLanguageCode  CardDetailsResponseLocalPOSLanguageCodeEnum value for
+     * @param  localPOSLanguageCode  CardDetailsResponseInternationalPOSLanguageCodeEnum value for
      *         localPOSLanguageCode.
      * @param  cardTypeCode  String value for cardTypeCode.
      * @param  cardTypeId  Integer value for cardTypeId.
@@ -395,10 +393,8 @@ public class CardDetailsResponse {
      * @param  effectiveDate  String value for effectiveDate.
      * @param  lastModifiedDate  String value for lastModifiedDate.
      * @param  bundleId  String value for bundleId.
-     * @param  cardDeliveryAddress  CardDetailsResponseCardDeliveryAddress value for
-     *         cardDeliveryAddress.
-     * @param  pINDeliveryAddress  CardDetailsResponsePINDeliveryAddress value for
-     *         pINDeliveryAddress.
+     * @param  cardDeliveryAddress  CardDeliveryAddress value for cardDeliveryAddress.
+     * @param  pINDeliveryAddress  PINDeliveryAddress value for pINDeliveryAddress.
      * @param  cardBlockSchedules  List of CardDetailsResponseCardBlockSchedulesItemsAllOf0 value
      *         for cardBlockSchedules.
      * @param  error  ErrorStatus value for error.
@@ -414,11 +410,11 @@ public class CardDetailsResponse {
             Boolean odometerPrompt, Boolean fleetIdPrompt, CardDetailsResponsePINTypeEnum pINType,
             Boolean hasPIN, Boolean isSelfSelectedPIN, Boolean temporaryBlockAllowed,
             Boolean unblockAllowed, Boolean permanentBlockAllowed, Integer issueNumber,
-            OptionalNullable<CardDetailsResponseReissueSettingEnum> reissueSetting,
+            Object reissueSetting,
             CardDetailsResponseInternationalPOSLanguageIDEnum internationalPOSLanguageID,
             CardDetailsResponseInternationalPOSLanguageCodeEnum internationalPOSLanguageCode,
-            CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID,
-            CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode,
+            CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID,
+            CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode,
             OptionalNullable<String> cardTypeCode, OptionalNullable<Integer> cardTypeId,
             OptionalNullable<String> cardTypeName, OptionalNullable<Integer> tokenTypeId,
             OptionalNullable<String> tokenTypeName, Boolean isChipCard, Boolean isMagStripCard,
@@ -438,8 +434,7 @@ public class CardDetailsResponse {
             CardDetailsResponseRenewedCardReissueSettingEnum renewedCardReissueSetting,
             OptionalNullable<String> creationDate, OptionalNullable<String> effectiveDate,
             OptionalNullable<String> lastModifiedDate, OptionalNullable<String> bundleId,
-            CardDetailsResponseCardDeliveryAddress cardDeliveryAddress,
-            CardDetailsResponsePINDeliveryAddress pINDeliveryAddress,
+            CardDeliveryAddress cardDeliveryAddress, PINDeliveryAddress pINDeliveryAddress,
             OptionalNullable<List<CardDetailsResponseCardBlockSchedulesItemsAllOf0>> cardBlockSchedules,
             ErrorStatus error, String requestId) {
         this.payerId = payerId;
@@ -897,16 +892,6 @@ public class CardDetailsResponse {
 
     /**
      * Getter for StatusId.
-     * Possible Id’s and description: * 1 Active * 7 Blocked Card * 8 Expired * 9 Cancelled * 10 New
-     * * 23 Pending Renewal * 31 Replaced * 41 Temporary Block (Customer) * 42 Temporary Block
-     * (Shell) * 43 Fraud * 101 Active (Block in progress) * * 102 Blocked Card (Unblock in
-     * progress) * * 103 Active (Cancel in progress) * * 104 Active (Marked as damaged) * * 105 New
-     * (Cancel as damaged) * * 106 Active(Scheduled for block) ”# * 107 Blocked Card(Scheduled for
-     * unblock)*# * 108 Blocked Card (Cancel in progress) * &gt; Note: • Items marked with * are
-     * intermediate statuses to indicate that there are pending requests in progress. , The response
-     * can contain these intermediate statuses only if the IncludeIntermediateStatus flag is true. •
-     * The placeholder “&lt;Shell Card Platform Status&gt;” in the items marked with # will be replaced
-     * with the Shell Card Platform status description. E.g., “Active (Scheduled for block)”
      * @return Returns the CardDetailsResponseStatusIdEnum
      */
     @JsonGetter("StatusId")
@@ -917,16 +902,6 @@ public class CardDetailsResponse {
 
     /**
      * Setter for StatusId.
-     * Possible Id’s and description: * 1 Active * 7 Blocked Card * 8 Expired * 9 Cancelled * 10 New
-     * * 23 Pending Renewal * 31 Replaced * 41 Temporary Block (Customer) * 42 Temporary Block
-     * (Shell) * 43 Fraud * 101 Active (Block in progress) * * 102 Blocked Card (Unblock in
-     * progress) * * 103 Active (Cancel in progress) * * 104 Active (Marked as damaged) * * 105 New
-     * (Cancel as damaged) * * 106 Active(Scheduled for block) ”# * 107 Blocked Card(Scheduled for
-     * unblock)*# * 108 Blocked Card (Cancel in progress) * &gt; Note: • Items marked with * are
-     * intermediate statuses to indicate that there are pending requests in progress. , The response
-     * can contain these intermediate statuses only if the IncludeIntermediateStatus flag is true. •
-     * The placeholder “&lt;Shell Card Platform Status&gt;” in the items marked with # will be replaced
-     * with the Shell Card Platform status description. E.g., “Active (Scheduled for block)”
      * @param statusId Value for CardDetailsResponseStatusIdEnum
      */
     @JsonSetter("StatusId")
@@ -1017,7 +992,6 @@ public class CardDetailsResponse {
 
     /**
      * Getter for PINType.
-     * PIN type: * `Card` - Card PIN * `Fleet` - Fleet PIN
      * @return Returns the CardDetailsResponsePINTypeEnum
      */
     @JsonGetter("PINType")
@@ -1028,7 +1002,6 @@ public class CardDetailsResponse {
 
     /**
      * Setter for PINType.
-     * PIN type: * `Card` - Card PIN * `Fleet` - Fleet PIN
      * @param pINType Value for CardDetailsResponsePINTypeEnum
      */
     @JsonSetter("PINType")
@@ -1163,61 +1136,26 @@ public class CardDetailsResponse {
     }
 
     /**
-     * Internal Getter for ReissueSetting.
-     * Reissue setting of the card. If the card is superseded (i.e. a replacement/new card is
-     * issued) then reissue setting of the latest card issued. Reissue setting: * `True` - Card will
-     * be Reissued when nearing its expiry date * `False` - Card will not be Reissued
-     * @return Returns the Internal CardDetailsResponseReissueSettingEnum
+     * Getter for ReissueSetting.
+     * @return Returns the Object
      */
     @JsonGetter("ReissueSetting")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<CardDetailsResponseReissueSettingEnum> internalGetReissueSetting() {
-        return this.reissueSetting;
-    }
-
-    /**
-     * Getter for ReissueSetting.
-     * Reissue setting of the card. If the card is superseded (i.e. a replacement/new card is
-     * issued) then reissue setting of the latest card issued. Reissue setting: * `True` - Card will
-     * be Reissued when nearing its expiry date * `False` - Card will not be Reissued
-     * @return Returns the CardDetailsResponseReissueSettingEnum
-     */
-    public CardDetailsResponseReissueSettingEnum getReissueSetting() {
-        return OptionalNullable.getFrom(reissueSetting);
+    public Object getReissueSetting() {
+        return reissueSetting;
     }
 
     /**
      * Setter for ReissueSetting.
-     * Reissue setting of the card. If the card is superseded (i.e. a replacement/new card is
-     * issued) then reissue setting of the latest card issued. Reissue setting: * `True` - Card will
-     * be Reissued when nearing its expiry date * `False` - Card will not be Reissued
-     * @param reissueSetting Value for CardDetailsResponseReissueSettingEnum
+     * @param reissueSetting Value for Object
      */
     @JsonSetter("ReissueSetting")
-    public void setReissueSetting(CardDetailsResponseReissueSettingEnum reissueSetting) {
-        this.reissueSetting = OptionalNullable.of(reissueSetting);
-    }
-
-    /**
-     * UnSetter for ReissueSetting.
-     * Reissue setting of the card. If the card is superseded (i.e. a replacement/new card is
-     * issued) then reissue setting of the latest card issued. Reissue setting: * `True` - Card will
-     * be Reissued when nearing its expiry date * `False` - Card will not be Reissued
-     */
-    public void unsetReissueSetting() {
-        reissueSetting = null;
+    public void setReissueSetting(Object reissueSetting) {
+        this.reissueSetting = reissueSetting;
     }
 
     /**
      * Getter for InternationalPOSLanguageID.
-     * POS language identifier. Language Id: * `1` - German * `2` - French * `3` - Bulgarian * `4` -
-     * Croatian * `5` - Czech * `6` - Danish * `7` - Finnish * `8` - English * `9` - Greek * `10` -
-     * Chinese * `11` - Hungarian * `12` - Italian * `13` - Luxembourgish * `14` - Malay * `15` -
-     * Dutch * `16` - Norwegian, Bokmal * `17` - Urdu * `18` - Polish * `19` - Portuguese * `20` -
-     * Romanian * `21` - Russian * `22` - Slovak * `23` - Slovenian * `24` - Spanish * `25` -
-     * Swedish * `26` - Turkish * `27` - Thai * `28` - Filipino * `29` - Estonian * `30` - Latvian *
-     * `31` - Lithuanian
      * @return Returns the CardDetailsResponseInternationalPOSLanguageIDEnum
      */
     @JsonGetter("InternationalPOSLanguageID")
@@ -1228,13 +1166,6 @@ public class CardDetailsResponse {
 
     /**
      * Setter for InternationalPOSLanguageID.
-     * POS language identifier. Language Id: * `1` - German * `2` - French * `3` - Bulgarian * `4` -
-     * Croatian * `5` - Czech * `6` - Danish * `7` - Finnish * `8` - English * `9` - Greek * `10` -
-     * Chinese * `11` - Hungarian * `12` - Italian * `13` - Luxembourgish * `14` - Malay * `15` -
-     * Dutch * `16` - Norwegian, Bokmal * `17` - Urdu * `18` - Polish * `19` - Portuguese * `20` -
-     * Romanian * `21` - Russian * `22` - Slovak * `23` - Slovenian * `24` - Spanish * `25` -
-     * Swedish * `26` - Turkish * `27` - Thai * `28` - Filipino * `29` - Estonian * `30` - Latvian *
-     * `31` - Lithuanian
      * @param internationalPOSLanguageID Value for CardDetailsResponseInternationalPOSLanguageIDEnum
      */
     @JsonSetter("InternationalPOSLanguageID")
@@ -1244,13 +1175,6 @@ public class CardDetailsResponse {
 
     /**
      * Getter for InternationalPOSLanguageCode.
-     * POS language code. Language code: * `deu` - German * `fra` - French * `bul` - Bulgarian *
-     * `hrv` - Croatian * `ces` - Czech * `dan` - Danish * `fin` - Finnish * `eng` - English * `ell`
-     * - Greek * `zho` - Chinese * `hun` - Hungarian * `ita` - Italian * `ltz` - Luxembourgish *
-     * `msa` - Malay * `nld` - Dutch * `nob` - Norwegian, Bokmal * `urd` - Urdu * `pol` - Polish *
-     * `por` - Portuguese * `ron` - Romanian * `rus` - Russian * `slk` - Slovak * `slv` - Slovenian
-     * * `spa` - Spanish * `swe` - Swedish * `tur` - Turkish * `tha` - Thai * `fil` - Filipino *
-     * `est` - Estonian * `lav` - Latvian * `lit` - Lithuanian
      * @return Returns the CardDetailsResponseInternationalPOSLanguageCodeEnum
      */
     @JsonGetter("InternationalPOSLanguageCode")
@@ -1261,13 +1185,6 @@ public class CardDetailsResponse {
 
     /**
      * Setter for InternationalPOSLanguageCode.
-     * POS language code. Language code: * `deu` - German * `fra` - French * `bul` - Bulgarian *
-     * `hrv` - Croatian * `ces` - Czech * `dan` - Danish * `fin` - Finnish * `eng` - English * `ell`
-     * - Greek * `zho` - Chinese * `hun` - Hungarian * `ita` - Italian * `ltz` - Luxembourgish *
-     * `msa` - Malay * `nld` - Dutch * `nob` - Norwegian, Bokmal * `urd` - Urdu * `pol` - Polish *
-     * `por` - Portuguese * `ron` - Romanian * `rus` - Russian * `slk` - Slovak * `slv` - Slovenian
-     * * `spa` - Spanish * `swe` - Swedish * `tur` - Turkish * `tha` - Thai * `fil` - Filipino *
-     * `est` - Estonian * `lav` - Latvian * `lit` - Lithuanian
      * @param internationalPOSLanguageCode Value for CardDetailsResponseInternationalPOSLanguageCodeEnum
      */
     @JsonSetter("InternationalPOSLanguageCode")
@@ -1277,67 +1194,39 @@ public class CardDetailsResponse {
 
     /**
      * Getter for LocalPOSLanguageID.
-     * POS language identifier. Language Id: * `1` - German * `2` - French * `3` - Bulgarian * `4` -
-     * Croatian * `5` - Czech * `6` - Danish * `7` - Finnish * `8` - English * `9` - Greek * `10` -
-     * Chinese * `11` - Hungarian * `12` - Italian * `13` - Luxembourgish * `14` - Malay * `15` -
-     * Dutch * `16` - Norwegian, Bokmal * `17` - Urdu * `18` - Polish * `19` - Portuguese * `20` -
-     * Romanian * `21` - Russian * `22` - Slovak * `23` - Slovenian * `24` - Spanish * `25` -
-     * Swedish * `26` - Turkish * `27` - Thai * `28` - Filipino * `29` - Estonian * `30` - Latvian *
-     * `31` - Lithuanian
-     * @return Returns the CardDetailsResponseLocalPOSLanguageIDEnum
+     * @return Returns the CardDetailsResponseInternationalPOSLanguageIDEnum
      */
     @JsonGetter("LocalPOSLanguageID")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CardDetailsResponseLocalPOSLanguageIDEnum getLocalPOSLanguageID() {
+    public CardDetailsResponseInternationalPOSLanguageIDEnum getLocalPOSLanguageID() {
         return localPOSLanguageID;
     }
 
     /**
      * Setter for LocalPOSLanguageID.
-     * POS language identifier. Language Id: * `1` - German * `2` - French * `3` - Bulgarian * `4` -
-     * Croatian * `5` - Czech * `6` - Danish * `7` - Finnish * `8` - English * `9` - Greek * `10` -
-     * Chinese * `11` - Hungarian * `12` - Italian * `13` - Luxembourgish * `14` - Malay * `15` -
-     * Dutch * `16` - Norwegian, Bokmal * `17` - Urdu * `18` - Polish * `19` - Portuguese * `20` -
-     * Romanian * `21` - Russian * `22` - Slovak * `23` - Slovenian * `24` - Spanish * `25` -
-     * Swedish * `26` - Turkish * `27` - Thai * `28` - Filipino * `29` - Estonian * `30` - Latvian *
-     * `31` - Lithuanian
-     * @param localPOSLanguageID Value for CardDetailsResponseLocalPOSLanguageIDEnum
+     * @param localPOSLanguageID Value for CardDetailsResponseInternationalPOSLanguageIDEnum
      */
     @JsonSetter("LocalPOSLanguageID")
-    public void setLocalPOSLanguageID(CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID) {
+    public void setLocalPOSLanguageID(CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID) {
         this.localPOSLanguageID = localPOSLanguageID;
     }
 
     /**
      * Getter for LocalPOSLanguageCode.
-     * POS language code. Language code: * `deu` - German * `fra` - French * `bul` - Bulgarian *
-     * `hrv` - Croatian * `ces` - Czech * `dan` - Danish * `fin` - Finnish * `eng` - English * `ell`
-     * - Greek * `zho` - Chinese * `hun` - Hungarian * `ita` - Italian * `ltz` - Luxembourgish *
-     * `msa` - Malay * `nld` - Dutch * `nob` - Norwegian, Bokmal * `urd` - Urdu * `pol` - Polish *
-     * `por` - Portuguese * `ron` - Romanian * `rus` - Russian * `slk` - Slovak * `slv` - Slovenian
-     * * `spa` - Spanish * `swe` - Swedish * `tur` - Turkish * `tha` - Thai * `fil` - Filipino *
-     * `est` - Estonian * `lav` - Latvian * `lit` - Lithuanian
-     * @return Returns the CardDetailsResponseLocalPOSLanguageCodeEnum
+     * @return Returns the CardDetailsResponseInternationalPOSLanguageCodeEnum
      */
     @JsonGetter("LocalPOSLanguageCode")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CardDetailsResponseLocalPOSLanguageCodeEnum getLocalPOSLanguageCode() {
+    public CardDetailsResponseInternationalPOSLanguageCodeEnum getLocalPOSLanguageCode() {
         return localPOSLanguageCode;
     }
 
     /**
      * Setter for LocalPOSLanguageCode.
-     * POS language code. Language code: * `deu` - German * `fra` - French * `bul` - Bulgarian *
-     * `hrv` - Croatian * `ces` - Czech * `dan` - Danish * `fin` - Finnish * `eng` - English * `ell`
-     * - Greek * `zho` - Chinese * `hun` - Hungarian * `ita` - Italian * `ltz` - Luxembourgish *
-     * `msa` - Malay * `nld` - Dutch * `nob` - Norwegian, Bokmal * `urd` - Urdu * `pol` - Polish *
-     * `por` - Portuguese * `ron` - Romanian * `rus` - Russian * `slk` - Slovak * `slv` - Slovenian
-     * * `spa` - Spanish * `swe` - Swedish * `tur` - Turkish * `tha` - Thai * `fil` - Filipino *
-     * `est` - Estonian * `lav` - Latvian * `lit` - Lithuanian
-     * @param localPOSLanguageCode Value for CardDetailsResponseLocalPOSLanguageCodeEnum
+     * @param localPOSLanguageCode Value for CardDetailsResponseInternationalPOSLanguageCodeEnum
      */
     @JsonSetter("LocalPOSLanguageCode")
-    public void setLocalPOSLanguageCode(CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode) {
+    public void setLocalPOSLanguageCode(CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode) {
         this.localPOSLanguageCode = localPOSLanguageCode;
     }
 
@@ -2400,8 +2289,6 @@ public class CardDetailsResponse {
 
     /**
      * Getter for RenewedCardReissueSetting.
-     * Reissue setting of the renewed new card. Reissue Setting: * `True` - Card will be sent to
-     * production * `False` - Parent Card is Dormant or the Card is not to be produced
      * @return Returns the CardDetailsResponseRenewedCardReissueSettingEnum
      */
     @JsonGetter("RenewedCardReissueSetting")
@@ -2412,8 +2299,6 @@ public class CardDetailsResponse {
 
     /**
      * Setter for RenewedCardReissueSetting.
-     * Reissue setting of the renewed new card. Reissue Setting: * `True` - Card will be sent to
-     * production * `False` - Parent Card is Dormant or the Card is not to be produced
      * @param renewedCardReissueSetting Value for CardDetailsResponseRenewedCardReissueSettingEnum
      */
     @JsonSetter("RenewedCardReissueSetting")
@@ -2587,43 +2472,39 @@ public class CardDetailsResponse {
 
     /**
      * Getter for CardDeliveryAddress.
-     * Delivery address.
-     * @return Returns the CardDetailsResponseCardDeliveryAddress
+     * @return Returns the CardDeliveryAddress
      */
     @JsonGetter("CardDeliveryAddress")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CardDetailsResponseCardDeliveryAddress getCardDeliveryAddress() {
+    public CardDeliveryAddress getCardDeliveryAddress() {
         return cardDeliveryAddress;
     }
 
     /**
      * Setter for CardDeliveryAddress.
-     * Delivery address.
-     * @param cardDeliveryAddress Value for CardDetailsResponseCardDeliveryAddress
+     * @param cardDeliveryAddress Value for CardDeliveryAddress
      */
     @JsonSetter("CardDeliveryAddress")
-    public void setCardDeliveryAddress(CardDetailsResponseCardDeliveryAddress cardDeliveryAddress) {
+    public void setCardDeliveryAddress(CardDeliveryAddress cardDeliveryAddress) {
         this.cardDeliveryAddress = cardDeliveryAddress;
     }
 
     /**
      * Getter for PINDeliveryAddress.
-     * Delivery address.
-     * @return Returns the CardDetailsResponsePINDeliveryAddress
+     * @return Returns the PINDeliveryAddress
      */
     @JsonGetter("PINDeliveryAddress")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CardDetailsResponsePINDeliveryAddress getPINDeliveryAddress() {
+    public PINDeliveryAddress getPINDeliveryAddress() {
         return pINDeliveryAddress;
     }
 
     /**
      * Setter for PINDeliveryAddress.
-     * Delivery address.
-     * @param pINDeliveryAddress Value for CardDetailsResponsePINDeliveryAddress
+     * @param pINDeliveryAddress Value for PINDeliveryAddress
      */
     @JsonSetter("PINDeliveryAddress")
-    public void setPINDeliveryAddress(CardDetailsResponsePINDeliveryAddress pINDeliveryAddress) {
+    public void setPINDeliveryAddress(PINDeliveryAddress pINDeliveryAddress) {
         this.pINDeliveryAddress = pINDeliveryAddress;
     }
 
@@ -2766,6 +2647,7 @@ public class CardDetailsResponse {
                 .unblockAllowed(getUnblockAllowed())
                 .permanentBlockAllowed(getPermanentBlockAllowed())
                 .issueNumber(getIssueNumber())
+                .reissueSetting(getReissueSetting())
                 .internationalPOSLanguageID(getInternationalPOSLanguageID())
                 .internationalPOSLanguageCode(getInternationalPOSLanguageCode())
                 .localPOSLanguageID(getLocalPOSLanguageID())
@@ -2802,7 +2684,6 @@ public class CardDetailsResponse {
         builder.localCurrencyCode = internalGetLocalCurrencyCode();
         builder.localCurrencySymbol = internalGetLocalCurrencySymbol();
         builder.pAN = internalGetPAN();
-        builder.reissueSetting = internalGetReissueSetting();
         builder.cardTypeCode = internalGetCardTypeCode();
         builder.cardTypeId = internalGetCardTypeId();
         builder.cardTypeName = internalGetCardTypeName();
@@ -2853,11 +2734,11 @@ public class CardDetailsResponse {
         private Boolean unblockAllowed;
         private Boolean permanentBlockAllowed;
         private Integer issueNumber;
-        private OptionalNullable<CardDetailsResponseReissueSettingEnum> reissueSetting;
+        private Object reissueSetting;
         private CardDetailsResponseInternationalPOSLanguageIDEnum internationalPOSLanguageID;
         private CardDetailsResponseInternationalPOSLanguageCodeEnum internationalPOSLanguageCode;
-        private CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID;
-        private CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode;
+        private CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID;
+        private CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode;
         private OptionalNullable<String> cardTypeCode;
         private OptionalNullable<Integer> cardTypeId;
         private OptionalNullable<String> cardTypeName;
@@ -2898,8 +2779,8 @@ public class CardDetailsResponse {
         private OptionalNullable<String> effectiveDate;
         private OptionalNullable<String> lastModifiedDate;
         private OptionalNullable<String> bundleId;
-        private CardDetailsResponseCardDeliveryAddress cardDeliveryAddress;
-        private CardDetailsResponsePINDeliveryAddress pINDeliveryAddress;
+        private CardDeliveryAddress cardDeliveryAddress;
+        private PINDeliveryAddress pINDeliveryAddress;
         private OptionalNullable<List<CardDetailsResponseCardBlockSchedulesItemsAllOf0>> cardBlockSchedules;
         private ErrorStatus error;
         private String requestId;
@@ -3199,20 +3080,11 @@ public class CardDetailsResponse {
 
         /**
          * Setter for reissueSetting.
-         * @param  reissueSetting  CardDetailsResponseReissueSettingEnum value for reissueSetting.
+         * @param  reissueSetting  Object value for reissueSetting.
          * @return Builder
          */
-        public Builder reissueSetting(CardDetailsResponseReissueSettingEnum reissueSetting) {
-            this.reissueSetting = OptionalNullable.of(reissueSetting);
-            return this;
-        }
-
-        /**
-         * UnSetter for reissueSetting.
-         * @return Builder
-         */
-        public Builder unsetReissueSetting() {
-            reissueSetting = null;
+        public Builder reissueSetting(Object reissueSetting) {
+            this.reissueSetting = reissueSetting;
             return this;
         }
 
@@ -3242,24 +3114,24 @@ public class CardDetailsResponse {
 
         /**
          * Setter for localPOSLanguageID.
-         * @param  localPOSLanguageID  CardDetailsResponseLocalPOSLanguageIDEnum value for
+         * @param  localPOSLanguageID  CardDetailsResponseInternationalPOSLanguageIDEnum value for
          *         localPOSLanguageID.
          * @return Builder
          */
         public Builder localPOSLanguageID(
-                CardDetailsResponseLocalPOSLanguageIDEnum localPOSLanguageID) {
+                CardDetailsResponseInternationalPOSLanguageIDEnum localPOSLanguageID) {
             this.localPOSLanguageID = localPOSLanguageID;
             return this;
         }
 
         /**
          * Setter for localPOSLanguageCode.
-         * @param  localPOSLanguageCode  CardDetailsResponseLocalPOSLanguageCodeEnum value for
-         *         localPOSLanguageCode.
+         * @param  localPOSLanguageCode  CardDetailsResponseInternationalPOSLanguageCodeEnum value
+         *         for localPOSLanguageCode.
          * @return Builder
          */
         public Builder localPOSLanguageCode(
-                CardDetailsResponseLocalPOSLanguageCodeEnum localPOSLanguageCode) {
+                CardDetailsResponseInternationalPOSLanguageCodeEnum localPOSLanguageCode) {
             this.localPOSLanguageCode = localPOSLanguageCode;
             return this;
         }
@@ -3857,24 +3729,20 @@ public class CardDetailsResponse {
 
         /**
          * Setter for cardDeliveryAddress.
-         * @param  cardDeliveryAddress  CardDetailsResponseCardDeliveryAddress value for
-         *         cardDeliveryAddress.
+         * @param  cardDeliveryAddress  CardDeliveryAddress value for cardDeliveryAddress.
          * @return Builder
          */
-        public Builder cardDeliveryAddress(
-                CardDetailsResponseCardDeliveryAddress cardDeliveryAddress) {
+        public Builder cardDeliveryAddress(CardDeliveryAddress cardDeliveryAddress) {
             this.cardDeliveryAddress = cardDeliveryAddress;
             return this;
         }
 
         /**
          * Setter for pINDeliveryAddress.
-         * @param  pINDeliveryAddress  CardDetailsResponsePINDeliveryAddress value for
-         *         pINDeliveryAddress.
+         * @param  pINDeliveryAddress  PINDeliveryAddress value for pINDeliveryAddress.
          * @return Builder
          */
-        public Builder pINDeliveryAddress(
-                CardDetailsResponsePINDeliveryAddress pINDeliveryAddress) {
+        public Builder pINDeliveryAddress(PINDeliveryAddress pINDeliveryAddress) {
             this.pINDeliveryAddress = pINDeliveryAddress;
             return this;
         }

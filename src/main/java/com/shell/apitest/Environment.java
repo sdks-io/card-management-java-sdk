@@ -17,6 +17,8 @@ import java.util.TreeMap;
  * Environment to be used.
  */
 public enum Environment {
+    SIT,
+
     PRODUCTION;
 
 
@@ -24,9 +26,11 @@ public enum Environment {
     private String value;
 
     static {
-        PRODUCTION.value = "production";
+        SIT.value = "SIT";
+        PRODUCTION.value = "Production";
 
-        valueMap.put("production", PRODUCTION);
+        valueMap.put("SIT", SIT);
+        valueMap.put("Production", PRODUCTION);
     }
 
     /**

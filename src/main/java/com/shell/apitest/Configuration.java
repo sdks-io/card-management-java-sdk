@@ -11,7 +11,6 @@ import com.shell.apitest.authentication.BasicAuthModel;
 import com.shell.apitest.authentication.BearerTokenCredentials;
 import com.shell.apitest.authentication.BearerTokenModel;
 import com.shell.apitest.http.client.ReadonlyHttpClientConfiguration;
-import com.shell.apitest.models.UrlEnum;
 
 /**
  * Configuration Interface for the library.
@@ -23,12 +22,6 @@ public interface Configuration {
      * @return a copy of environment
      */
     Environment getEnvironment();
-
-    /**
-     * This variable specifies the type of environment. Environments:   * `api.shell.com` - Production   * `api-test.shell.com` - SIT
-     * @return a copy of url
-     */
-    UrlEnum getUrl();
 
     /**
      * Http Client Configuration instance.

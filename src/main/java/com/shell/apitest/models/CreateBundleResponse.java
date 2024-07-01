@@ -9,16 +9,24 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for CreateBundleResponse type.
  */
 public class CreateBundleResponse {
-    private String requestId;
-    private String status;
-    private List<CreateBundleResponseDataItems> data;
-    private List<ErrorDetails> errors;
+    private OptionalNullable<String> requestId;
+    private ErrorStatus bundleCreationStatus;
+    private String bundleId;
+    private ErrorStatus dayTimeRestrictionStatus;
+    private String dayTimeRestrictionProfileId;
+    private ErrorStatus locationRestrictionStatus;
+    private String locationRestrictionProfileId;
+    private ErrorStatus usageRestrictionStatus;
+    private ErrorStatus productRestrictionStatus;
+    private BundleCardRestrictionStatus cards;
+    private ErrorStatus error;
 
     /**
      * Default constructor.
@@ -29,99 +37,309 @@ public class CreateBundleResponse {
     /**
      * Initialization constructor.
      * @param  requestId  String value for requestId.
-     * @param  status  String value for status.
-     * @param  data  List of CreateBundleResponseDataItems value for data.
-     * @param  errors  List of ErrorDetails value for errors.
+     * @param  bundleCreationStatus  ErrorStatus value for bundleCreationStatus.
+     * @param  bundleId  String value for bundleId.
+     * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+     * @param  dayTimeRestrictionProfileId  String value for dayTimeRestrictionProfileId.
+     * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+     * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
+     * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+     * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+     * @param  cards  BundleCardRestrictionStatus value for cards.
+     * @param  error  ErrorStatus value for error.
      */
     public CreateBundleResponse(
             String requestId,
-            String status,
-            List<CreateBundleResponseDataItems> data,
-            List<ErrorDetails> errors) {
+            ErrorStatus bundleCreationStatus,
+            String bundleId,
+            ErrorStatus dayTimeRestrictionStatus,
+            String dayTimeRestrictionProfileId,
+            ErrorStatus locationRestrictionStatus,
+            String locationRestrictionProfileId,
+            ErrorStatus usageRestrictionStatus,
+            ErrorStatus productRestrictionStatus,
+            BundleCardRestrictionStatus cards,
+            ErrorStatus error) {
+        this.requestId = OptionalNullable.of(requestId);
+        this.bundleCreationStatus = bundleCreationStatus;
+        this.bundleId = bundleId;
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+        this.dayTimeRestrictionProfileId = dayTimeRestrictionProfileId;
+        this.locationRestrictionStatus = locationRestrictionStatus;
+        this.locationRestrictionProfileId = locationRestrictionProfileId;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.productRestrictionStatus = productRestrictionStatus;
+        this.cards = cards;
+        this.error = error;
+    }
+
+    /**
+     * Initialization constructor.
+     * @param  requestId  String value for requestId.
+     * @param  bundleCreationStatus  ErrorStatus value for bundleCreationStatus.
+     * @param  bundleId  String value for bundleId.
+     * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+     * @param  dayTimeRestrictionProfileId  String value for dayTimeRestrictionProfileId.
+     * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+     * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
+     * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+     * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+     * @param  cards  BundleCardRestrictionStatus value for cards.
+     * @param  error  ErrorStatus value for error.
+     */
+
+    protected CreateBundleResponse(OptionalNullable<String> requestId,
+            ErrorStatus bundleCreationStatus, String bundleId, ErrorStatus dayTimeRestrictionStatus,
+            String dayTimeRestrictionProfileId, ErrorStatus locationRestrictionStatus,
+            String locationRestrictionProfileId, ErrorStatus usageRestrictionStatus,
+            ErrorStatus productRestrictionStatus, BundleCardRestrictionStatus cards,
+            ErrorStatus error) {
         this.requestId = requestId;
-        this.status = status;
-        this.data = data;
-        this.errors = errors;
+        this.bundleCreationStatus = bundleCreationStatus;
+        this.bundleId = bundleId;
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+        this.dayTimeRestrictionProfileId = dayTimeRestrictionProfileId;
+        this.locationRestrictionStatus = locationRestrictionStatus;
+        this.locationRestrictionProfileId = locationRestrictionProfileId;
+        this.usageRestrictionStatus = usageRestrictionStatus;
+        this.productRestrictionStatus = productRestrictionStatus;
+        this.cards = cards;
+        this.error = error;
+    }
+
+    /**
+     * Internal Getter for RequestId.
+     * Request Id of the API call
+     * @return Returns the Internal String
+     */
+    @JsonGetter("RequestId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetRequestId() {
+        return this.requestId;
     }
 
     /**
      * Getter for RequestId.
-     * Request Id
+     * Request Id of the API call
      * @return Returns the String
      */
-    @JsonGetter("RequestId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getRequestId() {
-        return requestId;
+        return OptionalNullable.getFrom(requestId);
     }
 
     /**
      * Setter for RequestId.
-     * Request Id
+     * Request Id of the API call
      * @param requestId Value for String
      */
     @JsonSetter("RequestId")
     public void setRequestId(String requestId) {
-        this.requestId = requestId;
+        this.requestId = OptionalNullable.of(requestId);
     }
 
     /**
-     * Getter for Status.
-     * Response status
+     * UnSetter for RequestId.
+     * Request Id of the API call
+     */
+    public void unsetRequestId() {
+        requestId = null;
+    }
+
+    /**
+     * Getter for BundleCreationStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("BundleCreationStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getBundleCreationStatus() {
+        return bundleCreationStatus;
+    }
+
+    /**
+     * Setter for BundleCreationStatus.
+     * @param bundleCreationStatus Value for ErrorStatus
+     */
+    @JsonSetter("BundleCreationStatus")
+    public void setBundleCreationStatus(ErrorStatus bundleCreationStatus) {
+        this.bundleCreationStatus = bundleCreationStatus;
+    }
+
+    /**
+     * Getter for BundleId.
+     * Identifier of the newly created bundle
      * @return Returns the String
      */
-    @JsonGetter("Status")
+    @JsonGetter("BundleId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getStatus() {
-        return status;
+    public String getBundleId() {
+        return bundleId;
     }
 
     /**
-     * Setter for Status.
-     * Response status
-     * @param status Value for String
+     * Setter for BundleId.
+     * Identifier of the newly created bundle
+     * @param bundleId Value for String
      */
-    @JsonSetter("Status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonSetter("BundleId")
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
     }
 
     /**
-     * Getter for Data.
-     * @return Returns the List of CreateBundleResponseDataItems
+     * Getter for DayTimeRestrictionStatus.
+     * @return Returns the ErrorStatus
      */
-    @JsonGetter("Data")
+    @JsonGetter("DayTimeRestrictionStatus")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<CreateBundleResponseDataItems> getData() {
-        return data;
+    public ErrorStatus getDayTimeRestrictionStatus() {
+        return dayTimeRestrictionStatus;
     }
 
     /**
-     * Setter for Data.
-     * @param data Value for List of CreateBundleResponseDataItems
+     * Setter for DayTimeRestrictionStatus.
+     * @param dayTimeRestrictionStatus Value for ErrorStatus
      */
-    @JsonSetter("Data")
-    public void setData(List<CreateBundleResponseDataItems> data) {
-        this.data = data;
+    @JsonSetter("DayTimeRestrictionStatus")
+    public void setDayTimeRestrictionStatus(ErrorStatus dayTimeRestrictionStatus) {
+        this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
     }
 
     /**
-     * Getter for Errors.
-     * @return Returns the List of ErrorDetails
+     * Getter for DayTimeRestrictionProfileId.
+     * Identifier of the day/time restriction profile created
+     * @return Returns the String
      */
-    @JsonGetter("Errors")
+    @JsonGetter("DayTimeRestrictionProfileId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<ErrorDetails> getErrors() {
-        return errors;
+    public String getDayTimeRestrictionProfileId() {
+        return dayTimeRestrictionProfileId;
     }
 
     /**
-     * Setter for Errors.
-     * @param errors Value for List of ErrorDetails
+     * Setter for DayTimeRestrictionProfileId.
+     * Identifier of the day/time restriction profile created
+     * @param dayTimeRestrictionProfileId Value for String
      */
-    @JsonSetter("Errors")
-    public void setErrors(List<ErrorDetails> errors) {
-        this.errors = errors;
+    @JsonSetter("DayTimeRestrictionProfileId")
+    public void setDayTimeRestrictionProfileId(String dayTimeRestrictionProfileId) {
+        this.dayTimeRestrictionProfileId = dayTimeRestrictionProfileId;
+    }
+
+    /**
+     * Getter for LocationRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("LocationRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getLocationRestrictionStatus() {
+        return locationRestrictionStatus;
+    }
+
+    /**
+     * Setter for LocationRestrictionStatus.
+     * @param locationRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("LocationRestrictionStatus")
+    public void setLocationRestrictionStatus(ErrorStatus locationRestrictionStatus) {
+        this.locationRestrictionStatus = locationRestrictionStatus;
+    }
+
+    /**
+     * Getter for LocationRestrictionProfileId.
+     * Identifier of the location restriction profile created
+     * @return Returns the String
+     */
+    @JsonGetter("LocationRestrictionProfileId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getLocationRestrictionProfileId() {
+        return locationRestrictionProfileId;
+    }
+
+    /**
+     * Setter for LocationRestrictionProfileId.
+     * Identifier of the location restriction profile created
+     * @param locationRestrictionProfileId Value for String
+     */
+    @JsonSetter("LocationRestrictionProfileId")
+    public void setLocationRestrictionProfileId(String locationRestrictionProfileId) {
+        this.locationRestrictionProfileId = locationRestrictionProfileId;
+    }
+
+    /**
+     * Getter for UsageRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("UsageRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getUsageRestrictionStatus() {
+        return usageRestrictionStatus;
+    }
+
+    /**
+     * Setter for UsageRestrictionStatus.
+     * @param usageRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("UsageRestrictionStatus")
+    public void setUsageRestrictionStatus(ErrorStatus usageRestrictionStatus) {
+        this.usageRestrictionStatus = usageRestrictionStatus;
+    }
+
+    /**
+     * Getter for ProductRestrictionStatus.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("ProductRestrictionStatus")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getProductRestrictionStatus() {
+        return productRestrictionStatus;
+    }
+
+    /**
+     * Setter for ProductRestrictionStatus.
+     * @param productRestrictionStatus Value for ErrorStatus
+     */
+    @JsonSetter("ProductRestrictionStatus")
+    public void setProductRestrictionStatus(ErrorStatus productRestrictionStatus) {
+        this.productRestrictionStatus = productRestrictionStatus;
+    }
+
+    /**
+     * Getter for Cards.
+     * @return Returns the BundleCardRestrictionStatus
+     */
+    @JsonGetter("Cards")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public BundleCardRestrictionStatus getCards() {
+        return cards;
+    }
+
+    /**
+     * Setter for Cards.
+     * @param cards Value for BundleCardRestrictionStatus
+     */
+    @JsonSetter("Cards")
+    public void setCards(BundleCardRestrictionStatus cards) {
+        this.cards = cards;
+    }
+
+    /**
+     * Getter for Error.
+     * @return Returns the ErrorStatus
+     */
+    @JsonGetter("Error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public ErrorStatus getError() {
+        return error;
+    }
+
+    /**
+     * Setter for Error.
+     * @param error Value for ErrorStatus
+     */
+    @JsonSetter("Error")
+    public void setError(ErrorStatus error) {
+        this.error = error;
     }
 
     /**
@@ -130,8 +348,14 @@ public class CreateBundleResponse {
      */
     @Override
     public String toString() {
-        return "CreateBundleResponse [" + "requestId=" + requestId + ", status=" + status
-                + ", data=" + data + ", errors=" + errors + "]";
+        return "CreateBundleResponse [" + "requestId=" + requestId + ", bundleCreationStatus="
+                + bundleCreationStatus + ", bundleId=" + bundleId + ", dayTimeRestrictionStatus="
+                + dayTimeRestrictionStatus + ", dayTimeRestrictionProfileId="
+                + dayTimeRestrictionProfileId + ", locationRestrictionStatus="
+                + locationRestrictionStatus + ", locationRestrictionProfileId="
+                + locationRestrictionProfileId + ", usageRestrictionStatus="
+                + usageRestrictionStatus + ", productRestrictionStatus=" + productRestrictionStatus
+                + ", cards=" + cards + ", error=" + error + "]";
     }
 
     /**
@@ -141,10 +365,17 @@ public class CreateBundleResponse {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
-                .requestId(getRequestId())
-                .status(getStatus())
-                .data(getData())
-                .errors(getErrors());
+                .bundleCreationStatus(getBundleCreationStatus())
+                .bundleId(getBundleId())
+                .dayTimeRestrictionStatus(getDayTimeRestrictionStatus())
+                .dayTimeRestrictionProfileId(getDayTimeRestrictionProfileId())
+                .locationRestrictionStatus(getLocationRestrictionStatus())
+                .locationRestrictionProfileId(getLocationRestrictionProfileId())
+                .usageRestrictionStatus(getUsageRestrictionStatus())
+                .productRestrictionStatus(getProductRestrictionStatus())
+                .cards(getCards())
+                .error(getError());
+        builder.requestId = internalGetRequestId();
         return builder;
     }
 
@@ -152,10 +383,17 @@ public class CreateBundleResponse {
      * Class to build instances of {@link CreateBundleResponse}.
      */
     public static class Builder {
-        private String requestId;
-        private String status;
-        private List<CreateBundleResponseDataItems> data;
-        private List<ErrorDetails> errors;
+        private OptionalNullable<String> requestId;
+        private ErrorStatus bundleCreationStatus;
+        private String bundleId;
+        private ErrorStatus dayTimeRestrictionStatus;
+        private String dayTimeRestrictionProfileId;
+        private ErrorStatus locationRestrictionStatus;
+        private String locationRestrictionProfileId;
+        private ErrorStatus usageRestrictionStatus;
+        private ErrorStatus productRestrictionStatus;
+        private BundleCardRestrictionStatus cards;
+        private ErrorStatus error;
 
 
 
@@ -165,37 +403,116 @@ public class CreateBundleResponse {
          * @return Builder
          */
         public Builder requestId(String requestId) {
-            this.requestId = requestId;
+            this.requestId = OptionalNullable.of(requestId);
             return this;
         }
 
         /**
-         * Setter for status.
-         * @param  status  String value for status.
+         * UnSetter for requestId.
          * @return Builder
          */
-        public Builder status(String status) {
-            this.status = status;
+        public Builder unsetRequestId() {
+            requestId = null;
             return this;
         }
 
         /**
-         * Setter for data.
-         * @param  data  List of CreateBundleResponseDataItems value for data.
+         * Setter for bundleCreationStatus.
+         * @param  bundleCreationStatus  ErrorStatus value for bundleCreationStatus.
          * @return Builder
          */
-        public Builder data(List<CreateBundleResponseDataItems> data) {
-            this.data = data;
+        public Builder bundleCreationStatus(ErrorStatus bundleCreationStatus) {
+            this.bundleCreationStatus = bundleCreationStatus;
             return this;
         }
 
         /**
-         * Setter for errors.
-         * @param  errors  List of ErrorDetails value for errors.
+         * Setter for bundleId.
+         * @param  bundleId  String value for bundleId.
          * @return Builder
          */
-        public Builder errors(List<ErrorDetails> errors) {
-            this.errors = errors;
+        public Builder bundleId(String bundleId) {
+            this.bundleId = bundleId;
+            return this;
+        }
+
+        /**
+         * Setter for dayTimeRestrictionStatus.
+         * @param  dayTimeRestrictionStatus  ErrorStatus value for dayTimeRestrictionStatus.
+         * @return Builder
+         */
+        public Builder dayTimeRestrictionStatus(ErrorStatus dayTimeRestrictionStatus) {
+            this.dayTimeRestrictionStatus = dayTimeRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for dayTimeRestrictionProfileId.
+         * @param  dayTimeRestrictionProfileId  String value for dayTimeRestrictionProfileId.
+         * @return Builder
+         */
+        public Builder dayTimeRestrictionProfileId(String dayTimeRestrictionProfileId) {
+            this.dayTimeRestrictionProfileId = dayTimeRestrictionProfileId;
+            return this;
+        }
+
+        /**
+         * Setter for locationRestrictionStatus.
+         * @param  locationRestrictionStatus  ErrorStatus value for locationRestrictionStatus.
+         * @return Builder
+         */
+        public Builder locationRestrictionStatus(ErrorStatus locationRestrictionStatus) {
+            this.locationRestrictionStatus = locationRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for locationRestrictionProfileId.
+         * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
+         * @return Builder
+         */
+        public Builder locationRestrictionProfileId(String locationRestrictionProfileId) {
+            this.locationRestrictionProfileId = locationRestrictionProfileId;
+            return this;
+        }
+
+        /**
+         * Setter for usageRestrictionStatus.
+         * @param  usageRestrictionStatus  ErrorStatus value for usageRestrictionStatus.
+         * @return Builder
+         */
+        public Builder usageRestrictionStatus(ErrorStatus usageRestrictionStatus) {
+            this.usageRestrictionStatus = usageRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for productRestrictionStatus.
+         * @param  productRestrictionStatus  ErrorStatus value for productRestrictionStatus.
+         * @return Builder
+         */
+        public Builder productRestrictionStatus(ErrorStatus productRestrictionStatus) {
+            this.productRestrictionStatus = productRestrictionStatus;
+            return this;
+        }
+
+        /**
+         * Setter for cards.
+         * @param  cards  BundleCardRestrictionStatus value for cards.
+         * @return Builder
+         */
+        public Builder cards(BundleCardRestrictionStatus cards) {
+            this.cards = cards;
+            return this;
+        }
+
+        /**
+         * Setter for error.
+         * @param  error  ErrorStatus value for error.
+         * @return Builder
+         */
+        public Builder error(ErrorStatus error) {
+            this.error = error;
             return this;
         }
 
@@ -204,7 +521,10 @@ public class CreateBundleResponse {
          * @return {@link CreateBundleResponse}
          */
         public CreateBundleResponse build() {
-            return new CreateBundleResponse(requestId, status, data, errors);
+            return new CreateBundleResponse(requestId, bundleCreationStatus, bundleId,
+                    dayTimeRestrictionStatus, dayTimeRestrictionProfileId,
+                    locationRestrictionStatus, locationRestrictionProfileId, usageRestrictionStatus,
+                    productRestrictionStatus, cards, error);
         }
     }
 }

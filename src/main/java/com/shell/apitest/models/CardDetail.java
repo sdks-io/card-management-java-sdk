@@ -39,10 +39,10 @@ public class CardDetail {
     private Boolean isNewCardGroup;
     private Boolean embossCardGroup;
     private Integer cardDeliveryType;
-    private CardDeliveryContact cardContact;
+    private CardContact cardContact;
     private OptionalNullable<Integer> pINDeliveryAddressType;
     private Integer pINAdviceType;
-    private PINDeliveryContact pINContact;
+    private PINContact pINContact;
     private Boolean notifyCaller;
     private OptionalNullable<String> caller;
     private Boolean notifyCallerOnSync;
@@ -88,9 +88,9 @@ public class CardDetail {
      * @param  cardGroupName  String value for cardGroupName.
      * @param  isNewCardGroup  Boolean value for isNewCardGroup.
      * @param  embossCardGroup  Boolean value for embossCardGroup.
-     * @param  cardContact  CardDeliveryContact value for cardContact.
+     * @param  cardContact  CardContact value for cardContact.
      * @param  pINDeliveryAddressType  Integer value for pINDeliveryAddressType.
-     * @param  pINContact  PINDeliveryContact value for pINContact.
+     * @param  pINContact  PINContact value for pINContact.
      * @param  notifyCaller  Boolean value for notifyCaller.
      * @param  caller  String value for caller.
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
@@ -129,9 +129,9 @@ public class CardDetail {
             String cardGroupName,
             Boolean isNewCardGroup,
             Boolean embossCardGroup,
-            CardDeliveryContact cardContact,
+            CardContact cardContact,
             Integer pINDeliveryAddressType,
-            PINDeliveryContact pINContact,
+            PINContact pINContact,
             Boolean notifyCaller,
             String caller,
             Boolean notifyCallerOnSync,
@@ -211,9 +211,9 @@ public class CardDetail {
      * @param  cardGroupName  String value for cardGroupName.
      * @param  isNewCardGroup  Boolean value for isNewCardGroup.
      * @param  embossCardGroup  Boolean value for embossCardGroup.
-     * @param  cardContact  CardDeliveryContact value for cardContact.
+     * @param  cardContact  CardContact value for cardContact.
      * @param  pINDeliveryAddressType  Integer value for pINDeliveryAddressType.
-     * @param  pINContact  PINDeliveryContact value for pINContact.
+     * @param  pINContact  PINContact value for pINContact.
      * @param  notifyCaller  Boolean value for notifyCaller.
      * @param  caller  String value for caller.
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
@@ -240,8 +240,8 @@ public class CardDetail {
             String selfSelectedEncryptedPIN, OptionalNullable<String> selfSelectedPINKeyID,
             OptionalNullable<String> selfSelectedPINSessionKey,
             OptionalNullable<Integer> cardGroupId, OptionalNullable<String> cardGroupName,
-            Boolean isNewCardGroup, Boolean embossCardGroup, CardDeliveryContact cardContact,
-            OptionalNullable<Integer> pINDeliveryAddressType, PINDeliveryContact pINContact,
+            Boolean isNewCardGroup, Boolean embossCardGroup, CardContact cardContact,
+            OptionalNullable<Integer> pINDeliveryAddressType, PINContact pINContact,
             Boolean notifyCaller, OptionalNullable<String> caller, Boolean notifyCallerOnSync,
             Boolean validateFleetId, OptionalNullable<String> fleetOption,
             OptionalNullable<String> bundleId, OptionalNullable<String> usageRestrictionAction,
@@ -1164,24 +1164,20 @@ public class CardDetail {
 
     /**
      * Getter for CardContact.
-     * Request entity object for CardDeliveryContact Mandatory when CardDeliveryType is 2 else
-     * ignored.
-     * @return Returns the CardDeliveryContact
+     * @return Returns the CardContact
      */
     @JsonGetter("CardContact")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public CardDeliveryContact getCardContact() {
+    public CardContact getCardContact() {
         return cardContact;
     }
 
     /**
      * Setter for CardContact.
-     * Request entity object for CardDeliveryContact Mandatory when CardDeliveryType is 2 else
-     * ignored.
-     * @param cardContact Value for CardDeliveryContact
+     * @param cardContact Value for CardContact
      */
     @JsonSetter("CardContact")
-    public void setCardContact(CardDeliveryContact cardContact) {
+    public void setCardContact(CardContact cardContact) {
         this.cardContact = cardContact;
     }
 
@@ -1254,24 +1250,20 @@ public class CardDetail {
 
     /**
      * Getter for PINContact.
-     * Request entity object for PINDeliveryContact Mandatory when PINDeliveryAddressType is ‘3’
-     * (New delivery address). Else, ignored.
-     * @return Returns the PINDeliveryContact
+     * @return Returns the PINContact
      */
     @JsonGetter("PINContact")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public PINDeliveryContact getPINContact() {
+    public PINContact getPINContact() {
         return pINContact;
     }
 
     /**
      * Setter for PINContact.
-     * Request entity object for PINDeliveryContact Mandatory when PINDeliveryAddressType is ‘3’
-     * (New delivery address). Else, ignored.
-     * @param pINContact Value for PINDeliveryContact
+     * @param pINContact Value for PINContact
      */
     @JsonSetter("PINContact")
-    public void setPINContact(PINDeliveryContact pINContact) {
+    public void setPINContact(PINContact pINContact) {
         this.pINContact = pINContact;
     }
 
@@ -1765,9 +1757,6 @@ public class CardDetail {
 
     /**
      * Getter for AutoRenew.
-     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
-     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
-     * will not be Reissued.
      * @return Returns the CardDetailAutoRenewEnum
      */
     @JsonGetter("AutoRenew")
@@ -1778,9 +1767,6 @@ public class CardDetail {
 
     /**
      * Setter for AutoRenew.
-     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
-     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
-     * will not be Reissued.
      * @param autoRenew Value for CardDetailAutoRenewEnum
      */
     @JsonSetter("AutoRenew")
@@ -1889,9 +1875,9 @@ public class CardDetail {
         private OptionalNullable<String> cardGroupName;
         private Boolean isNewCardGroup;
         private Boolean embossCardGroup;
-        private CardDeliveryContact cardContact;
+        private CardContact cardContact;
         private OptionalNullable<Integer> pINDeliveryAddressType;
-        private PINDeliveryContact pINContact;
+        private PINContact pINContact;
         private Boolean notifyCaller;
         private OptionalNullable<String> caller;
         private Boolean notifyCallerOnSync;
@@ -2298,10 +2284,10 @@ public class CardDetail {
 
         /**
          * Setter for cardContact.
-         * @param  cardContact  CardDeliveryContact value for cardContact.
+         * @param  cardContact  CardContact value for cardContact.
          * @return Builder
          */
-        public Builder cardContact(CardDeliveryContact cardContact) {
+        public Builder cardContact(CardContact cardContact) {
             this.cardContact = cardContact;
             return this;
         }
@@ -2327,10 +2313,10 @@ public class CardDetail {
 
         /**
          * Setter for pINContact.
-         * @param  pINContact  PINDeliveryContact value for pINContact.
+         * @param  pINContact  PINContact value for pINContact.
          * @return Builder
          */
-        public Builder pINContact(PINDeliveryContact pINContact) {
+        public Builder pINContact(PINContact pINContact) {
             this.pINContact = pINContact;
             return this;
         }

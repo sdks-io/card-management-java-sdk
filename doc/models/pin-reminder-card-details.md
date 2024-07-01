@@ -15,9 +15,9 @@ Request entity object for PINReminderCardDetails
 | `PANID` | `Integer` | Optional | PAN ID - Unique PAN ID<br>Optional if Either CardId or PAN AND  ExpiryDate is passed, else Mandatory. Example: 123456. <br/>Note:PANID parameter will be considered only if CardId is not provided | Integer getPANID() | setPANID(Integer pANID) |
 | `PAN` | `String` | Optional | PAN of the card.<br>Optional if Either CardId or PANID is passed, else Mandatory. <br/>Note:PAN & ExpiryDate parameters will be considered only if CardId & PANID are not provided | String getPAN() | setPAN(String pAN) |
 | `CardExpiryDate` | `String` | Optional | Expiry date of the card.<br>Mandatory if Either PAN or PANID is passed, else optional.<br>Format: yyyyMMdd | String getCardExpiryDate() | setCardExpiryDate(String cardExpiryDate) |
-| `PINAdviceType` | `int` | Required | PIN delivery method.<br>Mandatory<br>Allowed Values:<br><br>1. Paper<br>2. Email<br>3. SMS<br>**Constraints**: `>= 1`, `<= 3` | int getPINAdviceType() | setPINAdviceType(int pINAdviceType) |
+| `PINAdviceType` | `int` | Required | PIN delivery method.<br>Mandatory<br>Allowed Values:<br><br>1. Paper<br><br>2. Email<br><br>3. SMS<br>**Constraints**: `>= 1`, `<= 3` | int getPINAdviceType() | setPINAdviceType(int pINAdviceType) |
 | `PINContactType` | `Integer` | Optional | PIN Contact Type.<br>Mandatory<br>Allowed Values:<br><br>1. Use PIN Delivery contact details stored previously for this card<br>2. Use Card Delivery contact details stored previously for this card<br>3. Use default PIN Delivery contact details stored for this customer<br>4. Use new specific contact for PIN Reminder only<br><br>Note: - PINContactType “3” is only allowed for Paper delivery<br>**Constraints**: `>= 1`, `<= 4` | Integer getPINContactType() | setPINContactType(Integer pINContactType) |
-| `PINDeliverTo` | [`PINDeliveryDetails`](../../doc/models/pin-delivery-details.md) | Optional | PINDeliverDetails entity. The fields of this entity are described below.<br>This is mandatory if PINContactType is 4 else optional and ignored. | PINDeliveryDetails getPINDeliverTo() | setPINDeliverTo(PINDeliveryDetails pINDeliverTo) |
+| `PINDeliverTo` | [`PINDeliverTo`](../../doc/models/pin-deliver-to.md) | Optional | - | PINDeliverTo getPINDeliverTo() | setPINDeliverTo(PINDeliverTo pINDeliverTo) |
 
 ## Example (as JSON)
 

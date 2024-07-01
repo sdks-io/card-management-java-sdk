@@ -18,16 +18,16 @@ import java.util.List;
  */
 public class UpdateBundleRequest {
     private OptionalNullable<Integer> colCoId;
-    private OptionalNullable<Integer> payerId;
+    private OptionalNullable<Integer> colCoCode;
+    private OptionalNullable<String> payerId;
+    private OptionalNullable<String> payerNumber;
     private OptionalNullable<Integer> accountId;
+    private OptionalNullable<String> accountNumber;
     private String bundleId;
     private String requestAction;
     private List<String> cards;
     private String usageRestrictionAction;
-    private BundleRestriction restrictions;
-    private OptionalNullable<Integer> colCoCode;
-    private OptionalNullable<String> payerNumber;
-    private OptionalNullable<String> accountNumber;
+    private BundleRestrictionUpdate restrictions;
 
     /**
      * Default constructor.
@@ -39,72 +39,72 @@ public class UpdateBundleRequest {
      * Initialization constructor.
      * @param  bundleId  String value for bundleId.
      * @param  requestAction  String value for requestAction.
-     * @param  colCoId  Integer value for colCoId.
-     * @param  payerId  Integer value for payerId.
-     * @param  accountId  Integer value for accountId.
      * @param  cards  List of String value for cards.
      * @param  usageRestrictionAction  String value for usageRestrictionAction.
-     * @param  restrictions  BundleRestriction value for restrictions.
+     * @param  colCoId  Integer value for colCoId.
      * @param  colCoCode  Integer value for colCoCode.
+     * @param  payerId  String value for payerId.
      * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
+     * @param  restrictions  BundleRestrictionUpdate value for restrictions.
      */
     public UpdateBundleRequest(
             String bundleId,
             String requestAction,
-            Integer colCoId,
-            Integer payerId,
-            Integer accountId,
             List<String> cards,
             String usageRestrictionAction,
-            BundleRestriction restrictions,
+            Integer colCoId,
             Integer colCoCode,
+            String payerId,
             String payerNumber,
-            String accountNumber) {
+            Integer accountId,
+            String accountNumber,
+            BundleRestrictionUpdate restrictions) {
         this.colCoId = OptionalNullable.of(colCoId);
+        this.colCoCode = OptionalNullable.of(colCoCode);
         this.payerId = OptionalNullable.of(payerId);
+        this.payerNumber = OptionalNullable.of(payerNumber);
         this.accountId = OptionalNullable.of(accountId);
+        this.accountNumber = OptionalNullable.of(accountNumber);
         this.bundleId = bundleId;
         this.requestAction = requestAction;
         this.cards = cards;
         this.usageRestrictionAction = usageRestrictionAction;
         this.restrictions = restrictions;
-        this.colCoCode = OptionalNullable.of(colCoCode);
-        this.payerNumber = OptionalNullable.of(payerNumber);
-        this.accountNumber = OptionalNullable.of(accountNumber);
     }
 
     /**
      * Initialization constructor.
      * @param  bundleId  String value for bundleId.
      * @param  requestAction  String value for requestAction.
-     * @param  colCoId  Integer value for colCoId.
-     * @param  payerId  Integer value for payerId.
-     * @param  accountId  Integer value for accountId.
      * @param  cards  List of String value for cards.
      * @param  usageRestrictionAction  String value for usageRestrictionAction.
-     * @param  restrictions  BundleRestriction value for restrictions.
+     * @param  colCoId  Integer value for colCoId.
      * @param  colCoCode  Integer value for colCoCode.
+     * @param  payerId  String value for payerId.
      * @param  payerNumber  String value for payerNumber.
+     * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
+     * @param  restrictions  BundleRestrictionUpdate value for restrictions.
      */
 
-    protected UpdateBundleRequest(String bundleId, String requestAction,
-            OptionalNullable<Integer> colCoId, OptionalNullable<Integer> payerId,
-            OptionalNullable<Integer> accountId, List<String> cards, String usageRestrictionAction,
-            BundleRestriction restrictions, OptionalNullable<Integer> colCoCode,
-            OptionalNullable<String> payerNumber, OptionalNullable<String> accountNumber) {
+    protected UpdateBundleRequest(String bundleId, String requestAction, List<String> cards,
+            String usageRestrictionAction, OptionalNullable<Integer> colCoId,
+            OptionalNullable<Integer> colCoCode, OptionalNullable<String> payerId,
+            OptionalNullable<String> payerNumber, OptionalNullable<Integer> accountId,
+            OptionalNullable<String> accountNumber, BundleRestrictionUpdate restrictions) {
         this.colCoId = colCoId;
+        this.colCoCode = colCoCode;
         this.payerId = payerId;
+        this.payerNumber = payerNumber;
         this.accountId = accountId;
+        this.accountNumber = accountNumber;
         this.bundleId = bundleId;
         this.requestAction = requestAction;
         this.cards = cards;
         this.usageRestrictionAction = usageRestrictionAction;
         this.restrictions = restrictions;
-        this.colCoCode = colCoCode;
-        this.payerNumber = payerNumber;
-        this.accountNumber = accountNumber;
     }
 
     /**
@@ -151,15 +151,62 @@ public class UpdateBundleRequest {
     }
 
     /**
+     * Internal Getter for ColCoCode.
+     * Collecting Company Code of the selected payer. Mandatory for serviced OUs such as Romania,
+     * Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if ColCoID is
+     * provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Internal Integer
+     */
+    @JsonGetter("ColCoCode")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Integer> internalGetColCoCode() {
+        return this.colCoCode;
+    }
+
+    /**
+     * Getter for ColCoCode.
+     * Collecting Company Code of the selected payer. Mandatory for serviced OUs such as Romania,
+     * Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if ColCoID is
+     * provided. Example: 86 for Philippines 5 for UK
+     * @return Returns the Integer
+     */
+    public Integer getColCoCode() {
+        return OptionalNullable.getFrom(colCoCode);
+    }
+
+    /**
+     * Setter for ColCoCode.
+     * Collecting Company Code of the selected payer. Mandatory for serviced OUs such as Romania,
+     * Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if ColCoID is
+     * provided. Example: 86 for Philippines 5 for UK
+     * @param colCoCode Value for Integer
+     */
+    @JsonSetter("ColCoCode")
+    public void setColCoCode(Integer colCoCode) {
+        this.colCoCode = OptionalNullable.of(colCoCode);
+    }
+
+    /**
+     * UnSetter for ColCoCode.
+     * Collecting Company Code of the selected payer. Mandatory for serviced OUs such as Romania,
+     * Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if ColCoID is
+     * provided. Example: 86 for Philippines 5 for UK
+     */
+    public void unsetColCoCode() {
+        colCoCode = null;
+    }
+
+    /**
      * Internal Getter for PayerId.
      * Payer Id of the selected payer. Either PayerId or PayerNumber or both must be passed.
      * Example: 123456
-     * @return Returns the Internal Integer
+     * @return Returns the Internal String
      */
     @JsonGetter("PayerId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Integer> internalGetPayerId() {
+    protected OptionalNullable<String> internalGetPayerId() {
         return this.payerId;
     }
 
@@ -167,9 +214,9 @@ public class UpdateBundleRequest {
      * Getter for PayerId.
      * Payer Id of the selected payer. Either PayerId or PayerNumber or both must be passed.
      * Example: 123456
-     * @return Returns the Integer
+     * @return Returns the String
      */
-    public Integer getPayerId() {
+    public String getPayerId() {
         return OptionalNullable.getFrom(payerId);
     }
 
@@ -177,10 +224,10 @@ public class UpdateBundleRequest {
      * Setter for PayerId.
      * Payer Id of the selected payer. Either PayerId or PayerNumber or both must be passed.
      * Example: 123456
-     * @param payerId Value for Integer
+     * @param payerId Value for String
      */
     @JsonSetter("PayerId")
-    public void setPayerId(Integer payerId) {
+    public void setPayerId(String payerId) {
         this.payerId = OptionalNullable.of(payerId);
     }
 
@@ -191,6 +238,49 @@ public class UpdateBundleRequest {
      */
     public void unsetPayerId() {
         payerId = null;
+    }
+
+    /**
+     * Internal Getter for PayerNumber.
+     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
+     * Example: GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("PayerNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetPayerNumber() {
+        return this.payerNumber;
+    }
+
+    /**
+     * Getter for PayerNumber.
+     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
+     * Example: GB000000123
+     * @return Returns the String
+     */
+    public String getPayerNumber() {
+        return OptionalNullable.getFrom(payerNumber);
+    }
+
+    /**
+     * Setter for PayerNumber.
+     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
+     * Example: GB000000123
+     * @param payerNumber Value for String
+     */
+    @JsonSetter("PayerNumber")
+    public void setPayerNumber(String payerNumber) {
+        this.payerNumber = OptionalNullable.of(payerNumber);
+    }
+
+    /**
+     * UnSetter for PayerNumber.
+     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
+     * Example: GB000000123
+     */
+    public void unsetPayerNumber() {
+        payerNumber = null;
     }
 
     /**
@@ -234,6 +324,49 @@ public class UpdateBundleRequest {
      */
     public void unsetAccountId() {
         accountId = null;
+    }
+
+    /**
+     * Internal Getter for AccountNumber.
+     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
+     * Example: GB000000123
+     * @return Returns the Internal String
+     */
+    @JsonGetter("AccountNumber")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetAccountNumber() {
+        return this.accountNumber;
+    }
+
+    /**
+     * Getter for AccountNumber.
+     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
+     * Example: GB000000123
+     * @return Returns the String
+     */
+    public String getAccountNumber() {
+        return OptionalNullable.getFrom(accountNumber);
+    }
+
+    /**
+     * Setter for AccountNumber.
+     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
+     * Example: GB000000123
+     * @param accountNumber Value for String
+     */
+    @JsonSetter("AccountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = OptionalNullable.of(accountNumber);
+    }
+
+    /**
+     * UnSetter for AccountNumber.
+     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
+     * Example: GB000000123
+     */
+    public void unsetAccountNumber() {
+        accountNumber = null;
     }
 
     /**
@@ -282,11 +415,10 @@ public class UpdateBundleRequest {
      * Getter for Cards.
      * List of Card PANs to be added in the bundle. Mandatory for Add / Remove request action.
      * Ignored for Update action. Example: 7002051006629890645 When PAN matches with multiple cards,
-     * the restriction will be applied on the latest issued card
+     * the restriction will be applied on the latest issued card.
      * @return Returns the List of String
      */
     @JsonGetter("Cards")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> getCards() {
         return cards;
     }
@@ -295,7 +427,7 @@ public class UpdateBundleRequest {
      * Setter for Cards.
      * List of Card PANs to be added in the bundle. Mandatory for Add / Remove request action.
      * Ignored for Update action. Example: 7002051006629890645 When PAN matches with multiple cards,
-     * the restriction will be applied on the latest issued card
+     * the restriction will be applied on the latest issued card.
      * @param cards Value for List of String
      */
     @JsonSetter("Cards")
@@ -311,7 +443,6 @@ public class UpdateBundleRequest {
      * @return Returns the String
      */
     @JsonGetter("UsageRestrictionAction")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public String getUsageRestrictionAction() {
         return usageRestrictionAction;
     }
@@ -330,154 +461,21 @@ public class UpdateBundleRequest {
 
     /**
      * Getter for Restrictions.
-     * @return Returns the BundleRestriction
+     * @return Returns the BundleRestrictionUpdate
      */
     @JsonGetter("Restrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public BundleRestriction getRestrictions() {
+    public BundleRestrictionUpdate getRestrictions() {
         return restrictions;
     }
 
     /**
      * Setter for Restrictions.
-     * @param restrictions Value for BundleRestriction
+     * @param restrictions Value for BundleRestrictionUpdate
      */
     @JsonSetter("Restrictions")
-    public void setRestrictions(BundleRestriction restrictions) {
+    public void setRestrictions(BundleRestrictionUpdate restrictions) {
         this.restrictions = restrictions;
-    }
-
-    /**
-     * Internal Getter for ColCoCode.
-     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
-     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
-     * ColCoID is provided. Example: 86 for Philippines 5 for UK
-     * @return Returns the Internal Integer
-     */
-    @JsonGetter("ColCoCode")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Integer> internalGetColCoCode() {
-        return this.colCoCode;
-    }
-
-    /**
-     * Getter for ColCoCode.
-     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
-     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
-     * ColCoID is provided. Example: 86 for Philippines 5 for UK
-     * @return Returns the Integer
-     */
-    public Integer getColCoCode() {
-        return OptionalNullable.getFrom(colCoCode);
-    }
-
-    /**
-     * Setter for ColCoCode.
-     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
-     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
-     * ColCoID is provided. Example: 86 for Philippines 5 for UK
-     * @param colCoCode Value for Integer
-     */
-    @JsonSetter("ColCoCode")
-    public void setColCoCode(Integer colCoCode) {
-        this.colCoCode = OptionalNullable.of(colCoCode);
-    }
-
-    /**
-     * UnSetter for ColCoCode.
-     * Collecting Company Code (Shell Code) of the selected payer. Mandatory for serviced OUs such
-     * as Romania, Latvia, Lithuania, Estonia, Ukraine etc. It is optional for other countries if
-     * ColCoID is provided. Example: 86 for Philippines 5 for UK
-     */
-    public void unsetColCoCode() {
-        colCoCode = null;
-    }
-
-    /**
-     * Internal Getter for PayerNumber.
-     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
-     * Example: GB000000123
-     * @return Returns the Internal String
-     */
-    @JsonGetter("PayerNumber")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetPayerNumber() {
-        return this.payerNumber;
-    }
-
-    /**
-     * Getter for PayerNumber.
-     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
-     * Example: GB000000123
-     * @return Returns the String
-     */
-    public String getPayerNumber() {
-        return OptionalNullable.getFrom(payerNumber);
-    }
-
-    /**
-     * Setter for PayerNumber.
-     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
-     * Example: GB000000123
-     * @param payerNumber Value for String
-     */
-    @JsonSetter("PayerNumber")
-    public void setPayerNumber(String payerNumber) {
-        this.payerNumber = OptionalNullable.of(payerNumber);
-    }
-
-    /**
-     * UnSetter for PayerNumber.
-     * Payer Number of the selected payer. Either PayerId or PayerNumber or both must be passed.
-     * Example: GB000000123
-     */
-    public void unsetPayerNumber() {
-        payerNumber = null;
-    }
-
-    /**
-     * Internal Getter for AccountNumber.
-     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
-     * Example: GB000000123
-     * @return Returns the Internal String
-     */
-    @JsonGetter("AccountNumber")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetAccountNumber() {
-        return this.accountNumber;
-    }
-
-    /**
-     * Getter for AccountNumber.
-     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
-     * Example: GB000000123
-     * @return Returns the String
-     */
-    public String getAccountNumber() {
-        return OptionalNullable.getFrom(accountNumber);
-    }
-
-    /**
-     * Setter for AccountNumber.
-     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
-     * Example: GB000000123
-     * @param accountNumber Value for String
-     */
-    @JsonSetter("AccountNumber")
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = OptionalNullable.of(accountNumber);
-    }
-
-    /**
-     * UnSetter for AccountNumber.
-     * Account Number of the customer. Either AccountId or AccountNumber or both must be passed.
-     * Example: GB000000123
-     */
-    public void unsetAccountNumber() {
-        accountNumber = null;
     }
 
     /**
@@ -487,10 +485,10 @@ public class UpdateBundleRequest {
     @Override
     public String toString() {
         return "UpdateBundleRequest [" + "bundleId=" + bundleId + ", requestAction=" + requestAction
-                + ", colCoId=" + colCoId + ", payerId=" + payerId + ", accountId=" + accountId
                 + ", cards=" + cards + ", usageRestrictionAction=" + usageRestrictionAction
-                + ", restrictions=" + restrictions + ", colCoCode=" + colCoCode + ", payerNumber="
-                + payerNumber + ", accountNumber=" + accountNumber + "]";
+                + ", colCoId=" + colCoId + ", colCoCode=" + colCoCode + ", payerId=" + payerId
+                + ", payerNumber=" + payerNumber + ", accountId=" + accountId + ", accountNumber="
+                + accountNumber + ", restrictions=" + restrictions + "]";
     }
 
     /**
@@ -499,15 +497,13 @@ public class UpdateBundleRequest {
      * @return a new {@link UpdateBundleRequest.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder(bundleId, requestAction)
-                .cards(getCards())
-                .usageRestrictionAction(getUsageRestrictionAction())
+        Builder builder = new Builder(bundleId, requestAction, cards, usageRestrictionAction)
                 .restrictions(getRestrictions());
         builder.colCoId = internalGetColCoId();
-        builder.payerId = internalGetPayerId();
-        builder.accountId = internalGetAccountId();
         builder.colCoCode = internalGetColCoCode();
+        builder.payerId = internalGetPayerId();
         builder.payerNumber = internalGetPayerNumber();
+        builder.accountId = internalGetAccountId();
         builder.accountNumber = internalGetAccountNumber();
         return builder;
     }
@@ -518,15 +514,15 @@ public class UpdateBundleRequest {
     public static class Builder {
         private String bundleId;
         private String requestAction;
-        private OptionalNullable<Integer> colCoId;
-        private OptionalNullable<Integer> payerId;
-        private OptionalNullable<Integer> accountId;
         private List<String> cards;
         private String usageRestrictionAction;
-        private BundleRestriction restrictions;
+        private OptionalNullable<Integer> colCoId;
         private OptionalNullable<Integer> colCoCode;
+        private OptionalNullable<String> payerId;
         private OptionalNullable<String> payerNumber;
+        private OptionalNullable<Integer> accountId;
         private OptionalNullable<String> accountNumber;
+        private BundleRestrictionUpdate restrictions;
 
         /**
          * Initialization constructor.
@@ -538,10 +534,15 @@ public class UpdateBundleRequest {
          * Initialization constructor.
          * @param  bundleId  String value for bundleId.
          * @param  requestAction  String value for requestAction.
+         * @param  cards  List of String value for cards.
+         * @param  usageRestrictionAction  String value for usageRestrictionAction.
          */
-        public Builder(String bundleId, String requestAction) {
+        public Builder(String bundleId, String requestAction, List<String> cards,
+                String usageRestrictionAction) {
             this.bundleId = bundleId;
             this.requestAction = requestAction;
+            this.cards = cards;
+            this.usageRestrictionAction = usageRestrictionAction;
         }
 
         /**
@@ -561,63 +562,6 @@ public class UpdateBundleRequest {
          */
         public Builder requestAction(String requestAction) {
             this.requestAction = requestAction;
-            return this;
-        }
-
-        /**
-         * Setter for colCoId.
-         * @param  colCoId  Integer value for colCoId.
-         * @return Builder
-         */
-        public Builder colCoId(Integer colCoId) {
-            this.colCoId = OptionalNullable.of(colCoId);
-            return this;
-        }
-
-        /**
-         * UnSetter for colCoId.
-         * @return Builder
-         */
-        public Builder unsetColCoId() {
-            colCoId = null;
-            return this;
-        }
-
-        /**
-         * Setter for payerId.
-         * @param  payerId  Integer value for payerId.
-         * @return Builder
-         */
-        public Builder payerId(Integer payerId) {
-            this.payerId = OptionalNullable.of(payerId);
-            return this;
-        }
-
-        /**
-         * UnSetter for payerId.
-         * @return Builder
-         */
-        public Builder unsetPayerId() {
-            payerId = null;
-            return this;
-        }
-
-        /**
-         * Setter for accountId.
-         * @param  accountId  Integer value for accountId.
-         * @return Builder
-         */
-        public Builder accountId(Integer accountId) {
-            this.accountId = OptionalNullable.of(accountId);
-            return this;
-        }
-
-        /**
-         * UnSetter for accountId.
-         * @return Builder
-         */
-        public Builder unsetAccountId() {
-            accountId = null;
             return this;
         }
 
@@ -642,12 +586,21 @@ public class UpdateBundleRequest {
         }
 
         /**
-         * Setter for restrictions.
-         * @param  restrictions  BundleRestriction value for restrictions.
+         * Setter for colCoId.
+         * @param  colCoId  Integer value for colCoId.
          * @return Builder
          */
-        public Builder restrictions(BundleRestriction restrictions) {
-            this.restrictions = restrictions;
+        public Builder colCoId(Integer colCoId) {
+            this.colCoId = OptionalNullable.of(colCoId);
+            return this;
+        }
+
+        /**
+         * UnSetter for colCoId.
+         * @return Builder
+         */
+        public Builder unsetColCoId() {
+            colCoId = null;
             return this;
         }
 
@@ -671,6 +624,25 @@ public class UpdateBundleRequest {
         }
 
         /**
+         * Setter for payerId.
+         * @param  payerId  String value for payerId.
+         * @return Builder
+         */
+        public Builder payerId(String payerId) {
+            this.payerId = OptionalNullable.of(payerId);
+            return this;
+        }
+
+        /**
+         * UnSetter for payerId.
+         * @return Builder
+         */
+        public Builder unsetPayerId() {
+            payerId = null;
+            return this;
+        }
+
+        /**
          * Setter for payerNumber.
          * @param  payerNumber  String value for payerNumber.
          * @return Builder
@@ -686,6 +658,25 @@ public class UpdateBundleRequest {
          */
         public Builder unsetPayerNumber() {
             payerNumber = null;
+            return this;
+        }
+
+        /**
+         * Setter for accountId.
+         * @param  accountId  Integer value for accountId.
+         * @return Builder
+         */
+        public Builder accountId(Integer accountId) {
+            this.accountId = OptionalNullable.of(accountId);
+            return this;
+        }
+
+        /**
+         * UnSetter for accountId.
+         * @return Builder
+         */
+        public Builder unsetAccountId() {
+            accountId = null;
             return this;
         }
 
@@ -709,13 +700,23 @@ public class UpdateBundleRequest {
         }
 
         /**
+         * Setter for restrictions.
+         * @param  restrictions  BundleRestrictionUpdate value for restrictions.
+         * @return Builder
+         */
+        public Builder restrictions(BundleRestrictionUpdate restrictions) {
+            this.restrictions = restrictions;
+            return this;
+        }
+
+        /**
          * Builds a new {@link UpdateBundleRequest} object using the set fields.
          * @return {@link UpdateBundleRequest}
          */
         public UpdateBundleRequest build() {
-            return new UpdateBundleRequest(bundleId, requestAction, colCoId, payerId, accountId,
-                    cards, usageRestrictionAction, restrictions, colCoCode, payerNumber,
-                    accountNumber);
+            return new UpdateBundleRequest(bundleId, requestAction, cards, usageRestrictionAction,
+                    colCoId, colCoCode, payerId, payerNumber, accountId, accountNumber,
+                    restrictions);
         }
     }
 }

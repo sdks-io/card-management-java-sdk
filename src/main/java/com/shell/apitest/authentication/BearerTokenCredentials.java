@@ -71,4 +71,9 @@ public interface BearerTokenCredentials {
      */
     boolean isTokenExpired();
 
+    /**
+     * Has the OAuth token expired?.
+     * @return True if expired
+     */
+    boolean isTokenExpired(OAuthToken oAuthToken);
 }

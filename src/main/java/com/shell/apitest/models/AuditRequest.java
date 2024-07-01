@@ -401,10 +401,10 @@ public class AuditRequest {
 
     /**
      * Getter for RequestedOperation.
-     * To search for requests submitted until this date. Optional Format: yyyyMMdd Example: 20200130
-     * If ToDate is not provided and FromDate is provided, then ToDate will be considered as current
-     * date or 30 days from FromDate, whichever is earlier. However, when both FromDate and ToDate
-     * is not provided then last 30 days will be considered for filtering.
+     * Type of requests to be fetched. Optional Allowed values: •	OrderCard •	CreateCardGroup
+     * •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder
+     * •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo
+     * •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
      * @return Returns the List of String
      */
     @JsonGetter("RequestedOperation")
@@ -415,10 +415,10 @@ public class AuditRequest {
 
     /**
      * Setter for RequestedOperation.
-     * To search for requests submitted until this date. Optional Format: yyyyMMdd Example: 20200130
-     * If ToDate is not provided and FromDate is provided, then ToDate will be considered as current
-     * date or 30 days from FromDate, whichever is earlier. However, when both FromDate and ToDate
-     * is not provided then last 30 days will be considered for filtering.
+     * Type of requests to be fetched. Optional Allowed values: •	OrderCard •	CreateCardGroup
+     * •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder
+     * •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo
+     * •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
      * @param requestedOperation Value for List of String
      */
     @JsonSetter("RequestedOperation")

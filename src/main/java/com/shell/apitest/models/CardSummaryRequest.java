@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * This is a model class for CardSummaryRequest type.
  */
 public class CardSummaryRequest {
-    private SummaryRequest filters;
+    private Filters1 filters;
 
     /**
      * Default constructor.
@@ -24,33 +24,29 @@ public class CardSummaryRequest {
 
     /**
      * Initialization constructor.
-     * @param  filters  SummaryRequest value for filters.
+     * @param  filters  Filters1 value for filters.
      */
     public CardSummaryRequest(
-            SummaryRequest filters) {
+            Filters1 filters) {
         this.filters = filters;
     }
 
     /**
      * Getter for Filters.
-     * Encapsulates the details of a Summary Request. Summary Request fields are same as the Search
-     * Request base class and no new fields are required.
-     * @return Returns the SummaryRequest
+     * @return Returns the Filters1
      */
     @JsonGetter("Filters")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SummaryRequest getFilters() {
+    public Filters1 getFilters() {
         return filters;
     }
 
     /**
      * Setter for Filters.
-     * Encapsulates the details of a Summary Request. Summary Request fields are same as the Search
-     * Request base class and no new fields are required.
-     * @param filters Value for SummaryRequest
+     * @param filters Value for Filters1
      */
     @JsonSetter("Filters")
-    public void setFilters(SummaryRequest filters) {
+    public void setFilters(Filters1 filters) {
         this.filters = filters;
     }
 
@@ -78,16 +74,16 @@ public class CardSummaryRequest {
      * Class to build instances of {@link CardSummaryRequest}.
      */
     public static class Builder {
-        private SummaryRequest filters;
+        private Filters1 filters;
 
 
 
         /**
          * Setter for filters.
-         * @param  filters  SummaryRequest value for filters.
+         * @param  filters  Filters1 value for filters.
          * @return Builder
          */
-        public Builder filters(SummaryRequest filters) {
+        public Builder filters(Filters1 filters) {
             this.filters = filters;
             return this;
         }
