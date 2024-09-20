@@ -18,6 +18,7 @@ import io.apimatic.core.types.OptionalNullable;
 public class AutoRenewCardResponseDataItems {
     private OptionalNullable<Integer> autoRenewReferenceId;
     private OptionalNullable<String> cardIdAndPAN;
+    private OptionalNullable<Double> pANID;
 
     /**
      * Default constructor.
@@ -29,24 +30,29 @@ public class AutoRenewCardResponseDataItems {
      * Initialization constructor.
      * @param  autoRenewReferenceId  Integer value for autoRenewReferenceId.
      * @param  cardIdAndPAN  String value for cardIdAndPAN.
+     * @param  pANID  Double value for pANID.
      */
     public AutoRenewCardResponseDataItems(
             Integer autoRenewReferenceId,
-            String cardIdAndPAN) {
+            String cardIdAndPAN,
+            Double pANID) {
         this.autoRenewReferenceId = OptionalNullable.of(autoRenewReferenceId);
         this.cardIdAndPAN = OptionalNullable.of(cardIdAndPAN);
+        this.pANID = OptionalNullable.of(pANID);
     }
 
     /**
      * Initialization constructor.
      * @param  autoRenewReferenceId  Integer value for autoRenewReferenceId.
      * @param  cardIdAndPAN  String value for cardIdAndPAN.
+     * @param  pANID  Double value for pANID.
      */
 
     protected AutoRenewCardResponseDataItems(OptionalNullable<Integer> autoRenewReferenceId,
-            OptionalNullable<String> cardIdAndPAN) {
+            OptionalNullable<String> cardIdAndPAN, OptionalNullable<Double> pANID) {
         this.autoRenewReferenceId = autoRenewReferenceId;
         this.cardIdAndPAN = cardIdAndPAN;
+        this.pANID = pANID;
     }
 
     /**
@@ -128,13 +134,52 @@ public class AutoRenewCardResponseDataItems {
     }
 
     /**
+     * Internal Getter for PANID.
+     * PANID of the card
+     * @return Returns the Internal Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Double> internalGetPANID() {
+        return this.pANID;
+    }
+
+    /**
+     * Getter for PANID.
+     * PANID of the card
+     * @return Returns the Double
+     */
+    public Double getPANID() {
+        return OptionalNullable.getFrom(pANID);
+    }
+
+    /**
+     * Setter for PANID.
+     * PANID of the card
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = OptionalNullable.of(pANID);
+    }
+
+    /**
+     * UnSetter for PANID.
+     * PANID of the card
+     */
+    public void unsetPANID() {
+        pANID = null;
+    }
+
+    /**
      * Converts this AutoRenewCardResponseDataItems into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
         return "AutoRenewCardResponseDataItems [" + "autoRenewReferenceId=" + autoRenewReferenceId
-                + ", cardIdAndPAN=" + cardIdAndPAN + "]";
+                + ", cardIdAndPAN=" + cardIdAndPAN + ", pANID=" + pANID + "]";
     }
 
     /**
@@ -146,6 +191,7 @@ public class AutoRenewCardResponseDataItems {
         Builder builder = new Builder();
         builder.autoRenewReferenceId = internalGetAutoRenewReferenceId();
         builder.cardIdAndPAN = internalGetCardIdAndPAN();
+        builder.pANID = internalGetPANID();
         return builder;
     }
 
@@ -155,6 +201,7 @@ public class AutoRenewCardResponseDataItems {
     public static class Builder {
         private OptionalNullable<Integer> autoRenewReferenceId;
         private OptionalNullable<String> cardIdAndPAN;
+        private OptionalNullable<Double> pANID;
 
 
 
@@ -197,11 +244,30 @@ public class AutoRenewCardResponseDataItems {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = OptionalNullable.of(pANID);
+            return this;
+        }
+
+        /**
+         * UnSetter for pANID.
+         * @return Builder
+         */
+        public Builder unsetPANID() {
+            pANID = null;
+            return this;
+        }
+
+        /**
          * Builds a new {@link AutoRenewCardResponseDataItems} object using the set fields.
          * @return {@link AutoRenewCardResponseDataItems}
          */
         public AutoRenewCardResponseDataItems build() {
-            return new AutoRenewCardResponseDataItems(autoRenewReferenceId, cardIdAndPAN);
+            return new AutoRenewCardResponseDataItems(autoRenewReferenceId, cardIdAndPAN, pANID);
         }
     }
 }

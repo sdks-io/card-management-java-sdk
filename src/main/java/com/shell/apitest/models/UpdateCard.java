@@ -32,6 +32,7 @@ public class UpdateCard {
     private OptionalNullable<Integer> colCoCode;
     private OptionalNullable<Integer> colCoId;
     private OptionalNullable<String> pAN;
+    private OptionalNullable<Double> pANID;
     private OptionalNullable<Integer> payerId;
     private OptionalNullable<String> payerNumber;
 
@@ -59,6 +60,7 @@ public class UpdateCard {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  colCoId  Integer value for colCoId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
      */
@@ -79,6 +81,7 @@ public class UpdateCard {
             Integer colCoCode,
             Integer colCoId,
             String pAN,
+            Double pANID,
             Integer payerId,
             String payerNumber) {
         this.caller = OptionalNullable.of(caller);
@@ -97,6 +100,7 @@ public class UpdateCard {
         this.colCoCode = OptionalNullable.of(colCoCode);
         this.colCoId = OptionalNullable.of(colCoId);
         this.pAN = OptionalNullable.of(pAN);
+        this.pANID = OptionalNullable.of(pANID);
         this.payerId = OptionalNullable.of(payerId);
         this.payerNumber = OptionalNullable.of(payerNumber);
     }
@@ -119,6 +123,7 @@ public class UpdateCard {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  colCoId  Integer value for colCoId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
      */
@@ -130,7 +135,8 @@ public class UpdateCard {
             OptionalNullable<String> accountNumber, OptionalNullable<String> cardExpiryDate,
             OptionalNullable<Integer> cardId, OptionalNullable<Integer> colCoCode,
             OptionalNullable<Integer> colCoId, OptionalNullable<String> pAN,
-            OptionalNullable<Integer> payerId, OptionalNullable<String> payerNumber) {
+            OptionalNullable<Double> pANID, OptionalNullable<Integer> payerId,
+            OptionalNullable<String> payerNumber) {
         this.caller = caller;
         this.isReplacementChargeable = isReplacementChargeable;
         this.notifyCaller = notifyCaller;
@@ -147,6 +153,7 @@ public class UpdateCard {
         this.colCoCode = colCoCode;
         this.colCoId = colCoId;
         this.pAN = pAN;
+        this.pANID = pANID;
         this.payerId = payerId;
         this.payerNumber = payerNumber;
     }
@@ -768,6 +775,45 @@ public class UpdateCard {
     }
 
     /**
+     * Internal Getter for PANID.
+     * PANID of the card
+     * @return Returns the Internal Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Double> internalGetPANID() {
+        return this.pANID;
+    }
+
+    /**
+     * Getter for PANID.
+     * PANID of the card
+     * @return Returns the Double
+     */
+    public Double getPANID() {
+        return OptionalNullable.getFrom(pANID);
+    }
+
+    /**
+     * Setter for PANID.
+     * PANID of the card
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = OptionalNullable.of(pANID);
+    }
+
+    /**
+     * UnSetter for PANID.
+     * PANID of the card
+     */
+    public void unsetPANID() {
+        pANID = null;
+    }
+
+    /**
      * Internal Getter for PayerId.
      * Payer id of the customer.&lt;br /&gt; Optional if PayerNumber is passed, else Mandatory.
      * @return Returns the Internal Integer
@@ -858,8 +904,8 @@ public class UpdateCard {
                 + ", reasonText=" + reasonText + ", targetStatus=" + targetStatus + ", accountId="
                 + accountId + ", accountNumber=" + accountNumber + ", cardExpiryDate="
                 + cardExpiryDate + ", cardId=" + cardId + ", colCoCode=" + colCoCode + ", colCoId="
-                + colCoId + ", pAN=" + pAN + ", payerId=" + payerId + ", payerNumber=" + payerNumber
-                + "]";
+                + colCoId + ", pAN=" + pAN + ", pANID=" + pANID + ", payerId=" + payerId
+                + ", payerNumber=" + payerNumber + "]";
     }
 
     /**
@@ -885,6 +931,7 @@ public class UpdateCard {
         builder.colCoCode = internalGetColCoCode();
         builder.colCoId = internalGetColCoId();
         builder.pAN = internalGetPAN();
+        builder.pANID = internalGetPANID();
         builder.payerId = internalGetPayerId();
         builder.payerNumber = internalGetPayerNumber();
         return builder;
@@ -910,6 +957,7 @@ public class UpdateCard {
         private OptionalNullable<Integer> colCoCode;
         private OptionalNullable<Integer> colCoId;
         private OptionalNullable<String> pAN;
+        private OptionalNullable<Double> pANID;
         private OptionalNullable<Integer> payerId;
         private OptionalNullable<String> payerNumber;
 
@@ -1166,6 +1214,25 @@ public class UpdateCard {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = OptionalNullable.of(pANID);
+            return this;
+        }
+
+        /**
+         * UnSetter for pANID.
+         * @return Builder
+         */
+        public Builder unsetPANID() {
+            pANID = null;
+            return this;
+        }
+
+        /**
          * Setter for payerId.
          * @param  payerId  Integer value for payerId.
          * @return Builder
@@ -1211,7 +1278,7 @@ public class UpdateCard {
             return new UpdateCard(caller, isReplacementChargeable, notifyCaller, notifyCallerOnSync,
                     orderCardReplacement, cardSettings, reasonId, reasonText, targetStatus,
                     accountId, accountNumber, cardExpiryDate, cardId, colCoCode, colCoId, pAN,
-                    payerId, payerNumber);
+                    pANID, payerId, payerNumber);
         }
     }
 }

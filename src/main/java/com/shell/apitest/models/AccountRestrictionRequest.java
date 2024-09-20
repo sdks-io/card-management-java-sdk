@@ -23,7 +23,7 @@ public class AccountRestrictionRequest {
     private OptionalNullable<Integer> accountId;
     private OptionalNullable<String> accountNumber;
     private OptionalNullable<Boolean> resetUsageRestrictions;
-    private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+    private Object usageRestrictions;
 
     /**
      * Default constructor.
@@ -40,7 +40,7 @@ public class AccountRestrictionRequest {
      * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  resetUsageRestrictions  Boolean value for resetUsageRestrictions.
-     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  usageRestrictions  Object value for usageRestrictions.
      */
     public AccountRestrictionRequest(
             Integer colCoId,
@@ -50,7 +50,7 @@ public class AccountRestrictionRequest {
             Integer accountId,
             String accountNumber,
             Boolean resetUsageRestrictions,
-            UsageRestrictionsCard usageRestrictions) {
+            Object usageRestrictions) {
         this.colCoId = OptionalNullable.of(colCoId);
         this.colCoCode = OptionalNullable.of(colCoCode);
         this.payerId = OptionalNullable.of(payerId);
@@ -58,7 +58,7 @@ public class AccountRestrictionRequest {
         this.accountId = OptionalNullable.of(accountId);
         this.accountNumber = OptionalNullable.of(accountNumber);
         this.resetUsageRestrictions = OptionalNullable.of(resetUsageRestrictions);
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+        this.usageRestrictions = usageRestrictions;
     }
 
     /**
@@ -70,15 +70,14 @@ public class AccountRestrictionRequest {
      * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  resetUsageRestrictions  Boolean value for resetUsageRestrictions.
-     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  usageRestrictions  Object value for usageRestrictions.
      */
 
     protected AccountRestrictionRequest(OptionalNullable<Integer> colCoId,
             OptionalNullable<Integer> colCoCode, OptionalNullable<Integer> payerId,
             OptionalNullable<String> payerNumber, OptionalNullable<Integer> accountId,
             OptionalNullable<String> accountNumber,
-            OptionalNullable<Boolean> resetUsageRestrictions,
-            OptionalNullable<UsageRestrictionsCard> usageRestrictions) {
+            OptionalNullable<Boolean> resetUsageRestrictions, Object usageRestrictions) {
         this.colCoId = colCoId;
         this.colCoCode = colCoCode;
         this.payerId = payerId;
@@ -395,38 +394,22 @@ public class AccountRestrictionRequest {
     }
 
     /**
-     * Internal Getter for UsageRestrictions.
-     * @return Returns the Internal UsageRestrictionsCard
+     * Getter for UsageRestrictions.
+     * @return Returns the Object
      */
     @JsonGetter("UsageRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<UsageRestrictionsCard> internalGetUsageRestrictions() {
-        return this.usageRestrictions;
-    }
-
-    /**
-     * Getter for UsageRestrictions.
-     * @return Returns the UsageRestrictionsCard
-     */
-    public UsageRestrictionsCard getUsageRestrictions() {
-        return OptionalNullable.getFrom(usageRestrictions);
+    public Object getUsageRestrictions() {
+        return usageRestrictions;
     }
 
     /**
      * Setter for UsageRestrictions.
-     * @param usageRestrictions Value for UsageRestrictionsCard
+     * @param usageRestrictions Value for Object
      */
     @JsonSetter("UsageRestrictions")
-    public void setUsageRestrictions(UsageRestrictionsCard usageRestrictions) {
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-    }
-
-    /**
-     * UnSetter for UsageRestrictions.
-     */
-    public void unsetUsageRestrictions() {
-        usageRestrictions = null;
+    public void setUsageRestrictions(Object usageRestrictions) {
+        this.usageRestrictions = usageRestrictions;
     }
 
     /**
@@ -447,7 +430,8 @@ public class AccountRestrictionRequest {
      * @return a new {@link AccountRestrictionRequest.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder();
+        Builder builder = new Builder()
+                .usageRestrictions(getUsageRestrictions());
         builder.colCoId = internalGetColCoId();
         builder.colCoCode = internalGetColCoCode();
         builder.payerId = internalGetPayerId();
@@ -455,7 +439,6 @@ public class AccountRestrictionRequest {
         builder.accountId = internalGetAccountId();
         builder.accountNumber = internalGetAccountNumber();
         builder.resetUsageRestrictions = internalGetResetUsageRestrictions();
-        builder.usageRestrictions = internalGetUsageRestrictions();
         return builder;
     }
 
@@ -470,7 +453,7 @@ public class AccountRestrictionRequest {
         private OptionalNullable<Integer> accountId;
         private OptionalNullable<String> accountNumber;
         private OptionalNullable<Boolean> resetUsageRestrictions;
-        private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+        private Object usageRestrictions;
 
 
 
@@ -609,20 +592,11 @@ public class AccountRestrictionRequest {
 
         /**
          * Setter for usageRestrictions.
-         * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+         * @param  usageRestrictions  Object value for usageRestrictions.
          * @return Builder
          */
-        public Builder usageRestrictions(UsageRestrictionsCard usageRestrictions) {
-            this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-            return this;
-        }
-
-        /**
-         * UnSetter for usageRestrictions.
-         * @return Builder
-         */
-        public Builder unsetUsageRestrictions() {
-            usageRestrictions = null;
+        public Builder usageRestrictions(Object usageRestrictions) {
+            this.usageRestrictions = usageRestrictions;
             return this;
         }
 

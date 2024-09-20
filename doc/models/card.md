@@ -41,7 +41,9 @@
 | `LocalCurrencyCode` | `String` | Optional | ISO code of the local currency. <br /> | String getLocalCurrencyCode() | setLocalCurrencyCode(String localCurrencyCode) |
 | `LocalCurrencySymbol` | `String` | Optional | Local currency symbol. <br /> | String getLocalCurrencySymbol() | setLocalCurrencySymbol(String localCurrencySymbol) |
 | `OdometerInput` | `Boolean` | Optional | True/False True if odometer input is enabled on the card, else false | Boolean getOdometerInput() | setOdometerInput(Boolean odometerInput) |
-| `PAN` | `String` | Optional | Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN) | String getPAN() | setPAN(String pAN) |
+| `PAN` | `String` | Optional | Card PAN | String getPAN() | setPAN(String pAN) |
+| `MaskedPAN` | `String` | Optional | Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN) | String getMaskedPAN() | setMaskedPAN(String maskedPAN) |
+| `PANID` | `Double` | Optional | Card PAN ID. | Double getPANID() | setPANID(Double pANID) |
 | `PurchaseCategoryCode` | `String` | Optional | Purchase category code | String getPurchaseCategoryCode() | setPurchaseCategoryCode(String purchaseCategoryCode) |
 | `PurchaseCategoryId` | `Integer` | Optional | Purchase category Id <br /><br>Note: Not Purchase code. | Integer getPurchaseCategoryId() | setPurchaseCategoryId(Integer purchaseCategoryId) |
 | `PurchaseCategoryName` | `String` | Optional | Purchase category name | String getPurchaseCategoryName() | setPurchaseCategoryName(String purchaseCategoryName) |

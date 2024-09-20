@@ -508,7 +508,7 @@ public class CustomerDetailResponse {
 
     /**
      * Internal Getter for CardGroupPosition.
-     * Card group position at – •	Payer – Payer level •	Account – Account level
+     * Card group position at – • Payer – Payer level • Account – Account level
      * @return Returns the Internal String
      */
     @JsonGetter("CardGroupPosition")
@@ -520,7 +520,7 @@ public class CustomerDetailResponse {
 
     /**
      * Getter for CardGroupPosition.
-     * Card group position at – •	Payer – Payer level •	Account – Account level
+     * Card group position at – • Payer – Payer level • Account – Account level
      * @return Returns the String
      */
     public String getCardGroupPosition() {
@@ -529,7 +529,7 @@ public class CustomerDetailResponse {
 
     /**
      * Setter for CardGroupPosition.
-     * Card group position at – •	Payer – Payer level •	Account – Account level
+     * Card group position at – • Payer – Payer level • Account – Account level
      * @param cardGroupPosition Value for String
      */
     @JsonSetter("CardGroupPosition")
@@ -539,7 +539,7 @@ public class CustomerDetailResponse {
 
     /**
      * UnSetter for CardGroupPosition.
-     * Card group position at – •	Payer – Payer level •	Account – Account level
+     * Card group position at – • Payer – Payer level • Account – Account level
      */
     public void unsetCardGroupPosition() {
         cardGroupPosition = null;
@@ -1043,7 +1043,7 @@ public class CustomerDetailResponse {
 
     /**
      * Internal Getter for DefaultPINAdviceType.
-     * Default PIN AdviceType of the customer. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Default PIN AdviceType of the customer. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @return Returns the Internal Integer
      */
     @JsonGetter("DefaultPINAdviceType")
@@ -1055,7 +1055,7 @@ public class CustomerDetailResponse {
 
     /**
      * Getter for DefaultPINAdviceType.
-     * Default PIN AdviceType of the customer. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Default PIN AdviceType of the customer. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @return Returns the Integer
      */
     public Integer getDefaultPINAdviceType() {
@@ -1064,7 +1064,7 @@ public class CustomerDetailResponse {
 
     /**
      * Setter for DefaultPINAdviceType.
-     * Default PIN AdviceType of the customer. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Default PIN AdviceType of the customer. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @param defaultPINAdviceType Value for Integer
      */
     @JsonSetter("DefaultPINAdviceType")
@@ -1074,7 +1074,7 @@ public class CustomerDetailResponse {
 
     /**
      * UnSetter for DefaultPINAdviceType.
-     * Default PIN AdviceType of the customer. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Default PIN AdviceType of the customer. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      */
     public void unsetDefaultPINAdviceType() {
         defaultPINAdviceType = null;

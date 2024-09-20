@@ -26,7 +26,7 @@ public class CreateBundleRequest {
     private OptionalNullable<String> externalBundleId;
     private String description;
     private List<String> cards;
-    private OptionalNullable<BundleRestriction> restrictions;
+    private Object restrictions;
 
     /**
      * Default constructor.
@@ -45,7 +45,7 @@ public class CreateBundleRequest {
      * @param  externalBundleId  String value for externalBundleId.
      * @param  description  String value for description.
      * @param  cards  List of String value for cards.
-     * @param  restrictions  BundleRestriction value for restrictions.
+     * @param  restrictions  Object value for restrictions.
      */
     public CreateBundleRequest(
             Integer colCoId,
@@ -57,7 +57,7 @@ public class CreateBundleRequest {
             String externalBundleId,
             String description,
             List<String> cards,
-            BundleRestriction restrictions) {
+            Object restrictions) {
         this.colCoId = OptionalNullable.of(colCoId);
         this.colCoCode = OptionalNullable.of(colCoCode);
         this.payerId = OptionalNullable.of(payerId);
@@ -67,7 +67,7 @@ public class CreateBundleRequest {
         this.externalBundleId = OptionalNullable.of(externalBundleId);
         this.description = description;
         this.cards = cards;
-        this.restrictions = OptionalNullable.of(restrictions);
+        this.restrictions = restrictions;
     }
 
     /**
@@ -81,15 +81,14 @@ public class CreateBundleRequest {
      * @param  externalBundleId  String value for externalBundleId.
      * @param  description  String value for description.
      * @param  cards  List of String value for cards.
-     * @param  restrictions  BundleRestriction value for restrictions.
+     * @param  restrictions  Object value for restrictions.
      */
 
     protected CreateBundleRequest(OptionalNullable<Integer> colCoId,
             OptionalNullable<Integer> colCoCode, OptionalNullable<Integer> payerId,
             String payerNumber, OptionalNullable<Integer> accountId,
             OptionalNullable<String> accountNumber, OptionalNullable<String> externalBundleId,
-            String description, List<String> cards,
-            OptionalNullable<BundleRestriction> restrictions) {
+            String description, List<String> cards, Object restrictions) {
         this.colCoId = colCoId;
         this.colCoCode = colCoCode;
         this.payerId = payerId;
@@ -428,38 +427,22 @@ public class CreateBundleRequest {
     }
 
     /**
-     * Internal Getter for Restrictions.
-     * @return Returns the Internal BundleRestriction
+     * Getter for Restrictions.
+     * @return Returns the Object
      */
     @JsonGetter("Restrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<BundleRestriction> internalGetRestrictions() {
-        return this.restrictions;
-    }
-
-    /**
-     * Getter for Restrictions.
-     * @return Returns the BundleRestriction
-     */
-    public BundleRestriction getRestrictions() {
-        return OptionalNullable.getFrom(restrictions);
+    public Object getRestrictions() {
+        return restrictions;
     }
 
     /**
      * Setter for Restrictions.
-     * @param restrictions Value for BundleRestriction
+     * @param restrictions Value for Object
      */
     @JsonSetter("Restrictions")
-    public void setRestrictions(BundleRestriction restrictions) {
-        this.restrictions = OptionalNullable.of(restrictions);
-    }
-
-    /**
-     * UnSetter for Restrictions.
-     */
-    public void unsetRestrictions() {
-        restrictions = null;
+    public void setRestrictions(Object restrictions) {
+        this.restrictions = restrictions;
     }
 
     /**
@@ -484,14 +467,14 @@ public class CreateBundleRequest {
         Builder builder = new Builder()
                 .payerNumber(getPayerNumber())
                 .description(getDescription())
-                .cards(getCards());
+                .cards(getCards())
+                .restrictions(getRestrictions());
         builder.colCoId = internalGetColCoId();
         builder.colCoCode = internalGetColCoCode();
         builder.payerId = internalGetPayerId();
         builder.accountId = internalGetAccountId();
         builder.accountNumber = internalGetAccountNumber();
         builder.externalBundleId = internalGetExternalBundleId();
-        builder.restrictions = internalGetRestrictions();
         return builder;
     }
 
@@ -508,7 +491,7 @@ public class CreateBundleRequest {
         private OptionalNullable<String> externalBundleId;
         private String description;
         private List<String> cards;
-        private OptionalNullable<BundleRestriction> restrictions;
+        private Object restrictions;
 
 
 
@@ -658,20 +641,11 @@ public class CreateBundleRequest {
 
         /**
          * Setter for restrictions.
-         * @param  restrictions  BundleRestriction value for restrictions.
+         * @param  restrictions  Object value for restrictions.
          * @return Builder
          */
-        public Builder restrictions(BundleRestriction restrictions) {
-            this.restrictions = OptionalNullable.of(restrictions);
-            return this;
-        }
-
-        /**
-         * UnSetter for restrictions.
-         * @return Builder
-         */
-        public Builder unsetRestrictions() {
-            restrictions = null;
+        public Builder restrictions(Object restrictions) {
+            this.restrictions = restrictions;
             return this;
         }
 

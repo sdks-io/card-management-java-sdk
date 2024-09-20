@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description | Getter | Setter |
 |  --- | --- | --- | --- | --- | --- |
-| `Status` | `String` | Optional | Account Status.<br>Optional if StatusList is passed, else mandatory.<br>Ignored if StatusList is passed.<br>Allowed values:<br>•	ALL<br>•	ACTIVE<br>•	BLOCKED<br>•	CANCELLED<br>•	CREDITLOCK<br>•	DELINQUENCYLOCK | String getStatus() | setStatus(String status) |
+| `Status` | `String` | Optional | Account Status.<br>Optional if StatusList is passed, else mandatory.<br>Ignored if StatusList is passed.<br>Allowed values:<br>•    ALL<br>•    ACTIVE<br>•    BLOCKED<br>•    CANCELLED<br>•    CREDITLOCK<br>•    DELINQUENCYLOCK | String getStatus() | setStatus(String status) |
 | `IncludeCardSummary` | `Boolean` | Optional | Include card summary details in the response.<br><br>When passed as false, the card summary related parameters on response will be set to null.<br><br>Optional – default value: true.<br>**Default**: `true` | Boolean getIncludeCardSummary() | setIncludeCardSummary(Boolean includeCardSummary) |
 | `PayerId` | `Integer` | Optional | Payer id of the customer.<br>Optional if PayerNumber is passed, else Mandatory. | Integer getPayerId() | setPayerId(Integer payerId) |
 | `PayerNumber` | `String` | Optional | PayerNumber of the customer.<br>Optional if PayerId is passed, else Mandatory. | String getPayerNumber() | setPayerNumber(String payerNumber) |
@@ -23,7 +23,7 @@
 | `ReturnTollsCustomerId` | `Boolean` | Optional | Return e-Toll Customer details When True. | Boolean getReturnTollsCustomerId() | setReturnTollsCustomerId(Boolean returnTollsCustomerId) |
 | `Accounts` | [`List<Accounts>`](../../doc/models/accounts.md) | Optional | - | List<Accounts> getAccounts() | setAccounts(List<Accounts> accounts) |
 | `AccountName` | `String` | Optional | Account Name of the customer.<br>Optional.<br>Minimum of 4 characters should be provided else not considered.<br>Accounts those have the entered value at any part of the Name will be returned. | String getAccountName() | setAccountName(String accountName) |
-| `StatusList` | `List<String>` | Optional | Account Statuses.<br>Optional<br>Multiple statuses are allowed to be included in the search criteria.<br>Allowed values:<br>•	ACTIVE<br>•	BLOCKED<br>•	CANCELLED<br>•	CREDITLOCK<br>•	DELINQUENCYLOCK | List<String> getStatusList() | setStatusList(List<String> statusList) |
+| `StatusList` | `List<String>` | Optional | Account Statuses.<br>Optional<br>Multiple statuses are allowed to be included in the search criteria.<br>Allowed values:<br>•    ACTIVE<br>•    BLOCKED<br>•    CANCELLED<br>•    CREDITLOCK<br>•    DELINQUENCYLOCK | List<String> getStatusList() | setStatusList(List<String> statusList) |
 
 ## Example (as JSON)
 

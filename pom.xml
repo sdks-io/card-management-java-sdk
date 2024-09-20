@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.sdks</groupId>
   <artifactId>card-management-sdk</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <packaging>jar</packaging>
   <name>Card Management SDK</name>
   <description>The Shell Card Management API is REST-based and employs OAUTH 2.0,Basic and ApiKey authentication. The API endpoints accept JSON-encoded request bodies, return JSON-encoded responses and use standard HTTP response codes.
@@ -46,17 +46,17 @@ All resources are located in the Shell Card Platform. The Shell Card Platform is
     <dependency>
       <groupId>io.apimatic</groupId>
       <artifactId>core-interfaces</artifactId>
-      <version>[0.3, 0.4)</version>
+      <version>[0.3.1, 0.4)</version>
     </dependency>
     <dependency>
       <groupId>io.apimatic</groupId>
       <artifactId>core</artifactId>
-      <version>[0.6, 0.7)</version>
+      <version>[0.6.4, 0.7)</version>
     </dependency>
     <dependency>
       <groupId>io.apimatic</groupId>
       <artifactId>okhttp-client-adapter</artifactId>
-      <version>[0.3, 0.4)</version>
+      <version>[0.3.1, 0.4)</version>
     </dependency>
   </dependencies>
   <build>
@@ -141,6 +141,18 @@ All resources are located in the Shell Card Platform. The Shell Card Platform is
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>com.shell.apitest</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>

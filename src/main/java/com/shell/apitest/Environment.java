@@ -19,12 +19,7 @@ import java.util.TreeMap;
 public enum Environment {
     SIT,
 
-    PRODUCTION,
-
-    /**
-     * Unknown values will be mapped by this enum member
-     */
-    _UNKNOWN;
+    PRODUCTION;
 
 
     private static TreeMap<String, Environment> valueMap = new TreeMap<>();
@@ -33,7 +28,6 @@ public enum Environment {
     static {
         SIT.value = "SIT";
         PRODUCTION.value = "Production";
-        _UNKNOWN.value = null;
 
         valueMap.put("SIT", SIT);
         valueMap.put("Production", PRODUCTION);
@@ -60,9 +54,6 @@ public enum Environment {
      * @return The enum member against the given string value.
      */
     public static Environment fromString(String toConvert) {
-        if (!valueMap.containsKey(toConvert)) {
-            return _UNKNOWN;
-        }
         return valueMap.get(toConvert);
     }
 
@@ -80,9 +71,6 @@ public enum Environment {
      */
     @Override
     public String toString() {
-        if (value == null) {
-            return null;
-        }
         return value.toString();
     }
 

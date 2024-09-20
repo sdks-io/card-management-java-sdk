@@ -19,6 +19,8 @@ This entity models the data that is sent in the https
 | `CardGroupName` | `String` | Optional | Card group name | String getCardGroupName() | setCardGroupName(String cardGroupName) |
 | `CardId` | `Integer` | Optional | Unique Card Id.<br /><br>The field will be null if the card order request is not successly processed. | Integer getCardId() | setCardId(Integer cardId) |
 | `CardPAN` | `String` | Optional | Card PAN.<br /><br>Mask PAN (Mask all digits except the Last 6 digits of the PAN).<br /><br>The field will be null if the card order request is not successly processed. | String getCardPAN() | setCardPAN(String cardPAN) |
+| `MaskedPAN` | `String` | Optional | Card PAN | String getMaskedPAN() | setMaskedPAN(String maskedPAN) |
+| `PANID` | `Double` | Optional | Card PAN ID as a unique number for each PAN | Double getPANID() | setPANID(Double pANID) |
 | `CardTypeCode` | `String` | Optional | CardTypeCode<br /><br>ISO code of the card i.e. first 7 digits of the PAN | String getCardTypeCode() | setCardTypeCode(String cardTypeCode) |
 | `CardTypeId` | `Integer` | Optional | CardTypeId | Integer getCardTypeId() | setCardTypeId(Integer cardTypeId) |
 | `CardTypeName` | `String` | Optional | CardTypeName | String getCardTypeName() | setCardTypeName(String cardTypeName) |
@@ -30,7 +32,7 @@ This entity models the data that is sent in the https
 | `GatewaySyncStatus` | `String` | Optional | GatewaySyncStatus<br /><br>Status of the card sync with CFGW.<br /><br>Possible values:<br /><br>-Success<br /><br>-Failed<br /><br>-In Progress<br /><br>-Not Submitted | String getGatewaySyncStatus() | setGatewaySyncStatus(String gatewaySyncStatus) |
 | `MainReference` | `Integer` | Optional | Main reference number for the order card request.<br /><br>This field will be null if the order is through BCO. | Integer getMainReference() | setMainReference(Integer mainReference) |
 | `OrderCardReference` | `Integer` | Optional | Indivitual card reference number for the order card request.<br /><br>This field will be null if the order is through BCO. | Integer getOrderCardReference() | setOrderCardReference(Integer orderCardReference) |
-| `OrderStatus` | `String` | Optional | Order status.<br /><br>Possible values:<br /><br>P   Pending<br /><br>I   Picked up for processing<br /><br>PX	Failed at Queue but retry attempts pending<br /><br>X	Failed  at Queue<br /><br>R	Card is processed, awaiting for PAN update.<br /><br>S	Processed<br /><br>F	Failed | String getOrderStatus() | setOrderStatus(String orderStatus) |
+| `OrderStatus` | `String` | Optional | Order status.<br /><br>Possible values:<br /><br>P   Pending<br /><br>I   Picked up for processing<br /><br>PX    Failed at Queue but retry attempts pending<br /><br>X    Failed  at Queue<br /><br>R    Card is processed, awaiting for PAN update.<br /><br>S    Processed<br /><br>F    Failed | String getOrderStatus() | setOrderStatus(String orderStatus) |
 | `PayerId` | `Integer` | Optional | Payer ID on the card request. | Integer getPayerId() | setPayerId(Integer payerId) |
 | `PayerNumber` | `String` | Optional | Payer Number on the card request | String getPayerNumber() | setPayerNumber(String payerNumber) |
 | `ProcessedDate` | `String` | Optional | Date and time (in cutomers local time) when the card order request is processed<br /><br>Format: yyyyMMdd HH:mm:ss<br /><br>Note: The client application to convert the string to appropriate date/time type. | String getProcessedDate() | setProcessedDate(String processedDate) |

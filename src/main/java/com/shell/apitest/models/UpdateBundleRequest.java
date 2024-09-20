@@ -391,8 +391,8 @@ public class UpdateBundleRequest {
 
     /**
      * Getter for RequestAction.
-     * The value indicates the action to be performed with the request. Mandatory Allowed values:
-     * •	Add •	Update •	Remove
+     * The value indicates the action to be performed with the request. Mandatory Allowed values: •
+     * Add • Update • Remove
      * @return Returns the String
      */
     @JsonGetter("RequestAction")
@@ -402,8 +402,8 @@ public class UpdateBundleRequest {
 
     /**
      * Setter for RequestAction.
-     * The value indicates the action to be performed with the request. Mandatory Allowed values:
-     * •	Add •	Update •	Remove
+     * The value indicates the action to be performed with the request. Mandatory Allowed values: •
+     * Add • Update • Remove
      * @param requestAction Value for String
      */
     @JsonSetter("RequestAction")
@@ -439,7 +439,7 @@ public class UpdateBundleRequest {
      * Getter for UsageRestrictionAction.
      * The value indicates what actions to be performed with respect to usage restrictions on the
      * list of cards being added or removed. Mandatory for Add / Remove request action. Ignored for
-     * Update action. Allowed values: •	Update •	None
+     * Update action. Allowed values: • Update • None
      * @return Returns the String
      */
     @JsonGetter("UsageRestrictionAction")
@@ -451,7 +451,7 @@ public class UpdateBundleRequest {
      * Setter for UsageRestrictionAction.
      * The value indicates what actions to be performed with respect to usage restrictions on the
      * list of cards being added or removed. Mandatory for Add / Remove request action. Ignored for
-     * Update action. Allowed values: •	Update •	None
+     * Update action. Allowed values: • Update • None
      * @param usageRestrictionAction Value for String
      */
     @JsonSetter("UsageRestrictionAction")

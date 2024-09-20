@@ -1328,8 +1328,8 @@ public final class CardController extends BaseController {
 
     /**
      * This operation allows update the approval status of Mobile Payment Registration requests
-     * requiring for Fleet Manager approval. If the approval status is: *	“Approved” then the
-     * request status will be changed to Pending for processing. *	“Rejected” then status will be
+     * requiring for Fleet Manager approval. If the approval status is: * “Approved” then the
+     * request status will be changed to Pending for processing. * “Rejected” then status will be
      * updated to “CI” (Failed) with appropriate error message.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.
@@ -1346,8 +1346,8 @@ public final class CardController extends BaseController {
 
     /**
      * This operation allows update the approval status of Mobile Payment Registration requests
-     * requiring for Fleet Manager approval. If the approval status is: *	“Approved” then the
-     * request status will be changed to Pending for processing. *	“Rejected” then status will be
+     * requiring for Fleet Manager approval. If the approval status is: * “Approved” then the
+     * request status will be changed to Pending for processing. * “Rejected” then status will be
      * updated to “CI” (Failed) with appropriate error message.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
      *         requests and responses. This will be played back in the response from the request.

@@ -16,6 +16,7 @@ import com.shell.apitest.controllers.CardController;
 import com.shell.apitest.controllers.CustomerController;
 import com.shell.apitest.controllers.OAuthAuthorizationController;
 import com.shell.apitest.controllers.RestrictionController;
+import com.shell.apitest.http.client.HttpCallback;
 import com.shell.apitest.http.client.HttpClientConfiguration;
 import com.shell.apitest.http.client.ReadonlyHttpClientConfiguration;
 import io.apimatic.core.GlobalConfiguration;
@@ -88,12 +89,18 @@ public final class ShellCardManagementAPIsClient implements Configuration {
      */
     private Map<String, Authentication> authentications = new HashMap<String, Authentication>();
 
+    /**
+     * Callback to be called before and after the HTTP call for an endpoint is made.
+     */
+    private final HttpCallback httpCallback;
+
     private ShellCardManagementAPIsClient(Environment environment, HttpClient httpClient,
             ReadonlyHttpClientConfiguration httpClientConfig, BasicAuthModel basicAuthModel,
-            BearerTokenModel bearerTokenModel) {
+            BearerTokenModel bearerTokenModel, HttpCallback httpCallback) {
         this.environment = environment;
         this.httpClient = httpClient;
         this.httpClientConfig = httpClientConfig;
+        this.httpCallback = httpCallback;
 
         this.basicAuthModel = basicAuthModel;
         this.bearerTokenModel = bearerTokenModel;
@@ -108,6 +115,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
                 .httpClient(httpClient).baseUri(server -> getBaseUri(server))
                 .compatibilityFactory(compatibilityFactory)
                 .authentication(this.authentications)
+                .callback(httpCallback)
                 .userAgent(userAgent)
                 .build();
         this.bearerTokenManager.applyGlobalConfiguration(globalConfig);
@@ -305,6 +313,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
                 .toBuilder().build());
         builder.bearerTokenCredentials(getBearerTokenModel()
                 .toBuilder().build());
+        builder.httpCallback = httpCallback;
         builder.httpClientConfig(() -> ((HttpClientConfiguration) httpClientConfig).newBuilder());
         return builder;
     }
@@ -318,6 +327,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
         private HttpClient httpClient;
         private BasicAuthModel basicAuthModel = new BasicAuthModel.Builder("", "").build();
         private BearerTokenModel bearerTokenModel = new BearerTokenModel.Builder("", "").build();
+        private HttpCallback httpCallback = null;
         private HttpClientConfiguration.Builder httpClientConfigBuilder =
                 new HttpClientConfiguration.Builder();
 
@@ -366,6 +376,16 @@ public final class ShellCardManagementAPIsClient implements Configuration {
         }
 
         /**
+         * HttpCallback.
+         * @param httpCallback Callback to be called before and after the HTTP call.
+         * @return Builder
+         */
+        public Builder httpCallback(HttpCallback httpCallback) {
+            this.httpCallback = httpCallback;
+            return this;
+        }
+
+        /**
          * Setter for the Builder of httpClientConfiguration, takes in an operation to be performed
          * on the builder instance of HTTP client configuration.
          * 
@@ -398,7 +418,7 @@ public final class ShellCardManagementAPIsClient implements Configuration {
             httpClient = new OkClient(httpClientConfig.getConfiguration(), compatibilityFactory);
 
             return new ShellCardManagementAPIsClient(environment, httpClient, httpClientConfig,
-                    basicAuthModel, bearerTokenModel);
+                    basicAuthModel, bearerTokenModel, httpCallback);
         }
     }
 }

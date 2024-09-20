@@ -7,8 +7,8 @@ The following parameters are configurable for the API Client:
 |  --- | --- | --- |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.SIT`** |
 | `httpClientConfig` | [`Consumer<HttpClientConfiguration.Builder>`](http-client-configuration-builder.md) | Set up Http Client Configuration instance. |
-| `basicAuthCredentials` | [`BasicAuthCredentials`]($a/basic-authentication.md) | The Credentials Setter for Basic Authentication |
-| `bearerTokenCredentials` | [`BearerTokenCredentials`]($a/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
+| `basicAuthCredentials` | [`BasicAuthCredentials`](auth/basic-authentication.md) | The Credentials Setter for Basic Authentication |
+| `bearerTokenCredentials` | [`BearerTokenCredentials`](auth/oauth-2-client-credentials-grant.md) | The Credentials Setter for OAuth 2 Client Credentials Grant |
 
 The API client can be initialized as follows:
 
@@ -51,8 +51,8 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | `getEnvironment()` | Current API environment. | `Environment` |
 | `getHttpClient()` | The HTTP Client instance to use for making HTTP requests. | `HttpClient` |
 | `getHttpClientConfig()` | Http Client Configuration instance. | [`ReadonlyHttpClientConfiguration`](http-client-configuration.md) |
-| `getBasicAuthCredentials()` | The credentials to use with BasicAuth. | [`BasicAuthCredentials`]($a/basic-authentication.md) |
-| `getBearerTokenCredentials()` | The credentials to use with BearerToken. | [`BearerTokenCredentials`]($a/oauth-2-client-credentials-grant.md) |
+| `getBasicAuthCredentials()` | The credentials to use with BasicAuth. | [`BasicAuthCredentials`](auth/basic-authentication.md) |
+| `getBearerTokenCredentials()` | The credentials to use with BearerToken. | [`BearerTokenCredentials`](auth/oauth-2-client-credentials-grant.md) |
 | `getBaseUri(Server server)` | Get base URI by current environment | `String` |
 | `getBaseUri()` | Get base URI by current environment | `String` |
 

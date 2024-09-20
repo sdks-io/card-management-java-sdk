@@ -2005,8 +2005,8 @@ public class PayerDetails {
     /**
      * Internal Getter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @return Returns the Internal String
      */
     @JsonGetter("BillingFrequencyType")
@@ -2019,8 +2019,8 @@ public class PayerDetails {
     /**
      * Getter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @return Returns the String
      */
     public String getBillingFrequencyType() {
@@ -2030,8 +2030,8 @@ public class PayerDetails {
     /**
      * Setter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @param billingFrequencyType Value for String
      */
     @JsonSetter("BillingFrequencyType")
@@ -2042,8 +2042,8 @@ public class PayerDetails {
     /**
      * UnSetter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      */
     public void unsetBillingFrequencyType() {
         billingFrequencyType = null;
@@ -2090,8 +2090,8 @@ public class PayerDetails {
 
     /**
      * Internal Getter for BillingRunFrequnecy.
-     * Frequency at which the billing process is triggered.E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered.E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @return Returns the Internal String
      */
     @JsonGetter("BillingRunFrequnecy")
@@ -2103,8 +2103,8 @@ public class PayerDetails {
 
     /**
      * Getter for BillingRunFrequnecy.
-     * Frequency at which the billing process is triggered.E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered.E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @return Returns the String
      */
     public String getBillingRunFrequnecy() {
@@ -2113,8 +2113,8 @@ public class PayerDetails {
 
     /**
      * Setter for BillingRunFrequnecy.
-     * Frequency at which the billing process is triggered.E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered.E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @param billingRunFrequnecy Value for String
      */
     @JsonSetter("BillingRunFrequnecy")
@@ -2124,8 +2124,8 @@ public class PayerDetails {
 
     /**
      * UnSetter for BillingRunFrequnecy.
-     * Frequency at which the billing process is triggered.E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered.E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      */
     public void unsetBillingRunFrequnecy() {
         billingRunFrequnecy = null;
@@ -4515,7 +4515,7 @@ public class PayerDetails {
 
     /**
      * Internal Getter for TollsColcoCountryTypeId.
-     * String	Colco country type id in e-TM system This field will have value only when
+     * String Colco country type id in e-TM system This field will have value only when
      * ReturnTollsCustomerId is set to true in the request else set to null or empty.
      * @return Returns the Internal String
      */
@@ -4528,7 +4528,7 @@ public class PayerDetails {
 
     /**
      * Getter for TollsColcoCountryTypeId.
-     * String	Colco country type id in e-TM system This field will have value only when
+     * String Colco country type id in e-TM system This field will have value only when
      * ReturnTollsCustomerId is set to true in the request else set to null or empty.
      * @return Returns the String
      */
@@ -4538,7 +4538,7 @@ public class PayerDetails {
 
     /**
      * Setter for TollsColcoCountryTypeId.
-     * String	Colco country type id in e-TM system This field will have value only when
+     * String Colco country type id in e-TM system This field will have value only when
      * ReturnTollsCustomerId is set to true in the request else set to null or empty.
      * @param tollsColcoCountryTypeId Value for String
      */
@@ -4549,7 +4549,7 @@ public class PayerDetails {
 
     /**
      * UnSetter for TollsColcoCountryTypeId.
-     * String	Colco country type id in e-TM system This field will have value only when
+     * String Colco country type id in e-TM system This field will have value only when
      * ReturnTollsCustomerId is set to true in the request else set to null or empty.
      */
     public void unsetTollsColcoCountryTypeId() {

@@ -583,8 +583,8 @@ public class AccountResponseAccountsItems {
     /**
      * Internal Getter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @return Returns the Internal String
      */
     @JsonGetter("BillingFrequencyType")
@@ -597,8 +597,8 @@ public class AccountResponseAccountsItems {
     /**
      * Getter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @return Returns the String
      */
     public String getBillingFrequencyType() {
@@ -608,8 +608,8 @@ public class AccountResponseAccountsItems {
     /**
      * Setter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      * @param billingFrequencyType Value for String
      */
     @JsonSetter("BillingFrequencyType")
@@ -620,8 +620,8 @@ public class AccountResponseAccountsItems {
     /**
      * UnSetter for BillingFrequencyType.
      * Billing/Invoice frequency. The frequency in which the transactions will be considered for
-     * invoicing in a bulling run E.g.: 1	Daily (all days) 2	Daily (only working days) 3	Weekly -
-     * Monday 4	Weekly – Tuesday Etc.
+     * invoicing in a bulling run E.g.: 1 Daily (all days) 2 Daily (only working days) 3 Weekly -
+     * Monday 4 Weekly – Tuesday Etc.
      */
     public void unsetBillingFrequencyType() {
         billingFrequencyType = null;
@@ -672,8 +672,8 @@ public class AccountResponseAccountsItems {
 
     /**
      * Internal Getter for BillingRunFrequency.
-     * Frequency at which the billing process is triggered. E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered. E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @return Returns the Internal String
      */
     @JsonGetter("BillingRunFrequency")
@@ -685,8 +685,8 @@ public class AccountResponseAccountsItems {
 
     /**
      * Getter for BillingRunFrequency.
-     * Frequency at which the billing process is triggered. E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered. E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @return Returns the String
      */
     public String getBillingRunFrequency() {
@@ -695,8 +695,8 @@ public class AccountResponseAccountsItems {
 
     /**
      * Setter for BillingRunFrequency.
-     * Frequency at which the billing process is triggered. E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered. E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      * @param billingRunFrequency Value for String
      */
     @JsonSetter("BillingRunFrequency")
@@ -706,8 +706,8 @@ public class AccountResponseAccountsItems {
 
     /**
      * UnSetter for BillingRunFrequency.
-     * Frequency at which the billing process is triggered. E.g.: 1	Daily (all days) 2	Daily (only
-     * working days) 3	Weekly - Monday 4	Weekly – Tuesday Etc.
+     * Frequency at which the billing process is triggered. E.g.: 1 Daily (all days) 2 Daily (only
+     * working days) 3 Weekly - Monday 4 Weekly – Tuesday Etc.
      */
     public void unsetBillingRunFrequency() {
         billingRunFrequency = null;

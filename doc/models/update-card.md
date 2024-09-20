@@ -27,6 +27,7 @@ Request entity object for UpdateCardRequest  list
 | `ColCoCode` | `Integer` | Optional | Collecting company code of the customer. <br /><br>Optional if ColCoId is passed, else Mandatory.<br /> | Integer getColCoCode() | setColCoCode(Integer colCoCode) |
 | `ColCoId` | `Integer` | Optional | Collecting company id of the customer. <br /><br>Optional if ColCoCode is passed, else Mandatory.<br /> | Integer getColCoId() | setColCoId(Integer colCoId) |
 | `PAN` | `String` | Optional | PAN of the card.<br /><br>Optional if CardId is passed, else Mandatory.<br /> | String getPAN() | setPAN(String pAN) |
+| `PANID` | `Double` | Optional | PANID of the card | Double getPANID() | setPANID(Double pANID) |
 | `PayerId` | `Integer` | Optional | Payer id of the customer.<br /><br>Optional if PayerNumber is passed, else Mandatory. | Integer getPayerId() | setPayerId(Integer payerId) |
 | `PayerNumber` | `String` | Optional | PayerNumber of the customer.<br /><br>Optional if PayerId is passed, else Mandatory. | String getPayerNumber() | setPayerNumber(String payerNumber) |
 

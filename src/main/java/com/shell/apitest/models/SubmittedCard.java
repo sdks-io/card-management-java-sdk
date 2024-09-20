@@ -25,6 +25,8 @@ public class SubmittedCard {
     private OptionalNullable<Integer> colCoCode;
     private OptionalNullable<Integer> colCoId;
     private OptionalNullable<String> pAN;
+    private OptionalNullable<Double> pANID;
+    private OptionalNullable<String> maskedPAN;
     private OptionalNullable<Integer> payerId;
     private OptionalNullable<String> payerNumber;
 
@@ -45,6 +47,8 @@ public class SubmittedCard {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  colCoId  Integer value for colCoId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
+     * @param  maskedPAN  String value for maskedPAN.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
      */
@@ -58,6 +62,8 @@ public class SubmittedCard {
             Integer colCoCode,
             Integer colCoId,
             String pAN,
+            Double pANID,
+            String maskedPAN,
             Integer payerId,
             String payerNumber) {
         this.replacementCardReference = OptionalNullable.of(replacementCardReference);
@@ -69,6 +75,8 @@ public class SubmittedCard {
         this.colCoCode = OptionalNullable.of(colCoCode);
         this.colCoId = OptionalNullable.of(colCoId);
         this.pAN = OptionalNullable.of(pAN);
+        this.pANID = OptionalNullable.of(pANID);
+        this.maskedPAN = OptionalNullable.of(maskedPAN);
         this.payerId = OptionalNullable.of(payerId);
         this.payerNumber = OptionalNullable.of(payerNumber);
     }
@@ -84,6 +92,8 @@ public class SubmittedCard {
      * @param  colCoCode  Integer value for colCoCode.
      * @param  colCoId  Integer value for colCoId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
+     * @param  maskedPAN  String value for maskedPAN.
      * @param  payerId  Integer value for payerId.
      * @param  payerNumber  String value for payerNumber.
      */
@@ -93,6 +103,7 @@ public class SubmittedCard {
             OptionalNullable<String> accountNumber, OptionalNullable<String> cardExpiryDate,
             OptionalNullable<Integer> cardId, OptionalNullable<Integer> colCoCode,
             OptionalNullable<Integer> colCoId, OptionalNullable<String> pAN,
+            OptionalNullable<Double> pANID, OptionalNullable<String> maskedPAN,
             OptionalNullable<Integer> payerId, OptionalNullable<String> payerNumber) {
         this.replacementCardReference = replacementCardReference;
         this.updateCardReference = updateCardReference;
@@ -103,6 +114,8 @@ public class SubmittedCard {
         this.colCoCode = colCoCode;
         this.colCoId = colCoId;
         this.pAN = pAN;
+        this.pANID = pANID;
+        this.maskedPAN = maskedPAN;
         this.payerId = payerId;
         this.payerNumber = payerNumber;
     }
@@ -479,6 +492,84 @@ public class SubmittedCard {
     }
 
     /**
+     * Internal Getter for PANID.
+     * PANID of the card
+     * @return Returns the Internal Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Double> internalGetPANID() {
+        return this.pANID;
+    }
+
+    /**
+     * Getter for PANID.
+     * PANID of the card
+     * @return Returns the Double
+     */
+    public Double getPANID() {
+        return OptionalNullable.getFrom(pANID);
+    }
+
+    /**
+     * Setter for PANID.
+     * PANID of the card
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = OptionalNullable.of(pANID);
+    }
+
+    /**
+     * UnSetter for PANID.
+     * PANID of the card
+     */
+    public void unsetPANID() {
+        pANID = null;
+    }
+
+    /**
+     * Internal Getter for MaskedPAN.
+     * Card PAN
+     * @return Returns the Internal String
+     */
+    @JsonGetter("MaskedPAN")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetMaskedPAN() {
+        return this.maskedPAN;
+    }
+
+    /**
+     * Getter for MaskedPAN.
+     * Card PAN
+     * @return Returns the String
+     */
+    public String getMaskedPAN() {
+        return OptionalNullable.getFrom(maskedPAN);
+    }
+
+    /**
+     * Setter for MaskedPAN.
+     * Card PAN
+     * @param maskedPAN Value for String
+     */
+    @JsonSetter("MaskedPAN")
+    public void setMaskedPAN(String maskedPAN) {
+        this.maskedPAN = OptionalNullable.of(maskedPAN);
+    }
+
+    /**
+     * UnSetter for MaskedPAN.
+     * Card PAN
+     */
+    public void unsetMaskedPAN() {
+        maskedPAN = null;
+    }
+
+    /**
      * Internal Getter for PayerId.
      * Payer id of the customer.&lt;br /&gt; Optional if PayerNumber is passed, else Mandatory.
      * @return Returns the Internal Integer
@@ -566,7 +657,8 @@ public class SubmittedCard {
                 + ", updateCardReference=" + updateCardReference + ", accountId=" + accountId
                 + ", accountNumber=" + accountNumber + ", cardExpiryDate=" + cardExpiryDate
                 + ", cardId=" + cardId + ", colCoCode=" + colCoCode + ", colCoId=" + colCoId
-                + ", pAN=" + pAN + ", payerId=" + payerId + ", payerNumber=" + payerNumber + "]";
+                + ", pAN=" + pAN + ", pANID=" + pANID + ", maskedPAN=" + maskedPAN + ", payerId="
+                + payerId + ", payerNumber=" + payerNumber + "]";
     }
 
     /**
@@ -585,6 +677,8 @@ public class SubmittedCard {
         builder.colCoCode = internalGetColCoCode();
         builder.colCoId = internalGetColCoId();
         builder.pAN = internalGetPAN();
+        builder.pANID = internalGetPANID();
+        builder.maskedPAN = internalGetMaskedPAN();
         builder.payerId = internalGetPayerId();
         builder.payerNumber = internalGetPayerNumber();
         return builder;
@@ -603,6 +697,8 @@ public class SubmittedCard {
         private OptionalNullable<Integer> colCoCode;
         private OptionalNullable<Integer> colCoId;
         private OptionalNullable<String> pAN;
+        private OptionalNullable<Double> pANID;
+        private OptionalNullable<String> maskedPAN;
         private OptionalNullable<Integer> payerId;
         private OptionalNullable<String> payerNumber;
 
@@ -780,6 +876,44 @@ public class SubmittedCard {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = OptionalNullable.of(pANID);
+            return this;
+        }
+
+        /**
+         * UnSetter for pANID.
+         * @return Builder
+         */
+        public Builder unsetPANID() {
+            pANID = null;
+            return this;
+        }
+
+        /**
+         * Setter for maskedPAN.
+         * @param  maskedPAN  String value for maskedPAN.
+         * @return Builder
+         */
+        public Builder maskedPAN(String maskedPAN) {
+            this.maskedPAN = OptionalNullable.of(maskedPAN);
+            return this;
+        }
+
+        /**
+         * UnSetter for maskedPAN.
+         * @return Builder
+         */
+        public Builder unsetMaskedPAN() {
+            maskedPAN = null;
+            return this;
+        }
+
+        /**
          * Setter for payerId.
          * @param  payerId  Integer value for payerId.
          * @return Builder
@@ -823,8 +957,8 @@ public class SubmittedCard {
          */
         public SubmittedCard build() {
             return new SubmittedCard(replacementCardReference, updateCardReference, accountId,
-                    accountNumber, cardExpiryDate, cardId, colCoCode, colCoId, pAN, payerId,
-                    payerNumber);
+                    accountNumber, cardExpiryDate, cardId, colCoCode, colCoId, pAN, pANID,
+                    maskedPAN, payerId, payerNumber);
         }
     }
 }

@@ -16,7 +16,7 @@
 | `AccountId` | `Integer` | Optional | Account ID of the customer on which the restrictions will be applied.<br>Optional if AccountNumber is passed, else Mandatory.<br>Example: 123456 | Integer getAccountId() | setAccountId(Integer accountId) |
 | `AccountNumber` | `String` | Optional | Account Number of the customer on which the restrictions will be applied.<br>Optional if AccountId is passed, else Mandatory.<br>Example: GB000000123 | String getAccountNumber() | setAccountNumber(String accountNumber) |
 | `ResetUsageRestrictions` | `Boolean` | Optional | True/False.<br>If true, the usage restrictions applied on the account will be removed.<br>Optional<br>Default: False | Boolean getResetUsageRestrictions() | setResetUsageRestrictions(Boolean resetUsageRestrictions) |
-| `UsageRestrictions` | [`UsageRestrictionsCard`](../../doc/models/usage-restrictions-card.md) | Optional | - | UsageRestrictionsCard getUsageRestrictions() | setUsageRestrictions(UsageRestrictionsCard usageRestrictions) |
+| `UsageRestrictions` | `Object` | Optional | - | Object getUsageRestrictions() | setUsageRestrictions(Object usageRestrictions) |
 
 ## Example (as JSON)
 

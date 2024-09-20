@@ -17,6 +17,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
     private String accountNumber;
     private Integer accountId;
     private String pAN;
+    private Double pANID;
     private Integer cardId;
     private boolean reissueSetting;
 
@@ -32,6 +33,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
      * @param  accountNumber  String value for accountNumber.
      * @param  accountId  Integer value for accountId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
      * @param  cardId  Integer value for cardId.
      */
     public AutoRenewCardRequestAutoRenewCardsItems(
@@ -39,10 +41,12 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
             String accountNumber,
             Integer accountId,
             String pAN,
+            Double pANID,
             Integer cardId) {
         this.accountNumber = accountNumber;
         this.accountId = accountId;
         this.pAN = pAN;
+        this.pANID = pANID;
         this.cardId = cardId;
         this.reissueSetting = reissueSetting;
     }
@@ -111,6 +115,29 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
     }
 
     /**
+     * Getter for PANID.
+     * Card PAN ID. Optional if CardId is given, else mandatory. Note: PANID is ignored if CardId is
+     * given.
+     * @return Returns the Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Double getPANID() {
+        return pANID;
+    }
+
+    /**
+     * Setter for PANID.
+     * Card PAN ID. Optional if CardId is given, else mandatory. Note: PANID is ignored if CardId is
+     * given.
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = pANID;
+    }
+
+    /**
      * Getter for CardId.
      * Card Id of the card. Optional if PAN is passed, else Mandatory.
      * @return Returns the Integer
@@ -161,7 +188,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
     public String toString() {
         return "AutoRenewCardRequestAutoRenewCardsItems [" + "reissueSetting=" + reissueSetting
                 + ", accountNumber=" + accountNumber + ", accountId=" + accountId + ", pAN=" + pAN
-                + ", cardId=" + cardId + "]";
+                + ", pANID=" + pANID + ", cardId=" + cardId + "]";
     }
 
     /**
@@ -174,6 +201,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
                 .accountNumber(getAccountNumber())
                 .accountId(getAccountId())
                 .pAN(getPAN())
+                .pANID(getPANID())
                 .cardId(getCardId());
         return builder;
     }
@@ -186,6 +214,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
         private String accountNumber;
         private Integer accountId;
         private String pAN;
+        private Double pANID;
         private Integer cardId;
 
         /**
@@ -243,6 +272,16 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = pANID;
+            return this;
+        }
+
+        /**
          * Setter for cardId.
          * @param  cardId  Integer value for cardId.
          * @return Builder
@@ -258,7 +297,7 @@ public class AutoRenewCardRequestAutoRenewCardsItems {
          */
         public AutoRenewCardRequestAutoRenewCardsItems build() {
             return new AutoRenewCardRequestAutoRenewCardsItems(reissueSetting, accountNumber,
-                    accountId, pAN, cardId);
+                    accountId, pAN, pANID, cardId);
         }
     }
 }

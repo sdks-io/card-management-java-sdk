@@ -212,7 +212,7 @@ public class DayTimeRestriction {
 
     /**
      * Getter for TimeFrom.
-     * Card could be used from this time in a day. Format: HH:mm (24-hour format) Note: 1.	Clients
+     * Card could be used from this time in a day. Format: HH:mm (24-hour format) Note: 1. Clients
      * to convert this to appropriate DateTime or TimeSpan type. “00:00” is the lowest time value
      * and “23:59” is the highest time value.
      * @return Returns the String
@@ -225,7 +225,7 @@ public class DayTimeRestriction {
 
     /**
      * Setter for TimeFrom.
-     * Card could be used from this time in a day. Format: HH:mm (24-hour format) Note: 1.	Clients
+     * Card could be used from this time in a day. Format: HH:mm (24-hour format) Note: 1. Clients
      * to convert this to appropriate DateTime or TimeSpan type. “00:00” is the lowest time value
      * and “23:59” is the highest time value.
      * @param timeFrom Value for String
@@ -237,7 +237,7 @@ public class DayTimeRestriction {
 
     /**
      * Getter for TimeTo.
-     * Card could be used up to this time in a day. Format: HH:mm (24-hour format) Note: 1.	Clients
+     * Card could be used up to this time in a day. Format: HH:mm (24-hour format) Note: 1. Clients
      * to convert this to appropriate DateTime or TimeSpan type. “00:00” is the lowest time value
      * and “23:59” is the highest time value.
      * @return Returns the String
@@ -250,7 +250,7 @@ public class DayTimeRestriction {
 
     /**
      * Setter for TimeTo.
-     * Card could be used up to this time in a day. Format: HH:mm (24-hour format) Note: 1.	Clients
+     * Card could be used up to this time in a day. Format: HH:mm (24-hour format) Note: 1. Clients
      * to convert this to appropriate DateTime or TimeSpan type. “00:00” is the lowest time value
      * and “23:59” is the highest time value.
      * @param timeTo Value for String

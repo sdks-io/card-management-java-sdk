@@ -24,6 +24,8 @@ public class OrderCardEnquiry {
     private OptionalNullable<String> cardGroupName;
     private OptionalNullable<Integer> cardId;
     private OptionalNullable<String> cardPAN;
+    private OptionalNullable<String> maskedPAN;
+    private OptionalNullable<Double> pANID;
     private OptionalNullable<String> cardTypeCode;
     private OptionalNullable<Integer> cardTypeId;
     private OptionalNullable<String> cardTypeName;
@@ -68,6 +70,8 @@ public class OrderCardEnquiry {
      * @param  cardGroupName  String value for cardGroupName.
      * @param  cardId  Integer value for cardId.
      * @param  cardPAN  String value for cardPAN.
+     * @param  maskedPAN  String value for maskedPAN.
+     * @param  pANID  Double value for pANID.
      * @param  cardTypeCode  String value for cardTypeCode.
      * @param  cardTypeId  Integer value for cardTypeId.
      * @param  cardTypeName  String value for cardTypeName.
@@ -105,6 +109,8 @@ public class OrderCardEnquiry {
             String cardGroupName,
             Integer cardId,
             String cardPAN,
+            String maskedPAN,
+            Double pANID,
             String cardTypeCode,
             Integer cardTypeId,
             String cardTypeName,
@@ -140,6 +146,8 @@ public class OrderCardEnquiry {
         this.cardGroupName = OptionalNullable.of(cardGroupName);
         this.cardId = OptionalNullable.of(cardId);
         this.cardPAN = OptionalNullable.of(cardPAN);
+        this.maskedPAN = OptionalNullable.of(maskedPAN);
+        this.pANID = OptionalNullable.of(pANID);
         this.cardTypeCode = OptionalNullable.of(cardTypeCode);
         this.cardTypeId = OptionalNullable.of(cardTypeId);
         this.cardTypeName = OptionalNullable.of(cardTypeName);
@@ -179,6 +187,8 @@ public class OrderCardEnquiry {
      * @param  cardGroupName  String value for cardGroupName.
      * @param  cardId  Integer value for cardId.
      * @param  cardPAN  String value for cardPAN.
+     * @param  maskedPAN  String value for maskedPAN.
+     * @param  pANID  Double value for pANID.
      * @param  cardTypeCode  String value for cardTypeCode.
      * @param  cardTypeId  Integer value for cardTypeId.
      * @param  cardTypeName  String value for cardTypeName.
@@ -212,7 +222,8 @@ public class OrderCardEnquiry {
             OptionalNullable<String> accountNumber, OptionalNullable<Integer> bCOReference,
             OptionalNullable<Integer> bCORowNumber, OptionalNullable<Integer> cardGroupId,
             OptionalNullable<String> cardGroupName, OptionalNullable<Integer> cardId,
-            OptionalNullable<String> cardPAN, OptionalNullable<String> cardTypeCode,
+            OptionalNullable<String> cardPAN, OptionalNullable<String> maskedPAN,
+            OptionalNullable<Double> pANID, OptionalNullable<String> cardTypeCode,
             OptionalNullable<Integer> cardTypeId, OptionalNullable<String> cardTypeName,
             OptionalNullable<String> driverName, OptionalNullable<String> errorCode,
             OptionalNullable<String> errorDescription,
@@ -236,6 +247,8 @@ public class OrderCardEnquiry {
         this.cardGroupName = cardGroupName;
         this.cardId = cardId;
         this.cardPAN = cardPAN;
+        this.maskedPAN = maskedPAN;
+        this.pANID = pANID;
         this.cardTypeCode = cardTypeCode;
         this.cardTypeId = cardTypeId;
         this.cardTypeName = cardTypeName;
@@ -591,6 +604,84 @@ public class OrderCardEnquiry {
      */
     public void unsetCardPAN() {
         cardPAN = null;
+    }
+
+    /**
+     * Internal Getter for MaskedPAN.
+     * Card PAN
+     * @return Returns the Internal String
+     */
+    @JsonGetter("MaskedPAN")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<String> internalGetMaskedPAN() {
+        return this.maskedPAN;
+    }
+
+    /**
+     * Getter for MaskedPAN.
+     * Card PAN
+     * @return Returns the String
+     */
+    public String getMaskedPAN() {
+        return OptionalNullable.getFrom(maskedPAN);
+    }
+
+    /**
+     * Setter for MaskedPAN.
+     * Card PAN
+     * @param maskedPAN Value for String
+     */
+    @JsonSetter("MaskedPAN")
+    public void setMaskedPAN(String maskedPAN) {
+        this.maskedPAN = OptionalNullable.of(maskedPAN);
+    }
+
+    /**
+     * UnSetter for MaskedPAN.
+     * Card PAN
+     */
+    public void unsetMaskedPAN() {
+        maskedPAN = null;
+    }
+
+    /**
+     * Internal Getter for PANID.
+     * Card PAN ID as a unique number for each PAN
+     * @return Returns the Internal Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = OptionalNullable.Serializer.class)
+    protected OptionalNullable<Double> internalGetPANID() {
+        return this.pANID;
+    }
+
+    /**
+     * Getter for PANID.
+     * Card PAN ID as a unique number for each PAN
+     * @return Returns the Double
+     */
+    public Double getPANID() {
+        return OptionalNullable.getFrom(pANID);
+    }
+
+    /**
+     * Setter for PANID.
+     * Card PAN ID as a unique number for each PAN
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = OptionalNullable.of(pANID);
+    }
+
+    /**
+     * UnSetter for PANID.
+     * Card PAN ID as a unique number for each PAN
+     */
+    public void unsetPANID() {
+        pANID = null;
     }
 
     /**
@@ -1013,8 +1104,8 @@ public class OrderCardEnquiry {
     /**
      * Internal Getter for OrderStatus.
      * Order status.&lt;br /&gt; Possible values:&lt;br /&gt; P Pending&lt;br /&gt; I Picked up for processing&lt;br /&gt;
-     * PX	Failed at Queue but retry attempts pending&lt;br /&gt; X	Failed at Queue&lt;br /&gt; R	Card is
-     * processed, awaiting for PAN update.&lt;br /&gt; S	Processed&lt;br /&gt; F	Failed
+     * PX Failed at Queue but retry attempts pending&lt;br /&gt; X Failed at Queue&lt;br /&gt; R Card is
+     * processed, awaiting for PAN update.&lt;br /&gt; S Processed&lt;br /&gt; F Failed
      * @return Returns the Internal String
      */
     @JsonGetter("OrderStatus")
@@ -1027,8 +1118,8 @@ public class OrderCardEnquiry {
     /**
      * Getter for OrderStatus.
      * Order status.&lt;br /&gt; Possible values:&lt;br /&gt; P Pending&lt;br /&gt; I Picked up for processing&lt;br /&gt;
-     * PX	Failed at Queue but retry attempts pending&lt;br /&gt; X	Failed at Queue&lt;br /&gt; R	Card is
-     * processed, awaiting for PAN update.&lt;br /&gt; S	Processed&lt;br /&gt; F	Failed
+     * PX Failed at Queue but retry attempts pending&lt;br /&gt; X Failed at Queue&lt;br /&gt; R Card is
+     * processed, awaiting for PAN update.&lt;br /&gt; S Processed&lt;br /&gt; F Failed
      * @return Returns the String
      */
     public String getOrderStatus() {
@@ -1038,8 +1129,8 @@ public class OrderCardEnquiry {
     /**
      * Setter for OrderStatus.
      * Order status.&lt;br /&gt; Possible values:&lt;br /&gt; P Pending&lt;br /&gt; I Picked up for processing&lt;br /&gt;
-     * PX	Failed at Queue but retry attempts pending&lt;br /&gt; X	Failed at Queue&lt;br /&gt; R	Card is
-     * processed, awaiting for PAN update.&lt;br /&gt; S	Processed&lt;br /&gt; F	Failed
+     * PX Failed at Queue but retry attempts pending&lt;br /&gt; X Failed at Queue&lt;br /&gt; R Card is
+     * processed, awaiting for PAN update.&lt;br /&gt; S Processed&lt;br /&gt; F Failed
      * @param orderStatus Value for String
      */
     @JsonSetter("OrderStatus")
@@ -1050,8 +1141,8 @@ public class OrderCardEnquiry {
     /**
      * UnSetter for OrderStatus.
      * Order status.&lt;br /&gt; Possible values:&lt;br /&gt; P Pending&lt;br /&gt; I Picked up for processing&lt;br /&gt;
-     * PX	Failed at Queue but retry attempts pending&lt;br /&gt; X	Failed at Queue&lt;br /&gt; R	Card is
-     * processed, awaiting for PAN update.&lt;br /&gt; S	Processed&lt;br /&gt; F	Failed
+     * PX Failed at Queue but retry attempts pending&lt;br /&gt; X Failed at Queue&lt;br /&gt; R Card is
+     * processed, awaiting for PAN update.&lt;br /&gt; S Processed&lt;br /&gt; F Failed
      */
     public void unsetOrderStatus() {
         orderStatus = null;
@@ -1693,21 +1784,22 @@ public class OrderCardEnquiry {
         return "OrderCardEnquiry [" + "accountId=" + accountId + ", accountNumber=" + accountNumber
                 + ", bCOReference=" + bCOReference + ", bCORowNumber=" + bCORowNumber
                 + ", cardGroupId=" + cardGroupId + ", cardGroupName=" + cardGroupName + ", cardId="
-                + cardId + ", cardPAN=" + cardPAN + ", cardTypeCode=" + cardTypeCode
-                + ", cardTypeId=" + cardTypeId + ", cardTypeName=" + cardTypeName + ", driverName="
-                + driverName + ", errorCode=" + errorCode + ", errorDescription=" + errorDescription
-                + ", gatewaySyncErrorCode=" + gatewaySyncErrorCode
-                + ", gatewaySyncErrorDescription=" + gatewaySyncErrorDescription
-                + ", gatewaySyncStatus=" + gatewaySyncStatus + ", mainReference=" + mainReference
-                + ", orderCardReference=" + orderCardReference + ", orderStatus=" + orderStatus
-                + ", payerId=" + payerId + ", payerNumber=" + payerNumber + ", processedDate="
-                + processedDate + ", purchaseCategoryCode=" + purchaseCategoryCode
-                + ", purchaseCategoryId=" + purchaseCategoryId + ", purchaseCategoryName="
-                + purchaseCategoryName + ", submittedDate=" + submittedDate + ", syncProcessedDate="
-                + syncProcessedDate + ", syncRequestedDate=" + syncRequestedDate + ", vRN=" + vRN
-                + ", orderRequestId=" + orderRequestId + ", expiryDate=" + expiryDate
-                + ", clientReferenceId=" + clientReferenceId + ", statusDescription="
-                + statusDescription + ", colCoId=" + colCoId + "]";
+                + cardId + ", cardPAN=" + cardPAN + ", maskedPAN=" + maskedPAN + ", pANID=" + pANID
+                + ", cardTypeCode=" + cardTypeCode + ", cardTypeId=" + cardTypeId
+                + ", cardTypeName=" + cardTypeName + ", driverName=" + driverName + ", errorCode="
+                + errorCode + ", errorDescription=" + errorDescription + ", gatewaySyncErrorCode="
+                + gatewaySyncErrorCode + ", gatewaySyncErrorDescription="
+                + gatewaySyncErrorDescription + ", gatewaySyncStatus=" + gatewaySyncStatus
+                + ", mainReference=" + mainReference + ", orderCardReference=" + orderCardReference
+                + ", orderStatus=" + orderStatus + ", payerId=" + payerId + ", payerNumber="
+                + payerNumber + ", processedDate=" + processedDate + ", purchaseCategoryCode="
+                + purchaseCategoryCode + ", purchaseCategoryId=" + purchaseCategoryId
+                + ", purchaseCategoryName=" + purchaseCategoryName + ", submittedDate="
+                + submittedDate + ", syncProcessedDate=" + syncProcessedDate
+                + ", syncRequestedDate=" + syncRequestedDate + ", vRN=" + vRN + ", orderRequestId="
+                + orderRequestId + ", expiryDate=" + expiryDate + ", clientReferenceId="
+                + clientReferenceId + ", statusDescription=" + statusDescription + ", colCoId="
+                + colCoId + "]";
     }
 
     /**
@@ -1728,6 +1820,8 @@ public class OrderCardEnquiry {
         builder.cardGroupName = internalGetCardGroupName();
         builder.cardId = internalGetCardId();
         builder.cardPAN = internalGetCardPAN();
+        builder.maskedPAN = internalGetMaskedPAN();
+        builder.pANID = internalGetPANID();
         builder.cardTypeCode = internalGetCardTypeCode();
         builder.cardTypeId = internalGetCardTypeId();
         builder.cardTypeName = internalGetCardTypeName();
@@ -1767,6 +1861,8 @@ public class OrderCardEnquiry {
         private OptionalNullable<String> cardGroupName;
         private OptionalNullable<Integer> cardId;
         private OptionalNullable<String> cardPAN;
+        private OptionalNullable<String> maskedPAN;
+        private OptionalNullable<Double> pANID;
         private OptionalNullable<String> cardTypeCode;
         private OptionalNullable<Integer> cardTypeId;
         private OptionalNullable<String> cardTypeName;
@@ -1946,6 +2042,44 @@ public class OrderCardEnquiry {
          */
         public Builder unsetCardPAN() {
             cardPAN = null;
+            return this;
+        }
+
+        /**
+         * Setter for maskedPAN.
+         * @param  maskedPAN  String value for maskedPAN.
+         * @return Builder
+         */
+        public Builder maskedPAN(String maskedPAN) {
+            this.maskedPAN = OptionalNullable.of(maskedPAN);
+            return this;
+        }
+
+        /**
+         * UnSetter for maskedPAN.
+         * @return Builder
+         */
+        public Builder unsetMaskedPAN() {
+            maskedPAN = null;
+            return this;
+        }
+
+        /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = OptionalNullable.of(pANID);
+            return this;
+        }
+
+        /**
+         * UnSetter for pANID.
+         * @return Builder
+         */
+        public Builder unsetPANID() {
+            pANID = null;
             return this;
         }
 
@@ -2441,13 +2575,13 @@ public class OrderCardEnquiry {
          */
         public OrderCardEnquiry build() {
             return new OrderCardEnquiry(accountId, accountNumber, bCOReference, bCORowNumber,
-                    cardGroupId, cardGroupName, cardId, cardPAN, cardTypeCode, cardTypeId,
-                    cardTypeName, driverName, errorCode, errorDescription, gatewaySyncErrorCode,
-                    gatewaySyncErrorDescription, gatewaySyncStatus, mainReference,
-                    orderCardReference, orderStatus, payerId, payerNumber, processedDate,
-                    purchaseCategoryCode, purchaseCategoryId, purchaseCategoryName, submittedDate,
-                    syncProcessedDate, syncRequestedDate, vRN, orderRequestId, expiryDate,
-                    clientReferenceId, statusDescription, colCoId);
+                    cardGroupId, cardGroupName, cardId, cardPAN, maskedPAN, pANID, cardTypeCode,
+                    cardTypeId, cardTypeName, driverName, errorCode, errorDescription,
+                    gatewaySyncErrorCode, gatewaySyncErrorDescription, gatewaySyncStatus,
+                    mainReference, orderCardReference, orderStatus, payerId, payerNumber,
+                    processedDate, purchaseCategoryCode, purchaseCategoryId, purchaseCategoryName,
+                    submittedDate, syncProcessedDate, syncRequestedDate, vRN, orderRequestId,
+                    expiryDate, clientReferenceId, statusDescription, colCoId);
         }
     }
 }

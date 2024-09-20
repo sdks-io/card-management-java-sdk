@@ -1502,7 +1502,7 @@ public class Filters1 {
      * ‘ReissueSetting’.&lt;br /&gt; If ‘True’, the API will return cards with ReIssueSetting value is
      * true.&lt;br /&gt; If ‘False’, the API will return cards with ReIsssueSetting value is false.&lt;br /&gt;
      * If ‘ALL’, API will return cards with ReIssueSetting value True &amp; False both.&lt;br /&gt;
-     * Allowed Values:&lt;br /&gt; 1.	All&lt;br /&gt; 2.	True&lt;br /&gt; 3.	False
+     * Allowed Values:&lt;br /&gt; 1. All&lt;br /&gt; 2. True&lt;br /&gt; 3. False
      * @return Returns the Internal String
      */
     @JsonGetter("ReissueSetting")
@@ -1518,7 +1518,7 @@ public class Filters1 {
      * ‘ReissueSetting’.&lt;br /&gt; If ‘True’, the API will return cards with ReIssueSetting value is
      * true.&lt;br /&gt; If ‘False’, the API will return cards with ReIsssueSetting value is false.&lt;br /&gt;
      * If ‘ALL’, API will return cards with ReIssueSetting value True &amp; False both.&lt;br /&gt;
-     * Allowed Values:&lt;br /&gt; 1.	All&lt;br /&gt; 2.	True&lt;br /&gt; 3.	False
+     * Allowed Values:&lt;br /&gt; 1. All&lt;br /&gt; 2. True&lt;br /&gt; 3. False
      * @return Returns the String
      */
     public String getReissueSetting() {
@@ -1531,7 +1531,7 @@ public class Filters1 {
      * ‘ReissueSetting’.&lt;br /&gt; If ‘True’, the API will return cards with ReIssueSetting value is
      * true.&lt;br /&gt; If ‘False’, the API will return cards with ReIsssueSetting value is false.&lt;br /&gt;
      * If ‘ALL’, API will return cards with ReIssueSetting value True &amp; False both.&lt;br /&gt;
-     * Allowed Values:&lt;br /&gt; 1.	All&lt;br /&gt; 2.	True&lt;br /&gt; 3.	False
+     * Allowed Values:&lt;br /&gt; 1. All&lt;br /&gt; 2. True&lt;br /&gt; 3. False
      * @param reissueSetting Value for String
      */
     @JsonSetter("ReissueSetting")
@@ -1545,7 +1545,7 @@ public class Filters1 {
      * ‘ReissueSetting’.&lt;br /&gt; If ‘True’, the API will return cards with ReIssueSetting value is
      * true.&lt;br /&gt; If ‘False’, the API will return cards with ReIsssueSetting value is false.&lt;br /&gt;
      * If ‘ALL’, API will return cards with ReIssueSetting value True &amp; False both.&lt;br /&gt;
-     * Allowed Values:&lt;br /&gt; 1.	All&lt;br /&gt; 2.	True&lt;br /&gt; 3.	False
+     * Allowed Values:&lt;br /&gt; 1. All&lt;br /&gt; 2. True&lt;br /&gt; 3. False
      */
     public void unsetReissueSetting() {
         reissueSetting = null;

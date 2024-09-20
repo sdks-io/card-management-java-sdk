@@ -18,6 +18,7 @@ import io.apimatic.core.types.OptionalNullable;
 public class SearchCard {
     private OptionalNullable<Integer> cardId;
     private OptionalNullable<String> pAN;
+    private Double pANID;
 
     /**
      * Default constructor.
@@ -29,23 +30,29 @@ public class SearchCard {
      * Initialization constructor.
      * @param  cardId  Integer value for cardId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
      */
     public SearchCard(
             Integer cardId,
-            String pAN) {
+            String pAN,
+            Double pANID) {
         this.cardId = OptionalNullable.of(cardId);
         this.pAN = OptionalNullable.of(pAN);
+        this.pANID = pANID;
     }
 
     /**
      * Initialization constructor.
      * @param  cardId  Integer value for cardId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  Double value for pANID.
      */
 
-    protected SearchCard(OptionalNullable<Integer> cardId, OptionalNullable<String> pAN) {
+    protected SearchCard(OptionalNullable<Integer> cardId, OptionalNullable<String> pAN,
+            Double pANID) {
         this.cardId = cardId;
         this.pAN = pAN;
+        this.pANID = pANID;
     }
 
     /**
@@ -131,12 +138,35 @@ public class SearchCard {
     }
 
     /**
+     * Getter for PANID.
+     * Card PANID optional id cardid given, else mandatory Note: PANID is ignored if CardId is
+     * given.
+     * @return Returns the Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Double getPANID() {
+        return pANID;
+    }
+
+    /**
+     * Setter for PANID.
+     * Card PANID optional id cardid given, else mandatory Note: PANID is ignored if CardId is
+     * given.
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = pANID;
+    }
+
+    /**
      * Converts this SearchCard into string format.
      * @return String representation of this class
      */
     @Override
     public String toString() {
-        return "SearchCard [" + "cardId=" + cardId + ", pAN=" + pAN + "]";
+        return "SearchCard [" + "cardId=" + cardId + ", pAN=" + pAN + ", pANID=" + pANID + "]";
     }
 
     /**
@@ -145,7 +175,8 @@ public class SearchCard {
      * @return a new {@link SearchCard.Builder} object
      */
     public Builder toBuilder() {
-        Builder builder = new Builder();
+        Builder builder = new Builder()
+                .pANID(getPANID());
         builder.cardId = internalGetCardId();
         builder.pAN = internalGetPAN();
         return builder;
@@ -157,6 +188,7 @@ public class SearchCard {
     public static class Builder {
         private OptionalNullable<Integer> cardId;
         private OptionalNullable<String> pAN;
+        private Double pANID;
 
 
 
@@ -199,11 +231,21 @@ public class SearchCard {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = pANID;
+            return this;
+        }
+
+        /**
          * Builds a new {@link SearchCard} object using the set fields.
          * @return {@link SearchCard}
          */
         public SearchCard build() {
-            return new SearchCard(cardId, pAN);
+            return new SearchCard(cardId, pAN, pANID);
         }
     }
 }

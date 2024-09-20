@@ -1142,8 +1142,8 @@ public class CardDetail {
 
     /**
      * Getter for CardDeliveryType.
-     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1.	Customer Address(Default)
-     * &lt;br /&gt; 2.	New Delivery Address
+     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1. Customer Address(Default)
+     * &lt;br /&gt; 2. New Delivery Address
      * @return Returns the Integer
      */
     @JsonGetter("CardDeliveryType")
@@ -1153,8 +1153,8 @@ public class CardDetail {
 
     /**
      * Setter for CardDeliveryType.
-     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1.	Customer Address(Default)
-     * &lt;br /&gt; 2.	New Delivery Address
+     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1. Customer Address(Default)
+     * &lt;br /&gt; 2. New Delivery Address
      * @param cardDeliveryType Value for Integer
      */
     @JsonSetter("CardDeliveryType")
@@ -1183,8 +1183,8 @@ public class CardDetail {
 
     /**
      * Internal Getter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @return Returns the Internal Integer
      */
     @JsonGetter("PINDeliveryAddressType")
@@ -1196,8 +1196,8 @@ public class CardDetail {
 
     /**
      * Getter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @return Returns the Integer
      */
     public Integer getPINDeliveryAddressType() {
@@ -1206,8 +1206,8 @@ public class CardDetail {
 
     /**
      * Setter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @param pINDeliveryAddressType Value for Integer
      */
     @JsonSetter("PINDeliveryAddressType")
@@ -1217,8 +1217,8 @@ public class CardDetail {
 
     /**
      * UnSetter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      */
     public void unsetPINDeliveryAddressType() {
         pINDeliveryAddressType = null;
@@ -1226,8 +1226,8 @@ public class CardDetail {
 
     /**
      * Getter for PINAdviceType.
-     * PIN delivery method.&lt;br /&gt; Mandatory&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br
-     * /&gt; 3.	SMS&lt;br /&gt; 4.	None &lt;br /&gt; **Note:** Paper delivery not applicable for selfselctedPIN
+     * PIN delivery method.&lt;br /&gt; Mandatory&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br
+     * /&gt; 3. SMS&lt;br /&gt; 4. None &lt;br /&gt; **Note:** Paper delivery not applicable for selfselctedPIN
      * type
      * @return Returns the Integer
      */
@@ -1238,8 +1238,8 @@ public class CardDetail {
 
     /**
      * Setter for PINAdviceType.
-     * PIN delivery method.&lt;br /&gt; Mandatory&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br
-     * /&gt; 3.	SMS&lt;br /&gt; 4.	None &lt;br /&gt; **Note:** Paper delivery not applicable for selfselctedPIN
+     * PIN delivery method.&lt;br /&gt; Mandatory&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br
+     * /&gt; 3. SMS&lt;br /&gt; 4. None &lt;br /&gt; **Note:** Paper delivery not applicable for selfselctedPIN
      * type
      * @param pINAdviceType Value for Integer
      */
@@ -1297,8 +1297,8 @@ public class CardDetail {
     /**
      * Internal Getter for Caller.
      * The caller to be notified with the status of the card order.&lt;br /&gt; Mandatory, if NotifyCaller
-     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; •	“NextGenUI”: This value
-     * to be used by next gen UI application.&lt;br /&gt; •	“FleetHubUILifeTime”: This value to be used by
+     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; • “NextGenUI”: This value
+     * to be used by next gen UI application.&lt;br /&gt; • “FleetHubUILifeTime”: This value to be used by
      * Fleet Hub UI application for life time restriction cards.&lt;br /&gt; Note: The values passed in
      * this field are case insensitive
      * @return Returns the Internal String
@@ -1313,8 +1313,8 @@ public class CardDetail {
     /**
      * Getter for Caller.
      * The caller to be notified with the status of the card order.&lt;br /&gt; Mandatory, if NotifyCaller
-     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; •	“NextGenUI”: This value
-     * to be used by next gen UI application.&lt;br /&gt; •	“FleetHubUILifeTime”: This value to be used by
+     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; • “NextGenUI”: This value
+     * to be used by next gen UI application.&lt;br /&gt; • “FleetHubUILifeTime”: This value to be used by
      * Fleet Hub UI application for life time restriction cards.&lt;br /&gt; Note: The values passed in
      * this field are case insensitive
      * @return Returns the String
@@ -1326,8 +1326,8 @@ public class CardDetail {
     /**
      * Setter for Caller.
      * The caller to be notified with the status of the card order.&lt;br /&gt; Mandatory, if NotifyCaller
-     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; •	“NextGenUI”: This value
-     * to be used by next gen UI application.&lt;br /&gt; •	“FleetHubUILifeTime”: This value to be used by
+     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; • “NextGenUI”: This value
+     * to be used by next gen UI application.&lt;br /&gt; • “FleetHubUILifeTime”: This value to be used by
      * Fleet Hub UI application for life time restriction cards.&lt;br /&gt; Note: The values passed in
      * this field are case insensitive
      * @param caller Value for String
@@ -1340,8 +1340,8 @@ public class CardDetail {
     /**
      * UnSetter for Caller.
      * The caller to be notified with the status of the card order.&lt;br /&gt; Mandatory, if NotifyCaller
-     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; •	“NextGenUI”: This value
-     * to be used by next gen UI application.&lt;br /&gt; •	“FleetHubUILifeTime”: This value to be used by
+     * is true.&lt;br /&gt; Maximum field length: 20&lt;br /&gt; Allowed values:&lt;br /&gt; • “NextGenUI”: This value
+     * to be used by next gen UI application.&lt;br /&gt; • “FleetHubUILifeTime”: This value to be used by
      * Fleet Hub UI application for life time restriction cards.&lt;br /&gt; Note: The values passed in
      * this field are case insensitive
      */
@@ -1402,8 +1402,8 @@ public class CardDetail {
     /**
      * Internal Getter for FleetOption.
      * Type of action will be performed for the card when the fleet Id is validated.&lt;br /&gt;
-     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; •	ALERT&lt;br /&gt; •	DECLINE&lt;br
-     * /&gt; •	DECLINE_ALERT&lt;br /&gt; •	NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
+     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; • ALERT&lt;br /&gt; • DECLINE&lt;br
+     * /&gt; • DECLINE_ALERT&lt;br /&gt; • NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
      * validatefleetid is true then by default allowed value is NO_VALIDATION.
      * @return Returns the Internal String
      */
@@ -1417,8 +1417,8 @@ public class CardDetail {
     /**
      * Getter for FleetOption.
      * Type of action will be performed for the card when the fleet Id is validated.&lt;br /&gt;
-     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; •	ALERT&lt;br /&gt; •	DECLINE&lt;br
-     * /&gt; •	DECLINE_ALERT&lt;br /&gt; •	NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
+     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; • ALERT&lt;br /&gt; • DECLINE&lt;br
+     * /&gt; • DECLINE_ALERT&lt;br /&gt; • NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
      * validatefleetid is true then by default allowed value is NO_VALIDATION.
      * @return Returns the String
      */
@@ -1429,8 +1429,8 @@ public class CardDetail {
     /**
      * Setter for FleetOption.
      * Type of action will be performed for the card when the fleet Id is validated.&lt;br /&gt;
-     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; •	ALERT&lt;br /&gt; •	DECLINE&lt;br
-     * /&gt; •	DECLINE_ALERT&lt;br /&gt; •	NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
+     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; • ALERT&lt;br /&gt; • DECLINE&lt;br
+     * /&gt; • DECLINE_ALERT&lt;br /&gt; • NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
      * validatefleetid is true then by default allowed value is NO_VALIDATION.
      * @param fleetOption Value for String
      */
@@ -1442,8 +1442,8 @@ public class CardDetail {
     /**
      * UnSetter for FleetOption.
      * Type of action will be performed for the card when the fleet Id is validated.&lt;br /&gt;
-     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; •	ALERT&lt;br /&gt; •	DECLINE&lt;br
-     * /&gt; •	DECLINE_ALERT&lt;br /&gt; •	NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
+     * Optional.&lt;br /&gt; Default: NO_VALIDATION&lt;br /&gt; Allowed values:&lt;br /&gt; • ALERT&lt;br /&gt; • DECLINE&lt;br
+     * /&gt; • DECLINE_ALERT&lt;br /&gt; • NO_VALIDATION&lt;br /&gt; Note: When FleetIdOption is not provided and
      * validatefleetid is true then by default allowed value is NO_VALIDATION.
      */
     public void unsetFleetOption() {
@@ -1757,6 +1757,9 @@ public class CardDetail {
 
     /**
      * Getter for AutoRenew.
+     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
+     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
+     * will not be Reissued.
      * @return Returns the CardDetailAutoRenewEnum
      */
     @JsonGetter("AutoRenew")
@@ -1767,6 +1770,9 @@ public class CardDetail {
 
     /**
      * Setter for AutoRenew.
+     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
+     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
+     * will not be Reissued.
      * @param autoRenew Value for CardDetailAutoRenewEnum
      */
     @JsonSetter("AutoRenew")

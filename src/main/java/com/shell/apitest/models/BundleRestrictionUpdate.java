@@ -19,10 +19,10 @@ public class BundleRestrictionUpdate {
     private OptionalNullable<Boolean> resetDayTimeRestriction;
     private OptionalNullable<Boolean> resetLocationRestriction;
     private OptionalNullable<Boolean> resetProductRestriction;
-    private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+    private Object usageRestrictions;
     private OptionalNullable<String> dayTimeRestrictionProfileId;
     private CardDayTimeRestrictions dayTimeRestrictions;
-    private OptionalNullable<ProductRestrictionCard> productRestrictions;
+    private Object productRestrictions;
     private String locationRestrictionProfileId;
     private LocationRestriction locationRestrictions;
 
@@ -37,10 +37,10 @@ public class BundleRestrictionUpdate {
      * @param  resetDayTimeRestriction  Boolean value for resetDayTimeRestriction.
      * @param  resetLocationRestriction  Boolean value for resetLocationRestriction.
      * @param  resetProductRestriction  Boolean value for resetProductRestriction.
-     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  usageRestrictions  Object value for usageRestrictions.
      * @param  dayTimeRestrictionProfileId  String value for dayTimeRestrictionProfileId.
      * @param  dayTimeRestrictions  CardDayTimeRestrictions value for dayTimeRestrictions.
-     * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
+     * @param  productRestrictions  Object value for productRestrictions.
      * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
      * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
      */
@@ -48,19 +48,19 @@ public class BundleRestrictionUpdate {
             Boolean resetDayTimeRestriction,
             Boolean resetLocationRestriction,
             Boolean resetProductRestriction,
-            UsageRestrictionsCard usageRestrictions,
+            Object usageRestrictions,
             String dayTimeRestrictionProfileId,
             CardDayTimeRestrictions dayTimeRestrictions,
-            ProductRestrictionCard productRestrictions,
+            Object productRestrictions,
             String locationRestrictionProfileId,
             LocationRestriction locationRestrictions) {
         this.resetDayTimeRestriction = OptionalNullable.of(resetDayTimeRestriction);
         this.resetLocationRestriction = OptionalNullable.of(resetLocationRestriction);
         this.resetProductRestriction = OptionalNullable.of(resetProductRestriction);
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
+        this.usageRestrictions = usageRestrictions;
         this.dayTimeRestrictionProfileId = OptionalNullable.of(dayTimeRestrictionProfileId);
         this.dayTimeRestrictions = dayTimeRestrictions;
-        this.productRestrictions = OptionalNullable.of(productRestrictions);
+        this.productRestrictions = productRestrictions;
         this.locationRestrictionProfileId = locationRestrictionProfileId;
         this.locationRestrictions = locationRestrictions;
     }
@@ -70,21 +70,19 @@ public class BundleRestrictionUpdate {
      * @param  resetDayTimeRestriction  Boolean value for resetDayTimeRestriction.
      * @param  resetLocationRestriction  Boolean value for resetLocationRestriction.
      * @param  resetProductRestriction  Boolean value for resetProductRestriction.
-     * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+     * @param  usageRestrictions  Object value for usageRestrictions.
      * @param  dayTimeRestrictionProfileId  String value for dayTimeRestrictionProfileId.
      * @param  dayTimeRestrictions  CardDayTimeRestrictions value for dayTimeRestrictions.
-     * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
+     * @param  productRestrictions  Object value for productRestrictions.
      * @param  locationRestrictionProfileId  String value for locationRestrictionProfileId.
      * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
      */
 
     protected BundleRestrictionUpdate(OptionalNullable<Boolean> resetDayTimeRestriction,
             OptionalNullable<Boolean> resetLocationRestriction,
-            OptionalNullable<Boolean> resetProductRestriction,
-            OptionalNullable<UsageRestrictionsCard> usageRestrictions,
+            OptionalNullable<Boolean> resetProductRestriction, Object usageRestrictions,
             OptionalNullable<String> dayTimeRestrictionProfileId,
-            CardDayTimeRestrictions dayTimeRestrictions,
-            OptionalNullable<ProductRestrictionCard> productRestrictions,
+            CardDayTimeRestrictions dayTimeRestrictions, Object productRestrictions,
             String locationRestrictionProfileId, LocationRestriction locationRestrictions) {
         this.resetDayTimeRestriction = resetDayTimeRestriction;
         this.resetLocationRestriction = resetLocationRestriction;
@@ -227,38 +225,22 @@ public class BundleRestrictionUpdate {
     }
 
     /**
-     * Internal Getter for UsageRestrictions.
-     * @return Returns the Internal UsageRestrictionsCard
+     * Getter for UsageRestrictions.
+     * @return Returns the Object
      */
     @JsonGetter("UsageRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<UsageRestrictionsCard> internalGetUsageRestrictions() {
-        return this.usageRestrictions;
-    }
-
-    /**
-     * Getter for UsageRestrictions.
-     * @return Returns the UsageRestrictionsCard
-     */
-    public UsageRestrictionsCard getUsageRestrictions() {
-        return OptionalNullable.getFrom(usageRestrictions);
+    public Object getUsageRestrictions() {
+        return usageRestrictions;
     }
 
     /**
      * Setter for UsageRestrictions.
-     * @param usageRestrictions Value for UsageRestrictionsCard
+     * @param usageRestrictions Value for Object
      */
     @JsonSetter("UsageRestrictions")
-    public void setUsageRestrictions(UsageRestrictionsCard usageRestrictions) {
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-    }
-
-    /**
-     * UnSetter for UsageRestrictions.
-     */
-    public void unsetUsageRestrictions() {
-        usageRestrictions = null;
+    public void setUsageRestrictions(Object usageRestrictions) {
+        this.usageRestrictions = usageRestrictions;
     }
 
     /**
@@ -324,38 +306,22 @@ public class BundleRestrictionUpdate {
     }
 
     /**
-     * Internal Getter for ProductRestrictions.
-     * @return Returns the Internal ProductRestrictionCard
+     * Getter for ProductRestrictions.
+     * @return Returns the Object
      */
     @JsonGetter("ProductRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<ProductRestrictionCard> internalGetProductRestrictions() {
-        return this.productRestrictions;
-    }
-
-    /**
-     * Getter for ProductRestrictions.
-     * @return Returns the ProductRestrictionCard
-     */
-    public ProductRestrictionCard getProductRestrictions() {
-        return OptionalNullable.getFrom(productRestrictions);
+    public Object getProductRestrictions() {
+        return productRestrictions;
     }
 
     /**
      * Setter for ProductRestrictions.
-     * @param productRestrictions Value for ProductRestrictionCard
+     * @param productRestrictions Value for Object
      */
     @JsonSetter("ProductRestrictions")
-    public void setProductRestrictions(ProductRestrictionCard productRestrictions) {
-        this.productRestrictions = OptionalNullable.of(productRestrictions);
-    }
-
-    /**
-     * UnSetter for ProductRestrictions.
-     */
-    public void unsetProductRestrictions() {
-        productRestrictions = null;
+    public void setProductRestrictions(Object productRestrictions) {
+        this.productRestrictions = productRestrictions;
     }
 
     /**
@@ -423,15 +389,15 @@ public class BundleRestrictionUpdate {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
+                .usageRestrictions(getUsageRestrictions())
                 .dayTimeRestrictions(getDayTimeRestrictions())
+                .productRestrictions(getProductRestrictions())
                 .locationRestrictionProfileId(getLocationRestrictionProfileId())
                 .locationRestrictions(getLocationRestrictions());
         builder.resetDayTimeRestriction = internalGetResetDayTimeRestriction();
         builder.resetLocationRestriction = internalGetResetLocationRestriction();
         builder.resetProductRestriction = internalGetResetProductRestriction();
-        builder.usageRestrictions = internalGetUsageRestrictions();
         builder.dayTimeRestrictionProfileId = internalGetDayTimeRestrictionProfileId();
-        builder.productRestrictions = internalGetProductRestrictions();
         return builder;
     }
 
@@ -442,10 +408,10 @@ public class BundleRestrictionUpdate {
         private OptionalNullable<Boolean> resetDayTimeRestriction;
         private OptionalNullable<Boolean> resetLocationRestriction;
         private OptionalNullable<Boolean> resetProductRestriction;
-        private OptionalNullable<UsageRestrictionsCard> usageRestrictions;
+        private Object usageRestrictions;
         private OptionalNullable<String> dayTimeRestrictionProfileId;
         private CardDayTimeRestrictions dayTimeRestrictions;
-        private OptionalNullable<ProductRestrictionCard> productRestrictions;
+        private Object productRestrictions;
         private String locationRestrictionProfileId;
         private LocationRestriction locationRestrictions;
 
@@ -510,20 +476,11 @@ public class BundleRestrictionUpdate {
 
         /**
          * Setter for usageRestrictions.
-         * @param  usageRestrictions  UsageRestrictionsCard value for usageRestrictions.
+         * @param  usageRestrictions  Object value for usageRestrictions.
          * @return Builder
          */
-        public Builder usageRestrictions(UsageRestrictionsCard usageRestrictions) {
-            this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-            return this;
-        }
-
-        /**
-         * UnSetter for usageRestrictions.
-         * @return Builder
-         */
-        public Builder unsetUsageRestrictions() {
-            usageRestrictions = null;
+        public Builder usageRestrictions(Object usageRestrictions) {
+            this.usageRestrictions = usageRestrictions;
             return this;
         }
 
@@ -558,20 +515,11 @@ public class BundleRestrictionUpdate {
 
         /**
          * Setter for productRestrictions.
-         * @param  productRestrictions  ProductRestrictionCard value for productRestrictions.
+         * @param  productRestrictions  Object value for productRestrictions.
          * @return Builder
          */
-        public Builder productRestrictions(ProductRestrictionCard productRestrictions) {
-            this.productRestrictions = OptionalNullable.of(productRestrictions);
-            return this;
-        }
-
-        /**
-         * UnSetter for productRestrictions.
-         * @return Builder
-         */
-        public Builder unsetProductRestrictions() {
-            productRestrictions = null;
+        public Builder productRestrictions(Object productRestrictions) {
+            this.productRestrictions = productRestrictions;
             return this;
         }
 

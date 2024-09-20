@@ -24,6 +24,7 @@ public class ScheduleCardBlockCardsItems {
     private String payerNumber;
     private Integer cardId;
     private String pAN;
+    private String pANID;
     private String cardExpiryDate;
     private String action;
     private String fromDate;
@@ -48,6 +49,7 @@ public class ScheduleCardBlockCardsItems {
      * @param  payerNumber  String value for payerNumber.
      * @param  cardId  Integer value for cardId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  String value for pANID.
      * @param  cardExpiryDate  String value for cardExpiryDate.
      * @param  fromDate  String value for fromDate.
      * @param  toDate  String value for toDate.
@@ -64,6 +66,7 @@ public class ScheduleCardBlockCardsItems {
             String payerNumber,
             Integer cardId,
             String pAN,
+            String pANID,
             String cardExpiryDate,
             String fromDate,
             String toDate,
@@ -77,6 +80,7 @@ public class ScheduleCardBlockCardsItems {
         this.payerNumber = payerNumber;
         this.cardId = cardId;
         this.pAN = pAN;
+        this.pANID = pANID;
         this.cardExpiryDate = cardExpiryDate;
         this.action = action;
         this.fromDate = fromDate;
@@ -96,6 +100,7 @@ public class ScheduleCardBlockCardsItems {
      * @param  payerNumber  String value for payerNumber.
      * @param  cardId  Integer value for cardId.
      * @param  pAN  String value for pAN.
+     * @param  pANID  String value for pANID.
      * @param  cardExpiryDate  String value for cardExpiryDate.
      * @param  fromDate  String value for fromDate.
      * @param  toDate  String value for toDate.
@@ -105,8 +110,8 @@ public class ScheduleCardBlockCardsItems {
 
     protected ScheduleCardBlockCardsItems(String action, Integer colCoCode, Integer colCoId,
             Integer accountId, String accountNumber, Integer payerId, String payerNumber,
-            Integer cardId, String pAN, String cardExpiryDate, String fromDate, String toDate,
-            OptionalNullable<String> caller, Boolean notifyCaller) {
+            Integer cardId, String pAN, String pANID, String cardExpiryDate, String fromDate,
+            String toDate, OptionalNullable<String> caller, Boolean notifyCaller) {
         this.colCoCode = colCoCode;
         this.colCoId = colCoId;
         this.accountId = accountId;
@@ -115,6 +120,7 @@ public class ScheduleCardBlockCardsItems {
         this.payerNumber = payerNumber;
         this.cardId = cardId;
         this.pAN = pAN;
+        this.pANID = pANID;
         this.cardExpiryDate = cardExpiryDate;
         this.action = action;
         this.fromDate = fromDate;
@@ -298,6 +304,29 @@ public class ScheduleCardBlockCardsItems {
     }
 
     /**
+     * Getter for PANID.
+     * Card PAN ID. Optional if CardId is given, else mandatory. Note: PANID is ignored if CardId is
+     * given.
+     * @return Returns the String
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getPANID() {
+        return pANID;
+    }
+
+    /**
+     * Setter for PANID.
+     * Card PAN ID. Optional if CardId is given, else mandatory. Note: PANID is ignored if CardId is
+     * given.
+     * @param pANID Value for String
+     */
+    @JsonSetter("PANID")
+    public void setPANID(String pANID) {
+        this.pANID = pANID;
+    }
+
+    /**
      * Getter for CardExpiryDate.
      * Expiry date of the card. Optional if CardId is passed, else Mandatory. Format: yyyyMMdd
      * Example: 20170930
@@ -322,11 +351,11 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Getter for Action.
-     * Action Mandatory Possible values are: •	AddOrUpdate – adds a new request or updates any
-     * existing requests, with overlapping dates, for the card •	AddAndOverwriteAll - all the
+     * Action Mandatory Possible values are: • AddOrUpdate – adds a new request or updates any
+     * existing requests, with overlapping dates, for the card • AddAndOverwriteAll - all the
      * existing requests of the given card will be removed and a new request with the specified
-     * FromDate and ToDate will be added. •	Delete – deletes any existing request with the same
-     * start date and end date for the card •	DeleteAll – deletes all saved future dated requests
+     * FromDate and ToDate will be added. • Delete – deletes any existing request with the same
+     * start date and end date for the card • DeleteAll – deletes all saved future dated requests
      * (all block and unblock requests) of the card.
      * @return Returns the String
      */
@@ -337,11 +366,11 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Setter for Action.
-     * Action Mandatory Possible values are: •	AddOrUpdate – adds a new request or updates any
-     * existing requests, with overlapping dates, for the card •	AddAndOverwriteAll - all the
+     * Action Mandatory Possible values are: • AddOrUpdate – adds a new request or updates any
+     * existing requests, with overlapping dates, for the card • AddAndOverwriteAll - all the
      * existing requests of the given card will be removed and a new request with the specified
-     * FromDate and ToDate will be added. •	Delete – deletes any existing request with the same
-     * start date and end date for the card •	DeleteAll – deletes all saved future dated requests
+     * FromDate and ToDate will be added. • Delete – deletes any existing request with the same
+     * start date and end date for the card • DeleteAll – deletes all saved future dated requests
      * (all block and unblock requests) of the card.
      * @param action Value for String
      */
@@ -352,11 +381,11 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Getter for FromDate.
-     * Effective start date of Block / Unblock Allowed Formats: – •	yyyyMMdd •	yyyyMMdd HH:mm Eg:
-     * 20230512 14:30, 20230512 Optional Default value: •	 If the card status is “Active” then
-     * Current date &amp; Time •	If the card status is “TemporaryBlock (Customer)” then null. Note:
-     * •	Time is considered only when “IsTimeSupported” is true else it will be treated as a date.
-     * •	Time will be passed in UTC time-zone. •	If the Card Status is “Temporary Block (Customer)”
+     * Effective start date of Block / Unblock Allowed Formats: – • yyyyMMdd • yyyyMMdd HH:mm Eg:
+     * 20230512 14:30, 20230512 Optional Default value: • If the card status is “Active” then
+     * Current date &amp; Time • If the card status is “TemporaryBlock (Customer)” then null. Note: •
+     * Time is considered only when “IsTimeSupported” is true else it will be treated as a date. •
+     * Time will be passed in UTC time-zone. • If the Card Status is “Temporary Block (Customer)”
      * and FromDate is provided – The fromdate &amp; time is considered as starting period of unblock
      * request.
      * @return Returns the String
@@ -369,11 +398,11 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Setter for FromDate.
-     * Effective start date of Block / Unblock Allowed Formats: – •	yyyyMMdd •	yyyyMMdd HH:mm Eg:
-     * 20230512 14:30, 20230512 Optional Default value: •	 If the card status is “Active” then
-     * Current date &amp; Time •	If the card status is “TemporaryBlock (Customer)” then null. Note:
-     * •	Time is considered only when “IsTimeSupported” is true else it will be treated as a date.
-     * •	Time will be passed in UTC time-zone. •	If the Card Status is “Temporary Block (Customer)”
+     * Effective start date of Block / Unblock Allowed Formats: – • yyyyMMdd • yyyyMMdd HH:mm Eg:
+     * 20230512 14:30, 20230512 Optional Default value: • If the card status is “Active” then
+     * Current date &amp; Time • If the card status is “TemporaryBlock (Customer)” then null. Note: •
+     * Time is considered only when “IsTimeSupported” is true else it will be treated as a date. •
+     * Time will be passed in UTC time-zone. • If the Card Status is “Temporary Block (Customer)”
      * and FromDate is provided – The fromdate &amp; time is considered as starting period of unblock
      * request.
      * @param fromDate Value for String
@@ -385,13 +414,13 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Getter for ToDate.
-     * Effective end date of Block / Unblock Allowed Formats: – •	yyyyMMdd •	yyyyMMdd HH:mm Eg:
+     * Effective end date of Block / Unblock Allowed Formats: – • yyyyMMdd • yyyyMMdd HH:mm Eg:
      * 20230512 14:30, 20230512 Optional – When the Card status is Active else mandatory. When not
-     * provided, the card will remain blocked until manually unblocked. Note: •	Time is considered
+     * provided, the card will remain blocked until manually unblocked. Note: • Time is considered
      * only when the “IsTimeSupported” flag is set as true, else it will be considered as only date.
-     * •	Date &amp; Time passed in the request will be considered in UTC time-zone. •	If the card is
+     * • Date &amp; Time passed in the request will be considered in UTC time-zone. • If the card is
      * currently in ‘Temporary Block (Customer)’ status, then this date is treated as the unblock
-     * date and is mandatory. •	If the Card Status is “Temporary Block (Customer)” and FromDate &amp;
+     * date and is mandatory. • If the Card Status is “Temporary Block (Customer)” and FromDate &amp;
      * ToDate is provided - The request will be considered as a scheduled specific period unblock
      * request.
      * @return Returns the String
@@ -404,13 +433,13 @@ public class ScheduleCardBlockCardsItems {
 
     /**
      * Setter for ToDate.
-     * Effective end date of Block / Unblock Allowed Formats: – •	yyyyMMdd •	yyyyMMdd HH:mm Eg:
+     * Effective end date of Block / Unblock Allowed Formats: – • yyyyMMdd • yyyyMMdd HH:mm Eg:
      * 20230512 14:30, 20230512 Optional – When the Card status is Active else mandatory. When not
-     * provided, the card will remain blocked until manually unblocked. Note: •	Time is considered
+     * provided, the card will remain blocked until manually unblocked. Note: • Time is considered
      * only when the “IsTimeSupported” flag is set as true, else it will be considered as only date.
-     * •	Date &amp; Time passed in the request will be considered in UTC time-zone. •	If the card is
+     * • Date &amp; Time passed in the request will be considered in UTC time-zone. • If the card is
      * currently in ‘Temporary Block (Customer)’ status, then this date is treated as the unblock
-     * date and is mandatory. •	If the Card Status is “Temporary Block (Customer)” and FromDate &amp;
+     * date and is mandatory. • If the Card Status is “Temporary Block (Customer)” and FromDate &amp;
      * ToDate is provided - The request will be considered as a scheduled specific period unblock
      * request.
      * @param toDate Value for String
@@ -495,9 +524,9 @@ public class ScheduleCardBlockCardsItems {
         return "ScheduleCardBlockCardsItems [" + "action=" + action + ", colCoCode=" + colCoCode
                 + ", colCoId=" + colCoId + ", accountId=" + accountId + ", accountNumber="
                 + accountNumber + ", payerId=" + payerId + ", payerNumber=" + payerNumber
-                + ", cardId=" + cardId + ", pAN=" + pAN + ", cardExpiryDate=" + cardExpiryDate
-                + ", fromDate=" + fromDate + ", toDate=" + toDate + ", caller=" + caller
-                + ", notifyCaller=" + notifyCaller + "]";
+                + ", cardId=" + cardId + ", pAN=" + pAN + ", pANID=" + pANID + ", cardExpiryDate="
+                + cardExpiryDate + ", fromDate=" + fromDate + ", toDate=" + toDate + ", caller="
+                + caller + ", notifyCaller=" + notifyCaller + "]";
     }
 
     /**
@@ -515,6 +544,7 @@ public class ScheduleCardBlockCardsItems {
                 .payerNumber(getPayerNumber())
                 .cardId(getCardId())
                 .pAN(getPAN())
+                .pANID(getPANID())
                 .cardExpiryDate(getCardExpiryDate())
                 .fromDate(getFromDate())
                 .toDate(getToDate())
@@ -536,6 +566,7 @@ public class ScheduleCardBlockCardsItems {
         private String payerNumber;
         private Integer cardId;
         private String pAN;
+        private String pANID;
         private String cardExpiryDate;
         private String fromDate;
         private String toDate;
@@ -647,6 +678,16 @@ public class ScheduleCardBlockCardsItems {
         }
 
         /**
+         * Setter for pANID.
+         * @param  pANID  String value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(String pANID) {
+            this.pANID = pANID;
+            return this;
+        }
+
+        /**
          * Setter for cardExpiryDate.
          * @param  cardExpiryDate  String value for cardExpiryDate.
          * @return Builder
@@ -711,8 +752,8 @@ public class ScheduleCardBlockCardsItems {
          */
         public ScheduleCardBlockCardsItems build() {
             return new ScheduleCardBlockCardsItems(action, colCoCode, colCoId, accountId,
-                    accountNumber, payerId, payerNumber, cardId, pAN, cardExpiryDate, fromDate,
-                    toDate, caller, notifyCaller);
+                    accountNumber, payerId, payerNumber, cardId, pAN, pANID, cardExpiryDate,
+                    fromDate, toDate, caller, notifyCaller);
         }
     }
 }

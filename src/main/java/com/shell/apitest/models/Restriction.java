@@ -9,15 +9,13 @@ package com.shell.apitest.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.apimatic.core.types.OptionalNullable;
 
 /**
  * This is a model class for Restriction type.
  */
 public class Restriction {
-    private OptionalNullable<UsageRestriction> usageRestrictions;
-    private DayTimeRestriction dayTimeRestrictions;
+    private Object usageRestrictions;
+    private DayTimeRestrictions dayTimeRestrictions;
     private SearchProductRestriction productRestrictions;
     private LocationRestriction locationRestrictions;
 
@@ -29,32 +27,15 @@ public class Restriction {
 
     /**
      * Initialization constructor.
-     * @param  usageRestrictions  UsageRestriction value for usageRestrictions.
-     * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
+     * @param  usageRestrictions  Object value for usageRestrictions.
+     * @param  dayTimeRestrictions  DayTimeRestrictions value for dayTimeRestrictions.
      * @param  productRestrictions  SearchProductRestriction value for productRestrictions.
      * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
      */
     public Restriction(
-            UsageRestriction usageRestrictions,
-            DayTimeRestriction dayTimeRestrictions,
+            Object usageRestrictions,
+            DayTimeRestrictions dayTimeRestrictions,
             SearchProductRestriction productRestrictions,
-            LocationRestriction locationRestrictions) {
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-        this.dayTimeRestrictions = dayTimeRestrictions;
-        this.productRestrictions = productRestrictions;
-        this.locationRestrictions = locationRestrictions;
-    }
-
-    /**
-     * Initialization constructor.
-     * @param  usageRestrictions  UsageRestriction value for usageRestrictions.
-     * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
-     * @param  productRestrictions  SearchProductRestriction value for productRestrictions.
-     * @param  locationRestrictions  LocationRestriction value for locationRestrictions.
-     */
-
-    protected Restriction(OptionalNullable<UsageRestriction> usageRestrictions,
-            DayTimeRestriction dayTimeRestrictions, SearchProductRestriction productRestrictions,
             LocationRestriction locationRestrictions) {
         this.usageRestrictions = usageRestrictions;
         this.dayTimeRestrictions = dayTimeRestrictions;
@@ -63,68 +44,40 @@ public class Restriction {
     }
 
     /**
-     * Internal Getter for UsageRestrictions.
-     * Details of the usage restrictions such as day/week/month value and volume restrictions
-     * applied on the card.
-     * @return Returns the Internal UsageRestriction
+     * Getter for UsageRestrictions.
+     * @return Returns the Object
      */
     @JsonGetter("UsageRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<UsageRestriction> internalGetUsageRestrictions() {
-        return this.usageRestrictions;
-    }
-
-    /**
-     * Getter for UsageRestrictions.
-     * Details of the usage restrictions such as day/week/month value and volume restrictions
-     * applied on the card.
-     * @return Returns the UsageRestriction
-     */
-    public UsageRestriction getUsageRestrictions() {
-        return OptionalNullable.getFrom(usageRestrictions);
+    public Object getUsageRestrictions() {
+        return usageRestrictions;
     }
 
     /**
      * Setter for UsageRestrictions.
-     * Details of the usage restrictions such as day/week/month value and volume restrictions
-     * applied on the card.
-     * @param usageRestrictions Value for UsageRestriction
+     * @param usageRestrictions Value for Object
      */
     @JsonSetter("UsageRestrictions")
-    public void setUsageRestrictions(UsageRestriction usageRestrictions) {
-        this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-    }
-
-    /**
-     * UnSetter for UsageRestrictions.
-     * Details of the usage restrictions such as day/week/month value and volume restrictions
-     * applied on the card.
-     */
-    public void unsetUsageRestrictions() {
-        usageRestrictions = null;
+    public void setUsageRestrictions(Object usageRestrictions) {
+        this.usageRestrictions = usageRestrictions;
     }
 
     /**
      * Getter for DayTimeRestrictions.
-     * Details of the day/time restrictions such as weekdays and time range in which transactions
-     * should be allowed on the card.
-     * @return Returns the DayTimeRestriction
+     * @return Returns the DayTimeRestrictions
      */
     @JsonGetter("DayTimeRestrictions")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public DayTimeRestriction getDayTimeRestrictions() {
+    public DayTimeRestrictions getDayTimeRestrictions() {
         return dayTimeRestrictions;
     }
 
     /**
      * Setter for DayTimeRestrictions.
-     * Details of the day/time restrictions such as weekdays and time range in which transactions
-     * should be allowed on the card.
-     * @param dayTimeRestrictions Value for DayTimeRestriction
+     * @param dayTimeRestrictions Value for DayTimeRestrictions
      */
     @JsonSetter("DayTimeRestrictions")
-    public void setDayTimeRestrictions(DayTimeRestriction dayTimeRestrictions) {
+    public void setDayTimeRestrictions(DayTimeRestrictions dayTimeRestrictions) {
         this.dayTimeRestrictions = dayTimeRestrictions;
     }
 
@@ -184,10 +137,10 @@ public class Restriction {
      */
     public Builder toBuilder() {
         Builder builder = new Builder()
+                .usageRestrictions(getUsageRestrictions())
                 .dayTimeRestrictions(getDayTimeRestrictions())
                 .productRestrictions(getProductRestrictions())
                 .locationRestrictions(getLocationRestrictions());
-        builder.usageRestrictions = internalGetUsageRestrictions();
         return builder;
     }
 
@@ -195,8 +148,8 @@ public class Restriction {
      * Class to build instances of {@link Restriction}.
      */
     public static class Builder {
-        private OptionalNullable<UsageRestriction> usageRestrictions;
-        private DayTimeRestriction dayTimeRestrictions;
+        private Object usageRestrictions;
+        private DayTimeRestrictions dayTimeRestrictions;
         private SearchProductRestriction productRestrictions;
         private LocationRestriction locationRestrictions;
 
@@ -204,29 +157,20 @@ public class Restriction {
 
         /**
          * Setter for usageRestrictions.
-         * @param  usageRestrictions  UsageRestriction value for usageRestrictions.
+         * @param  usageRestrictions  Object value for usageRestrictions.
          * @return Builder
          */
-        public Builder usageRestrictions(UsageRestriction usageRestrictions) {
-            this.usageRestrictions = OptionalNullable.of(usageRestrictions);
-            return this;
-        }
-
-        /**
-         * UnSetter for usageRestrictions.
-         * @return Builder
-         */
-        public Builder unsetUsageRestrictions() {
-            usageRestrictions = null;
+        public Builder usageRestrictions(Object usageRestrictions) {
+            this.usageRestrictions = usageRestrictions;
             return this;
         }
 
         /**
          * Setter for dayTimeRestrictions.
-         * @param  dayTimeRestrictions  DayTimeRestriction value for dayTimeRestrictions.
+         * @param  dayTimeRestrictions  DayTimeRestrictions value for dayTimeRestrictions.
          * @return Builder
          */
-        public Builder dayTimeRestrictions(DayTimeRestriction dayTimeRestrictions) {
+        public Builder dayTimeRestrictions(DayTimeRestrictions dayTimeRestrictions) {
             this.dayTimeRestrictions = dayTimeRestrictions;
             return this;
         }

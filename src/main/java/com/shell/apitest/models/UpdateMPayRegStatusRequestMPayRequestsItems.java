@@ -72,7 +72,7 @@ public class UpdateMPayRegStatusRequestMPayRequestsItems {
 
     /**
      * Getter for Status.
-     * Status of mobile payment registration request Mandatory. Allowed values – •	Approved •
+     * Status of mobile payment registration request Mandatory. Allowed values – • Approved •
      * Rejected
      * @return Returns the String
      */
@@ -84,7 +84,7 @@ public class UpdateMPayRegStatusRequestMPayRequestsItems {
 
     /**
      * Setter for Status.
-     * Status of mobile payment registration request Mandatory. Allowed values – •	Approved •
+     * Status of mobile payment registration request Mandatory. Allowed values – • Approved •
      * Rejected
      * @param status Value for String
      */

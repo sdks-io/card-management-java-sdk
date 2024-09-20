@@ -17,7 +17,7 @@
 | `AllowFleetIdInput` | `Boolean` | Optional | True/False.<br>When false, users should not be allowed to enable Fleet Id prompt option while ordering cards under this account. | Boolean getAllowFleetIdInput() | setAllowFleetIdInput(Boolean allowFleetIdInput) |
 | `Band` | `String` | Optional | Band Id and Description of the Payer in Card Platform<br>e.g. (Id – Description):<br>1-Platinum<br>2-Gold<br>3-Silver<br>4-Bronze | String getBand() | setBand(String band) |
 | `BillingAddress` | [`Address`](../../doc/models/address.md) | Optional | - | Address getBillingAddress() | setBillingAddress(Address billingAddress) |
-| `CardGroupPosition` | `String` | Optional | Card group position at –<br>•	Payer – Payer level<br>•	Account – Account level | String getCardGroupPosition() | setCardGroupPosition(String cardGroupPosition) |
+| `CardGroupPosition` | `String` | Optional | Card group position at –<br>•    Payer – Payer level<br>•    Account – Account level | String getCardGroupPosition() | setCardGroupPosition(String cardGroupPosition) |
 | `CorrespondenceAddress` | [`Address`](../../doc/models/address.md) | Optional | - | Address getCorrespondenceAddress() | setCorrespondenceAddress(Address correspondenceAddress) |
 | `DeliveryAddresses` | [`List<DeliveryAddresses>`](../../doc/models/delivery-addresses.md) | Optional | - | List<DeliveryAddresses> getDeliveryAddresses() | setDeliveryAddresses(List<DeliveryAddresses> deliveryAddresses) |
 | `FleetPin` | `Boolean` | Optional | Is Fleet Pin optional enabled for the selected account | Boolean getFleetPin() | setFleetPin(Boolean fleetPin) |

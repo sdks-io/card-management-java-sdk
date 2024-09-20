@@ -19,12 +19,7 @@ import java.util.TreeMap;
 public enum Server {
     OAUTH_SERVER,
 
-    SHELL,
-
-    /**
-     * Unknown values will be mapped by this enum member
-     */
-    _UNKNOWN;
+    SHELL;
 
 
     private static TreeMap<String, Server> valueMap = new TreeMap<>();
@@ -33,7 +28,6 @@ public enum Server {
     static {
         OAUTH_SERVER.value = "OAuth Server";
         SHELL.value = "Shell";
-        _UNKNOWN.value = null;
 
         valueMap.put("OAuth Server", OAUTH_SERVER);
         valueMap.put("Shell", SHELL);
@@ -60,9 +54,6 @@ public enum Server {
      * @return The enum member against the given string value.
      */
     public static Server fromString(String toConvert) {
-        if (!valueMap.containsKey(toConvert)) {
-            return _UNKNOWN;
-        }
         return valueMap.get(toConvert);
     }
 
@@ -80,9 +71,6 @@ public enum Server {
      */
     @Override
     public String toString() {
-        if (value == null) {
-            return null;
-        }
         return value.toString();
     }
 

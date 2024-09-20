@@ -57,7 +57,7 @@ public class PINAdviceTypes {
 
     /**
      * Internal Getter for PINAdviceTypeID.
-     * Id of of PIN advice type. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Id of of PIN advice type. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @return Returns the Internal Integer
      */
     @JsonGetter("PINAdviceTypeID")
@@ -69,7 +69,7 @@ public class PINAdviceTypes {
 
     /**
      * Getter for PINAdviceTypeID.
-     * Id of of PIN advice type. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Id of of PIN advice type. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @return Returns the Integer
      */
     public Integer getPINAdviceTypeID() {
@@ -78,7 +78,7 @@ public class PINAdviceTypes {
 
     /**
      * Setter for PINAdviceTypeID.
-     * Id of of PIN advice type. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Id of of PIN advice type. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      * @param pINAdviceTypeID Value for Integer
      */
     @JsonSetter("PINAdviceTypeID")
@@ -88,7 +88,7 @@ public class PINAdviceTypes {
 
     /**
      * UnSetter for PINAdviceTypeID.
-     * Id of of PIN advice type. Possible Values: 1.	Paper 2.	Email 3.	SMS 4.	None
+     * Id of of PIN advice type. Possible Values: 1. Paper 2. Email 3. SMS 4. None
      */
     public void unsetPINAdviceTypeID() {
         pINAdviceTypeID = null;

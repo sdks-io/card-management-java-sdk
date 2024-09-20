@@ -129,8 +129,8 @@ public class AuditRequest {
 
     /**
      * Getter for Status.
-     * Status of requests to be fetched. •	Success •	Failed •	InProgress •	Submitted •	Rejected
-     * •	PendingApproval •	All •	MailedToCSC Optional If not passed “All” will be considered as the
+     * Status of requests to be fetched. • Success • Failed • InProgress • Submitted • Rejected •
+     * PendingApproval • All • MailedToCSC Optional If not passed “All” will be considered as the
      * default value.
      * @return Returns the String
      */
@@ -142,8 +142,8 @@ public class AuditRequest {
 
     /**
      * Setter for Status.
-     * Status of requests to be fetched. •	Success •	Failed •	InProgress •	Submitted •	Rejected
-     * •	PendingApproval •	All •	MailedToCSC Optional If not passed “All” will be considered as the
+     * Status of requests to be fetched. • Success • Failed • InProgress • Submitted • Rejected •
+     * PendingApproval • All • MailedToCSC Optional If not passed “All” will be considered as the
      * default value.
      * @param status Value for String
      */
@@ -401,10 +401,10 @@ public class AuditRequest {
 
     /**
      * Getter for RequestedOperation.
-     * Type of requests to be fetched. Optional Allowed values: •	OrderCard •	CreateCardGroup
-     * •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder
-     * •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo
-     * •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * Type of requests to be fetched. Optional Allowed values: • OrderCard • CreateCardGroup •
+     * PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder •
+     * BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo •
+     * BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      * @return Returns the List of String
      */
     @JsonGetter("RequestedOperation")
@@ -415,10 +415,10 @@ public class AuditRequest {
 
     /**
      * Setter for RequestedOperation.
-     * Type of requests to be fetched. Optional Allowed values: •	OrderCard •	CreateCardGroup
-     * •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder
-     * •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo
-     * •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * Type of requests to be fetched. Optional Allowed values: • OrderCard • CreateCardGroup •
+     * PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder •
+     * BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo •
+     * BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      * @param requestedOperation Value for List of String
      */
     @JsonSetter("RequestedOperation")
@@ -428,9 +428,9 @@ public class AuditRequest {
 
     /**
      * Internal Getter for SortOrder.
-     * Allowed Sorting Options: 1.	SubmittedDateDescending 2.	SubmittedDateAscending
-     * 3.	AccountNumberAscending 4.	AccountNumberDescending Optional: Default value is 1 Example
-     * value to be passed: 1,3
+     * Allowed Sorting Options: 1. SubmittedDateDescending 2. SubmittedDateAscending 3.
+     * AccountNumberAscending 4. AccountNumberDescending Optional: Default value is 1 Example value
+     * to be passed: 1,3
      * @return Returns the Internal String
      */
     @JsonGetter("SortOrder")
@@ -442,9 +442,9 @@ public class AuditRequest {
 
     /**
      * Getter for SortOrder.
-     * Allowed Sorting Options: 1.	SubmittedDateDescending 2.	SubmittedDateAscending
-     * 3.	AccountNumberAscending 4.	AccountNumberDescending Optional: Default value is 1 Example
-     * value to be passed: 1,3
+     * Allowed Sorting Options: 1. SubmittedDateDescending 2. SubmittedDateAscending 3.
+     * AccountNumberAscending 4. AccountNumberDescending Optional: Default value is 1 Example value
+     * to be passed: 1,3
      * @return Returns the String
      */
     public String getSortOrder() {
@@ -453,9 +453,9 @@ public class AuditRequest {
 
     /**
      * Setter for SortOrder.
-     * Allowed Sorting Options: 1.	SubmittedDateDescending 2.	SubmittedDateAscending
-     * 3.	AccountNumberAscending 4.	AccountNumberDescending Optional: Default value is 1 Example
-     * value to be passed: 1,3
+     * Allowed Sorting Options: 1. SubmittedDateDescending 2. SubmittedDateAscending 3.
+     * AccountNumberAscending 4. AccountNumberDescending Optional: Default value is 1 Example value
+     * to be passed: 1,3
      * @param sortOrder Value for String
      */
     @JsonSetter("SortOrder")
@@ -465,9 +465,9 @@ public class AuditRequest {
 
     /**
      * UnSetter for SortOrder.
-     * Allowed Sorting Options: 1.	SubmittedDateDescending 2.	SubmittedDateAscending
-     * 3.	AccountNumberAscending 4.	AccountNumberDescending Optional: Default value is 1 Example
-     * value to be passed: 1,3
+     * Allowed Sorting Options: 1. SubmittedDateDescending 2. SubmittedDateAscending 3.
+     * AccountNumberAscending 4. AccountNumberDescending Optional: Default value is 1 Example value
+     * to be passed: 1,3
      */
     public void unsetSortOrder() {
         sortOrder = null;

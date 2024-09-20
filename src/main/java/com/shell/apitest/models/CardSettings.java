@@ -513,8 +513,8 @@ public class CardSettings {
 
     /**
      * Getter for CardDeliveryType.
-     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1.	Customer Address(Default)
-     * &lt;br /&gt; 2.	New Delivery Address &lt;br /&gt; 3.	Old Card Address
+     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1. Customer Address(Default)
+     * &lt;br /&gt; 2. New Delivery Address &lt;br /&gt; 3. Old Card Address
      * @return Returns the Integer
      */
     @JsonGetter("CardDeliveryType")
@@ -524,8 +524,8 @@ public class CardSettings {
 
     /**
      * Setter for CardDeliveryType.
-     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1.	Customer Address(Default)
-     * &lt;br /&gt; 2.	New Delivery Address &lt;br /&gt; 3.	Old Card Address
+     * Card delivery type.&lt;br /&gt; Mandatory &lt;br /&gt; Allowed Value: &lt;br /&gt; 1. Customer Address(Default)
+     * &lt;br /&gt; 2. New Delivery Address &lt;br /&gt; 3. Old Card Address
      * @param cardDeliveryType Value for Integer
      */
     @JsonSetter("CardDeliveryType")
@@ -1091,8 +1091,8 @@ public class CardSettings {
 
     /**
      * Internal Getter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @return Returns the Internal Integer
      */
     @JsonGetter("PINDeliveryAddressType")
@@ -1104,8 +1104,8 @@ public class CardSettings {
 
     /**
      * Getter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @return Returns the Integer
      */
     public Integer getPINDeliveryAddressType() {
@@ -1114,8 +1114,8 @@ public class CardSettings {
 
     /**
      * Setter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      * @param pINDeliveryAddressType Value for Integer
      */
     @JsonSetter("PINDeliveryAddressType")
@@ -1125,8 +1125,8 @@ public class CardSettings {
 
     /**
      * UnSetter for PINDeliveryAddressType.
-     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1.	Customer
-     * Address(Default)&lt;br /&gt; 2.	Card Address&lt;br /&gt; 3.	New Delivery Address
+     * PIN delivery address type selection.&lt;br /&gt; Optional&lt;br /&gt; Allowed Values:&lt;br /&gt; 1. Customer
+     * Address(Default)&lt;br /&gt; 2. Card Address&lt;br /&gt; 3. New Delivery Address
      */
     public void unsetPINDeliveryAddressType() {
         pINDeliveryAddressType = null;
@@ -1135,7 +1135,7 @@ public class CardSettings {
     /**
      * Internal Getter for PINAdviceType.
      * PIN delivery method.&lt;br /&gt; Mandatory when OrderReplacement Is true.&lt;br /&gt; Allowed Values:&lt;br
-     * /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br /&gt; 3.	SMS&lt;br /&gt; 4.	None
+     * /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br /&gt; 3. SMS&lt;br /&gt; 4. None
      * @return Returns the Internal Integer
      */
     @JsonGetter("PINAdviceType")
@@ -1148,7 +1148,7 @@ public class CardSettings {
     /**
      * Getter for PINAdviceType.
      * PIN delivery method.&lt;br /&gt; Mandatory when OrderReplacement Is true.&lt;br /&gt; Allowed Values:&lt;br
-     * /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br /&gt; 3.	SMS&lt;br /&gt; 4.	None
+     * /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br /&gt; 3. SMS&lt;br /&gt; 4. None
      * @return Returns the Integer
      */
     public Integer getPINAdviceType() {
@@ -1158,7 +1158,7 @@ public class CardSettings {
     /**
      * Setter for PINAdviceType.
      * PIN delivery method.&lt;br /&gt; Mandatory when OrderReplacement Is true.&lt;br /&gt; Allowed Values:&lt;br
-     * /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br /&gt; 3.	SMS&lt;br /&gt; 4.	None
+     * /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br /&gt; 3. SMS&lt;br /&gt; 4. None
      * @param pINAdviceType Value for Integer
      */
     @JsonSetter("PINAdviceType")
@@ -1169,7 +1169,7 @@ public class CardSettings {
     /**
      * UnSetter for PINAdviceType.
      * PIN delivery method.&lt;br /&gt; Mandatory when OrderReplacement Is true.&lt;br /&gt; Allowed Values:&lt;br
-     * /&gt; 1.	Paper&lt;br /&gt; 2.	Email&lt;br /&gt; 3.	SMS&lt;br /&gt; 4.	None
+     * /&gt; 1. Paper&lt;br /&gt; 2. Email&lt;br /&gt; 3. SMS&lt;br /&gt; 4. None
      */
     public void unsetPINAdviceType() {
         pINAdviceType = null;

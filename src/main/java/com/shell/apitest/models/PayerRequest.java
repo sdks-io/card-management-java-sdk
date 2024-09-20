@@ -57,8 +57,8 @@ public class PayerRequest {
 
     /**
      * Getter for Payers.
-     * List of Payer entity. Optional. Note: •	Max number of payers allowed in the input is 10, if
-     * it exceeds in the input it will throw an error. •	This value is configurable. Initial
+     * List of Payer entity. Optional. Note: • Max number of payers allowed in the input is 10, if
+     * it exceeds in the input it will throw an error. • This value is configurable. Initial
      * configuration will be 1000 and will change to 10 once SFH changes are integrated.
      * @return Returns the List of Payers
      */
@@ -70,8 +70,8 @@ public class PayerRequest {
 
     /**
      * Setter for Payers.
-     * List of Payer entity. Optional. Note: •	Max number of payers allowed in the input is 10, if
-     * it exceeds in the input it will throw an error. •	This value is configurable. Initial
+     * List of Payer entity. Optional. Note: • Max number of payers allowed in the input is 10, if
+     * it exceeds in the input it will throw an error. • This value is configurable. Initial
      * configuration will be 1000 and will change to 10 once SFH changes are integrated.
      * @param payers Value for List of Payers
      */
@@ -171,8 +171,8 @@ public class PayerRequest {
     /**
      * Getter for PageSize.
      * Page Size – Number of records to show on a page Default value 50 Return 250 rows only in the
-     * response if -1 is supplied as page size. Note: •	Max page size is 250, if the user provided
-     * value is more than 250 then it will throw error. •	This value is configurable.
+     * response if -1 is supplied as page size. Note: • Max page size is 250, if the user provided
+     * value is more than 250 then it will throw error. • This value is configurable.
      * @return Returns the Integer
      */
     @JsonGetter("PageSize")
@@ -184,8 +184,8 @@ public class PayerRequest {
     /**
      * Setter for PageSize.
      * Page Size – Number of records to show on a page Default value 50 Return 250 rows only in the
-     * response if -1 is supplied as page size. Note: •	Max page size is 250, if the user provided
-     * value is more than 250 then it will throw error. •	This value is configurable.
+     * response if -1 is supplied as page size. Note: • Max page size is 250, if the user provided
+     * value is more than 250 then it will throw error. • This value is configurable.
      * @param pageSize Value for Integer
      */
     @JsonSetter("PageSize")

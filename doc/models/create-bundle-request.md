@@ -18,7 +18,7 @@
 | `ExternalBundleId` | `String` | Optional | Identifier of the bundle in external system.<br>Optional. | String getExternalBundleId() | setExternalBundleId(String externalBundleId) |
 | `Description` | `String` | Optional | A bundle description.<br>Optional. | String getDescription() | setDescription(String description) |
 | `Cards` | `List<String>` | Optional | List of Card PANs to be added in the bundle.<br>Mandatory.<br>Example: 7002051006629890645<br>When PAN matches with multiple cards, the restriction will be applied on the latest issued card. | List<String> getCards() | setCards(List<String> cards) |
-| `Restrictions` | [`BundleRestriction`](../../doc/models/bundle-restriction.md) | Optional | - | BundleRestriction getRestrictions() | setRestrictions(BundleRestriction restrictions) |
+| `Restrictions` | `Object` | Optional | - | Object getRestrictions() | setRestrictions(Object restrictions) |
 
 ## Example (as JSON)
 

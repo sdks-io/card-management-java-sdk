@@ -198,7 +198,7 @@ public class PINReminderCardDetails {
 
     /**
      * Getter for PINAdviceType.
-     * PIN delivery method. Mandatory Allowed Values: 1.	Paper 2.	Email 3.	SMS
+     * PIN delivery method. Mandatory Allowed Values: 1. Paper 2. Email 3. SMS
      * @return Returns the int
      */
     @JsonGetter("PINAdviceType")
@@ -208,7 +208,7 @@ public class PINReminderCardDetails {
 
     /**
      * Setter for PINAdviceType.
-     * PIN delivery method. Mandatory Allowed Values: 1.	Paper 2.	Email 3.	SMS
+     * PIN delivery method. Mandatory Allowed Values: 1. Paper 2. Email 3. SMS
      * @param pINAdviceType Value for int
      */
     @JsonSetter("PINAdviceType")
@@ -218,9 +218,9 @@ public class PINReminderCardDetails {
 
     /**
      * Getter for PINContactType.
-     * PIN Contact Type. Mandatory Allowed Values: 1.	Use PIN Delivery contact details stored
-     * previously for this card 2.	Use Card Delivery contact details stored previously for this card
-     * 3.	Use default PIN Delivery contact details stored for this customer 4.	Use new specific
+     * PIN Contact Type. Mandatory Allowed Values: 1. Use PIN Delivery contact details stored
+     * previously for this card 2. Use Card Delivery contact details stored previously for this card
+     * 3. Use default PIN Delivery contact details stored for this customer 4. Use new specific
      * contact for PIN Reminder only Note: - PINContactType “3” is only allowed for Paper delivery
      * @return Returns the Integer
      */
@@ -232,9 +232,9 @@ public class PINReminderCardDetails {
 
     /**
      * Setter for PINContactType.
-     * PIN Contact Type. Mandatory Allowed Values: 1.	Use PIN Delivery contact details stored
-     * previously for this card 2.	Use Card Delivery contact details stored previously for this card
-     * 3.	Use default PIN Delivery contact details stored for this customer 4.	Use new specific
+     * PIN Contact Type. Mandatory Allowed Values: 1. Use PIN Delivery contact details stored
+     * previously for this card 2. Use Card Delivery contact details stored previously for this card
+     * 3. Use default PIN Delivery contact details stored for this customer 4. Use new specific
      * contact for PIN Reminder only Note: - PINContactType “3” is only allowed for Paper delivery
      * @param pINContactType Value for Integer
      */

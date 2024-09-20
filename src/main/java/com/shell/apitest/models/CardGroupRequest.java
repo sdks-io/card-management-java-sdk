@@ -335,7 +335,7 @@ public class CardGroupRequest {
 
     /**
      * Internal Getter for Status.
-     * Card Group Status Mandatory Allowed values: •	ALL •	TERMINATED •	ACTIVE
+     * Card Group Status Mandatory Allowed values: • ALL • TERMINATED • ACTIVE
      * @return Returns the Internal String
      */
     @JsonGetter("Status")
@@ -347,7 +347,7 @@ public class CardGroupRequest {
 
     /**
      * Getter for Status.
-     * Card Group Status Mandatory Allowed values: •	ALL •	TERMINATED •	ACTIVE
+     * Card Group Status Mandatory Allowed values: • ALL • TERMINATED • ACTIVE
      * @return Returns the String
      */
     public String getStatus() {
@@ -356,7 +356,7 @@ public class CardGroupRequest {
 
     /**
      * Setter for Status.
-     * Card Group Status Mandatory Allowed values: •	ALL •	TERMINATED •	ACTIVE
+     * Card Group Status Mandatory Allowed values: • ALL • TERMINATED • ACTIVE
      * @param status Value for String
      */
     @JsonSetter("Status")
@@ -366,7 +366,7 @@ public class CardGroupRequest {
 
     /**
      * UnSetter for Status.
-     * Card Group Status Mandatory Allowed values: •	ALL •	TERMINATED •	ACTIVE
+     * Card Group Status Mandatory Allowed values: • ALL • TERMINATED • ACTIVE
      */
     public void unsetStatus() {
         status = null;

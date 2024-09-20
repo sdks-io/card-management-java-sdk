@@ -139,7 +139,7 @@ public class AccountRequest {
     /**
      * Internal Getter for Status.
      * Account Status. Optional if StatusList is passed, else mandatory. Ignored if StatusList is
-     * passed. Allowed values: •	ALL •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * passed. Allowed values: • ALL • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      * @return Returns the Internal String
      */
     @JsonGetter("Status")
@@ -152,7 +152,7 @@ public class AccountRequest {
     /**
      * Getter for Status.
      * Account Status. Optional if StatusList is passed, else mandatory. Ignored if StatusList is
-     * passed. Allowed values: •	ALL •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * passed. Allowed values: • ALL • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      * @return Returns the String
      */
     public String getStatus() {
@@ -162,7 +162,7 @@ public class AccountRequest {
     /**
      * Setter for Status.
      * Account Status. Optional if StatusList is passed, else mandatory. Ignored if StatusList is
-     * passed. Allowed values: •	ALL •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * passed. Allowed values: • ALL • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      * @param status Value for String
      */
     @JsonSetter("Status")
@@ -173,7 +173,7 @@ public class AccountRequest {
     /**
      * UnSetter for Status.
      * Account Status. Optional if StatusList is passed, else mandatory. Ignored if StatusList is
-     * passed. Allowed values: •	ALL •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * passed. Allowed values: • ALL • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      */
     public void unsetStatus() {
         status = null;
@@ -663,7 +663,7 @@ public class AccountRequest {
     /**
      * Getter for StatusList.
      * Account Statuses. Optional Multiple statuses are allowed to be included in the search
-     * criteria. Allowed values: •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * criteria. Allowed values: • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      * @return Returns the List of String
      */
     @JsonGetter("StatusList")
@@ -675,7 +675,7 @@ public class AccountRequest {
     /**
      * Setter for StatusList.
      * Account Statuses. Optional Multiple statuses are allowed to be included in the search
-     * criteria. Allowed values: •	ACTIVE •	BLOCKED •	CANCELLED •	CREDITLOCK •	DELINQUENCYLOCK
+     * criteria. Allowed values: • ACTIVE • BLOCKED • CANCELLED • CREDITLOCK • DELINQUENCYLOCK
      * @param statusList Value for List of String
      */
     @JsonSetter("StatusList")

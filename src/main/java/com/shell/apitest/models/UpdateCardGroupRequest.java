@@ -301,8 +301,8 @@ public class UpdateCardGroupRequest {
     /**
      * Getter for CardTypeId.
      * Card Type ID of the card group. Populate this field if the value needs to be updated.
-     * Otherwise set to ‘null’. Optional Note: 1)	If a card type is passed, the cardgorup will allow
-     * cards with same card type to be moved in to the card group. 2)	Pass ‘-1’ to remove the card
+     * Otherwise set to ‘null’. Optional Note: 1) If a card type is passed, the cardgorup will allow
+     * cards with same card type to be moved in to the card group. 2) Pass ‘-1’ to remove the card
      * type from the card group.
      * @return Returns the Integer
      */
@@ -315,8 +315,8 @@ public class UpdateCardGroupRequest {
     /**
      * Setter for CardTypeId.
      * Card Type ID of the card group. Populate this field if the value needs to be updated.
-     * Otherwise set to ‘null’. Optional Note: 1)	If a card type is passed, the cardgorup will allow
-     * cards with same card type to be moved in to the card group. 2)	Pass ‘-1’ to remove the card
+     * Otherwise set to ‘null’. Optional Note: 1) If a card type is passed, the cardgorup will allow
+     * cards with same card type to be moved in to the card group. 2) Pass ‘-1’ to remove the card
      * type from the card group.
      * @param cardTypeId Value for Integer
      */

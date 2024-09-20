@@ -17,7 +17,7 @@
 | `City` | `String` | Optional | City<br>Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’. The field is ignored otherwise.<br>Max Length: 40 | String getCity() | setCity(String city) |
 | `RegionID` | `Integer` | Optional | Region id of card. | Integer getRegionID() | setRegionID(Integer regionID) |
 | `CountryID` | `int` | Required | Country ID<br>Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’. The field is ignored otherwise. | int getCountryID() | setCountryID(int countryID) |
-| `EmailAddress` | `String` | Optional | Email Address<br><br>Max Length: 90<br>Note: -<br>Based on the international standard that there can be<br>•	Max Length 64 before the @ (the 'Local part’) =64(minimum of 1)<br>•	Max Lenth after the (the domain) = 88 (Minimum of 2) | String getEmailAddress() | setEmailAddress(String emailAddress) |
+| `EmailAddress` | `String` | Optional | Email Address<br><br>Max Length: 90<br>Note: -<br>Based on the international standard that there can be<br>•    Max Length 64 before the @ (the 'Local part’) =64(minimum of 1)<br>•    Max Lenth after the (the domain) = 88 (Minimum of 2) | String getEmailAddress() | setEmailAddress(String emailAddress) |
 | `PhoneNumber` | `String` | Optional | Phone number<br>Optional<br>Max Length: 16 | String getPhoneNumber() | setPhoneNumber(String phoneNumber) |
 
 ## Example (as JSON)

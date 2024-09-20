@@ -50,6 +50,8 @@ public class Card {
     private OptionalNullable<String> localCurrencySymbol;
     private Boolean odometerInput;
     private OptionalNullable<String> pAN;
+    private String maskedPAN;
+    private Double pANID;
     private OptionalNullable<String> purchaseCategoryCode;
     private OptionalNullable<Integer> purchaseCategoryId;
     private OptionalNullable<String> purchaseCategoryName;
@@ -110,6 +112,8 @@ public class Card {
      * @param  localCurrencySymbol  String value for localCurrencySymbol.
      * @param  odometerInput  Boolean value for odometerInput.
      * @param  pAN  String value for pAN.
+     * @param  maskedPAN  String value for maskedPAN.
+     * @param  pANID  Double value for pANID.
      * @param  purchaseCategoryCode  String value for purchaseCategoryCode.
      * @param  purchaseCategoryId  Integer value for purchaseCategoryId.
      * @param  purchaseCategoryName  String value for purchaseCategoryName.
@@ -163,6 +167,8 @@ public class Card {
             String localCurrencySymbol,
             Boolean odometerInput,
             String pAN,
+            String maskedPAN,
+            Double pANID,
             String purchaseCategoryCode,
             Integer purchaseCategoryId,
             String purchaseCategoryName,
@@ -214,6 +220,8 @@ public class Card {
         this.localCurrencySymbol = OptionalNullable.of(localCurrencySymbol);
         this.odometerInput = odometerInput;
         this.pAN = OptionalNullable.of(pAN);
+        this.maskedPAN = maskedPAN;
+        this.pANID = pANID;
         this.purchaseCategoryCode = OptionalNullable.of(purchaseCategoryCode);
         this.purchaseCategoryId = OptionalNullable.of(purchaseCategoryId);
         this.purchaseCategoryName = OptionalNullable.of(purchaseCategoryName);
@@ -269,6 +277,8 @@ public class Card {
      * @param  localCurrencySymbol  String value for localCurrencySymbol.
      * @param  odometerInput  Boolean value for odometerInput.
      * @param  pAN  String value for pAN.
+     * @param  maskedPAN  String value for maskedPAN.
+     * @param  pANID  Double value for pANID.
      * @param  purchaseCategoryCode  String value for purchaseCategoryCode.
      * @param  purchaseCategoryId  Integer value for purchaseCategoryId.
      * @param  purchaseCategoryName  String value for purchaseCategoryName.
@@ -304,7 +314,8 @@ public class Card {
             OptionalNullable<String> lastModifiedDate, OptionalNullable<String> lastUsedDate,
             OptionalNullable<String> localCurrencyCode,
             OptionalNullable<String> localCurrencySymbol, Boolean odometerInput,
-            OptionalNullable<String> pAN, OptionalNullable<String> purchaseCategoryCode,
+            OptionalNullable<String> pAN, String maskedPAN, Double pANID,
+            OptionalNullable<String> purchaseCategoryCode,
             OptionalNullable<Integer> purchaseCategoryId,
             OptionalNullable<String> purchaseCategoryName, OptionalNullable<String> reason,
             OptionalNullable<String> reissueSetting, OptionalNullable<String> statusDescription,
@@ -347,6 +358,8 @@ public class Card {
         this.localCurrencySymbol = localCurrencySymbol;
         this.odometerInput = odometerInput;
         this.pAN = pAN;
+        this.maskedPAN = maskedPAN;
+        this.pANID = pANID;
         this.purchaseCategoryCode = purchaseCategoryCode;
         this.purchaseCategoryId = purchaseCategoryId;
         this.purchaseCategoryName = purchaseCategoryName;
@@ -1495,7 +1508,7 @@ public class Card {
 
     /**
      * Internal Getter for PAN.
-     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * Card PAN
      * @return Returns the Internal String
      */
     @JsonGetter("PAN")
@@ -1507,7 +1520,7 @@ public class Card {
 
     /**
      * Getter for PAN.
-     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * Card PAN
      * @return Returns the String
      */
     public String getPAN() {
@@ -1516,7 +1529,7 @@ public class Card {
 
     /**
      * Setter for PAN.
-     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * Card PAN
      * @param pAN Value for String
      */
     @JsonSetter("PAN")
@@ -1526,10 +1539,52 @@ public class Card {
 
     /**
      * UnSetter for PAN.
-     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * Card PAN
      */
     public void unsetPAN() {
         pAN = null;
+    }
+
+    /**
+     * Getter for MaskedPAN.
+     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * @return Returns the String
+     */
+    @JsonGetter("MaskedPAN")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getMaskedPAN() {
+        return maskedPAN;
+    }
+
+    /**
+     * Setter for MaskedPAN.
+     * Card PAN Mask PAN (Mask all digits except the Last 6 digits of the PAN)
+     * @param maskedPAN Value for String
+     */
+    @JsonSetter("MaskedPAN")
+    public void setMaskedPAN(String maskedPAN) {
+        this.maskedPAN = maskedPAN;
+    }
+
+    /**
+     * Getter for PANID.
+     * Card PAN ID.
+     * @return Returns the Double
+     */
+    @JsonGetter("PANID")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Double getPANID() {
+        return pANID;
+    }
+
+    /**
+     * Setter for PANID.
+     * Card PAN ID.
+     * @param pANID Value for Double
+     */
+    @JsonSetter("PANID")
+    public void setPANID(Double pANID) {
+        this.pANID = pANID;
     }
 
     /**
@@ -2263,9 +2318,10 @@ public class Card {
                 + ", isVirtualCard=" + isVirtualCard + ", lastModifiedDate=" + lastModifiedDate
                 + ", lastUsedDate=" + lastUsedDate + ", localCurrencyCode=" + localCurrencyCode
                 + ", localCurrencySymbol=" + localCurrencySymbol + ", odometerInput="
-                + odometerInput + ", pAN=" + pAN + ", purchaseCategoryCode=" + purchaseCategoryCode
-                + ", purchaseCategoryId=" + purchaseCategoryId + ", purchaseCategoryName="
-                + purchaseCategoryName + ", reason=" + reason + ", reissueSetting=" + reissueSetting
+                + odometerInput + ", pAN=" + pAN + ", maskedPAN=" + maskedPAN + ", pANID=" + pANID
+                + ", purchaseCategoryCode=" + purchaseCategoryCode + ", purchaseCategoryId="
+                + purchaseCategoryId + ", purchaseCategoryName=" + purchaseCategoryName
+                + ", reason=" + reason + ", reissueSetting=" + reissueSetting
                 + ", statusDescription=" + statusDescription + ", statusId=" + statusId
                 + ", tokenTypeID=" + tokenTypeID + ", tokenTypeName=" + tokenTypeName + ", vRN="
                 + vRN + ", clientReferenceId=" + clientReferenceId + ", isEMVContact="
@@ -2292,6 +2348,8 @@ public class Card {
                 .isSuperseded(getIsSuperseded())
                 .isVirtualCard(getIsVirtualCard())
                 .odometerInput(getOdometerInput())
+                .maskedPAN(getMaskedPAN())
+                .pANID(getPANID())
                 .tokenTypeName(getTokenTypeName())
                 .isEMVContact(getIsEMVContact())
                 .isEMVContactless(getIsEMVContactless())
@@ -2372,6 +2430,8 @@ public class Card {
         private OptionalNullable<String> localCurrencySymbol;
         private Boolean odometerInput;
         private OptionalNullable<String> pAN;
+        private String maskedPAN;
+        private Double pANID;
         private OptionalNullable<String> purchaseCategoryCode;
         private OptionalNullable<Integer> purchaseCategoryId;
         private OptionalNullable<String> purchaseCategoryName;
@@ -2922,6 +2982,26 @@ public class Card {
         }
 
         /**
+         * Setter for maskedPAN.
+         * @param  maskedPAN  String value for maskedPAN.
+         * @return Builder
+         */
+        public Builder maskedPAN(String maskedPAN) {
+            this.maskedPAN = maskedPAN;
+            return this;
+        }
+
+        /**
+         * Setter for pANID.
+         * @param  pANID  Double value for pANID.
+         * @return Builder
+         */
+        public Builder pANID(Double pANID) {
+            this.pANID = pANID;
+            return this;
+        }
+
+        /**
          * Setter for purchaseCategoryCode.
          * @param  purchaseCategoryCode  String value for purchaseCategoryCode.
          * @return Builder
@@ -3238,7 +3318,7 @@ public class Card {
                     effectiveDate, expiryDate, fleetIdInput, isCRT, isFleet, isInternational,
                     isNational, isPartnerSitesIncluded, isShellSitesOnly, issueDate, isSuperseded,
                     isVirtualCard, lastModifiedDate, lastUsedDate, localCurrencyCode,
-                    localCurrencySymbol, odometerInput, pAN, purchaseCategoryCode,
+                    localCurrencySymbol, odometerInput, pAN, maskedPAN, pANID, purchaseCategoryCode,
                     purchaseCategoryId, purchaseCategoryName, reason, reissueSetting,
                     statusDescription, statusId, tokenTypeID, tokenTypeName, vRN, clientReferenceId,
                     isEMVContact, isEMVContactless, isRFID, rFIDUID, eMAID, eVPrintedNumber,

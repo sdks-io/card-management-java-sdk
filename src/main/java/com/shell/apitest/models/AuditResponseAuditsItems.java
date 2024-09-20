@@ -1173,10 +1173,10 @@ public class AuditResponseAuditsItems {
 
     /**
      * Internal Getter for RequestedOperation.
-     * User requested operation. Possible values: •	OrderCard •	CreateCardGroup •	PINReminder
-     * •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder •	BulkCardBlock
-     * •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo •	BCOSummary
-     * •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * User requested operation. Possible values: • OrderCard • CreateCardGroup • PINReminder •
+     * MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder • BulkCardBlock •
+     * BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo • BCOSummary •
+     * BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      * @return Returns the Internal String
      */
     @JsonGetter("RequestedOperation")
@@ -1188,10 +1188,10 @@ public class AuditResponseAuditsItems {
 
     /**
      * Getter for RequestedOperation.
-     * User requested operation. Possible values: •	OrderCard •	CreateCardGroup •	PINReminder
-     * •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder •	BulkCardBlock
-     * •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo •	BCOSummary
-     * •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * User requested operation. Possible values: • OrderCard • CreateCardGroup • PINReminder •
+     * MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder • BulkCardBlock •
+     * BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo • BCOSummary •
+     * BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      * @return Returns the String
      */
     public String getRequestedOperation() {
@@ -1200,10 +1200,10 @@ public class AuditResponseAuditsItems {
 
     /**
      * Setter for RequestedOperation.
-     * User requested operation. Possible values: •	OrderCard •	CreateCardGroup •	PINReminder
-     * •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder •	BulkCardBlock
-     * •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo •	BCOSummary
-     * •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * User requested operation. Possible values: • OrderCard • CreateCardGroup • PINReminder •
+     * MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder • BulkCardBlock •
+     * BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo • BCOSummary •
+     * BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      * @param requestedOperation Value for String
      */
     @JsonSetter("RequestedOperation")
@@ -1213,10 +1213,10 @@ public class AuditResponseAuditsItems {
 
     /**
      * UnSetter for RequestedOperation.
-     * User requested operation. Possible values: •	OrderCard •	CreateCardGroup •	PINReminder
-     * •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew •	BulkCardOrder •	BulkCardBlock
-     * •	BulkCardOrderMultiAccount •	MobilePaymentRegistration •	UpdateCompanyInfo •	BCOSummary
-     * •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer •	DeliveryAddressUpdate
+     * User requested operation. Possible values: • OrderCard • CreateCardGroup • PINReminder •
+     * MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew • BulkCardOrder • BulkCardBlock •
+     * BulkCardOrderMultiAccount • MobilePaymentRegistration • UpdateCompanyInfo • BCOSummary •
+     * BCOMultiAccountSummary • BCBSummary • FundTransfer • DeliveryAddressUpdate
      */
     public void unsetRequestedOperation() {
         requestedOperation = null;
@@ -1263,11 +1263,11 @@ public class AuditResponseAuditsItems {
 
     /**
      * Internal Getter for RequestType.
-     * Request type initiated under the requested operation. Possible values: •	OrderCard
-     * •	CreateCardGroup •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew
-     * •	BulkCardOrder •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration
-     * •	UpdateCompanyInfo •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer
-     * •	DeliveryAddressUpdate
+     * Request type initiated under the requested operation. Possible values: • OrderCard •
+     * CreateCardGroup • PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew •
+     * BulkCardOrder • BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration •
+     * UpdateCompanyInfo • BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer •
+     * DeliveryAddressUpdate
      * @return Returns the Internal String
      */
     @JsonGetter("RequestType")
@@ -1279,11 +1279,11 @@ public class AuditResponseAuditsItems {
 
     /**
      * Getter for RequestType.
-     * Request type initiated under the requested operation. Possible values: •	OrderCard
-     * •	CreateCardGroup •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew
-     * •	BulkCardOrder •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration
-     * •	UpdateCompanyInfo •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer
-     * •	DeliveryAddressUpdate
+     * Request type initiated under the requested operation. Possible values: • OrderCard •
+     * CreateCardGroup • PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew •
+     * BulkCardOrder • BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration •
+     * UpdateCompanyInfo • BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer •
+     * DeliveryAddressUpdate
      * @return Returns the String
      */
     public String getRequestType() {
@@ -1292,11 +1292,11 @@ public class AuditResponseAuditsItems {
 
     /**
      * Setter for RequestType.
-     * Request type initiated under the requested operation. Possible values: •	OrderCard
-     * •	CreateCardGroup •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew
-     * •	BulkCardOrder •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration
-     * •	UpdateCompanyInfo •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer
-     * •	DeliveryAddressUpdate
+     * Request type initiated under the requested operation. Possible values: • OrderCard •
+     * CreateCardGroup • PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew •
+     * BulkCardOrder • BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration •
+     * UpdateCompanyInfo • BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer •
+     * DeliveryAddressUpdate
      * @param requestType Value for String
      */
     @JsonSetter("RequestType")
@@ -1306,11 +1306,11 @@ public class AuditResponseAuditsItems {
 
     /**
      * UnSetter for RequestType.
-     * Request type initiated under the requested operation. Possible values: •	OrderCard
-     * •	CreateCardGroup •	PINReminder •	MoveCard •	UpdateCardStatus •	UpdateCardGroup •	AutoRenew
-     * •	BulkCardOrder •	BulkCardBlock •	BulkCardOrderMultiAccount •	MobilePaymentRegistration
-     * •	UpdateCompanyInfo •	BCOSummary •	BCOMultiAccountSummary •	BCBSummary •	FundTransfer
-     * •	DeliveryAddressUpdate
+     * Request type initiated under the requested operation. Possible values: • OrderCard •
+     * CreateCardGroup • PINReminder • MoveCard • UpdateCardStatus • UpdateCardGroup • AutoRenew •
+     * BulkCardOrder • BulkCardBlock • BulkCardOrderMultiAccount • MobilePaymentRegistration •
+     * UpdateCompanyInfo • BCOSummary • BCOMultiAccountSummary • BCBSummary • FundTransfer •
+     * DeliveryAddressUpdate
      */
     public void unsetRequestType() {
         requestType = null;
@@ -1318,8 +1318,8 @@ public class AuditResponseAuditsItems {
 
     /**
      * Internal Getter for Status.
-     * Status of the request. Possible values: •	Success •	Failed •	InProgress •	Submitted
-     * •	Rejected •	PendingApproval •	MailedToCSC
+     * Status of the request. Possible values: • Success • Failed • InProgress • Submitted •
+     * Rejected • PendingApproval • MailedToCSC
      * @return Returns the Internal String
      */
     @JsonGetter("Status")
@@ -1331,8 +1331,8 @@ public class AuditResponseAuditsItems {
 
     /**
      * Getter for Status.
-     * Status of the request. Possible values: •	Success •	Failed •	InProgress •	Submitted
-     * •	Rejected •	PendingApproval •	MailedToCSC
+     * Status of the request. Possible values: • Success • Failed • InProgress • Submitted •
+     * Rejected • PendingApproval • MailedToCSC
      * @return Returns the String
      */
     public String getStatus() {
@@ -1341,8 +1341,8 @@ public class AuditResponseAuditsItems {
 
     /**
      * Setter for Status.
-     * Status of the request. Possible values: •	Success •	Failed •	InProgress •	Submitted
-     * •	Rejected •	PendingApproval •	MailedToCSC
+     * Status of the request. Possible values: • Success • Failed • InProgress • Submitted •
+     * Rejected • PendingApproval • MailedToCSC
      * @param status Value for String
      */
     @JsonSetter("Status")
@@ -1352,8 +1352,8 @@ public class AuditResponseAuditsItems {
 
     /**
      * UnSetter for Status.
-     * Status of the request. Possible values: •	Success •	Failed •	InProgress •	Submitted
-     * •	Rejected •	PendingApproval •	MailedToCSC
+     * Status of the request. Possible values: • Success • Failed • InProgress • Submitted •
+     * Rejected • PendingApproval • MailedToCSC
      */
     public void unsetStatus() {
         status = null;

@@ -246,8 +246,8 @@ public class UpdateCardRenewalAddress2 {
 
     /**
      * Getter for EmailAddress.
-     * Email Address Max Length: 90 Note: - Based on the international standard that there can be
-     * •	Max Length 64 before the {@literal @} (the 'Local part’) =64(minimum of 1) •	Max Lenth after the (the
+     * Email Address Max Length: 90 Note: - Based on the international standard that there can be •
+     * Max Length 64 before the {@literal @} (the 'Local part’) =64(minimum of 1) • Max Lenth after the (the
      * domain) = 88 (Minimum of 2)
      * @return Returns the String
      */
@@ -259,8 +259,8 @@ public class UpdateCardRenewalAddress2 {
 
     /**
      * Setter for EmailAddress.
-     * Email Address Max Length: 90 Note: - Based on the international standard that there can be
-     * •	Max Length 64 before the {@literal @} (the 'Local part’) =64(minimum of 1) •	Max Lenth after the (the
+     * Email Address Max Length: 90 Note: - Based on the international standard that there can be •
+     * Max Length 64 before the {@literal @} (the 'Local part’) =64(minimum of 1) • Max Lenth after the (the
      * domain) = 88 (Minimum of 2)
      * @param emailAddress Value for String
      */

@@ -45,12 +45,7 @@ public enum OAuthProviderErrorEnum {
     /**
      * The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.
      */
-    INVALID_SCOPE,
-
-    /**
-     * Unknown values will be mapped by this enum member
-     */
-    _UNKNOWN;
+    INVALID_SCOPE;
 
 
     private static TreeMap<String, OAuthProviderErrorEnum> valueMap = new TreeMap<>();
@@ -63,7 +58,6 @@ public enum OAuthProviderErrorEnum {
         UNAUTHORIZED_CLIENT.value = "unauthorized_client";
         UNSUPPORTED_GRANT_TYPE.value = "unsupported_grant_type";
         INVALID_SCOPE.value = "invalid_scope";
-        _UNKNOWN.value = null;
 
         valueMap.put("invalid_request", INVALID_REQUEST);
         valueMap.put("invalid_client", INVALID_CLIENT);
@@ -94,9 +88,6 @@ public enum OAuthProviderErrorEnum {
      * @return The enum member against the given string value.
      */
     public static OAuthProviderErrorEnum fromString(String toConvert) {
-        if (!valueMap.containsKey(toConvert)) {
-            return _UNKNOWN;
-        }
         return valueMap.get(toConvert);
     }
 
@@ -114,9 +105,6 @@ public enum OAuthProviderErrorEnum {
      */
     @Override
     public String toString() {
-        if (value == null) {
-            return null;
-        }
         return value.toString();
     }
 

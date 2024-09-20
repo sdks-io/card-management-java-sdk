@@ -345,7 +345,7 @@ public class UsageRestriction {
 
     /**
      * Getter for Level.
-     * Usage limit is applied on the card from this level. Valid values – •	Inherited •	Card When
+     * Usage limit is applied on the card from this level. Valid values – • Inherited • Card When
      * Card level usage restrictions are not present, the API will return the inherited
      * restrictions. Note: -This field is deprecated. Instead, use ‘Override’.
      * @return Returns the String
@@ -358,7 +358,7 @@ public class UsageRestriction {
 
     /**
      * Setter for Level.
-     * Usage limit is applied on the card from this level. Valid values – •	Inherited •	Card When
+     * Usage limit is applied on the card from this level. Valid values – • Inherited • Card When
      * Card level usage restrictions are not present, the API will return the inherited
      * restrictions. Note: -This field is deprecated. Instead, use ‘Override’.
      * @param level Value for String
