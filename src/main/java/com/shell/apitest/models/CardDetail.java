@@ -1757,9 +1757,6 @@ public class CardDetail {
 
     /**
      * Getter for AutoRenew.
-     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
-     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
-     * will not be Reissued.
      * @return Returns the CardDetailAutoRenewEnum
      */
     @JsonGetter("AutoRenew")
@@ -1770,9 +1767,6 @@ public class CardDetail {
 
     /**
      * Setter for AutoRenew.
-     * Whether to reissue card automatically when nearing the expiry. Allowed values: - 1. As per
-     * card type setting (Default). 2. Card will be Reissued when nearing its expiry date. 3. Card
-     * will not be Reissued.
      * @param autoRenew Value for CardDetailAutoRenewEnum
      */
     @JsonSetter("AutoRenew")

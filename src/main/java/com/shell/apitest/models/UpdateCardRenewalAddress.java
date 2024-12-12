@@ -136,7 +136,7 @@ public class UpdateCardRenewalAddress {
      * Getter for AddressLine.
      * Address line 1,2 and 3 Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’.
      * The field is ignored otherwise. Max Length: 128 Note: -Each address line should be separated
-     * by “\r\n”.
+     * by “\\r\\n”.
      * @return Returns the String
      */
     @JsonGetter("AddressLine")
@@ -148,7 +148,7 @@ public class UpdateCardRenewalAddress {
      * Setter for AddressLine.
      * Address line 1,2 and 3 Note: Mandatory when ‘UseCustomerDefaultAddress’ is set to ‘false’.
      * The field is ignored otherwise. Max Length: 128 Note: -Each address line should be separated
-     * by “\r\n”.
+     * by “\\r\\n”.
      * @param addressLine Value for String
      */
     @JsonSetter("AddressLine")

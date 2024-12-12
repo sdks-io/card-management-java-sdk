@@ -504,12 +504,13 @@ public final class CustomerController extends BaseController {
 
     /**
      * This operation allows querying the card group details . It provides flexible search criteria
-     * and supports paging.\ When the card group type is configured as ‘Vertical’ in cards platform,
-     * this operation will return all card groups from the given account or if no account is passed
-     * in the input, then will return card groups from all the accounts under the payer. When the
-     * card group type is configured as ‘Horizontal’ in cards platform, this API will return all
-     * card groups configured directly under the payer. Accounts with cancelled status will not be
-     * considered for cardgroups search for the configured (E.g., SFH) set of client apps.
+     * and supports paging.\\ When the card group type is configured as ‘Vertical’ in cards
+     * platform, this operation will return all card groups from the given account or if no account
+     * is passed in the input, then will return card groups from all the accounts under the payer.
+     * When the card group type is configured as ‘Horizontal’ in cards platform, this API will
+     * return all card groups configured directly under the payer. Accounts with cancelled status
+     * will not be considered for cardgroups search for the configured (E.g., SFH) set of client
+     * apps.
      * @param  apikey  Required parameter: This is the API key of the specific environment which
      *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for
@@ -528,12 +529,13 @@ public final class CustomerController extends BaseController {
 
     /**
      * This operation allows querying the card group details . It provides flexible search criteria
-     * and supports paging.\ When the card group type is configured as ‘Vertical’ in cards platform,
-     * this operation will return all card groups from the given account or if no account is passed
-     * in the input, then will return card groups from all the accounts under the payer. When the
-     * card group type is configured as ‘Horizontal’ in cards platform, this API will return all
-     * card groups configured directly under the payer. Accounts with cancelled status will not be
-     * considered for cardgroups search for the configured (E.g., SFH) set of client apps.
+     * and supports paging.\\ When the card group type is configured as ‘Vertical’ in cards
+     * platform, this operation will return all card groups from the given account or if no account
+     * is passed in the input, then will return card groups from all the accounts under the payer.
+     * When the card group type is configured as ‘Horizontal’ in cards platform, this API will
+     * return all card groups configured directly under the payer. Accounts with cancelled status
+     * will not be considered for cardgroups search for the configured (E.g., SFH) set of client
+     * apps.
      * @param  apikey  Required parameter: This is the API key of the specific environment which
      *         needs to be passed by the client.
      * @param  requestId  Required parameter: Mandatory UUID (according to RFC 4122 standards) for

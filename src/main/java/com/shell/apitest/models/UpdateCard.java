@@ -22,9 +22,6 @@ public class UpdateCard {
     private Boolean notifyCallerOnSync;
     private Boolean orderCardReplacement;
     private CardSettings cardSettings;
-    private Integer reasonId;
-    private OptionalNullable<String> reasonText;
-    private OptionalNullable<Integer> targetStatus;
     private OptionalNullable<Integer> accountId;
     private OptionalNullable<String> accountNumber;
     private OptionalNullable<String> cardExpiryDate;
@@ -50,9 +47,6 @@ public class UpdateCard {
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
      * @param  orderCardReplacement  Boolean value for orderCardReplacement.
      * @param  cardSettings  CardSettings value for cardSettings.
-     * @param  reasonId  Integer value for reasonId.
-     * @param  reasonText  String value for reasonText.
-     * @param  targetStatus  Integer value for targetStatus.
      * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  cardExpiryDate  String value for cardExpiryDate.
@@ -71,9 +65,6 @@ public class UpdateCard {
             Boolean notifyCallerOnSync,
             Boolean orderCardReplacement,
             CardSettings cardSettings,
-            Integer reasonId,
-            String reasonText,
-            Integer targetStatus,
             Integer accountId,
             String accountNumber,
             String cardExpiryDate,
@@ -90,9 +81,6 @@ public class UpdateCard {
         this.notifyCallerOnSync = notifyCallerOnSync;
         this.orderCardReplacement = orderCardReplacement;
         this.cardSettings = cardSettings;
-        this.reasonId = reasonId;
-        this.reasonText = OptionalNullable.of(reasonText);
-        this.targetStatus = OptionalNullable.of(targetStatus);
         this.accountId = OptionalNullable.of(accountId);
         this.accountNumber = OptionalNullable.of(accountNumber);
         this.cardExpiryDate = OptionalNullable.of(cardExpiryDate);
@@ -113,9 +101,6 @@ public class UpdateCard {
      * @param  notifyCallerOnSync  Boolean value for notifyCallerOnSync.
      * @param  orderCardReplacement  Boolean value for orderCardReplacement.
      * @param  cardSettings  CardSettings value for cardSettings.
-     * @param  reasonId  Integer value for reasonId.
-     * @param  reasonText  String value for reasonText.
-     * @param  targetStatus  Integer value for targetStatus.
      * @param  accountId  Integer value for accountId.
      * @param  accountNumber  String value for accountNumber.
      * @param  cardExpiryDate  String value for cardExpiryDate.
@@ -130,8 +115,7 @@ public class UpdateCard {
 
     protected UpdateCard(OptionalNullable<String> caller, Boolean isReplacementChargeable,
             Boolean notifyCaller, Boolean notifyCallerOnSync, Boolean orderCardReplacement,
-            CardSettings cardSettings, Integer reasonId, OptionalNullable<String> reasonText,
-            OptionalNullable<Integer> targetStatus, OptionalNullable<Integer> accountId,
+            CardSettings cardSettings, OptionalNullable<Integer> accountId,
             OptionalNullable<String> accountNumber, OptionalNullable<String> cardExpiryDate,
             OptionalNullable<Integer> cardId, OptionalNullable<Integer> colCoCode,
             OptionalNullable<Integer> colCoId, OptionalNullable<String> pAN,
@@ -143,9 +127,6 @@ public class UpdateCard {
         this.notifyCallerOnSync = notifyCallerOnSync;
         this.orderCardReplacement = orderCardReplacement;
         this.cardSettings = cardSettings;
-        this.reasonId = reasonId;
-        this.reasonText = reasonText;
-        this.targetStatus = targetStatus;
         this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.cardExpiryDate = cardExpiryDate;
@@ -348,145 +329,6 @@ public class UpdateCard {
     @JsonSetter("CardSettings")
     public void setCardSettings(CardSettings cardSettings) {
         this.cardSettings = cardSettings;
-    }
-
-    /**
-     * Getter for ReasonId.
-     * Reason id for updating the card status. Either Reason ID or Text is madatory when
-     * TargetStatus is ‘Block’ or ‘Damaged’. Else ignored. Possible values: 1 (Lost) 2 (Stolen) 3
-     * (Card no longer required) &lt;br&gt;When passed, the reason Id will be mapped to allowed reason IDs
-     * configured for the card type of the card. If the given reason Id is not allowed for certain
-     * card types, then the request will be rejected as invalid ResonId
-     * @return Returns the Integer
-     */
-    @JsonGetter("ReasonId")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Integer getReasonId() {
-        return reasonId;
-    }
-
-    /**
-     * Setter for ReasonId.
-     * Reason id for updating the card status. Either Reason ID or Text is madatory when
-     * TargetStatus is ‘Block’ or ‘Damaged’. Else ignored. Possible values: 1 (Lost) 2 (Stolen) 3
-     * (Card no longer required) &lt;br&gt;When passed, the reason Id will be mapped to allowed reason IDs
-     * configured for the card type of the card. If the given reason Id is not allowed for certain
-     * card types, then the request will be rejected as invalid ResonId
-     * @param reasonId Value for Integer
-     */
-    @JsonSetter("ReasonId")
-    public void setReasonId(Integer reasonId) {
-        this.reasonId = reasonId;
-    }
-
-    /**
-     * Internal Getter for ReasonText.
-     * Reason text for updating the card status. Possible Values: 1) Lost 2) Stolen 3) Card no
-     * longer required Optional – However, either Reason ID or Text is madatory when TargetStatus is
-     * ‘Block’ or ‘Damaged’. Else, Ignored. When Reason Text is passed and the Target Status is
-     * either Block or Damaged, the text will be validated with the allowed list of values
-     * configured for the card type of the card. If the text is not allowed, request will be
-     * rejected as invaid ResonText. Note: ‘Customer blocked’ will be used as the reason for
-     * ‘Temporary Block’.
-     * @return Returns the Internal String
-     */
-    @JsonGetter("ReasonText")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<String> internalGetReasonText() {
-        return this.reasonText;
-    }
-
-    /**
-     * Getter for ReasonText.
-     * Reason text for updating the card status. Possible Values: 1) Lost 2) Stolen 3) Card no
-     * longer required Optional – However, either Reason ID or Text is madatory when TargetStatus is
-     * ‘Block’ or ‘Damaged’. Else, Ignored. When Reason Text is passed and the Target Status is
-     * either Block or Damaged, the text will be validated with the allowed list of values
-     * configured for the card type of the card. If the text is not allowed, request will be
-     * rejected as invaid ResonText. Note: ‘Customer blocked’ will be used as the reason for
-     * ‘Temporary Block’.
-     * @return Returns the String
-     */
-    public String getReasonText() {
-        return OptionalNullable.getFrom(reasonText);
-    }
-
-    /**
-     * Setter for ReasonText.
-     * Reason text for updating the card status. Possible Values: 1) Lost 2) Stolen 3) Card no
-     * longer required Optional – However, either Reason ID or Text is madatory when TargetStatus is
-     * ‘Block’ or ‘Damaged’. Else, Ignored. When Reason Text is passed and the Target Status is
-     * either Block or Damaged, the text will be validated with the allowed list of values
-     * configured for the card type of the card. If the text is not allowed, request will be
-     * rejected as invaid ResonText. Note: ‘Customer blocked’ will be used as the reason for
-     * ‘Temporary Block’.
-     * @param reasonText Value for String
-     */
-    @JsonSetter("ReasonText")
-    public void setReasonText(String reasonText) {
-        this.reasonText = OptionalNullable.of(reasonText);
-    }
-
-    /**
-     * UnSetter for ReasonText.
-     * Reason text for updating the card status. Possible Values: 1) Lost 2) Stolen 3) Card no
-     * longer required Optional – However, either Reason ID or Text is madatory when TargetStatus is
-     * ‘Block’ or ‘Damaged’. Else, Ignored. When Reason Text is passed and the Target Status is
-     * either Block or Damaged, the text will be validated with the allowed list of values
-     * configured for the card type of the card. If the text is not allowed, request will be
-     * rejected as invaid ResonText. Note: ‘Customer blocked’ will be used as the reason for
-     * ‘Temporary Block’.
-     */
-    public void unsetReasonText() {
-        reasonText = null;
-    }
-
-    /**
-     * Internal Getter for TargetStatus.
-     * The list of cards passed in ‘Cards’ parameter will be updated to this status.&lt;br /&gt;
-     * Mandatory.&lt;br /&gt; Allowed values –&lt;br /&gt; - TemporaryBlock&lt;br /&gt; - Unblock&lt;br /&gt; - Block&lt;br /&gt;
-     * - Damaged&lt;br /&gt;
-     * @return Returns the Internal Integer
-     */
-    @JsonGetter("TargetStatus")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = OptionalNullable.Serializer.class)
-    protected OptionalNullable<Integer> internalGetTargetStatus() {
-        return this.targetStatus;
-    }
-
-    /**
-     * Getter for TargetStatus.
-     * The list of cards passed in ‘Cards’ parameter will be updated to this status.&lt;br /&gt;
-     * Mandatory.&lt;br /&gt; Allowed values –&lt;br /&gt; - TemporaryBlock&lt;br /&gt; - Unblock&lt;br /&gt; - Block&lt;br /&gt;
-     * - Damaged&lt;br /&gt;
-     * @return Returns the Integer
-     */
-    public Integer getTargetStatus() {
-        return OptionalNullable.getFrom(targetStatus);
-    }
-
-    /**
-     * Setter for TargetStatus.
-     * The list of cards passed in ‘Cards’ parameter will be updated to this status.&lt;br /&gt;
-     * Mandatory.&lt;br /&gt; Allowed values –&lt;br /&gt; - TemporaryBlock&lt;br /&gt; - Unblock&lt;br /&gt; - Block&lt;br /&gt;
-     * - Damaged&lt;br /&gt;
-     * @param targetStatus Value for Integer
-     */
-    @JsonSetter("TargetStatus")
-    public void setTargetStatus(Integer targetStatus) {
-        this.targetStatus = OptionalNullable.of(targetStatus);
-    }
-
-    /**
-     * UnSetter for TargetStatus.
-     * The list of cards passed in ‘Cards’ parameter will be updated to this status.&lt;br /&gt;
-     * Mandatory.&lt;br /&gt; Allowed values –&lt;br /&gt; - TemporaryBlock&lt;br /&gt; - Unblock&lt;br /&gt; - Block&lt;br /&gt;
-     * - Damaged&lt;br /&gt;
-     */
-    public void unsetTargetStatus() {
-        targetStatus = null;
     }
 
     /**
@@ -900,8 +742,7 @@ public class UpdateCard {
         return "UpdateCard [" + "caller=" + caller + ", isReplacementChargeable="
                 + isReplacementChargeable + ", notifyCaller=" + notifyCaller
                 + ", notifyCallerOnSync=" + notifyCallerOnSync + ", orderCardReplacement="
-                + orderCardReplacement + ", cardSettings=" + cardSettings + ", reasonId=" + reasonId
-                + ", reasonText=" + reasonText + ", targetStatus=" + targetStatus + ", accountId="
+                + orderCardReplacement + ", cardSettings=" + cardSettings + ", accountId="
                 + accountId + ", accountNumber=" + accountNumber + ", cardExpiryDate="
                 + cardExpiryDate + ", cardId=" + cardId + ", colCoCode=" + colCoCode + ", colCoId="
                 + colCoId + ", pAN=" + pAN + ", pANID=" + pANID + ", payerId=" + payerId
@@ -919,11 +760,8 @@ public class UpdateCard {
                 .notifyCaller(getNotifyCaller())
                 .notifyCallerOnSync(getNotifyCallerOnSync())
                 .orderCardReplacement(getOrderCardReplacement())
-                .cardSettings(getCardSettings())
-                .reasonId(getReasonId());
+                .cardSettings(getCardSettings());
         builder.caller = internalGetCaller();
-        builder.reasonText = internalGetReasonText();
-        builder.targetStatus = internalGetTargetStatus();
         builder.accountId = internalGetAccountId();
         builder.accountNumber = internalGetAccountNumber();
         builder.cardExpiryDate = internalGetCardExpiryDate();
@@ -947,9 +785,6 @@ public class UpdateCard {
         private Boolean notifyCallerOnSync;
         private Boolean orderCardReplacement;
         private CardSettings cardSettings;
-        private Integer reasonId;
-        private OptionalNullable<String> reasonText;
-        private OptionalNullable<Integer> targetStatus;
         private OptionalNullable<Integer> accountId;
         private OptionalNullable<String> accountNumber;
         private OptionalNullable<String> cardExpiryDate;
@@ -1029,54 +864,6 @@ public class UpdateCard {
          */
         public Builder cardSettings(CardSettings cardSettings) {
             this.cardSettings = cardSettings;
-            return this;
-        }
-
-        /**
-         * Setter for reasonId.
-         * @param  reasonId  Integer value for reasonId.
-         * @return Builder
-         */
-        public Builder reasonId(Integer reasonId) {
-            this.reasonId = reasonId;
-            return this;
-        }
-
-        /**
-         * Setter for reasonText.
-         * @param  reasonText  String value for reasonText.
-         * @return Builder
-         */
-        public Builder reasonText(String reasonText) {
-            this.reasonText = OptionalNullable.of(reasonText);
-            return this;
-        }
-
-        /**
-         * UnSetter for reasonText.
-         * @return Builder
-         */
-        public Builder unsetReasonText() {
-            reasonText = null;
-            return this;
-        }
-
-        /**
-         * Setter for targetStatus.
-         * @param  targetStatus  Integer value for targetStatus.
-         * @return Builder
-         */
-        public Builder targetStatus(Integer targetStatus) {
-            this.targetStatus = OptionalNullable.of(targetStatus);
-            return this;
-        }
-
-        /**
-         * UnSetter for targetStatus.
-         * @return Builder
-         */
-        public Builder unsetTargetStatus() {
-            targetStatus = null;
             return this;
         }
 
@@ -1276,9 +1063,8 @@ public class UpdateCard {
          */
         public UpdateCard build() {
             return new UpdateCard(caller, isReplacementChargeable, notifyCaller, notifyCallerOnSync,
-                    orderCardReplacement, cardSettings, reasonId, reasonText, targetStatus,
-                    accountId, accountNumber, cardExpiryDate, cardId, colCoCode, colCoId, pAN,
-                    pANID, payerId, payerNumber);
+                    orderCardReplacement, cardSettings, accountId, accountNumber, cardExpiryDate,
+                    cardId, colCoCode, colCoId, pAN, pANID, payerId, payerNumber);
         }
     }
 }
