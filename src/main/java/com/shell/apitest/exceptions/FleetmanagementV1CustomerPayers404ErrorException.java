@@ -45,4 +45,14 @@ public class FleetmanagementV1CustomerPayers404ErrorException extends ApiExcepti
     private void setFault(Fault fault) {
         this.fault = fault;
     }
+
+    /**
+     * Converts this FleetmanagementV1CustomerPayers404ErrorException into string format.
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "FleetmanagementV1CustomerPayers404ErrorException [" + "statusCode="
+                + getResponseCode() + ", message=" + getMessage() + ", fault=" + fault + "]";
+    }
 }

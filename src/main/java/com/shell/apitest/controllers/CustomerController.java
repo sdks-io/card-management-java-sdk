@@ -71,11 +71,11 @@ public final class CustomerController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public LoggedInUserResponse loggedinuser(
+    public LoggedInUserResponse loggedinUser(
             final String apikey,
             final String requestId,
             final FleetmanagementV1UserLoggedinuserRequest body) throws ApiException, IOException {
-        return prepareLoggedinuserRequest(apikey, requestId, body).execute();
+        return prepareLoggedinUserRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -90,21 +90,21 @@ public final class CustomerController extends BaseController {
      * @param  body  Optional parameter: Logged in user request body
      * @return    Returns the LoggedInUserResponse response from the API call
      */
-    public CompletableFuture<LoggedInUserResponse> loggedinuserAsync(
+    public CompletableFuture<LoggedInUserResponse> loggedinUserAsync(
             final String apikey,
             final String requestId,
             final FleetmanagementV1UserLoggedinuserRequest body) {
         try { 
-            return prepareLoggedinuserRequest(apikey, requestId, body).executeAsync(); 
+            return prepareLoggedinUserRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for loggedinuser.
+     * Builds the ApiCall object for loggedinUser.
      */
-    private ApiCall<LoggedInUserResponse, ApiException> prepareLoggedinuserRequest(
+    private ApiCall<LoggedInUserResponse, ApiException> prepareLoggedinUserRequest(
             final String apikey,
             final String requestId,
             final FleetmanagementV1UserLoggedinuserRequest body) throws JsonProcessingException, IOException {
@@ -520,11 +520,11 @@ public final class CustomerController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardGroupResponse cardgroups(
+    public CardGroupResponse cardGroups(
             final String apikey,
             final String requestId,
             final CardGroupRequest body) throws ApiException, IOException {
-        return prepareCardgroupsRequest(apikey, requestId, body).execute();
+        return prepareCardGroupsRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -543,21 +543,21 @@ public final class CustomerController extends BaseController {
      * @param  body  Optional parameter: Request Body
      * @return    Returns the CardGroupResponse response from the API call
      */
-    public CompletableFuture<CardGroupResponse> cardgroupsAsync(
+    public CompletableFuture<CardGroupResponse> cardGroupsAsync(
             final String apikey,
             final String requestId,
             final CardGroupRequest body) {
         try { 
-            return prepareCardgroupsRequest(apikey, requestId, body).executeAsync(); 
+            return prepareCardGroupsRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardgroups.
+     * Builds the ApiCall object for cardGroups.
      */
-    private ApiCall<CardGroupResponse, ApiException> prepareCardgroupsRequest(
+    private ApiCall<CardGroupResponse, ApiException> prepareCardGroupsRequest(
             final String apikey,
             final String requestId,
             final CardGroupRequest body) throws JsonProcessingException, IOException {
@@ -617,11 +617,11 @@ public final class CustomerController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public AuditResponse auditreport(
+    public AuditResponse auditReport(
             final String apikey,
             final String requestId,
             final AuditRequest body) throws ApiException, IOException {
-        return prepareAuditreportRequest(apikey, requestId, body).execute();
+        return prepareAuditReportRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -638,21 +638,21 @@ public final class CustomerController extends BaseController {
      * @param  body  Optional parameter: request body
      * @return    Returns the AuditResponse response from the API call
      */
-    public CompletableFuture<AuditResponse> auditreportAsync(
+    public CompletableFuture<AuditResponse> auditReportAsync(
             final String apikey,
             final String requestId,
             final AuditRequest body) {
         try { 
-            return prepareAuditreportRequest(apikey, requestId, body).executeAsync(); 
+            return prepareAuditReportRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for auditreport.
+     * Builds the ApiCall object for auditReport.
      */
-    private ApiCall<AuditResponse, ApiException> prepareAuditreportRequest(
+    private ApiCall<AuditResponse, ApiException> prepareAuditReportRequest(
             final String apikey,
             final String requestId,
             final AuditRequest body) throws JsonProcessingException, IOException {
@@ -712,11 +712,11 @@ public final class CustomerController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CreateCardGroupResponse createcardgroup(
+    public CreateCardGroupResponse createCardGroup(
             final String apikey,
             final String requestId,
             final CreateCardGroupRequest body) throws ApiException, IOException {
-        return prepareCreatecardgroupRequest(apikey, requestId, body).execute();
+        return prepareCreateCardGroupRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -733,21 +733,21 @@ public final class CustomerController extends BaseController {
      * @param  body  Optional parameter: CreateCardGroup request body
      * @return    Returns the CreateCardGroupResponse response from the API call
      */
-    public CompletableFuture<CreateCardGroupResponse> createcardgroupAsync(
+    public CompletableFuture<CreateCardGroupResponse> createCardGroupAsync(
             final String apikey,
             final String requestId,
             final CreateCardGroupRequest body) {
         try { 
-            return prepareCreatecardgroupRequest(apikey, requestId, body).executeAsync(); 
+            return prepareCreateCardGroupRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for createcardgroup.
+     * Builds the ApiCall object for createCardGroup.
      */
-    private ApiCall<CreateCardGroupResponse, ApiException> prepareCreatecardgroupRequest(
+    private ApiCall<CreateCardGroupResponse, ApiException> prepareCreateCardGroupRequest(
             final String apikey,
             final String requestId,
             final CreateCardGroupRequest body) throws JsonProcessingException, IOException {
@@ -806,11 +806,11 @@ public final class CustomerController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateCardGroupResponse updatecardgroup(
+    public UpdateCardGroupResponse updateCardGroup(
             final String apikey,
             final String requestId,
             final UpdateCardGroupRequest body) throws ApiException, IOException {
-        return prepareUpdatecardgroupRequest(apikey, requestId, body).execute();
+        return prepareUpdateCardGroupRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -826,21 +826,21 @@ public final class CustomerController extends BaseController {
      * @param  body  Optional parameter: request body of customer card group
      * @return    Returns the UpdateCardGroupResponse response from the API call
      */
-    public CompletableFuture<UpdateCardGroupResponse> updatecardgroupAsync(
+    public CompletableFuture<UpdateCardGroupResponse> updateCardGroupAsync(
             final String apikey,
             final String requestId,
             final UpdateCardGroupRequest body) {
         try { 
-            return prepareUpdatecardgroupRequest(apikey, requestId, body).executeAsync(); 
+            return prepareUpdateCardGroupRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for updatecardgroup.
+     * Builds the ApiCall object for updateCardGroup.
      */
-    private ApiCall<UpdateCardGroupResponse, ApiException> prepareUpdatecardgroupRequest(
+    private ApiCall<UpdateCardGroupResponse, ApiException> prepareUpdateCardGroupRequest(
             final String apikey,
             final String requestId,
             final UpdateCardGroupRequest body) throws JsonProcessingException, IOException {

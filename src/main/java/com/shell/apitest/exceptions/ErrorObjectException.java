@@ -90,4 +90,15 @@ public class ErrorObjectException extends ApiException {
     private void setErrors(List<ErrorDetails> errors) {
         this.errors = errors;
     }
+
+    /**
+     * Converts this ErrorObjectException into string format.
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "ErrorObjectException [" + "statusCode=" + getResponseCode() + ", message="
+                + getMessage() + ", requestId=" + requestId + ", status=" + status + ", errors="
+                + errors + "]";
+    }
 }

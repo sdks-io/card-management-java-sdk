@@ -12,25 +12,25 @@ CustomerController customerController = client.getCustomerController();
 
 ## Methods
 
-* [Loggedinuser](../../doc/controllers/customer.md#loggedinuser)
+* [Loggedin User](../../doc/controllers/customer.md#loggedin-user)
 * [Payers](../../doc/controllers/customer.md#payers)
 * [Customer](../../doc/controllers/customer.md#customer)
 * [Accounts](../../doc/controllers/customer.md#accounts)
 * [Card Type](../../doc/controllers/customer.md#card-type)
-* [Cardgroups](../../doc/controllers/customer.md#cardgroups)
-* [Auditreport](../../doc/controllers/customer.md#auditreport)
-* [Createcardgroup](../../doc/controllers/customer.md#createcardgroup)
-* [Updatecardgroup](../../doc/controllers/customer.md#updatecardgroup)
+* [Card Groups](../../doc/controllers/customer.md#card-groups)
+* [Audit Report](../../doc/controllers/customer.md#audit-report)
+* [Create Card Group](../../doc/controllers/customer.md#create-card-group)
+* [Update Card Group](../../doc/controllers/customer.md#update-card-group)
 
 
-# Loggedinuser
+# Loggedin User
 
 This API allows querying the user data of the logged in user.</br>
 This API will return the user access details such as payers and/or accounts. </br>
 This API will also validate that logged in user has access to the requested API, on failure it will return HasAPIAccess flag as false in response.</br>
 
 ```java
-CompletableFuture<LoggedInUserResponse> loggedinuserAsync(
+CompletableFuture<LoggedInUserResponse> loggedinUserAsync(
     final String apikey,
     final String requestId,
     final FleetmanagementV1UserLoggedinuserRequest body)
@@ -61,7 +61,7 @@ FleetmanagementV1UserLoggedinuserRequest body = new FleetmanagementV1UserLoggedi
     .payerNumber("GB00123456")
     .build();
 
-customerController.loggedinuserAsync(apikey, requestId, body).thenAccept(result -> {
+customerController.loggedinUserAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -897,7 +897,7 @@ customerController.cardTypeAsync(apikey, requestId, body).thenAccept(result -> {
 | 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Cardgroups
+# Card Groups
 
 This operation allows querying the card group details . It provides flexible search criteria and supports paging.\
 
@@ -908,7 +908,7 @@ When the card group type is configured as ‘Horizontal’ in cards platform, th
 Accounts with cancelled status will not be considered for cardgroups search for the configured (E.g., SFH) set of client apps.
 
 ```java
-CompletableFuture<CardGroupResponse> cardgroupsAsync(
+CompletableFuture<CardGroupResponse> cardGroupsAsync(
     final String apikey,
     final String requestId,
     final CardGroupRequest body)
@@ -948,7 +948,7 @@ CardGroupRequest body = new CardGroupRequest.Builder()
     .pageSize(1)
     .build();
 
-customerController.cardgroupsAsync(apikey, requestId, body).thenAccept(result -> {
+customerController.cardGroupsAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1010,7 +1010,7 @@ customerController.cardgroupsAsync(apikey, requestId, body).thenAccept(result ->
 | 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Auditreport
+# Audit Report
 
 This operation allows users to fetch audit data of account or card operations performed by users of a given customer
 The audit data includes details of below API operations
@@ -1033,7 +1033,7 @@ The audit data includes details of below API operations
 * Delivery Address Update.
 
 ```java
-CompletableFuture<AuditResponse> auditreportAsync(
+CompletableFuture<AuditResponse> auditReportAsync(
     final String apikey,
     final String requestId,
     final AuditRequest body)
@@ -1078,7 +1078,7 @@ AuditRequest body = new AuditRequest.Builder()
     .toDate("20240202")
     .build();
 
-customerController.auditreportAsync(apikey, requestId, body).thenAccept(result -> {
+customerController.auditReportAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1149,7 +1149,7 @@ customerController.auditreportAsync(apikey, requestId, body).thenAccept(result -
 | 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Createcardgroup
+# Create Card Group
 
 This API allows creating a new Card Group in the Shell Cards Platform. It will
 also allow moving of cards (up to 500 cards) into the newly created
@@ -1165,7 +1165,7 @@ card-group.
   successfully
 
 ```java
-CompletableFuture<CreateCardGroupResponse> createcardgroupAsync(
+CompletableFuture<CreateCardGroupResponse> createCardGroupAsync(
     final String apikey,
     final String requestId,
     final CreateCardGroupRequest body)
@@ -1207,7 +1207,7 @@ CreateCardGroupRequest body = new CreateCardGroupRequest.Builder()
     ))
     .build();
 
-customerController.createcardgroupAsync(apikey, requestId, body).thenAccept(result -> {
+customerController.createCardGroupAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {
@@ -1256,7 +1256,7 @@ customerController.createcardgroupAsync(apikey, requestId, body).thenAccept(resu
 | 500 | The server encountered an unexpected condition the prevented it from fulfilling the request. | `ApiException` |
 
 
-# Updatecardgroup
+# Update Card Group
 
 This API allows updating or removing a Card Group in the Shell Cards Platform.
 
@@ -1266,7 +1266,7 @@ The request for updating or removing of the card group, creationg of a new card 
 validations.
 
 ```java
-CompletableFuture<UpdateCardGroupResponse> updatecardgroupAsync(
+CompletableFuture<UpdateCardGroupResponse> updateCardGroupAsync(
     final String apikey,
     final String requestId,
     final UpdateCardGroupRequest body)
@@ -1308,7 +1308,7 @@ UpdateCardGroupRequest body = new UpdateCardGroupRequest.Builder()
     .targetCardGroupId(3456)
     .build();
 
-customerController.updatecardgroupAsync(apikey, requestId, body).thenAccept(result -> {
+customerController.updateCardGroupAsync(apikey, requestId, body).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {

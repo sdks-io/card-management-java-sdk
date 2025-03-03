@@ -633,11 +633,11 @@ public final class RestrictionController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public SummaryofbundleResponse summaryofbundles(
+    public SummaryofbundleResponse summaryOfBundles(
             final String apikey,
             final String requestId,
             final SummaryofbundlerRequest body) throws ApiException, IOException {
-        return prepareSummaryofbundlesRequest(apikey, requestId, body).execute();
+        return prepareSummaryOfBundlesRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -655,21 +655,21 @@ public final class RestrictionController extends BaseController {
      * @param  body  Optional parameter: Summary of Bundle request body
      * @return    Returns the SummaryofbundleResponse response from the API call
      */
-    public CompletableFuture<SummaryofbundleResponse> summaryofbundlesAsync(
+    public CompletableFuture<SummaryofbundleResponse> summaryOfBundlesAsync(
             final String apikey,
             final String requestId,
             final SummaryofbundlerRequest body) {
         try { 
-            return prepareSummaryofbundlesRequest(apikey, requestId, body).executeAsync(); 
+            return prepareSummaryOfBundlesRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for summaryofbundles.
+     * Builds the ApiCall object for summaryOfBundles.
      */
-    private ApiCall<SummaryofbundleResponse, ApiException> prepareSummaryofbundlesRequest(
+    private ApiCall<SummaryofbundleResponse, ApiException> prepareSummaryOfBundlesRequest(
             final String apikey,
             final String requestId,
             final SummaryofbundlerRequest body) throws JsonProcessingException, IOException {
@@ -911,11 +911,11 @@ public final class RestrictionController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public BundleDetailsResponse bundledetails(
+    public BundleDetailsResponse bundleDetails(
             final String apikey,
             final String requestId,
             final BudleDetailsRequest body) throws ApiException, IOException {
-        return prepareBundledetailsRequest(apikey, requestId, body).execute();
+        return prepareBundleDetailsRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -928,21 +928,21 @@ public final class RestrictionController extends BaseController {
      * @param  body  Optional parameter: Bundle Details Request body
      * @return    Returns the BundleDetailsResponse response from the API call
      */
-    public CompletableFuture<BundleDetailsResponse> bundledetailsAsync(
+    public CompletableFuture<BundleDetailsResponse> bundleDetailsAsync(
             final String apikey,
             final String requestId,
             final BudleDetailsRequest body) {
         try { 
-            return prepareBundledetailsRequest(apikey, requestId, body).executeAsync(); 
+            return prepareBundleDetailsRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for bundledetails.
+     * Builds the ApiCall object for bundleDetails.
      */
-    private ApiCall<BundleDetailsResponse, ApiException> prepareBundledetailsRequest(
+    private ApiCall<BundleDetailsResponse, ApiException> prepareBundleDetailsRequest(
             final String apikey,
             final String requestId,
             final BudleDetailsRequest body) throws JsonProcessingException, IOException {

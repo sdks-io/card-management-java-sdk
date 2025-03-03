@@ -80,7 +80,7 @@ public final class OAuthAuthorizationController extends BaseController {
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
                         .server(Server.OAUTH_SERVER.value())
-                        .path("/v1/oauth/token")
+                        .path("/v2/oauth/token")
                         .formParam(param -> param.key("grant_type")
                                 .value("client_credentials").isRequired(false))
                         .formParam(param -> param.key("scope")

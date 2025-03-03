@@ -45,4 +45,14 @@ public class FleetmanagementV2RestrictionSearchcard500ErrorException extends Api
     private void setFault(Fault fault) {
         this.fault = fault;
     }
+
+    /**
+     * Converts this FleetmanagementV2RestrictionSearchcard500ErrorException into string format.
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "FleetmanagementV2RestrictionSearchcard500ErrorException [" + "statusCode="
+                + getResponseCode() + ", message=" + getMessage() + ", fault=" + fault + "]";
+    }
 }

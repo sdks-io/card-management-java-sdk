@@ -126,6 +126,10 @@ public class BearerTokenManager extends HeaderAuth implements BearerTokenCredent
             getBasicAuthForClient(),
             null,
             aparams).thenApply(token -> {
+                Long expiresIn = token.getExpiresIn();
+                if (expiresIn != null && expiresIn != 0) {
+                    token.setExpiry((System.currentTimeMillis() / 1000L) + token.getExpiresIn());
+                }
                 return token;
             });
     }

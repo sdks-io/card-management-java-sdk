@@ -45,4 +45,14 @@ public class FleetmanagementV1UserLoggedinuser403ErrorException extends ApiExcep
     private void setError(ErrorUserAccessError error) {
         this.error = error;
     }
+
+    /**
+     * Converts this FleetmanagementV1UserLoggedinuser403ErrorException into string format.
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "FleetmanagementV1UserLoggedinuser403ErrorException [" + "statusCode="
+                + getResponseCode() + ", message=" + getMessage() + ", error=" + error + "]";
+    }
 }

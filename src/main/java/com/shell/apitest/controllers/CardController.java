@@ -77,10 +77,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardSearchResponse searchcard(
+    public CardSearchResponse searchCard(
             final String requestId,
             final SearchCardRequest body) throws ApiException, IOException {
-        return prepareSearchcardRequest(requestId, body).execute();
+        return prepareSearchCardRequest(requestId, body).execute();
     }
 
     /**
@@ -97,20 +97,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: requestbody
      * @return    Returns the CardSearchResponse response from the API call
      */
-    public CompletableFuture<CardSearchResponse> searchcardAsync(
+    public CompletableFuture<CardSearchResponse> searchCardAsync(
             final String requestId,
             final SearchCardRequest body) {
         try { 
-            return prepareSearchcardRequest(requestId, body).executeAsync(); 
+            return prepareSearchCardRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for searchcard.
+     * Builds the ApiCall object for searchCard.
      */
-    private ApiCall<CardSearchResponse, ApiException> prepareSearchcardRequest(
+    private ApiCall<CardSearchResponse, ApiException> prepareSearchCardRequest(
             final String requestId,
             final SearchCardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CardSearchResponse, ApiException>()
@@ -166,10 +166,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardSummaryResponse cardsummary(
+    public CardSummaryResponse cardSummary(
             final String requestId,
             final CardSummaryRequest body) throws ApiException, IOException {
-        return prepareCardsummaryRequest(requestId, body).execute();
+        return prepareCardSummaryRequest(requestId, body).execute();
     }
 
     /**
@@ -185,20 +185,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: summary request body
      * @return    Returns the CardSummaryResponse response from the API call
      */
-    public CompletableFuture<CardSummaryResponse> cardsummaryAsync(
+    public CompletableFuture<CardSummaryResponse> cardSummaryAsync(
             final String requestId,
             final CardSummaryRequest body) {
         try { 
-            return prepareCardsummaryRequest(requestId, body).executeAsync(); 
+            return prepareCardSummaryRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardsummary.
+     * Builds the ApiCall object for cardSummary.
      */
-    private ApiCall<CardSummaryResponse, ApiException> prepareCardsummaryRequest(
+    private ApiCall<CardSummaryResponse, ApiException> prepareCardSummaryRequest(
             final String requestId,
             final CardSummaryRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CardSummaryResponse, ApiException>()
@@ -263,10 +263,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public OrderCardResponse cardordercard(
+    public OrderCardResponse orderCard(
             final String requestId,
             final CardManagementV1OrdercardRequest body) throws ApiException, IOException {
-        return prepareCardordercardRequest(requestId, body).execute();
+        return prepareOrderCardRequest(requestId, body).execute();
     }
 
     /**
@@ -291,20 +291,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Order card request body
      * @return    Returns the OrderCardResponse response from the API call
      */
-    public CompletableFuture<OrderCardResponse> cardordercardAsync(
+    public CompletableFuture<OrderCardResponse> orderCardAsync(
             final String requestId,
             final CardManagementV1OrdercardRequest body) {
         try { 
-            return prepareCardordercardRequest(requestId, body).executeAsync(); 
+            return prepareOrderCardRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardordercard.
+     * Builds the ApiCall object for orderCard.
      */
-    private ApiCall<OrderCardResponse, ApiException> prepareCardordercardRequest(
+    private ApiCall<OrderCardResponse, ApiException> prepareOrderCardRequest(
             final String requestId,
             final CardManagementV1OrdercardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<OrderCardResponse, ApiException>()
@@ -359,10 +359,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public OrderCardEnquiryResponse cardordercardenquiry(
+    public OrderCardEnquiryResponse orderCardEnquiry(
             final String requestId,
             final OrderCardEnquiryRequest body) throws ApiException, IOException {
-        return prepareCardordercardenquiryRequest(requestId, body).execute();
+        return prepareOrderCardEnquiryRequest(requestId, body).execute();
     }
 
     /**
@@ -377,20 +377,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Order Card Enquiry request body
      * @return    Returns the OrderCardEnquiryResponse response from the API call
      */
-    public CompletableFuture<OrderCardEnquiryResponse> cardordercardenquiryAsync(
+    public CompletableFuture<OrderCardEnquiryResponse> orderCardEnquiryAsync(
             final String requestId,
             final OrderCardEnquiryRequest body) {
         try { 
-            return prepareCardordercardenquiryRequest(requestId, body).executeAsync(); 
+            return prepareOrderCardEnquiryRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardordercardenquiry.
+     * Builds the ApiCall object for orderCardEnquiry.
      */
-    private ApiCall<OrderCardEnquiryResponse, ApiException> prepareCardordercardenquiryRequest(
+    private ApiCall<OrderCardEnquiryResponse, ApiException> prepareOrderCardEnquiryRequest(
             final String requestId,
             final OrderCardEnquiryRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<OrderCardEnquiryResponse, ApiException>()
@@ -464,10 +464,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CancelCardResponse cardcancel(
+    public CancelCardResponse cardCancel(
             final String requestId,
             final CardManagementV1CancelRequest body) throws ApiException, IOException {
-        return prepareCardcancelRequest(requestId, body).execute();
+        return prepareCardCancelRequest(requestId, body).execute();
     }
 
     /**
@@ -501,20 +501,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Update status request body
      * @return    Returns the CancelCardResponse response from the API call
      */
-    public CompletableFuture<CancelCardResponse> cardcancelAsync(
+    public CompletableFuture<CancelCardResponse> cardCancelAsync(
             final String requestId,
             final CardManagementV1CancelRequest body) {
         try { 
-            return prepareCardcancelRequest(requestId, body).executeAsync(); 
+            return prepareCardCancelRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardcancel.
+     * Builds the ApiCall object for cardCancel.
      */
-    private ApiCall<CancelCardResponse, ApiException> prepareCardcancelRequest(
+    private ApiCall<CancelCardResponse, ApiException> prepareCardCancelRequest(
             final String requestId,
             final CardManagementV1CancelRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<CancelCardResponse, ApiException>()
@@ -602,10 +602,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateCardStatusResponse cardupdatestatus(
+    public UpdateCardStatusResponse cardUpdateStatus(
             final String requestId,
             final CardManagementV1UpdatestatusRequest body) throws ApiException, IOException {
-        return prepareCardupdatestatusRequest(requestId, body).execute();
+        return prepareCardUpdateStatusRequest(requestId, body).execute();
     }
 
     /**
@@ -653,20 +653,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Update status request body
      * @return    Returns the UpdateCardStatusResponse response from the API call
      */
-    public CompletableFuture<UpdateCardStatusResponse> cardupdatestatusAsync(
+    public CompletableFuture<UpdateCardStatusResponse> cardUpdateStatusAsync(
             final String requestId,
             final CardManagementV1UpdatestatusRequest body) {
         try { 
-            return prepareCardupdatestatusRequest(requestId, body).executeAsync(); 
+            return prepareCardUpdateStatusRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardupdatestatus.
+     * Builds the ApiCall object for cardUpdateStatus.
      */
-    private ApiCall<UpdateCardStatusResponse, ApiException> prepareCardupdatestatusRequest(
+    private ApiCall<UpdateCardStatusResponse, ApiException> prepareCardUpdateStatusRequest(
             final String requestId,
             final CardManagementV1UpdatestatusRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<UpdateCardStatusResponse, ApiException>()
@@ -813,11 +813,11 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public CardDetailsResponse carddetails(
+    public CardDetailsResponse cardDetails(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) throws ApiException, IOException {
-        return prepareCarddetailsRequest(apikey, requestId, body).execute();
+        return prepareCardDetailsRequest(apikey, requestId, body).execute();
     }
 
     /**
@@ -833,21 +833,21 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Card details request body
      * @return    Returns the CardDetailsResponse response from the API call
      */
-    public CompletableFuture<CardDetailsResponse> carddetailsAsync(
+    public CompletableFuture<CardDetailsResponse> cardDetailsAsync(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) {
         try { 
-            return prepareCarddetailsRequest(apikey, requestId, body).executeAsync(); 
+            return prepareCardDetailsRequest(apikey, requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for carddetails.
+     * Builds the ApiCall object for cardDetails.
      */
-    private ApiCall<CardDetailsResponse, ApiException> prepareCarddetailsRequest(
+    private ApiCall<CardDetailsResponse, ApiException> prepareCardDetailsRequest(
             final String apikey,
             final String requestId,
             final CardDetailsRequest body) throws JsonProcessingException, IOException {
@@ -1025,10 +1025,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public PINReminderResponse cardpinreminder(
+    public PINReminderResponse cardPinReminder(
             final String requestId,
             final CardManagementV1PinreminderRequest body) throws ApiException, IOException {
-        return prepareCardpinreminderRequest(requestId, body).execute();
+        return prepareCardPinReminderRequest(requestId, body).execute();
     }
 
     /**
@@ -1050,20 +1050,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: PIN reminder request body
      * @return    Returns the PINReminderResponse response from the API call
      */
-    public CompletableFuture<PINReminderResponse> cardpinreminderAsync(
+    public CompletableFuture<PINReminderResponse> cardPinReminderAsync(
             final String requestId,
             final CardManagementV1PinreminderRequest body) {
         try { 
-            return prepareCardpinreminderRequest(requestId, body).executeAsync(); 
+            return prepareCardPinReminderRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for cardpinreminder.
+     * Builds the ApiCall object for cardPinReminder.
      */
-    private ApiCall<PINReminderResponse, ApiException> prepareCardpinreminderRequest(
+    private ApiCall<PINReminderResponse, ApiException> prepareCardPinReminderRequest(
             final String requestId,
             final CardManagementV1PinreminderRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<PINReminderResponse, ApiException>()
@@ -1248,10 +1248,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public AutoRenewCardResponse autorenew(
+    public AutoRenewCardResponse autoRenew(
             final String requestId,
             final AutoRenewCardRequest body) throws ApiException, IOException {
-        return prepareAutorenewRequest(requestId, body).execute();
+        return prepareAutoRenewRequest(requestId, body).execute();
     }
 
     /**
@@ -1272,20 +1272,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Auto renew request body
      * @return    Returns the AutoRenewCardResponse response from the API call
      */
-    public CompletableFuture<AutoRenewCardResponse> autorenewAsync(
+    public CompletableFuture<AutoRenewCardResponse> autoRenewAsync(
             final String requestId,
             final AutoRenewCardRequest body) {
         try { 
-            return prepareAutorenewRequest(requestId, body).executeAsync(); 
+            return prepareAutoRenewRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for autorenew.
+     * Builds the ApiCall object for autoRenew.
      */
-    private ApiCall<AutoRenewCardResponse, ApiException> prepareAutorenewRequest(
+    private ApiCall<AutoRenewCardResponse, ApiException> prepareAutoRenewRequest(
             final String requestId,
             final AutoRenewCardRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<AutoRenewCardResponse, ApiException>()
@@ -1338,10 +1338,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public UpdateMPayRegStatusResponse updatemobilepaymentregistrationstatus(
+    public UpdateMPayRegStatusResponse updateMobilePaymentRegistrationStatus(
             final String requestId,
             final UpdateMPayRegStatusRequest body) throws ApiException, IOException {
-        return prepareUpdatemobilepaymentregistrationstatusRequest(requestId, body).execute();
+        return prepareUpdateMobilePaymentRegistrationStatusRequest(requestId, body).execute();
     }
 
     /**
@@ -1354,20 +1354,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Request body
      * @return    Returns the UpdateMPayRegStatusResponse response from the API call
      */
-    public CompletableFuture<UpdateMPayRegStatusResponse> updatemobilepaymentregistrationstatusAsync(
+    public CompletableFuture<UpdateMPayRegStatusResponse> updateMobilePaymentRegistrationStatusAsync(
             final String requestId,
             final UpdateMPayRegStatusRequest body) {
         try { 
-            return prepareUpdatemobilepaymentregistrationstatusRequest(requestId, body).executeAsync(); 
+            return prepareUpdateMobilePaymentRegistrationStatusRequest(requestId, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for updatemobilepaymentregistrationstatus.
+     * Builds the ApiCall object for updateMobilePaymentRegistrationStatus.
      */
-    private ApiCall<UpdateMPayRegStatusResponse, ApiException> prepareUpdatemobilepaymentregistrationstatusRequest(
+    private ApiCall<UpdateMPayRegStatusResponse, ApiException> prepareUpdateMobilePaymentRegistrationStatusRequest(
             final String requestId,
             final UpdateMPayRegStatusRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<UpdateMPayRegStatusResponse, ApiException>()
@@ -1421,10 +1421,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public GeneratePINKeyResponse getkey(
+    public GeneratePINKeyResponse getKey(
             final String requestId,
             final Boolean fleet) throws ApiException, IOException {
-        return prepareGetkeyRequest(requestId, fleet).execute();
+        return prepareGetKeyRequest(requestId, fleet).execute();
     }
 
     /**
@@ -1438,20 +1438,20 @@ public final class CardController extends BaseController {
      *         default value will be false.
      * @return    Returns the GeneratePINKeyResponse response from the API call
      */
-    public CompletableFuture<GeneratePINKeyResponse> getkeyAsync(
+    public CompletableFuture<GeneratePINKeyResponse> getKeyAsync(
             final String requestId,
             final Boolean fleet) {
         try { 
-            return prepareGetkeyRequest(requestId, fleet).executeAsync(); 
+            return prepareGetKeyRequest(requestId, fleet).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for getkey.
+     * Builds the ApiCall object for getKey.
      */
-    private ApiCall<GeneratePINKeyResponse, ApiException> prepareGetkeyRequest(
+    private ApiCall<GeneratePINKeyResponse, ApiException> prepareGetKeyRequest(
             final String requestId,
             final Boolean fleet) throws IOException {
         return new ApiCall.Builder<GeneratePINKeyResponse, ApiException>()
@@ -1501,10 +1501,10 @@ public final class CardController extends BaseController {
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
      */
-    public DeliveryAddressUpdateResponse deliveryaddressupdate(
+    public DeliveryAddressUpdateResponse deliveryAddressUpdate(
             final String apikey,
             final DeliveryAddressUpdateRequest body) throws ApiException, IOException {
-        return prepareDeliveryaddressupdateRequest(apikey, body).execute();
+        return prepareDeliveryAddressUpdateRequest(apikey, body).execute();
     }
 
     /**
@@ -1516,20 +1516,20 @@ public final class CardController extends BaseController {
      * @param  body  Optional parameter: Delivery Address Update Request Body
      * @return    Returns the DeliveryAddressUpdateResponse response from the API call
      */
-    public CompletableFuture<DeliveryAddressUpdateResponse> deliveryaddressupdateAsync(
+    public CompletableFuture<DeliveryAddressUpdateResponse> deliveryAddressUpdateAsync(
             final String apikey,
             final DeliveryAddressUpdateRequest body) {
         try { 
-            return prepareDeliveryaddressupdateRequest(apikey, body).executeAsync(); 
+            return prepareDeliveryAddressUpdateRequest(apikey, body).executeAsync(); 
         } catch (Exception e) {  
             throw new CompletionException(e); 
         }
     }
 
     /**
-     * Builds the ApiCall object for deliveryaddressupdate.
+     * Builds the ApiCall object for deliveryAddressUpdate.
      */
-    private ApiCall<DeliveryAddressUpdateResponse, ApiException> prepareDeliveryaddressupdateRequest(
+    private ApiCall<DeliveryAddressUpdateResponse, ApiException> prepareDeliveryAddressUpdateRequest(
             final String apikey,
             final DeliveryAddressUpdateRequest body) throws JsonProcessingException, IOException {
         return new ApiCall.Builder<DeliveryAddressUpdateResponse, ApiException>()

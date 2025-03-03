@@ -45,4 +45,14 @@ public class FleetmanagementV1UserLoggedinuser400ErrorException extends ApiExcep
     private void setFault(Fault fault) {
         this.fault = fault;
     }
+
+    /**
+     * Converts this FleetmanagementV1UserLoggedinuser400ErrorException into string format.
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "FleetmanagementV1UserLoggedinuser400ErrorException [" + "statusCode="
+                + getResponseCode() + ", message=" + getMessage() + ", fault=" + fault + "]";
+    }
 }

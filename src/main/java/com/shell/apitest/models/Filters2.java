@@ -435,6 +435,12 @@ public class Filters2 {
 
     /**
      * Getter for ReferenceType.
+     * Type of the reference number provided.&lt;br /&gt; Mandatory if ReferenceNumber is provided. Else
+     * optional.&lt;br /&gt; Allowed Values:&lt;br /&gt; 1=Main Reference(Main Order Reference Number returned
+     * in the output of Card/OrderCard service. &lt;br /&gt; 2=Order Card Reference (Reference number for
+     * each individual card in the order submitted via Card/OrderCard service. &lt;br /&gt; 3=Bulk Order
+     * Card Reference (Reference number returned in the response of bulkcardinterface
+     * /UploadOrderCardTemplate. )
      * @return Returns the OrderCardEnquiryReqReferenceTypeEnum
      */
     @JsonGetter("ReferenceType")
@@ -445,6 +451,12 @@ public class Filters2 {
 
     /**
      * Setter for ReferenceType.
+     * Type of the reference number provided.&lt;br /&gt; Mandatory if ReferenceNumber is provided. Else
+     * optional.&lt;br /&gt; Allowed Values:&lt;br /&gt; 1=Main Reference(Main Order Reference Number returned
+     * in the output of Card/OrderCard service. &lt;br /&gt; 2=Order Card Reference (Reference number for
+     * each individual card in the order submitted via Card/OrderCard service. &lt;br /&gt; 3=Bulk Order
+     * Card Reference (Reference number returned in the response of bulkcardinterface
+     * /UploadOrderCardTemplate. )
      * @param referenceType Value for OrderCardEnquiryReqReferenceTypeEnum
      */
     @JsonSetter("ReferenceType")
